@@ -14,6 +14,6 @@ See the [AeroGear JIRA Usage and Guidelines Guide](https://aerogear.org/docs/gui
 
 Whether you're contributing a new feature or bug fix, or simply submitting a
 ticket, the Aerogear team is available for technical advice or feedback. 
-You can reach us at [#aerogear](ircs://chat.freenode.net:6697/aerogear) on [Freenode IRC](https://freenode.net/) or the 
-[aerogear-dev list](http://lists.jboss.org/pipermail/aerogear-dev/)
+You can reach us at [#aerogear](ircs://chat.freenode.net:6697/aerogear-dev) on [Freenode IRC](https://freenode.net/) or the 
+[aerogear-dev list](https://groups.google.com/forum/#!forum/aerogear)
 -- both are actively monitored.

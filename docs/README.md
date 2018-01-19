@@ -40,15 +40,15 @@ If you have not installed CocoaPods, install CocoaPods by running the command:
 
 ## Getting Started with Swift
 
-1. Import the AeroGearCore header in the application delegate.
+1. Import the AGore in the application .
 
-        import AeroGearCore
+        import AGCore
 
 1. In Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AeroGearServiceName`, as in the following examples:
 
-        import Sync
+        import AGSync
 
         
 1. Use imported service library
 
-// TODO
+Please follow each individual service documentation

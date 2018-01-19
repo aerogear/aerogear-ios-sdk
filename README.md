@@ -1,10 +1,10 @@
-# AeroGear IOS SDK
+# AeroGear iOS Swift SDK
 
 Mobile.Next() IOS SDK (Early preview)
 
 ## Documentation
 
-See [Official IOS SDK Documentation](./docs/README.md)
+See [Official iOS Swift SDK Documentation](./docs/README.md)
 
 ## Contributing
 
