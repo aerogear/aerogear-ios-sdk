@@ -1,12 +1,12 @@
-# Contributing to the AeroGear IOS SDK
+# Contributing to the AeroGear IOS Swift SDK
 
-The AeroGear IOS SDK is part of the [AeroGear project](https://aerogear.org/), see the [Community Page](https://aerogear.org/community) for general guidelines for contributing to the project.
+The AeroGear IOS Swift SDK is part of the [AeroGear project](https://aerogear.org/), see the [Community Page](https://aerogear.org/community) for general guidelines for contributing to the project.
 
 This document details specifics for contributions to the IOS SDK.
 
 ## Issue tracker
 
-The tracking of issues for the AeroGear IOS SDK is done in the [AeroGear Android Project](https://issues.jboss.org/projects/AGDROID/issues) in the [JBoss Developer JIRA](https://issues.jboss.org).
+The tracking of issues for the AeroGear IOS Swift SDK is done in the [AeroGear Project](https://issues.jboss.org/projects/AGIOS/issues) in the [JBoss Developer JIRA](https://issues.jboss.org).
 
 See the [AeroGear JIRA Usage and Guidelines Guide](https://aerogear.org/docs/guides/JIRAUsage/) for information on how the issue tracker relates to contributions to this project.
 

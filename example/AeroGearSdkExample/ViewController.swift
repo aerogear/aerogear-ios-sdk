@@ -9,6 +9,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let configLoader = new ConfigParser();
+        configLoader.
         // Do any additional setup after loading the view, typically from a nib.
     }
 
