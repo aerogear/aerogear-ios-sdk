@@ -5,7 +5,7 @@ target 'AeroGearSdkExample' do
   use_frameworks!
 
 
-  pod 'AGCore', :path => '../modules/core'
+  # pod 'AGCore', :path => '../modules/core'
 
   # Pods for AeroGearSdkExample
 
