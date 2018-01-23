@@ -1,6 +1,6 @@
-# AeroGear iOS Swift SDK
+# AeroGear Services iOS Swift SDK
 
-Mobile.Next() IOS SDK (Early preview)
+AeroGear Services IOS Swift SDK (AGS)
 
 ## Documentation
 
@@ -19,4 +19,4 @@ See [Contributing documentation](./Contributing)
 
 ## License 
 
- See (LICENSE file)[./LICENSE]
+ See [LICENSE file](./LICENSE)
