@@ -6,7 +6,7 @@ set -eo pipefail
 test_iOS() {
   xcodebuild \
     -workspace example/AeroGearSdkExample.xcworkspace \
-    -scheme AeroGearSdkExampleTests \
+    -scheme AeroGearSdkExample \
     -sdk iphonesimulator \
     -destination 'platform=iOS Simulator,name=iPhone 7' \
     build \
