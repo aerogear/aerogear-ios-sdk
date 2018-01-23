@@ -5,11 +5,31 @@ jobs:
       xcode: "9.0"
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-gems-{{ checksum "Gemfile.lock" }}
+          # Fall back to using the latest cache if no exact match is found.
+          - v1-gems-
+      # Install gems.
+      - run:
+          name: Bundle install
+          command: bundle check || bundle install
+          environment:
+            BUNDLE_JOBS: 4
+            BUNDLE_RETRY: 3
+            # This is the path where all the gems will be installed, and
+            # which CircleCI will later cache.
+            BUNDLE_PATH: vendor/bundle
+      - save_cache:
+          key: v1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       # Install CocoaPods
       - run:
           name: Install CocoaPods
-          command: pod install
-          working_directory: ./example
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            pod install
 
       # Build the app and run tests
       - run:
