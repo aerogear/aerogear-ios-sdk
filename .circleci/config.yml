@@ -7,6 +7,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install lint
+          command: brew install swiftlint
+
+      - run:
+          name: Check style using swiftlint
+          command: swiftlint
+
+      - run:
           name: Set Ruby Version
           command:  echo "ruby-2.4" > ~/.ruby-version
 
@@ -44,14 +52,6 @@ jobs:
           environment:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: AeroGearSdkExample
-
-      - run:
-          name: Install lint
-          command: brew install swiftlint
-
-      - run:
-          name: Check style using swiftlint
-          command: swiftlint
 
       # Collect XML test results data to show in the UI,
       # and save the same XML files under test-results folder

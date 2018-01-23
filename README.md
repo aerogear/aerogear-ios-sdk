@@ -8,7 +8,7 @@ See [Official iOS Swift SDK Documentation](./docs/README.md)
 
 ## Contributing
 
-See [Contributing documentation](./Contributing)
+See [Contributing documentation](./CONTRIBUTING.md)
 
 ## Folder structure
 
