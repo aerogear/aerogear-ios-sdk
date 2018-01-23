@@ -8,8 +8,6 @@ jobs:
       - restore_cache:
           keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
-          # Fall back to using the latest cache if no exact match is found.
-          - v1-gems-
       # Install gems.
       - run:
           name: Bundle install
