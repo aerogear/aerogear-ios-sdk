@@ -10,8 +10,8 @@ JIRA: [https://issues.jboss.org/browse/AGDROID-{}]
 
 ### Progress
 
-- [ ] Done Task
-- [x] Todo Task
+- [x] Done Task
+- [ ] Todo Task
 
 ### Additional Notes
 

@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-To get started with the Mobile.Next()IOS SDK, you can set up the SDK in your existing or new project. SDK is written in completely in Swift language. You can also run the example to see how the SDK works.
+To get started with the Mobile.Next()IOS SDK, you can set up the SDK in your existing or new project. SDK is written in Swift language. You can also run the example to see how the SDK works.
 
 To use the AeroGear SDK for iOS, you will need the following installed on your development machine:
 
@@ -40,13 +40,13 @@ If you have not installed CocoaPods, install CocoaPods by running the command:
 
 ## Getting Started with Swift
 
-1. Import the AGore in the application .
+1. Import the AgsCore in the application .
 
-        import AGCore
+        import AgsCore
 
-1. In Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AeroGearServiceName`, as in the following examples:
+1. In Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
 
-        import AGSync
+        import AgsSync
 
         
 1. Use imported service library
