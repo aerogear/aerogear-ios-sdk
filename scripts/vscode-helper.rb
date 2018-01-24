@@ -2,6 +2,9 @@
 ## Script will add and append all new files to Xcode project
 ## After that changes can be build using CircleCi 
 
+## Running script
+## bundle exec ruby ./scripts/vscode-helper.rb 
+
 ## Based on https://github.com/CocoaPods/Xcodeproj/issues/178
 
 require 'xcodeproj'
