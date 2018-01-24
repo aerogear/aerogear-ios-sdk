@@ -191,6 +191,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
+  xcodeproj
 
 BUNDLED WITH
    1.14.6
