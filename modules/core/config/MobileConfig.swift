@@ -7,7 +7,7 @@ public struct MobileConfig: Codable {
     // Service namespace
     public var namespace: String?
     // List of services
-    public var services: [MobileService]?
+    public var services = [MobileService]()
 }
 
 /**

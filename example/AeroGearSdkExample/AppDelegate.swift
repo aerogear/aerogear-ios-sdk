@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_: UIApplication) {
- 
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
