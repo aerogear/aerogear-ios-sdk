@@ -10,15 +10,35 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBOutlet var pickerView: UIPickerView!
 
+    @IBOutlet weak var responseLabel: UILabel!
+    @IBOutlet var requestButton: UIButton!
     @IBOutlet var config: UILabel!
 
-    var pickerDataSource = ["sync-server", "prometheus"]
+    var pickerDataSource = ["sync-server", "prometheus", "echo"]
+    
+    @IBAction func buttonClick(sender _: UIButton) {
+        let row = pickerView.selectedRow(inComponent: 0)
+        let http = AgsCore.instance.getHttp(pickerDataSource[row])
+        if let http = http {
+            http.request(method: .post, path: "", completionHandler: { (response, error) -> Void in
+                if error != nil {
+                    print("An error has occured during read! \(error!)")
+                    return;
+                }
+                if let response = response as? Dictionary<String, Any> {
+                    
+                    self.responseLabel.text = response.description;
+                }
+                
+            })
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerView.delegate = self
         pickerView.dataSource = self
-        config.text = "Empty"
+        config.text = "Select config file"
     }
 
     func numberOfComponents(in _: UIPickerView) -> Int {
