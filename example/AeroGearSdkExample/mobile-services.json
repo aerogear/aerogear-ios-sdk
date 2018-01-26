@@ -3,15 +3,21 @@
     "services": [
       {
         "config": {
-          "uri": "https://fh-sync-server-myproject.192.168.37.1.nip.io"
+          "uri": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6"
         },
-        "name": "sync-server"
+        "name": "sync"
       },
       {
         "config": {
-          "uri": "https://prometheus-myproject.192.168.37.1.nip.io"
+          "uri": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6"
         },
         "name": "prometheus"
+      },
+      {
+        "config": {
+          "uri": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6"
+        },
+        "name": "echo"
       }
     ]
   }
