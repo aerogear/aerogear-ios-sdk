@@ -12,15 +12,16 @@ public struct MobileConfig: Codable {
 
 /**
  * Backend service model containing configuration
+ * Represents individual service metadata
  */
 public struct MobileService: Codable {
     public var name: String?
-    public var config: ServiceConfig?
+    public var config: MobileServiceConfig?
 }
 
 /**
- * Service configuration
+ * Service configuration containing both generic and service specific fields.
  */
-public struct ServiceConfig: Codable {
+public struct MobileServiceConfig: Codable {
     public var uri: String?
 }
