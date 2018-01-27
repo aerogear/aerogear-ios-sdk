@@ -36,9 +36,7 @@ public class AgsCore {
     }
 
     /**
-     * Returns logger instance that can be used to log issues.
+     * Logger instance that can be used to log issues.
      */
-    public func logger() -> XCGLogger {
-        return AgsCoreLogger.logger()
-    }
+    public var logger: XCGLogger { return AgsCoreLogger.logger() }
 }

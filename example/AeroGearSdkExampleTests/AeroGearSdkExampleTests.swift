@@ -6,6 +6,9 @@
 @testable import AeroGearSdkExample
 import XCTest
 
+/**
+ * General tests for example app
+ */
 class AeroGearSdkExampleTests: XCTestCase {
 
     override func setUp() {

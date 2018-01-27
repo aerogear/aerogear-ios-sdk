@@ -43,7 +43,7 @@ public class ServiceConfig {
             """)
             return nil
         }
-        return configuration[0]
+        return configuration.first
     }
 
     /**

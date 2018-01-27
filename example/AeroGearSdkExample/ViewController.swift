@@ -10,12 +10,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBOutlet var pickerView: UIPickerView!
 
-    @IBOutlet weak var responseLabel: UILabel!
+    @IBOutlet var responseLabel: UILabel!
     @IBOutlet var requestButton: UIButton!
     @IBOutlet var config: UILabel!
 
     var pickerDataSource = ["sync-server", "prometheus", "echo"]
-    
+
     @IBAction func buttonClick(sender _: UIButton) {
         let row = pickerView.selectedRow(inComponent: 0)
         let http = AgsCore.instance.getHttp(pickerDataSource[row])
@@ -23,13 +23,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             http.request(method: .post, path: "", completionHandler: { (response, error) -> Void in
                 if error != nil {
                     print("An error has occured during read! \(error!)")
-                    return;
+                    return
                 }
-                if let response = response as? Dictionary<String, Any> {
-                    
-                    self.responseLabel.text = response.description;
+                if let response = response as? [String: Any] {
+                    self.responseLabel.text = response.description
                 }
-                
             })
         }
     }
