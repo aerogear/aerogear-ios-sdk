@@ -10,8 +10,8 @@ import XCTest
  * General tests for example app
  */
 class ServiceConfigTests: XCTestCase {
-    let VALID_SERVICE_NAME = "sync"
-    let INVALID_SERVICE_NAME = "platform"
+    let validServiceName = "sync"
+    let invalidServiceName = "platform"
 
     var config: ServiceConfig!
 
@@ -27,10 +27,10 @@ class ServiceConfigTests: XCTestCase {
     }
 
     func testConfigReading() {
-        XCTAssertNotNil(config[VALID_SERVICE_NAME])
+        XCTAssertNotNil(config[validServiceName])
     }
 
     func testConfigParsingInValidService() {
-        XCTAssertNil(config[INVALID_SERVICE_NAME])
+        XCTAssertNil(config[invalidServiceName])
     }
 }

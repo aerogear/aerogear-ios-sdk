@@ -28,7 +28,7 @@ class ConfigParserTests: XCTestCase {
             let config = try decoder.decode(MobileConfig.self, from: jsonData!)
             XCTAssertNotNil(config)
         } catch {
-            XCTFail()
+            XCTFail("Error when decoding file")
         }
     }
 

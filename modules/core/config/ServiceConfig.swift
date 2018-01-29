@@ -34,16 +34,16 @@ public class ServiceConfig {
         let configuration = getConfiguration(serviceRef)
         if configuration.count > 1 {
             AgsCoreLogger.logger().warning("""
-             Mobile configuration \(configFileName) contains 
+             Mobile configuration \(configFileName) contains
              more than one service of the same type.
-             Using configuration from the first occurence of service with that type. 
+             Using configuration from the first occurence of service with that type.
              Any other duplicate will be ignored.
              Please review your \(configFileName) for services with \(serviceRef) type.
             """)
         } else if configuration.count == 0 {
             AgsCoreLogger.logger().error("""
-            Mobile configuration  \(configFileName) is missing service configuration 
-            for \(serviceRef) type. Please review your configuration 
+            Mobile configuration  \(configFileName) is missing service configuration
+            for \(serviceRef) type. Please review your configuration
             and make sure that is pointing to the right namespace.
             """)
             return nil
