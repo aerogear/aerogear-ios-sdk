@@ -1,4 +1,4 @@
-# AeroGear IOS SDK Getting Started
+# End user documentation
 
 ## Prerequisites
 
@@ -46,9 +46,10 @@ If you have not installed CocoaPods, install CocoaPods by running the command:
 
 1. In Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
 
-        import AgsSync
+        import AgsServiceName
 
         
 1. Use imported service library
 
-Please follow each individual service documentation
+Please follow each individual service documentation for more information 
+about usage.

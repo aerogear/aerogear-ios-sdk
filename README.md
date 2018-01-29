@@ -4,21 +4,13 @@ AeroGear Services IOS Swift SDK (AGS)
 
 ## Documentation
 
-See [Official iOS Swift SDK Documentation](./docs/README.md)
+1. [End User Getting Started](./docs/getting-started.md)
+1. [Service Contributor Guide](./docs/service-guide.md)
+1. [API documentation]()
 
 ## Contributing
 
-See [Contributing documentation](./CONTRIBUTING.md)
-
-## Folder structure
-
-`./modules` - folder containing cocoapods modules. Each module is represented by podspec file in root of the repository.
-
-`./example` - folder with example application used for testing etc.
-
-`./scripts` - scripts for development, build etc.
-
-`./docs` - documentation for SDK
+See [General Contributing Guide](./CONTRIBUTING.md)
 
 ## License 
 
