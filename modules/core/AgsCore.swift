@@ -6,13 +6,11 @@ import XCGLogger
  * AeroGear Core interface to be used directly by SDK services
  */
 public class AgsCore {
-    public static let instance = AgsCore()
-
     let config: ServiceConfig
 
     public init() {
         config = ServiceConfig()
-        AgsCoreLogger.logger().debug("Successfully created AeroGearServices SDK")
+        AgsCoreLogger.logger().debug("Successfully initialized AeroGearServices Core SDK")
     }
 
     /**

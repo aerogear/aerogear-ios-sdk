@@ -13,12 +13,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var responseLabel: UILabel!
     @IBOutlet var requestButton: UIButton!
     @IBOutlet var config: UILabel!
+    let coreInstance = AgsCore()
 
     var pickerDataSource = ["sync-server", "prometheus", "echo"]
 
     @IBAction func buttonClick(sender _: UIButton) {
         let row = pickerView.selectedRow(inComponent: 0)
-        let http = AgsCore.instance.getHttp(pickerDataSource[row])
+
+        let http = coreInstance.getHttp(pickerDataSource[row])
         if let http = http {
             http.request(method: .post, path: "", completionHandler: { (response, error) -> Void in
                 if error != nil {
@@ -34,6 +36,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         pickerView.delegate = self
         pickerView.dataSource = self
         config.text = "Select config file"
@@ -53,7 +56,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
         AgsCoreLogger.logger().info("Loading configuration")
-        let configuration = AgsCore.instance.getConfiguration(pickerDataSource[row])
+        let configuration = coreInstance.getConfiguration(pickerDataSource[row])
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(configuration)
