@@ -6,11 +6,14 @@ import XCGLogger
  * AeroGear Core interface to be used directly by SDK services
  */
 public class AgsCore {
+
     let config: ServiceConfig
+    let http: AgsHttp
 
     public init() {
+        AgsCoreLogger.logger().debug("Initializing AeroGearServices Core SDK")
         config = ServiceConfig()
-        AgsCoreLogger.logger().debug("Successfully initialized AeroGearServices Core SDK")
+        http = AgsHttp()
     }
 
     /**
@@ -24,13 +27,12 @@ public class AgsCore {
 
     /**
      * Get instance of http interface
+     *
+     * @param
+     * @return instance of network interface
      */
-    public func getHttp(_ serviceRef: String) -> Http? {
-        if let service = config[serviceRef] {
-            return AgsHttp.getHttp(service: service)
-        } else {
-            return nil
-        }
+    public func getHttp() -> AgsHttp {
+        return http
     }
 
     /**

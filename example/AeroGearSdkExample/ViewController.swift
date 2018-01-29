@@ -18,20 +18,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var pickerDataSource = ["sync-server", "prometheus", "echo"]
 
     @IBAction func buttonClick(sender _: UIButton) {
-        let row = pickerView.selectedRow(inComponent: 0)
-
-        let http = coreInstance.getHttp(pickerDataSource[row])
-        if let http = http {
-            http.request(method: .post, path: "", completionHandler: { (response, error) -> Void in
-                if error != nil {
-                    print("An error has occured during read! \(error!)")
-                    return
-                }
-                if let response = response as? [String: Any] {
-                    self.responseLabel.text = response.description
-                }
-            })
-        }
+        let http = coreInstance.getHttp()
+        http.getHttp().request(method: .post, path: "", completionHandler: { (response, error) -> Void in
+            if error != nil {
+                print("An error has occured during read! \(error!)")
+                return
+            }
+            if let response = response as? [String: Any] {
+                self.responseLabel.text = response.description
+            }
+        })
     }
 
     override func viewDidLoad() {

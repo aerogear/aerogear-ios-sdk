@@ -7,6 +7,7 @@ import XCGLogger
  * Logging based on https://github.com/DaveWoodCom/XCGLogger
  */
 public class AgsCoreLogger {
+
     public static let instance = AgsCoreLogger()
 
     public static func logger() -> XCGLogger {
