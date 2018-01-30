@@ -1,7 +1,11 @@
+## Run unit tests on local machine
+
+## Requirements for running on local machine 
+## gem install xcpretty
+
 set -eo pipefail
 
-## For running on local machine 
-## gem install xcpretty
+
 
 test_iOS() {
   xcodebuild \
