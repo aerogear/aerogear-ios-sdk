@@ -6,9 +6,6 @@
 import Foundation
 import XCTest
 
-/**
- * General tests for example app
- */
 class ServiceConfigTests: XCTestCase {
     let validServiceName = "sync"
     let invalidServiceName = "platform"

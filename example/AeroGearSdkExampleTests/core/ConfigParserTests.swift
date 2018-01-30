@@ -6,9 +6,6 @@
 import Foundation
 import XCTest
 
-/**
- * General tests for example app
- */
 class ConfigParserTests: XCTestCase {
 
     override func setUp() {
