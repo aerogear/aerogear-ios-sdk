@@ -1,3 +1,6 @@
+## NOTE: this file will be used for podspec releases.
+## Based on https://github.com/CocoaPods/Specs/blob/master/Specs/8/1/1/FirebaseCommunity/0.1.2/FirebaseCommunity.podspec.json
+
 Pod::Spec.new do |s|
   s.name         = 'AeroGearServices'
   s.version      = '1.0.0'
@@ -19,8 +22,8 @@ Pod::Spec.new do |s|
 
   # --- Subspecs --- #
 
-  s.subspec 'Core' do |base|
-    base.source_files = '**/*.swift'
+  s.subspec 'core' do |base|
+    base.source_files = 'modules/core/**/*.swift'
     base.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
     base.dependency 'AeroGearHttp'
     base.dependency 'XCGLogger'

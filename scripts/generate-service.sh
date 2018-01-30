@@ -36,10 +36,10 @@ mkdir -p ./example/AeroGearSdkExampleTests/$SDK_NAME
 
 echo "Copy and process module templates"
 envsubst < ./template/service.podspec > ./modules/$SDK_NAME/${SDK_NAME}.podspec
-envsubst < ./template/Service.swift > ./modules/$SDK_NAME/${SDK_NAME}.swift 
+envsubst < ./template/Service.swift_template > ./modules/$SDK_NAME/${SDK_NAME}.swift 
 
 echo "Copy and process docs and unit tests"
 envsubst < ./template/README.adoc > ./docs/$SDK_NAME/README.adoc
-envsubst < ./template/ServiceTests.swift > ./example/AeroGearSdkExampleTests/$SDK_NAME/${SDK_NAME}Tests.swift
+envsubst < ./template/ServiceTests.swift_template > ./example/AeroGearSdkExampleTests/$SDK_NAME/${SDK_NAME}Tests.swift
  
 echo "SDK generated successfully"
