@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +12,71 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AeroGearSdkExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8y-9t-VQ8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="Gxh-p6-Dc0"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="8bC-Xf-vdC" id="qAo-jy-EcS"/>
+                                    <outlet property="delegate" destination="8bC-Xf-vdC" id="O70-AG-URf"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="23" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciB-Qd-gkH">
+                                <rect key="frame" x="24" y="189" width="327" height="157"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Response" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBt-DP-HF5">
+                                <rect key="frame" x="30" y="443" width="315" height="123"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA5-lE-MKG">
+                                <rect key="frame" x="16" y="391" width="222" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Make network request">
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonClickWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ZT-Ad-O8U"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Z8y-9t-VQ8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3gx-KX-tou"/>
+                            <constraint firstItem="Z8y-9t-VQ8" firstAttribute="centerX" secondItem="ciB-Qd-gkH" secondAttribute="centerX" id="Q3P-DJ-leb"/>
+                            <constraint firstItem="Z8y-9t-VQ8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="TD4-7e-mxd"/>
+                            <constraint firstItem="Z8y-9t-VQ8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Uxo-43-JWe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ciB-Qd-gkH" secondAttribute="bottom" constant="321" id="abI-TD-DOB"/>
+                            <constraint firstAttribute="trailing" secondItem="Z8y-9t-VQ8" secondAttribute="trailing" id="bqK-pJ-KcO"/>
+                            <constraint firstItem="Z8y-9t-VQ8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="eR4-Hl-ukD"/>
+                            <constraint firstItem="Z8y-9t-VQ8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ngC-0R-MyS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ciB-Qd-gkH" secondAttribute="trailing" constant="24" id="pr6-Rp-hWV"/>
+                            <constraint firstItem="ciB-Qd-gkH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="169" id="th0-JY-Ca7"/>
+                            <constraint firstItem="ciB-Qd-gkH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="zQ4-wX-ipg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="config" destination="ciB-Qd-gkH" id="ivY-mZ-437"/>
+                        <outlet property="pickerView" destination="Z8y-9t-VQ8" id="NYe-mA-rYP"/>
+                        <outlet property="requestButton" destination="VA5-lE-MKG" id="S2x-cu-Csu"/>
+                        <outlet property="responseLabel" destination="vBt-DP-HF5" id="nUx-XV-FOB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="116" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>

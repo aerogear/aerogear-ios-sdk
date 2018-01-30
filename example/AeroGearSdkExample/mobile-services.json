@@ -1,46 +1,23 @@
 {
+    "namespace": "myproject",
     "services": [
       {
         "config": {
-          "headers": {},
-          "uri": "https://fh-sync-server-myproject.192.168.37.1.nip.io"
+          "uri": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6"
         },
-        "name": "fh-sync-server"
+        "name": "sync"
       },
       {
         "config": {
-          "auth-server-url": "http://keycloak-myproject.192.168.37.1.nip.io/auth",
-          "clientId": "OeFYkwEuUKXvDsSudfXc",
-          "headers": {},
-          "realm": "myproject",
-          "resource": "OeFYkwEuUKXvDsSudfXc",
-          "ssl-required": "external",
-          "url": "http://keycloak-myproject.192.168.37.1.nip.io/auth"
-        },
-        "name": "keycloak"
-      },
-      {
-        "config": {
-          "headers": {},
-          "name": "prometheus",
-          "type": "prometheus",
-          "uri": "https://prometheus-myproject.192.168.37.1.nip.io"
+          "uri": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6"
         },
         "name": "prometheus"
       },
       {
         "config": {
-          "headers": {},
-          "mysql_db": "unifiedpush",
-          "mysql_password": "unifiedpush",
-          "mysql_username": "unifiedpush",
-          "name": "unified-push-server",
-          "push_kc_realm": "aerogear",
-          "type": "unified-push-server",
-          "uri": "http://ups-myproject.192.168.37.1.nip.io"
+          "uri": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6"
         },
-        "name": "unified-push-server"
+        "name": "echo"
       }
-    ],
-    "namespace": "myproject"
+    ]
   }

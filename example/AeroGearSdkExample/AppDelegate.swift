@@ -1,8 +1,6 @@
 //
 //  AppDelegate.swift
 //  AeroGearSdkExample
-//
-//  Created by Wojciech Trocki on 1/19/18.
 //  Copyright © 2018 AeroGear. All rights reserved.
 //
 
