@@ -8,12 +8,12 @@ To use the AeroGear SDK for iOS, you will need the following installed on your d
 
 * iOS 9 or later
 * Xcode 9 or later
-* [CocoaPods](https://cocoapods.org/)
+* link:https://cocoapods.org/[CocoaPods]
 
 === CocoaPods
 
-1) The AeroGear Mobile SDK for iOS is available through [CocoaPods](http://cocoapods.org)
-If you have not installed CocoaPods, install CocoaPods by running the command:
+1) The AeroGear Mobile SDK for iOS is available using CocoaPods package manager
+If you have not installed CocoaPods, install it by running the command:
 
 [source,bash]
 ----
