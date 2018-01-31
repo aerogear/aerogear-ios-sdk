@@ -33,18 +33,16 @@ public class ServiceConfig {
     public subscript(serviceRef: String) -> MobileService? {
         let configuration = getConfiguration(serviceRef)
         if configuration.count > 1 {
-            AgsCoreLogger.logger().warning("""
-             Mobile configuration \(configFileName) contains
-             more than one service of the same type.
+            AgsCore.logger.warning("""
+             Mobile configuration \(configFileName) contains more than one service of the same type.
              Using configuration from the first occurence of service with that type.
              Any other duplicate will be ignored.
              Please review your \(configFileName) for services with \(serviceRef) type.
             """)
         } else if configuration.count == 0 {
-            AgsCoreLogger.logger().error("""
-            Mobile configuration  \(configFileName) is missing service configuration
-            for \(serviceRef) type. Please review your configuration
-            and make sure that is pointing to the right namespace.
+            AgsCore.logger.error("""
+            Configuration  \(configFileName) is missing service \(serviceRef) configuration
+            Please review your \(configFileName) for services with \(serviceRef) type.
             """)
             return nil
         }
@@ -69,7 +67,7 @@ public class ServiceConfig {
         do {
             config = try decoder.decode(MobileConfig.self, from: data)
         } catch {
-            AgsCoreLogger.logger().error("Error when decoding configuration file. Cannot decode \(configFileName)")
+            AgsCore.logger.error("Error when decoding configuration file. Cannot decode \(configFileName)")
         }
     }
 }
