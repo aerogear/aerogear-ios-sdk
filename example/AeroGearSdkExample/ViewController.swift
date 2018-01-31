@@ -13,11 +13,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var responseLabel: UILabel!
     @IBOutlet var requestButton: UIButton!
     @IBOutlet var config: UILabel!
-    
+
     let coreInstance = AgsCore()
     var currentConfig: MobileService?
-    
-    var pickerDataSource = ["sync-server", "prometheus", "echo"]
+
+    var pickerDataSource = ["sync", "prometheus", "echo"]
 
     @IBAction func buttonClick(sender _: UIButton) {
         if let uri = currentConfig?.config?.uri {
@@ -33,10 +33,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
             })
         } else {
-            self.responseLabel.textColor = UIColor.red
-            self.responseLabel.text = "Select config first"
+            responseLabel.textColor = UIColor.red
+            responseLabel.text = "Select config first"
         }
-
     }
 
     override func viewDidLoad() {
@@ -60,13 +59,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
-        AgsCoreLogger.logger().info("Loading configuration")
-        self.currentConfig = coreInstance.getConfiguration(pickerDataSource[row])
+        AgsCore.logger.debug("Loading configuration")
+        currentConfig = coreInstance.getConfiguration(pickerDataSource[row])
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(currentConfig)
             let jsonString = String(data: jsonData, encoding: .utf8)
-            print("JSON String : " + jsonString!)
+            AgsCore.logger.debug("JSON String \(jsonString!)")
             config.text = jsonString
         } catch {
         }
