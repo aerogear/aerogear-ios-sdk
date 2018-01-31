@@ -92,3 +92,14 @@ Instruction bellow explains how to crete new IOS based SDK
 open ./example/AeroGearSdkExampleTests/myservice/MyserviceTests.swift
 ----
 
+=== XCode development
+
+SDK and example applications can be developed in XCode. 
+To open xcode project Execute
+
+----
+open ./example/AeroGearSdkExample.xcworkspace
+----
+
+Example application source code is grouped in `AeroGearSdkExample` folder
+SDK source code is grouped in `Pods` > `Development pods` folder
