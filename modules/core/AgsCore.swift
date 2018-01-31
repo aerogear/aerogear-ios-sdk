@@ -11,7 +11,7 @@ public class AgsCore {
     let http: AgsHttp
 
     public init() {
-        AgsCoreLogger.logger().debug("Initializing AeroGearServices Core SDK")
+        AgsCore.logger.debug("Initializing AeroGearServices Core SDK")
         config = ServiceConfig()
         http = AgsHttp()
     }
@@ -35,8 +35,9 @@ public class AgsCore {
         return http
     }
 
-    /**
-     * Logger instance that can be used to log issues.
-     */
-    public var logger: XCGLogger { return AgsCoreLogger.logger() }
+    public static let logger: AgsLoggable = {
+        let log = XCGLogger(identifier: "AeroGearSDK", includeDefaultDestinations: true)
+        log.setup(level: .debug, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true)
+        return XCGLoggerAdapter(log)
+    }()
 }
