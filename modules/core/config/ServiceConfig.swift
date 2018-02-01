@@ -5,9 +5,9 @@ import Foundation
  * Entrypoint for parsing and processing configuration for individual services.
  *
  * This class is responsible for providing configurations for services of certain types.
- * Configuration is stored in single json file 
+ * Configuration is stored in single json file
  * that contains multiple individual service configurations and metadata.
- * Service developers can query configuration for certain types. 
+ * Service developers can query configuration for certain types.
  * See top level core interface for more information
  *
  * Usage:

@@ -6,15 +6,9 @@
 import Foundation
 import XCTest
 
-class ServiceConfigTests: XCTestCase {
-    let validServiceName = "sync"
-    let invalidServiceName = "platform"
-
-    var config: ServiceConfig!
-
+class ${SDK_NAME} Tests: XCTestCase {
     override func setUp() {
         super.setUp()
-        config = ServiceConfig()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
@@ -23,11 +17,7 @@ class ServiceConfigTests: XCTestCase {
         super.tearDown()
     }
 
-    func testConfigReading() {
-        XCTAssertNotNil(config[validServiceName])
-    }
-
-    func testConfigParsingInValidService() {
-        XCTAssertNil(config[invalidServiceName])
+    func test${SDK_NAME}() {
+        XCTFail("Not implemented")
     }
 }

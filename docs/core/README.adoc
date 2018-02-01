@@ -1,0 +1,14 @@
+== AeroGear Services Core SDK
+
+Core SDK provides numbers of helpers for individual SDK's 
+Core can be also used 
+
+See link:../getting-started.adoc[SDK architecture] for more details.
+
+=== Core Services Api
+
+Core SDK supports currently following areas
+
+1. Configuration parser
+1. Network library 
+1. Default logger shared between SDK.

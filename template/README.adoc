@@ -1,0 +1,12 @@
+= AeroGear Services ${SDK_NAME} documentation
+
+${SDK_DESCRIPTION}
+
+== Usage
+
+TODO: Add usage
+
+[source,swift]
+----
+   import AeroGearServices/${SDK_NAME}
+----

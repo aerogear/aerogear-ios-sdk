@@ -1,0 +1,71 @@
+= End user documentation
+
+== Prerequisites
+
+To get started with the Mobile.Next() IOS SDK, you can set up the SDK in your existing or new project. SDK is written in Swift language. You can also run the `./example` project to see how the SDK works.
+
+To use the AeroGear SDK for iOS, you will need the following installed on your development machine:
+
+* iOS 9 or later
+* Xcode 9 or later
+* link:https://cocoapods.org/[CocoaPods]
+
+=== CocoaPods
+
+1) The AeroGear Mobile SDK for iOS is available using CocoaPods package manager
+If you have not installed CocoaPods, install it by running the command:
+
+[source,bash]
+----
+gem install cocoapods
+pod setup
+----
+
+2) In your project directory (the directory where your `.xcodeproj` file is), create a plain text file named `Podfile` (without any file extension) and add the lines below. Replace `YourTarget` with your actual target name.
+
+.Podfile
+[source,ruby]
+----
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '9.0'
+use_frameworks!
+
+target :'YourTarget' do
+    ## Require one of the AeroGear Services here
+    pod 'AeroGearServices/sync'
+    pod 'AeroGearServices/core'
+end
+---- 
+
+3) Then run the following command:
+    
+[source,bash]
+----
+pod install
+----
+
+4) Open up `.xcworkspace` with Xcode and start using the SDK.
+
+> Do not use `.xcodeproj`. If you open up a project file instead of a workspace, dependencies will not be correctly configured.
+
+== Getting Started with Swift
+
+1) Import the AgsCore in the application .
+
+[source,swift]
+----
+   import AeroGearServices/core
+----
+
+2) In Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
+
+[source,swift]
+----
+   import AeroGearServices/sync
+----
+
+3) Use imported service library
+
+Please follow each individual service documentation for more information 
+about usage.

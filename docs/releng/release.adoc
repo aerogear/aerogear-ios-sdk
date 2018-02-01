@@ -1,0 +1,28 @@
+== SDK release documentation
+
+SDK release process
+
+For more info about cocoapods releases please visit:
+https://guides.cocoapods.org/making/specs-and-specs-repo.html
+
+> Release is needed only for distributing pods to end users.
+Developers can use development pods. Please avoid releasing untested/not approved changed to cocoapods.
+
+=== Run pre release
+
+Prerelase script verify pod specification
+
+----
+./scripts/release.sh
+----
+
+=== Create git tag
+
+----
+git tag v1.0.0
+----
+
+=== Send pod to release
+----
+pod trunk push AeroGearServices.podspec
+----
