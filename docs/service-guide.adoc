@@ -39,53 +39,49 @@ can be used to release changes under single namespace `AeroGearServices/ServiceN
 Instruction bellow explains how to crete new IOS based SDK
 
 1. Execute script that will create all required artifacts
-
++
 [source,bash]
 ----
    ./scripts/generate-service.sh --name myservice
 ----
-
-2. Review generated podspec file
-
++
+1. Review generated podspec file
++
 [source,bash]
 ----
    open ./modules/myservice/myservice.podspec
 ----
-
-3. Open generated file and write your SDK source code
-
++
+1. Open generated file and write your SDK source code
++
 [source,bash]
 ----
     open ./modules/myservice/myservice.swift
 ----
-
-
-4. Write usage example in service documentation
-
++
+1. Write usage example in service documentation
++
 [source,bash]
 ----
     open ./docs/myservice/README.adoc
 ----
-
-
-5. Link module to example application Podfile
-
++
+1. Link module to example application Podfile
++
 [source,ruby]
 ----
     pod 'myservice', :path => '../modules/myservice'
 ----
-
-
-6. Install dependencies
-
++
+1. Install dependencies
++
 [source,bash]
 ----
     cd ./example
     pod install
 ----
-
-
-6. Write unit tests
++
+1. Write unit tests
 
 [source,bash]
 ----
@@ -96,10 +92,10 @@ open ./example/AeroGearSdkExampleTests/myservice/MyserviceTests.swift
 
 SDK and example applications can be developed in XCode. 
 To open xcode project Execute
-
++
 ----
 open ./example/AeroGearSdkExample.xcworkspace
 ----
-
++
 Example application source code is grouped in `AeroGearSdkExample` folder
 SDK source code is grouped in `Pods` > `Development pods` folder
