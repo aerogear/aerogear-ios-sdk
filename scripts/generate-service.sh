@@ -8,7 +8,6 @@ set -eo pipefail
 
 # Defaults #
 SDK_NAME="AGExampleService"
-SDK_DESCRIPTION="AeroGear Services $SDK_NAME"
 
 # Parse Parameters #
 for ARG in $*; do
@@ -20,6 +19,8 @@ for ARG in $*; do
       echo "Unknown Argument $ARG. Usage: script.sh [-n=SDKName|--name=SDKName]" ;;
   esac
 done
+
+SDK_DESCRIPTION="AeroGear Services $SDK_NAME"
 
 ## Rexport values
 export SDK_NAME=$SDK_NAME
