@@ -1,4 +1,3 @@
-import AeroGearHttp
 import Foundation
 import XCGLogger
 

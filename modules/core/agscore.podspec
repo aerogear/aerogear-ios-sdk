@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
                      :tag => s.version}
   s.source_files = '**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
-  s.dependency 'AeroGearHttp'
+  s.dependency 'Alamofire', '4.6.0'
   s.dependency 'XCGLogger'
   s.requires_arc = true
 end
