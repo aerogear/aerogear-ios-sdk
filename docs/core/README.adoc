@@ -12,3 +12,22 @@ Core SDK supports currently following areas
 1. Configuration parser
 1. Network library 
 1. Default logger shared between SDK.
+
+=== Logger
+
+Logger is initialized automatically and available as static member of AgsCore.
+Example:
+
+[source,swift]
+----
+ AgsCore.logger.debug("Message")
+----
+
+End users can change or disable logger in top level application.
+
+
+[source,swift]
+----
+ AgsCore.setLogger(AgsDisabledLogger())
+----
+ 

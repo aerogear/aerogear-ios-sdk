@@ -53,3 +53,27 @@ public protocol AgsLoggable {
      */
     func severe(_ closure: @autoclosure () -> Any?)
 }
+
+/**
+* Class extends AgsLoggable protocol without providing implementation
+* Can be used to disable logging
+*/
+open class AgsDisabledLogger: AgsLoggable {
+    public func verbose(_ closure: @autoclosure () -> Any?) {
+    }
+    
+    public func debug(_ closure: @autoclosure () -> Any?) {
+    }
+    
+    public func info(_ closure: @autoclosure () -> Any?) {
+    }
+    
+    public func warning(_ closure: @autoclosure () -> Any?) {
+    }
+    
+    public func error(_ closure: @autoclosure () -> Any?) {
+    }
+    
+    public func severe(_ closure: @autoclosure () -> Any?) {
+    }
+}

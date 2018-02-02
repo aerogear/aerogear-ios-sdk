@@ -65,7 +65,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         do {
             let jsonData = try jsonEncoder.encode(currentConfig)
             let jsonString = String(data: jsonData, encoding: .utf8)
-            AgsCore.logger.debug("JSON String \(jsonString!)")
+            AgsCore.logger.debug("JSON String \(jsonString ?? "")")
             config.text = jsonString
         } catch {
         }
