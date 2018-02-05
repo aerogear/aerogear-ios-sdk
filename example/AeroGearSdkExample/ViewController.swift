@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let http = coreInstance.getHttp()
             http.getHttp().get(uri, { (response, error) -> Void in
                 if let error = error {
-                    print("An error has occured during read! \(error)")
+                    print("An error has occurred during read! \(error)")
                     return
                 }
                 if let response = response as? [String: Any] {
