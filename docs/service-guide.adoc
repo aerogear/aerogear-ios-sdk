@@ -99,3 +99,18 @@ open ./example/AeroGearSdkExample.xcworkspace
 
 Example application source code is grouped in `AeroGearSdkExample` folder
 SDK source code is grouped in `Pods` > `Development pods` folder
+
+=== Troubleshooting 
+
+==== XCode is missing files
+
+When switching between branches XCode will not be able to recognize the changes.
+This may be often seen as compilation errors when file is missing.
+
+To fix this problem developer need to:
+
+1. Close Xcode
+2. Run `pod install`
+3. Reopen project again
+
+> Note: Please make sure that cocoapods contains latest index before running pod install
