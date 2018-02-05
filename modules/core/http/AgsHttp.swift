@@ -1,8 +1,5 @@
 import Foundation
 
-public protocol Request {
-}
-
 /**
  * Wrapper class used for network requests
  */
