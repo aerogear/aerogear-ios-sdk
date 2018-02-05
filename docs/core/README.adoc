@@ -23,11 +23,10 @@ Example:
  AgsCore.logger.debug("Message")
 ----
 
-End users can change or disable logger in top level application.
-
+End users can change or disable logger in top level application by providing empty implementation.
 
 [source,swift]
 ----
- AgsCore.setLogger(AgsDisabledLogger())
+ AgsCore.setLogger(AgsLoggable())
 ----
  

@@ -1,9 +1,12 @@
 import Foundation
 
 /**
- * Protocol for all classes that want to provide logging functionality
+ * Class that should be extende by all implementations that want to provide logging functionality
+ * Note: This class is moved from protocol because 
+ * logger interface requires to provide default values for line numbers etc.
+ * Class can be also used to disable SDK logging
  */
-public protocol AgsLoggable {
+open class AgsLoggable {
 
     /**
      * Log something at the verbose log level.
@@ -11,7 +14,9 @@ public protocol AgsLoggable {
      * @param closure  A closure that returns the object to be logged.
      * It can be any object like string, array etc.
      */
-    func verbose(_ closure: @autoclosure () -> Any?)
+    open func verbose(functionName _: StaticString = #function, fileName _: StaticString = #file, lineNumber _: Int = #line, _: @autoclosure () -> Any?) {
+        // Intentionally empty. See implementations
+    }
 
     /**
      * Log something at the debug log level.
@@ -19,7 +24,9 @@ public protocol AgsLoggable {
      * @param closure  A closure that returns the object to be logged.
      * It can be any object like string, array etc.
      */
-    func debug(_ closure: @autoclosure () -> Any?)
+    open func debug(functionName _: StaticString = #function, fileName _: StaticString = #file, lineNumber _: Int = #line, _: @autoclosure () -> Any?) {
+        // Intentionally empty. See implementations
+    }
 
     /**
      * Log something at the info log level.
@@ -27,7 +34,9 @@ public protocol AgsLoggable {
      * @param closure  A closure that returns the object to be logged.
      * It can be any object like string, array etc.
      */
-    func info(_ closure: @autoclosure () -> Any?)
+    open func info(functionName _: StaticString = #function, fileName _: StaticString = #file, lineNumber _: Int = #line, _: @autoclosure () -> Any?) {
+        // Intentionally empty. See implementations
+    }
 
     /**
      * Log something at the warning log level.
@@ -35,7 +44,9 @@ public protocol AgsLoggable {
      * @param closure  A closure that returns the object to be logged.
      * It can be any object like string, array etc.
      */
-    func warning(_ closure: @autoclosure () -> Any?)
+    open func warning(functionName _: StaticString = #function, fileName _: StaticString = #file, lineNumber _: Int = #line, _: @autoclosure () -> Any?) {
+        // Intentionally empty. See implementations
+    }
 
     /**
      * Log something at the error log level.
@@ -43,7 +54,9 @@ public protocol AgsLoggable {
      * @param closure  A closure that returns the object to be logged.
      * It can be any object like string, array etc.
      */
-    func error(_ closure: @autoclosure () -> Any?)
+    open func error(functionName _: StaticString = #function, fileName _: StaticString = #file, lineNumber _: Int = #line, _: @autoclosure () -> Any?) {
+        // Intentionally empty. See implementations
+    }
 
     /**
      * Log something at the severe log level.
@@ -51,29 +64,7 @@ public protocol AgsLoggable {
      * @param closure  A closure that returns the object to be logged.
      * It can be any object like string, array etc.
      */
-    func severe(_ closure: @autoclosure () -> Any?)
-}
-
-/**
-* Class extends AgsLoggable protocol without providing implementation
-* Can be used to disable logging
-*/
-open class AgsDisabledLogger: AgsLoggable {
-    public func verbose(_ closure: @autoclosure () -> Any?) {
-    }
-    
-    public func debug(_ closure: @autoclosure () -> Any?) {
-    }
-    
-    public func info(_ closure: @autoclosure () -> Any?) {
-    }
-    
-    public func warning(_ closure: @autoclosure () -> Any?) {
-    }
-    
-    public func error(_ closure: @autoclosure () -> Any?) {
-    }
-    
-    public func severe(_ closure: @autoclosure () -> Any?) {
+    open func severe(functionName _: StaticString = #function, fileName _: StaticString = #file, lineNumber _: Int = #line, _: @autoclosure () -> Any?) {
+        // Intentionally empty. See implementations
     }
 }

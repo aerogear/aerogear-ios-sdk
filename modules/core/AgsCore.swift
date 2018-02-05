@@ -34,26 +34,22 @@ public class AgsCore {
     public func getHttp() -> AgsHttp {
         return http
     }
-    
+
     /**
-    * Logger instance used for logging across SDK's
-    */
+     * Logger instance used for logging across SDK's
+     */
     public static var logger: AgsLoggable = {
         let log = XCGLogger(identifier: "AeroGearSDK", includeDefaultDestinations: true)
         log.setup(level: .debug, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true)
         return XCGLoggerAdapter(log)
     }()
-    
+
     /**
-    * Provides way do dynamically change logger implementation
-    *
-    * @param newLogger - new logger implementation
-    */
-    public static func setLogger(newLogger: AgsLoggable){
-        logger = newLogger;
+     * Provides way do dynamically change logger implementation
+     *
+     * @param newLogger - new logger implementation
+     */
+    public static func setLogger(newLogger: AgsLoggable) {
+        logger = newLogger
     }
-    
-    
-    
-    
 }

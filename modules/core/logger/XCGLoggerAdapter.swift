@@ -20,8 +20,8 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure  A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-    open func verbose(_ closure: @autoclosure () -> Any?) {
-        defaultLoggerInstance.logln(closure, level: .verbose)
+    open override func verbose(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
+        defaultLoggerInstance.logln(closure, level: .verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 
     /**
@@ -30,8 +30,8 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-    open func debug(_ closure: @autoclosure () -> Any?) {
-        defaultLoggerInstance.logln(closure, level: .debug)
+    open override func debug(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
+        defaultLoggerInstance.logln(closure, level: .debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 
     /**
@@ -40,8 +40,8 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-    open func info(_ closure: @autoclosure () -> Any?) {
-        defaultLoggerInstance.logln(closure, level: .info)
+    open override func info(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
+        defaultLoggerInstance.logln(closure, level: .info, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 
     /**
@@ -50,8 +50,8 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-    open func warning(_ closure: @autoclosure () -> Any?) {
-        defaultLoggerInstance.logln(closure, level: .warning)
+    open override func warning(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
+        defaultLoggerInstance.logln(closure, level: .warning, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 
     /**
@@ -60,8 +60,8 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-    open func error(_ closure: @autoclosure () -> Any?) {
-        defaultLoggerInstance.logln(closure, level: .error)
+    open override func error(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
+        defaultLoggerInstance.logln(closure, level: .error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 
     /**
@@ -70,7 +70,7 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-    open func severe(_ closure: @autoclosure () -> Any?) {
-        defaultLoggerInstance.logln(closure, level: .severe)
+    open override func severe(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
+        defaultLoggerInstance.logln(closure, level: .severe, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 }
