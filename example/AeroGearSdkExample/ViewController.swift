@@ -22,10 +22,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBAction func buttonClick(sender _: UIButton) {
         if let uri = currentConfig?.config?.uri {
-            let http = coreInstance.getHttp()
-            http.getHttp().get(uri, { (response, error) -> Void in
+            coreInstance.getHttp().get(uri, { (response, error) -> Void in
                 if let error = error {
-                    print("An error has occurred during read! \(error)")
+                    AgsCore.logger.error("An error has occurred during read! \(error)")
                     return
                 }
                 if let response = response as? [String: Any] {
