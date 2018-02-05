@@ -30,3 +30,24 @@ End users can change or disable logger in top level application by providing emp
  AgsCore.setLogger(AgsLoggable())
 ----
  
+=== Network library
+
+Network library offers common wrapper for making any networking requests.
+Wrapper by default works with popular AlamoFire Swift library.
+
+==== Usage
+
+[source,swift]
+----
+ coreInstance.getHttp().get(uri, { (response, error) -> Void in
+        if let error = error {
+            AgsCore.logger.error("An error has occurred during read! \(error)")
+            return
+        }
+        // Unwrap optional
+        if let response = response as? [String: Any] {
+            // Operate on response Dictionary
+            print(response)
+        }
+    })
+----

@@ -1,4 +1,3 @@
-import AeroGearHttp
 import Foundation
 import XCGLogger
 
@@ -31,8 +30,8 @@ public class AgsCore {
      * @param
      * @return instance of network interface
      */
-    public func getHttp() -> AgsHttp {
-        return http
+    public func getHttp() -> AgsHttpRequest {
+        return http.getHttp()
     }
 
     /**

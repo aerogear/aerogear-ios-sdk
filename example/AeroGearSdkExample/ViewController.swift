@@ -17,14 +17,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let coreInstance = AgsCore()
     var currentConfig: MobileService?
 
+
     var pickerDataSource = ["sync", "prometheus", "echo"]
 
     @IBAction func buttonClick(sender _: UIButton) {
         if let uri = currentConfig?.config?.uri {
-            let http = coreInstance.getHttp()
-            http.getHttp().request(method: .post, path: uri, completionHandler: { (response, error) -> Void in
-                if error != nil {
-                    print("An error has occured during read! \(error!)")
+            coreInstance.getHttp().get(uri, { (response, error) -> Void in
+                if let error = error {
+                    AgsCore.logger.error("An error has occurred during read! \(error)")
                     return
                 }
                 if let response = response as? [String: Any] {
@@ -59,7 +59,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
-        AgsCore.logger.debug("Loading configuration")
+
+        AgsCore.logger.info("Loading configuration")
         currentConfig = coreInstance.getConfiguration(pickerDataSource[row])
         let jsonEncoder = JSONEncoder()
         do {

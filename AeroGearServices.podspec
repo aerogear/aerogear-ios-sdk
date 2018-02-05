@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.subspec 'core' do |base|
     base.source_files = 'modules/core/**/*.swift'
     base.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
-    base.dependency 'AeroGearHttp'
+    base.dependency 'Alamofire', '4.6.0'
     base.dependency 'XCGLogger'
   end
 end
