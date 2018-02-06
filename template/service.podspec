@@ -14,7 +14,9 @@ Pod::Spec.new do |s|
                      :tag => s.version}
   s.source_files = '**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
-  ## Add dependency here if needed
-  ## s.dependency ''
+  ## Default core dependency
+  s.dependency 'AGSCore'
+  ## Add other dependencies if needed
+  # s.dependency ''
   s.requires_arc = true
 end
