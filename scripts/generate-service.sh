@@ -21,9 +21,11 @@ for ARG in $*; do
 done
 
 SDK_DESCRIPTION="AeroGear Services $SDK_NAME"
+SDK_CLASS=`echo ${SDK_NAME} | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) substr($i,2) }}1'`
 
 ## Rexport values
 export SDK_NAME=$SDK_NAME
+export SDK_CLASS=$SDK_CLASS
 export SDK_DESCRIPTION=$SDK_DESCRIPTION
 
 echo "Create folder for SDK"
@@ -37,10 +39,11 @@ mkdir -p ./example/AeroGearSdkExampleTests/$SDK_NAME
 
 echo "Copy and process module templates"
 envsubst < ./template/service.podspec > ./modules/$SDK_NAME/${SDK_NAME}.podspec
-envsubst < ./template/Service.swift_template > ./modules/$SDK_NAME/${SDK_NAME}.swift 
+envsubst < ./template/Service.swift_template > ./modules/$SDK_NAME/${SDK_CLASS}.swift 
 
 echo "Copy and process docs and unit tests"
 envsubst < ./template/README.adoc > ./docs/$SDK_NAME/README.adoc
-envsubst < ./template/ServiceTests.swift_template > ./example/AeroGearSdkExampleTests/$SDK_NAME/${SDK_NAME}Tests.swift
+envsubst < ./template/ServiceTests.swift_template > \
+./example/AeroGearSdkExampleTests/$SDK_NAME/${SDK_CLASS}Tests.swift
  
 echo "SDK generated successfully"

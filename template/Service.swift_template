@@ -4,5 +4,5 @@ import XCTest
 /**
  * ${SDK_DESCRIPTION}
  */
-open class ${SDK_NAME} {
+open class ${SDK_CLASS} {
 }
