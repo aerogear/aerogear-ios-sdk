@@ -17,14 +17,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let coreInstance = AgsCore()
     var currentConfig: MobileService?
 
-
-    var pickerDataSource = ["sync", "prometheus", "echo"]
+    var pickerDataSource = ["fh-sync-server", "prometheus", "keycloak", "metrics"]
 
     @IBAction func buttonClick(sender _: UIButton) {
-        if let uri = currentConfig?.config?.uri {
+        if let uri = currentConfig?.url {
             coreInstance.getHttp().get(uri, { (response, error) -> Void in
                 if let error = error {
-                    AgsCore.logger.error("An error has occurred during read! \(error)")
+                    AgsCore.logger.error("An error has occurred during read \(error)")
                     return
                 }
                 if let response = response as? [String: Any] {

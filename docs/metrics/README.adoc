@@ -1,0 +1,20 @@
+= AeroGear Services metrics documentation
+
+AeroGear Services metrics
+
+== Usage
+
+Add to your app delegate following code
+
+[source,swift]
+----
+    var metrics = AgsMetrics()
+
+    func applicationDidEnterBackground(_: UIApplication) {
+        metrics.background();
+    }
+
+    func applicationDidBecomeActive(_: UIApplication) {
+        metrics.foreground();
+    }
+----

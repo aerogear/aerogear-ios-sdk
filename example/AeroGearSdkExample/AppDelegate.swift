@@ -4,12 +4,14 @@
 //  Copyright © 2018 AeroGear. All rights reserved.
 //
 
+import AGSMetrics
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var metrics = AgsMetrics()
 
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -27,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
+        metrics.collectMetrics()
     }
 
     func applicationWillTerminate(_: UIApplication) {
