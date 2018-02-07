@@ -10,11 +10,7 @@ Add to your app delegate following code
 ----
     var metrics = AgsMetrics()
 
-    func applicationDidEnterBackground(_: UIApplication) {
-        metrics.background();
-    }
-
     func applicationDidBecomeActive(_: UIApplication) {
-        metrics.foreground();
+        metrics.collectMetrics();
     }
 ----
