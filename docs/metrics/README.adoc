@@ -2,6 +2,11 @@
 
 AeroGear Services metrics
 
+
+== Supported metrics
+
+1. SDK and Application version
+
 == Usage
 
 Add to your app delegate following code
