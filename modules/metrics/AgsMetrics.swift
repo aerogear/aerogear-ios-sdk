@@ -6,22 +6,28 @@ import Foundation
  */
 open class AgsMetrics {
 
-    let core: AgsCore
-    let appData: AppData
-    let config: MetricsConfig
+    private let core: AgsCore
+    private let appData: AppData
+    private let config: MetricsConfig
 
-    var metrics: [Collectable] = Array()
+    public var metrics: [Collectable] = Array()
 
     public init() {
         core = AgsCore()
         appData = AppData()
         config = MetricsConfig(core)
-
-        metrics.append(SdkVersionMetrics(core.getHttp(), config, appData))
+        enableDefaultMetrics()
     }
-
+    
     /**
-     * Force collect metrics for SDK version
+     * Method can be extended to initialize specific set of metrics
+     */
+    open func enableDefaultMetrics(){
+       metrics.append(SdkVersionMetrics(core.getHttp(), config, appData))
+    }
+    
+    /**
+     * Force collect metrics
      */
     open func collectMetrics() {
         if config.metricsEnabled() {

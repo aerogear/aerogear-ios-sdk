@@ -31,7 +31,7 @@ public class SdkVersionMetrics: Collectable {
         sdkVersion = AgsCore.getMetadata().SDK_VERSION
     }
 
-    func collect() {
+    public func collect() {
         // TODO: Store version in User Preferences and detect that was changed?
         // TODO: use single endpoint vs dedicated one?
         if let uri = config.getBaseUrl() {
