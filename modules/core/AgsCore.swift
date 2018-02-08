@@ -56,6 +56,6 @@ public class AgsCore {
      * Returns metadata for SDK including version
      */
     public static func getMetadata() -> AgsMetaData {
-        return AgsMetaData()
+        return AppData().metadata
     }
 }

@@ -7,7 +7,7 @@ import Foundation
 open class AgsMetrics: MetricsContainer {
 
     private let core: AgsCore
-    private let appData: AppData
+    private let appData: AgsMetaData
     private let config: MetricsConfig
     private var publisher: MetricsPublisher!
 
@@ -15,7 +15,7 @@ open class AgsMetrics: MetricsContainer {
 
     public init() {
         core = AgsCore()
-        appData = AppData()
+        appData = AgsCore.getMetadata()
         config = MetricsConfig(core)
 
         injectPublisher()

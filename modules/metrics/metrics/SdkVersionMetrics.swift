@@ -20,17 +20,15 @@ public struct SdkVersion: Codable {
  */
 public class SdkVersionMetrics: Collectable {
 
-    let appData: AppData
-    var sdkVersion: String
+    let appData: AgsMetaData
 
-    init(_ appData: AppData) {
+    init(_ appData: AgsMetaData) {
         self.appData = appData
-        sdkVersion = AgsCore.getMetadata().sdkVersion
     }
 
     public func collect() -> MetricsData {
-        let payload = SdkVersion(clientId: appData.installationID,
-                                 sdkVersion: sdkVersion,
+        let payload = SdkVersion(clientId: appData.installationId,
+                                 sdkVersion: appData.sdkVersion,
                                  appId: appData.bundleId,
                                  appVersion: appData.appVersion
         )

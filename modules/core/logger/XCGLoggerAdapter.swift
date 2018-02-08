@@ -20,7 +20,7 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure  A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-     // swiftlint:disable line_length
+    // swiftlint:disable line_length
     open override func verbose(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
         defaultLoggerInstance.logln(closure, level: .verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
@@ -31,7 +31,7 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-     // swiftlint:disable line_length
+    // swiftlint:disable line_length
     open override func debug(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
         defaultLoggerInstance.logln(closure, level: .debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
@@ -63,7 +63,7 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-     // swiftlint:disable line_length
+    // swiftlint:disable line_length
     open override func error(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
         defaultLoggerInstance.logln(closure, level: .error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
@@ -74,7 +74,7 @@ open class XCGLoggerAdapter: AgsLoggable {
      * @param closure     A closure that returns the object to be logged. It can be any object like string, array etc.
      * @param userInfo Dictionary for adding arbitrary data to the log message, can be used by filters/formatters etc
      */
-     // swiftlint:disable line_length
+    // swiftlint:disable line_length
     open override func severe(functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, _ closure: @autoclosure () -> Any?) {
         defaultLoggerInstance.logln(closure, level: .severe, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
