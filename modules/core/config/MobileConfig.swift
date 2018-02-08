@@ -44,7 +44,8 @@ public enum ConfigType: Codable {
             do {
                 self = try .bool(container.decode(Bool.self))
             } catch DecodingError.typeMismatch {
-                throw DecodingError.typeMismatch(ConfigType.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Encoded payload not of an expected type"))
+                let decodingError = DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Encoded payload not of an expected type")
+                throw DecodingError.typeMismatch(ConfigType.self, decodingError)
             }
         }
     }
