@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var metrics = AgsMetrics()
+    var metrics: MetricsContainer = AgsMetrics()
 
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

@@ -3,11 +3,16 @@
 AeroGear Services metrics
 
 
-== Supported metrics
+== Internal metrics
 
-1. SDK and Application version
+1. SDK and application version 
+Tracking AeroGear Service SDK version and Application version
++
+1. Application started timestamp metrics
+Metrics sending current timestamp 
 
-== Usage
+
+== Application usage
 
 Add to your app delegate following code
 
@@ -18,4 +23,23 @@ Add to your app delegate following code
     func applicationDidBecomeActive(_: UIApplication) {
         metrics.collectMetrics();
     }
+----
+
+== Contributing to metrics SDK 
+
+1.Create new metrics collector by extending Collectable class
+[source,swift]
+----
+ public class MyMetrics: Collectable {
+    public func collect() -> MetricsData {
+        return ["mylabel","my value"]
+    }
+ }
+----
+2. Append metrics to metrics container  
+[source,swift]
+----
+ var metrics: MetricsContainer
+ //...
+ metrics.addMetricsCollector(MyMetrics())
 ----

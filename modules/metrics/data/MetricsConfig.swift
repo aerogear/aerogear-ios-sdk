@@ -30,7 +30,4 @@ class MetricsConfig {
     public func getRemoteMetricsUrl() -> String? {
         return config?.url
     }
-
-
- 
 }
