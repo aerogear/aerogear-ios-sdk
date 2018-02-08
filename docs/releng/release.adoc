@@ -16,12 +16,6 @@ Prerelase script verify pod specification
 ./scripts/release.sh
 ----
 
-=== Create git tag
-
-----
-git tag v1.0.0
-----
-
 === Send pod to release
 ----
 pod trunk push AeroGearServices.podspec

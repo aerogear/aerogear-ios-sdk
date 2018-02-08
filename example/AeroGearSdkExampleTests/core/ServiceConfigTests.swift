@@ -7,7 +7,7 @@ import Foundation
 import XCTest
 
 class ServiceConfigTests: XCTestCase {
-    let validServiceName = "sync"
+    let validServiceName = "keycloak"
     let invalidServiceName = "platform"
 
     var config: ServiceConfig!

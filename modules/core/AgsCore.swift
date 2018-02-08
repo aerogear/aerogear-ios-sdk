@@ -51,4 +51,11 @@ public class AgsCore {
     public static func setLogger(newLogger: AgsLoggable) {
         logger = newLogger
     }
+
+    /**
+     * Returns metadata for SDK including version
+     */
+    public static func getMetadata() -> AgsMetaData {
+        return AppData().metadata
+    }
 }

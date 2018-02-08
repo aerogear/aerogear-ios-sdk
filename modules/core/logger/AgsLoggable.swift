@@ -2,7 +2,7 @@ import Foundation
 
 /**
  * Class that should be extende by all implementations that want to provide logging functionality
- * Note: This class is moved from protocol because 
+ * Note: This class is moved from protocol because
  * logger interface requires to provide default values for line numbers etc.
  * Class can be also used to disable SDK logging
  */

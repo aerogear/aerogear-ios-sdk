@@ -51,3 +51,10 @@ Wrapper by default works with popular AlamoFire Swift library.
         }
     })
 ----
+
+==== Working with structures
+
+Network interface requires payload to be dictionary.
+Users can still work with structures and transform them back to dictionary.
+Any structure that implements `Codable` protocol can be transformed to Dictionary thanks to convenience method:
+`structureInstance.adaptToDictionary()`
