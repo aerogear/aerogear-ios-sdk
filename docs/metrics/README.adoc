@@ -27,10 +27,10 @@ Add to your app delegate following code
 
 == Contributing to metrics SDK 
 
-1.Create new metrics collector by extending Collectable class
+1.Create new metrics collector by extending `MetricsCollectable` prototype
 [source,swift]
 ----
- public class MyMetrics: Collectable {
+ public class MyMetrics: MetricsCollectable {
     public func collect() -> MetricsData {
         return ["mylabel","my value"]
     }

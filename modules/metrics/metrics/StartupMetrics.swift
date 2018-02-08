@@ -3,7 +3,7 @@ import Foundation
 /**
  * Collects metrics for application startup time
  */
-public class StartupMetrics: Collectable {
+public class StartupMetrics: MetricsCollectable {
 
     init() {
     }

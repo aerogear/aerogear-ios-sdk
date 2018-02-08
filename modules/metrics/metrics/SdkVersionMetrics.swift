@@ -18,7 +18,7 @@ public struct SdkVersion: Codable {
 /**
  * Collects metrics for SDK and application versions
  */
-public class SdkVersionMetrics: Collectable {
+public class SdkVersionMetrics: MetricsCollectable {
 
     let appData: AgsMetaData
 

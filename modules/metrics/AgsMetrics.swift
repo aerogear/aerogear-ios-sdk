@@ -11,7 +11,7 @@ open class AgsMetrics: MetricsContainer {
     private let config: MetricsConfig
     private var publisher: MetricsPublisher!
 
-    private var metricsCollectors: [Collectable] = Array()
+    private var metricsCollectors: [MetricsCollectable] = Array()
 
     public init() {
         core = AgsCore()
@@ -55,7 +55,7 @@ open class AgsMetrics: MetricsContainer {
      * @see Collectable
      * @param collector - new metrics implementation to be added
      */
-    open func addMetricsCollector(_ collector: Collectable) {
+    open func addMetricsCollector(_ collector: MetricsCollectable) {
         metricsCollectors.append(collector)
     }
 
@@ -65,7 +65,7 @@ open class AgsMetrics: MetricsContainer {
      */
     open func collectMetrics() {
         var metricsPayload: MetricsData = MetricsData()
-        for metricsEngine: Collectable in metricsCollectors {
+        for metricsEngine: MetricsCollectable in metricsCollectors {
             let engineResult = metricsEngine.collect()
             metricsPayload.merge(engineResult) { _, new in new }
         }

@@ -12,7 +12,7 @@ public protocol MetricsContainer {
      * @param collector - new metrics implementation to be added
      * @see Collectable
      */
-    func addMetricsCollector(_ collector: Collectable)
+    func addMetricsCollector(_ collector: MetricsCollectable)
 
     /**
      * Allows to override default metrics publisher
