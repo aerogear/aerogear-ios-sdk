@@ -26,8 +26,7 @@ open class AgsMetrics {
      * Injects publisher
      */
     open func injectPublisher() {
-        if config.remoteMetricsEnabled() {
-            let url = config.getBaseUrl()!
+        if let url = config.getRemoteMetricsUrl() {
             setMetricsPublisher(MetricsNetworkPublisher(core.getHttp(), url))
         } else {
             setMetricsPublisher(MetricsLoggerPublisher())
