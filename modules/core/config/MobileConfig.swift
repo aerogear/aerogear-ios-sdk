@@ -7,9 +7,9 @@ public struct MobileConfig: Codable {
     // Version of configuration
     public var version: String?
     // Name of the mobile client used to generate this config
-    public var client_id: String?
+    public var clientId: String?
     // Name of the server used to generate configuration
-    public var cluster_name: String?
+    public var clusterName: String?
     // Service namespace
     public var namespace: String?
     // List of services

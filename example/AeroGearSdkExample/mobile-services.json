@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "cluster_name": "192.168.64.74:8443",
+  "clusterName": "192.168.64.74:8443",
   "namespace": "myproject",
-  "client_id": "example_client_id",
+  "clientId": "example_client_id",
   "services": [
     {
       "id": "fh-sync-server",
