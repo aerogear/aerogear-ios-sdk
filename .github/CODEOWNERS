@@ -1,0 +1,6 @@
+## Default owners (going to be removed later stage)
+@wtrocki
+
+## module owners
+modules/core    @wtrocki
+modules/metrics    @wtrocki

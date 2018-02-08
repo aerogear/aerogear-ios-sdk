@@ -34,6 +34,10 @@ While each module will have their own pod specification
 `AeroGearServices.podspec` will aggregate all of them into single specification that 
 can be used to release changes under single namespace `AeroGearServices/ServiceName`
 
+=== Core SDK 
+
+link:./core[Core SDK documentation]
+
 === Creating new service
 
 Instruction bellow explains how to crete new IOS based SDK
