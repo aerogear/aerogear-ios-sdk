@@ -60,7 +60,8 @@ open class AgsMetrics: MetricsContainer {
     }
 
     /**
-     * Force collect metrics
+     * Collect metrics for all active metrics collectors
+     * Send data using metrics publisher
      */
     open func collectMetrics() {
         var metricsPayload: MetricsData = MetricsData()

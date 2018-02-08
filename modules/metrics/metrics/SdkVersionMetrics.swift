@@ -34,7 +34,7 @@ public class SdkVersionMetrics: Collectable {
                                  appId: appData.bundleId,
                                  appVersion: appData.appVersion
         )
-
-        return try! payload.adaptToDictionary()
+        let dictionary = try? payload.adaptToDictionary()
+        return dictionary ?? MetricsData()
     }
 }
