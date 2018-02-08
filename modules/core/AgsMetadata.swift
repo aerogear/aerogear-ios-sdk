@@ -1,10 +1,3 @@
-//
-//  Metadata.swift
-//  AGSCore
-//
-//  Created by Wojciech Trocki on 2/7/18.
-//
-
 import Foundation
 
 /**
