@@ -7,6 +7,8 @@ public protocol Collectable {
 
     /**
      * Function called when metrics need to be collected
+     *
+     * @return metrics dictionary object that contains metrics data
      */
-    func collect()
+    func collect() -> MetricsData
 }

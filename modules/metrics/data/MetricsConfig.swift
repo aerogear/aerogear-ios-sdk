@@ -25,9 +25,11 @@ class MetricsConfig {
     }
 
     /**
-     * @return true if metrics should be enabled
+     * Checks if configuration contains remote server url
+     *
+     * @return true if remote metrics should be enabled
      */
-    public func metricsEnabled() -> Bool {
+    public func remoteMetricsEnabled() -> Bool {
         return config?.url != nil
     }
 
