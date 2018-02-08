@@ -13,14 +13,14 @@ public protocol MetricsContainer {
      * @see Collectable
      */
     func addMetricsCollector(_ collector: Collectable)
-    
+
     /**
      * Allows to override default metrics publisher
      *
      * @param publisher - implementation of metrics publisher
      */
-      func setMetricsPublisher(_ publisher: MetricsPublisher)
-    
+    func setMetricsPublisher(_ publisher: MetricsPublisher)
+
     /**
      * Collect metrics for all active metrics collectors
      * Send data using metrics publisher

@@ -15,5 +15,5 @@ public struct AgsMetaData {
     /**
      * Version of Core SDK
      */
-    public let SDK_VERSION = "DEVELOPMENT"
+    public let sdkVersion = "DEVELOPMENT"
 }

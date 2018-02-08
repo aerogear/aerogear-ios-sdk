@@ -25,7 +25,7 @@ public class SdkVersionMetrics: Collectable {
 
     init(_ appData: AppData) {
         self.appData = appData
-        sdkVersion = AgsCore.getMetadata().SDK_VERSION
+        sdkVersion = AgsCore.getMetadata().sdkVersion
     }
 
     public func collect() -> MetricsData {
