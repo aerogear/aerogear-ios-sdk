@@ -5,7 +5,9 @@ import Foundation
  * AeroGear Services metrics
  */
 open class AgsMetrics: MetricsContainer {
-
+    
+    public static var instance: MetricsContainer = AgsMetrics()
+    
     private let core: AgsCore
     private let appData: AgsMetaData
     private let config: MetricsConfig

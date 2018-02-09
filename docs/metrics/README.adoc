@@ -39,7 +39,5 @@ Add to your app delegate following code
 2. Append metrics to metrics container  
 [source,swift]
 ----
- var metrics: MetricsContainer
- //...
- metrics.addMetricsCollector(MyMetrics())
+ AgsMetrics.instance.addMetricsCollector(MyMetrics())
 ----
