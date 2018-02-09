@@ -18,10 +18,8 @@ Add to your app delegate following code
 
 [source,swift]
 ----
-    var metrics = AgsMetrics()
-
     func applicationDidBecomeActive(_: UIApplication) {
-        metrics.collectMetrics();
+        AgsMetrics.instance.collectMetrics()
     }
 ----
 
