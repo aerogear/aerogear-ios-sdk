@@ -50,6 +50,7 @@ open class AgsMetrics: MetricsContainer {
     open func enableDefaultMetrics() {
         metricsCollectors.append(SdkVersionMetrics(appData))
         metricsCollectors.append(StartupMetrics())
+        metricsCollectors.append(PlatformMetrics())
     }
 
     /**
