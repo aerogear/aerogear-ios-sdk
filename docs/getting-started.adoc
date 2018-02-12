@@ -2,7 +2,7 @@
 
 == Prerequisites
 
-To get started with the Mobile.Next() IOS SDK, you can set up the SDK in your existing or new project. SDK is written in Swift language. You can also run the `./example` project to see how the SDK works.
+To get started with the AeroGear iOS SDK, you can set up the SDK in your existing or new project. The SDK is written in Swift. You can also link:./example-app-guide.adoc[run the example project] to see how the SDK works.
 
 To use the AeroGear SDK for iOS, you will need the following installed on your development machine:
 
@@ -12,7 +12,7 @@ To use the AeroGear SDK for iOS, you will need the following installed on your d
 
 === CocoaPods
 
-1) The AeroGear Mobile SDK for iOS is available using CocoaPods package manager
+1) The AeroGear SDK for iOS is available using the CocoaPods package manager.
 If you have not installed CocoaPods, install it by running the command:
 
 [source,bash]
@@ -58,7 +58,7 @@ pod install
    import AeroGearServices/core
 ----
 
-2) In Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
+2) In the Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
 
 [source,swift]
 ----
