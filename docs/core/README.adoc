@@ -1,13 +1,12 @@
 == AeroGear Services Core SDK
 
-Core SDK provides numbers of helpers for individual SDK's 
-Core can be also used 
+Core SDK provides numbers of helpers for individual SDK's
 
 See link:../getting-started.adoc[SDK architecture] for more details.
 
 === Core Services Api
 
-Core SDK supports currently following areas
+Main responsibilities
 
 1. Configuration parser
 1. Network library 
