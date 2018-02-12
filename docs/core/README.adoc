@@ -1,28 +1,27 @@
 == AeroGear Services Core SDK
 
-Core SDK provides numbers of helpers for individual SDK's
+The Core SDK provides a minimal set of helper functions which is used by the individual service SDKs. 
 
-See link:../getting-started.adoc[SDK architecture] for more details.
+See the link:../service-guide.adoc[Service Contributor Guide] for an explanation of the SDK Architecture.
 
 === Core Services Api
 
-Main responsibilities
+The core SDK currently supports the following areas:
 
 1. Configuration parser
-1. Network library 
-1. Default logger shared between SDK.
+2. Network library 
+3. Default logger shared between SDK.
 
 === Logger
 
-Logger is initialized automatically and available as static member of AgsCore.
-Example:
+The core SDK provides a logger. The logger is automatically initialized and available as a property of `AgsCore`.
 
 [source,swift]
 ----
  AgsCore.logger.debug("Message")
 ----
 
-End users can change or disable logger in top level application by providing empty implementation.
+End users can change or disable the logger in their applications by providing an empty implementation.
 
 [source,swift]
 ----
@@ -31,8 +30,8 @@ End users can change or disable logger in top level application by providing emp
  
 === Network library
 
-Network library offers common wrapper for making any networking requests.
-Wrapper by default works with popular AlamoFire Swift library.
+The network library offers a common wrapper for making networking requests.
+By default, the wrapper uses the popular AlamoFire Swift library.
 
 ==== Usage
 
