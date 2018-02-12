@@ -1,0 +1,51 @@
+= End user documentation
+
+== Prerequisites
+
+An example project that makes use of the SDK has been provided in the `example` folder. This project is good for understanding how the SDK works.
+
+You will need the following installed on your development machine:
+
+* iOS 9 or later
+* Xcode 9 or later
+* link:https://cocoapods.org/[CocoaPods]
+
+=== CocoaPods
+
+1) The AeroGear Mobile SDK for iOS is available using CocoaPods package manager
+If you have not installed CocoaPods, install it by running the command:
+
+[source,bash]
+----
+gem install cocoapods
+pod setup
+----
+
+2) In the `example` directory run the following command:
+
+[source,bash]
+----
+pod install
+----
+
+=== Run the Example App
+
+3) Open the `AeroGearSdkExample.xcworkspace` file with Xcode and click the 'Build & Run' button in Xcode. This should start the example application in an emulator.
+
+> Do not use `.xcodeproj`. If you open up a project file instead of a workspace, dependencies will not be correctly configured.
+
+=== Notes About the Example Project
+
+It is important to note that the example SDK is using relative import statements to import the SDK code. You can see this in `example/Podfile`:
+
+[source,ruby]
+----
+pod 'AGSCore', :path => '../modules/core'
+----
+
+In the Xcode workspace, you will see a file explorer similar to that below:
+
+image:./images/diagram.svg[]
+
+Under `Pods` > `Development Pods` you will find the Core and the Metrics SDKs.
+
