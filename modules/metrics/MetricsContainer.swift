@@ -5,7 +5,12 @@ import Foundation
  * Allows other SDK and implementations to manage (add) metrics
  */
 public protocol MetricsContainer {
-
+    
+    /**
+    * Default instance for metrics container
+    */
+    static var instance: MetricsContainer { get }
+    
     /**
      * Add new collector to metrics. Collectors allow to collect and append mobile metrics
      * Note: Collectors should be added before metrics are processed
