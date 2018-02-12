@@ -45,7 +45,7 @@ pod 'AGSCore', :path => '../modules/core'
 
 In the Xcode workspace, you will see a file explorer similar to that below:
 
-image:./images/diagram.svg[]
+image:./images/example-app-workspace.png[]
 
 Under `Pods` > `Development Pods` you will find the Core and the Metrics SDKs.
 
