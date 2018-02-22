@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
-        AgsCore.instance.sendAppDeviceMetrics()
+        AgsCore.instance.getMetrics().sendAppDeviceMetrics()
     }
 
     func applicationWillTerminate(_: UIApplication) {

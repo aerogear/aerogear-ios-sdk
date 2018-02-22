@@ -48,14 +48,6 @@ public class AgsCore {
     }
 
     /**
-     * Send default app and device metrics including a unique device identifier and
-     * App and SDK version information
-     */
-    public func sendAppDeviceMetrics() {
-        metrics.sendAppDeviceMetrics()
-    }
-
-    /**
      * Logger instance used for logging across SDK's
      */
     public static var logger: AgsLoggable = {
