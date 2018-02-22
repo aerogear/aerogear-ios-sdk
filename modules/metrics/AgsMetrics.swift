@@ -57,7 +57,7 @@ open class AgsMetrics: MetricsContainer {
      * @see Collectable
      * @param collector - new metrics implementation to be added
      */
-    open func addMetricsCollector(_ collector: MetricsCollectable) {
+    private func addMetricsCollector(_ collector: MetricsCollectable) {
         metricsCollectors.append(collector)
     }
 
@@ -65,12 +65,27 @@ open class AgsMetrics: MetricsContainer {
      * Collect metrics for all active metrics collectors
      * Send data using metrics publisher
      */
-    open func collectMetrics() {
-        var metricsPayload: MetricsData = MetricsData()
-        for metricsEngine: MetricsCollectable in metricsCollectors {
-            let engineResult = metricsEngine.collect()
-            metricsPayload[metricsEngine.identifier] = engineResult
+    open func sendDefaultMetrics() {
+        publish(metricsCollectors)
+    }
+
+    /**
+     * Publish user defined metrics. Can be used by other SDK  modules too
+     */
+    open func publish(_ metrics: MetricsCollectable...) {
+        publish(metrics)
+    }
+
+    /**
+      * Internal publish function that accepts an array and can be used by either
+      * passing an array or variadic args
+      */
+    private func publish(_ metrics: [MetricsCollectable]) {
+        var payload = MetricsData()
+        for metric: MetricsCollectable in metrics {
+            let result = metric.collect()
+            payload[metric.identifier] = result
         }
-        publisher.publish(metricsPayload)
+        publisher.publish(payload)
     }
 }
