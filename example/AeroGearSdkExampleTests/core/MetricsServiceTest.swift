@@ -9,7 +9,7 @@ class MetricsServiceTest: XCTestCase {
     }
 
     func testDeviceMetrics() {
-        let metrics: DeviceMetrics = DeviceMetrics();
+        let metrics: DeviceMetrics = DeviceMetrics()
         XCTAssert(metrics.identifier == "device")
         let data: MetricsData = metrics.collect()
         XCTAssertNotNil(data["platform"])

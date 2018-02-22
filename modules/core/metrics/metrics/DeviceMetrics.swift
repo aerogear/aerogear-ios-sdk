@@ -14,7 +14,7 @@ public class DeviceMetrics: MetricsCollectable {
         return [
             "platform": "ios",
             "platformVersion": UIDevice.current.systemVersion,
-            "device": UIDevice.current.model
+            "device": UIDevice.current.model,
         ]
     }
 }

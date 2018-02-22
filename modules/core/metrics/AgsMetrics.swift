@@ -10,9 +10,9 @@ open class AgsMetrics: MetricsContainer {
     private var publisher: MetricsPublisher!
     private var http: AgsHttp
 
-    public init(_ http: AgsHttp,_ configService: ServiceConfig) {
+    public init(_ http: AgsHttp, _ configService: ServiceConfig) {
         self.http = http
-        self.config = MetricsConfig(configService)
+        config = MetricsConfig(configService)
         appData = AgsCore.getMetadata()
         setDefaultPublisher()
     }
@@ -25,7 +25,7 @@ open class AgsMetrics: MetricsContainer {
      */
     open func setDefaultPublisher() {
         if let url = config.getRemoteMetricsUrl() {
-            setMetricsPublisher(MetricsNetworkPublisher(self.http.getHttp(), url))
+            setMetricsPublisher(MetricsNetworkPublisher(http.getHttp(), url))
         } else {
             setMetricsPublisher(MetricsLoggerPublisher(appData.clientId))
         }
@@ -39,7 +39,7 @@ open class AgsMetrics: MetricsContainer {
     public func setMetricsPublisher(_ publisher: MetricsPublisher) {
         self.publisher = publisher
     }
-    
+
     /**
      * Collect metrics for all active metrics collectors
      * Send data using metrics publisher
@@ -62,12 +62,11 @@ open class AgsMetrics: MetricsContainer {
         payload = metricsRoot().merging(payload) { orig, _ in orig }
         publisher.publish(payload)
     }
-    
+
     private func metricsRoot() -> [String: Any] {
         return [
             "clientId": appData.clientId,
-            "timestamp": "\(NSDate().timeIntervalSince1970 * 1000)"
+            "timestamp": "\(NSDate().timeIntervalSince1970 * 1000)",
         ]
     }
-
 }

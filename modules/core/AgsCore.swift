@@ -36,23 +36,23 @@ public class AgsCore {
     public func getHttp() -> AgsHttpRequest {
         return http.getHttp()
     }
-    
+
     /**
-    * Allows to retrieve metrics protocol to interact with application metrics.
-    *
-    * @return Metrics protocol to interact with metrics
-    * @see AgsCore.sendAppDeviceMetrics helper method
-    */
+     * Allows to retrieve metrics protocol to interact with application metrics.
+     *
+     * @return Metrics protocol to interact with metrics
+     * @see AgsCore.sendAppDeviceMetrics helper method
+     */
     public func getMetrics() -> MetricsContainer {
         return metrics
     }
 
     /**
-      * Send default app and device metrics including a unique device identifier and
-      * App and SDK version information
-      */
+     * Send default app and device metrics including a unique device identifier and
+     * App and SDK version information
+     */
     public func sendAppDeviceMetrics() {
-        self.metrics.sendAppDeviceMetrics()
+        metrics.sendAppDeviceMetrics()
     }
 
     /**

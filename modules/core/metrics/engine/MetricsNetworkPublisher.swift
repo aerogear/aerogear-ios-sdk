@@ -5,7 +5,7 @@ import Foundation
  * Publisher requires remote server URL
  */
 public class MetricsNetworkPublisher: MetricsPublisher {
-    
+
     let http: AgsHttpRequest
     let url: String
 
