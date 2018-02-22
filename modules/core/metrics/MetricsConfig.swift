@@ -8,11 +8,11 @@ struct MetricsConfigData {
  */
 class MetricsConfig {
 
-    private let sdkID = "metrics"
+    private let sdkId = "metrics"
     public var config: MobileService?
 
-    init(_ core: AgsCore) {
-        if let serviceConfig = core.getConfiguration(sdkID) {
+    init(_ configService: ServiceConfig) {
+        if let serviceConfig = configService[sdkId] {
             config = serviceConfig
         } else {
             AgsCore.logger.error("""

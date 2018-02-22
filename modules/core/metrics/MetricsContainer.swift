@@ -13,10 +13,10 @@ public protocol MetricsContainer {
     func setMetricsPublisher(_ publisher: MetricsPublisher)
 
     /**
-     * Collect metrics for all active metrics collectors
-     * Send data using metrics publisher
+     * Collect application and device metrics
+     * Send data instantly using active metrics publisher
      */
-    func sendDefaultMetrics()
+    func sendAppDeviceMetrics()
 
     /**
      * Publish user defined metrics

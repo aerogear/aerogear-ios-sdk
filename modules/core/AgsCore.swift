@@ -9,12 +9,13 @@ public class AgsCore {
 
     let config: ServiceConfig
     let http: AgsHttp
-    var metrics: AgsMetrics?
+    var metrics: AgsMetrics
 
     private init() {
         AgsCore.logger.debug("Initializing AeroGearServices Core SDK")
-        config = ServiceConfig()
         http = AgsHttp()
+        config = ServiceConfig()
+        metrics = AgsMetrics(http, config)
     }
 
     /**
@@ -35,22 +36,23 @@ public class AgsCore {
     public func getHttp() -> AgsHttpRequest {
         return http.getHttp()
     }
-
-    public func getMetricsService() -> AgsMetrics {
-        if let metricsInstance = metrics {
-            return metricsInstance
-        } else {
-            metrics = AgsMetrics.init(self)
-            return metrics!
-        }
+    
+    /**
+    * Allows to retrieve metrics protocol to interact with application metrics.
+    *
+    * @return Metrics protocol to interact with metrics
+    * @see AgsCore.sendAppDeviceMetrics helper method
+    */
+    public func getMetrics() -> MetricsContainer {
+        return metrics
     }
 
     /**
       * Send default app and device metrics including a unique device identifier and
       * App and SDK version information
       */
-    public func sendDefaultMetrics() {
-        getMetricsService().sendDefaultMetrics()
+    public func sendAppDeviceMetrics() {
+        self.metrics.sendAppDeviceMetrics()
     }
 
     /**
