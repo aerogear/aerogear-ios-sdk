@@ -16,12 +16,12 @@ public protocol MetricsContainer {
      * Collect application and device metrics
      * Send data instantly using active metrics publisher
      */
-    func sendAppDeviceMetrics()
+    func sendAppAndDeviceMetrics()
 
     /**
      * Publish user defined metrics
      *
      * @param metrics Varargs of objects implementing MetricsCollectable
      */
-    func publish(_ metrics: MetricsCollectable...)
+    func publish(_ metrics: Metrics...)
 }

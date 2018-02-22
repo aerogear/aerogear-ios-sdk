@@ -7,7 +7,7 @@ import Foundation
  *  - platformVersion - version of the ios platform
  *  - device - device name
  */
-public class DeviceMetrics: MetricsCollectable {
+public class DeviceMetrics: Metrics {
     public private(set) var identifier: String = "device"
 
     public func collect() -> MetricsData {

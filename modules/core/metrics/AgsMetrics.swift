@@ -44,7 +44,7 @@ open class AgsMetrics: MetricsContainer {
      * Collect metrics for all active metrics collectors
      * Send data using metrics publisher
      */
-    open func sendAppDeviceMetrics() {
+    open func sendAppAndDeviceMetrics() {
         publish(AppMetrics(appData), DeviceMetrics())
     }
 
@@ -53,9 +53,9 @@ open class AgsMetrics: MetricsContainer {
      *
      * @param - metrics instances that should be published
      */
-    open func publish(_ metrics: MetricsCollectable...) {
+    open func publish(_ metrics: Metrics...) {
         var payload = MetricsData()
-        for metric: MetricsCollectable in metrics {
+        for metric: Metrics in metrics {
             let result = metric.collect()
             payload[metric.identifier] = result
         }
