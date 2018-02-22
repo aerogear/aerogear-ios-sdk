@@ -37,7 +37,7 @@
       "id": "metrics",
       "name": "metrics",
       "type": "metrics",
-      "url": "https://www.mocky.io/v2/5a79c6572e000028009a5c4f",
+      "url": "http://192.168.178.20:4000/default_metrics",
       "config": {}
    }
   ]

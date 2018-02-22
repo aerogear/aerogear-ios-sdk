@@ -19,6 +19,7 @@ public struct SdkVersion: Codable {
  * Collects metrics for SDK and application versions
  */
 public class SdkVersionMetrics: MetricsCollectable {
+    public private(set) var identifier: String = ""
 
     let appData: AgsMetaData
 
@@ -27,7 +28,7 @@ public class SdkVersionMetrics: MetricsCollectable {
     }
 
     public func collect() -> MetricsData {
-        let payload = SdkVersion(clientId: appData.installationId,
+        let payload = SdkVersion(clientId: appData.clientId,
                                  sdkVersion: appData.sdkVersion,
                                  appId: appData.bundleId,
                                  appVersion: appData.appVersion

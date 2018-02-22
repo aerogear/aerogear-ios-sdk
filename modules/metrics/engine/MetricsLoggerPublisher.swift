@@ -6,7 +6,13 @@ import Foundation
  * Can be used when remote server is not available/supported
  */
 public class MetricsLoggerPublisher: MetricsPublisher {
+    let clientId: String
+
+    init(_ clientId: String) {
+        self.clientId = clientId
+    }
+
     public func publish(_ payload: MetricsData) {
-        AgsCore.logger.info("Metrics collected \(payload)")
+        AgsCore.logger.info("Metrics collected [\(clientId)]: \(payload)")
     }
 }

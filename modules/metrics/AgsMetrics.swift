@@ -29,9 +29,9 @@ open class AgsMetrics: MetricsContainer {
      */
     open func injectPublisher() {
         if let url = config.getRemoteMetricsUrl() {
-            setMetricsPublisher(MetricsNetworkPublisher(core.getHttp(), url))
+            setMetricsPublisher(MetricsNetworkPublisher(core.getHttp(), url, appData.clientId))
         } else {
-            setMetricsPublisher(MetricsLoggerPublisher())
+            setMetricsPublisher(MetricsLoggerPublisher(appData.clientId))
         }
     }
 
@@ -48,9 +48,8 @@ open class AgsMetrics: MetricsContainer {
      * Method can be extended to initialize specific set of metrics
      */
     open func enableDefaultMetrics() {
-        metricsCollectors.append(SdkVersionMetrics(appData))
-        metricsCollectors.append(StartupMetrics())
-        metricsCollectors.append(PlatformMetrics())
+        metricsCollectors.append(AppMetrics(appData));
+        metricsCollectors.append(DeviceMetrics())
     }
 
     /**
@@ -70,7 +69,7 @@ open class AgsMetrics: MetricsContainer {
         var metricsPayload: MetricsData = MetricsData()
         for metricsEngine: MetricsCollectable in metricsCollectors {
             let engineResult = metricsEngine.collect()
-            metricsPayload.merge(engineResult) { _, new in new }
+            metricsPayload[metricsEngine.identifier] = engineResult
         }
         publisher.publish(metricsPayload)
     }
