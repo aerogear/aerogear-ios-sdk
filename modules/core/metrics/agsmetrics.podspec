@@ -1,5 +1,6 @@
 Pod::Spec.new do |s|
-  s.name         = 'AGSMetrics'
+  s.name         = 'ls
+  AGSMetrics'
   s.version      = '1.0.0'
   s.summary      = 'AeroGear Services metrics'
   s.description  = 'AeroGear Services metrics'

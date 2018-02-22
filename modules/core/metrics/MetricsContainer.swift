@@ -5,20 +5,6 @@ import Foundation
  * Allows other SDK and implementations to manage (add) metrics
  */
 public protocol MetricsContainer {
-    
-    /**
-    * Default instance for metrics container
-    */
-    static var instance: MetricsContainer { get }
-    
-    /**
-     * Add new collector to metrics. Collectors allow to collect and append mobile metrics
-     * Note: Collectors should be added before metrics are processed
-     * @param collector - new metrics implementation to be added
-     * @see Collectable
-     */
-    func addMetricsCollector(_ collector: MetricsCollectable)
-
     /**
      * Allows to override default metrics publisher
      *
@@ -30,5 +16,12 @@ public protocol MetricsContainer {
      * Collect metrics for all active metrics collectors
      * Send data using metrics publisher
      */
-    func collectMetrics()
+    func sendDefaultMetrics()
+
+    /**
+     * Publish user defined metrics
+     *
+     * @param metrics Varargs of objects implementing MetricsCollectable
+     */
+    func publish(_ metrics: MetricsCollectable...)
 }

@@ -8,19 +8,19 @@ public class AppData {
 
     init() {
         let bundleId = Bundle.main.bundleIdentifier ?? "Unknown"
-        let instalId = setupInstallationId()
+        let clientId = setupClientId()
         let appVersion = setupAppVersion()
-        metadata = AgsMetaData(installationId: instalId, appVersion: appVersion, bundleId: bundleId)
+        metadata = AgsMetaData(clientId: clientId, appVersion: appVersion, bundleId: bundleId)
     }
 
-    private func setupInstallationId() -> String {
-        if let installId = defaults.string(forKey: "metrics-sdk-installation-id") {
-            return installId
+    private func setupClientId() -> String {
+        if let clientId = defaults.string(forKey: "metrics-sdk-client-id") {
+            return clientId
         } else {
-            let installId = UUID().uuidString
-            defaults.set(installId, forKey: "metrics-sdk-installation-id")
-            AgsCore.logger.debug("Generated new client id: \(installId)")
-            return installId
+            let clientId = UUID().uuidString
+            defaults.set(clientId, forKey: "metrics-sdk-client-id")
+            AgsCore.logger.debug("Generated new client id: \(clientId)")
+            return clientId
         }
     }
 
