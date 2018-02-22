@@ -1,5 +1,12 @@
 import Foundation
 
+/**
+ * Collect application metrics:
+ *
+ *  - appId - application bundle id
+ *  - appVersion - version of the applicatoon
+ *  - sdkVersion - AeroGear Services SDK version
+ */
 public class AppMetrics: MetricsCollectable {
     public private(set) var identifier: String = "app"
 

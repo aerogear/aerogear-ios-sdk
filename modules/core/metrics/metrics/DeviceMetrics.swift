@@ -1,5 +1,12 @@
 import Foundation
 
+/**
+ * Collect device metrics:
+ *
+ *  - platform - ios
+ *  - platformVersion - version of the ios platform
+ *  - device - device name
+ */
 public class DeviceMetrics: MetricsCollectable {
     public private(set) var identifier: String = "device"
 
