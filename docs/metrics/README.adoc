@@ -19,7 +19,7 @@ Add to your app delegate following code
 [source,swift]
 ----
     func applicationDidBecomeActive(_: UIApplication) {
-        AgsMetrics.instance.collectMetrics()
+        AgsCore.instance.sendAppDeviceMetrics()
     }
 ----
 
