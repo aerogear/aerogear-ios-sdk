@@ -1,4 +1,3 @@
-import AGSCore
 import Foundation
 
 public class AppMetrics: MetricsCollectable {

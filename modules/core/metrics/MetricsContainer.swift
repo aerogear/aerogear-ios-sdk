@@ -5,12 +5,6 @@ import Foundation
  * Allows other SDK and implementations to manage (add) metrics
  */
 public protocol MetricsContainer {
-    
-    /**
-    * Default instance for metrics container
-    */
-    static var instance: MetricsContainer { get }
-
     /**
      * Allows to override default metrics publisher
      *

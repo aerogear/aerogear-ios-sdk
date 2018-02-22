@@ -1,13 +1,10 @@
-import AGSCore
 import Foundation
 
 /**
  * AeroGear Services metrics
  */
 open class AgsMetrics: MetricsContainer {
-    
-    public static var instance: MetricsContainer = AgsMetrics()
-    
+
     private let core: AgsCore
     private let appData: AgsMetaData
     private let config: MetricsConfig
@@ -15,8 +12,8 @@ open class AgsMetrics: MetricsContainer {
 
     private var metricsCollectors: [MetricsCollectable] = Array()
 
-    public init() {
-        core = AgsCore()
+    public init(_ core: AgsCore) {
+        self.core = core
         appData = AgsCore.getMetadata()
         config = MetricsConfig(core)
 

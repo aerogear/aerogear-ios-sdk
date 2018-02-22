@@ -4,7 +4,7 @@
 //  Copyright © 2018 AeroGear. All rights reserved.
 //
 
-import AGSMetrics
+import AGSCore
 import UIKit
 
 @UIApplicationMain
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
-        AgsMetrics.instance.sendDefaultMetrics()
+        AgsCore.instance.sendDefaultMetrics()
     }
 
     func applicationWillTerminate(_: UIApplication) {
