@@ -51,14 +51,14 @@ pod install
 
 == Getting Started with Swift
 
-1) Import the AgsCore in the application .
+1) Import the Core service in the application .
 
 [source,swift]
 ----
    import AeroGearServices/core
 ----
 
-2) In the Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
+2) In the Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AeroGearServices/name`, as in the following examples:
 
 [source,swift]
 ----
