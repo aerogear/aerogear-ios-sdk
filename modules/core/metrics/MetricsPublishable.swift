@@ -4,7 +4,7 @@ import Foundation
  * Protocol used for mobile metrics management
  * Allows other SDK and implementations to manage (add) metrics
  */
-public protocol MetricsContainer {
+public protocol MetricsPublishable {
     /**
      * Allows to override default metrics publisher
      *

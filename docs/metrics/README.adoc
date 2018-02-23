@@ -28,7 +28,7 @@ Add to your app delegate following code
 1.Create new metrics collector by extending `MetricsCollectable` prototype
 [source,swift]
 ----
- public class MyMetrics: MetricsCollectable {
+ public class MyMetrics: Metrics {
     public func collect() -> MetricsData {
         return ["mylabel","my value"]
     }
@@ -37,5 +37,5 @@ Add to your app delegate following code
 2. Append metrics to metrics container  
 [source,swift]
 ----
- AgsMetrics.instance.addMetricsCollector(MyMetrics())
+    AgsCore.instance.getMetrics().publish(MyMetrics())
 ----

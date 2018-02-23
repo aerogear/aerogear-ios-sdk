@@ -43,7 +43,7 @@ public class AgsCore {
      * @return Metrics protocol to interact with metrics
      * @see AgsCore.sendAppDeviceMetrics helper method
      */
-    public func getMetrics() -> MetricsContainer {
+    public func getMetrics() -> MetricsPublishable {
         return metrics
     }
 

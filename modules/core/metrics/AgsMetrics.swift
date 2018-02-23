@@ -3,7 +3,7 @@ import Foundation
 /**
  * AeroGear Services metrics
  */
-open class AgsMetrics: MetricsContainer {
+open class AgsMetrics: MetricsPublishable {
 
     private let appData: AgsMetaData
     private let config: MetricsConfig

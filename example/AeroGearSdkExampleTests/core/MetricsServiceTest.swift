@@ -4,7 +4,7 @@ import XCTest
 
 class MetricsServiceTest: XCTestCase {
     func testMetricsPresent() {
-        let metrics: MetricsContainer = AgsCore.instance.getMetrics()
+        let metrics: MetricsPublishable = AgsCore.instance.getMetrics()
         XCTAssertNotNil(metrics)
     }
 
