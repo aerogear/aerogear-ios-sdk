@@ -8,24 +8,22 @@ AeroGear Services metrics
 1. SDK and application version 
 Tracking AeroGear Service SDK version and Application version
 +
-1. Application started timestamp metrics
-Metrics sending current timestamp 
+1. Device metrics
+Metrics sending device and platform information
 
+== Sending app and device metrics
 
-== Application usage
-
-Add to your app delegate following code
-
+To send bundled application metrics add to following code to main application delegate:
 [source,swift]
 ----
-    func applicationDidBecomeActive(_: UIApplication) {
-        AgsCore.instance.sendAppDeviceMetrics()
-    }
+func applicationDidBecomeActive(_: UIApplication) {
+    AgsCore.instance.sendAppAndDeviceMetrics()
+}
 ----
 
-== Contributing to metrics SDK 
+== Adding new metrics 
 
-1.Create new metrics collector by extending `MetricsCollectable` prototype
+1.Create new metrics collector by extending `Metrics` prototype
 [source,swift]
 ----
  public class MyMetrics: Metrics {
@@ -37,5 +35,17 @@ Add to your app delegate following code
 2. Append metrics to metrics container  
 [source,swift]
 ----
-    AgsCore.instance.getMetrics().publish(MyMetrics())
+AgsCore.instance.getMetrics().publish(MyMetrics())
 ----
+
+ == Replacing default metrics publisher
+
+Developers can provide custom publishers to change the way metrics are sent or stored:
+
+[source,swift]
+----
+MyPublisher publisher: MetricsPublisher = MyPublisher()
+AgsCore.instance.getMetrics().setMetricsPublisher(publisher) 
+----
+
+
