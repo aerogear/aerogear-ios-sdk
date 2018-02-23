@@ -4,14 +4,14 @@
 //  Copyright © 2018 AeroGear. All rights reserved.
 //
 
-import AGSMetrics
+import AGSCore
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
-        AgsMetrics.instance.collectMetrics()
+        AgsCore.instance.getMetrics().sendAppAndDeviceMetrics()
     }
 
     func applicationWillTerminate(_: UIApplication) {

@@ -5,14 +5,17 @@ import XCGLogger
  * AeroGear Core interface to be used directly by SDK services
  */
 public class AgsCore {
+    public static let instance: AgsCore = AgsCore()
 
     let config: ServiceConfig
     let http: AgsHttp
+    var metrics: AgsMetrics
 
-    public init() {
+    private init() {
         AgsCore.logger.debug("Initializing AeroGearServices Core SDK")
-        config = ServiceConfig()
         http = AgsHttp()
+        config = ServiceConfig()
+        metrics = AgsMetrics(http, config)
     }
 
     /**
@@ -32,6 +35,16 @@ public class AgsCore {
      */
     public func getHttp() -> AgsHttpRequest {
         return http.getHttp()
+    }
+
+    /**
+     * Allows to retrieve metrics protocol to interact with application metrics.
+     *
+     * @return Metrics protocol to interact with metrics
+     * @see AgsCore.sendAppDeviceMetrics helper method
+     */
+    public func getMetrics() -> MetricsPublishable {
+        return metrics
     }
 
     /**

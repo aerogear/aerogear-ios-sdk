@@ -14,14 +14,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var requestButton: UIButton!
     @IBOutlet var config: UILabel!
 
-    let coreInstance = AgsCore()
     var currentConfig: MobileService?
 
     var pickerDataSource = ["fh-sync-server", "prometheus", "keycloak", "metrics"]
 
     @IBAction func buttonClick(sender _: UIButton) {
         if let uri = currentConfig?.url {
-            coreInstance.getHttp().get(uri, { (response, error) -> Void in
+            AgsCore.instance.getHttp().get(uri, { (response, error) -> Void in
                 if let error = error {
                     AgsCore.logger.error("An error has occurred during read \(error)")
                     return
@@ -60,7 +59,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
 
         AgsCore.logger.info("Loading configuration")
-        currentConfig = coreInstance.getConfiguration(pickerDataSource[row])
+        currentConfig = AgsCore.instance.getConfiguration(pickerDataSource[row])
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(currentConfig)

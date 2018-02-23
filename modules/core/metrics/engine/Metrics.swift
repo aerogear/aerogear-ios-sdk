@@ -3,7 +3,13 @@ import Foundation
 /**
  * Protocol used for for classes that will colect metrics
  */
-public protocol MetricsCollectable {
+public protocol Metrics {
+    /**
+     * A identifier that is used to namespace the metrics data
+     *
+     * @return identifier string
+     */
+    var identifier: String { get }
 
     /**
      * Function called when metrics need to be collected

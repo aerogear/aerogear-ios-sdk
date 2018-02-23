@@ -9,8 +9,8 @@ public struct AgsMetaData {
     // NOTE: This version is being replacted by automation script
     public let sdkVersion = "DEVELOPMENT"
 
-    /** Application installation id */
-    public var installationId: String!
+    /** Unique client id */
+    public var clientId: String!
 
     /** Application version */
     public var appVersion: String!
