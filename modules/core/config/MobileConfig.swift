@@ -5,15 +5,15 @@ import Foundation
  */
 public struct MobileConfig: Codable {
     // Version of configuration
-    public var version: String?
+    public let version: String?
     // Name of the mobile client used to generate this config
-    public var clientId: String?
+    public let clientId: String?
     // Name of the server used to generate configuration
-    public var clusterName: String?
+    public let clusterName: String?
     // Service namespace
-    public var namespace: String?
+    public let namespace: String?
     // List of services
-    public var services = [MobileService]()
+    public let services: [MobileService]
 }
 
 /**
@@ -22,11 +22,11 @@ public struct MobileConfig: Codable {
  */
 public struct MobileService: Codable {
     /** Unique id for service */
-    public var id: String?
-    public var name: String?
-    public var type: String?
-    public var url: String?
-    public var config: [String: ConfigType]?
+    public let id: String?
+    public let name: String?
+    public let type: String?
+    public let url: String?
+    public let config: [String: ConfigType]?
 }
 
 /**

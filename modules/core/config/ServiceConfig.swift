@@ -17,11 +17,10 @@ import Foundation
 public class ServiceConfig {
 
     let configFileName: String
-    var config: MobileConfig
+    var config: MobileConfig?
 
     public init(_ configFileName: String = "mobile-services") {
         self.configFileName = configFileName
-        config = MobileConfig()
         readConfiguration()
     }
 
@@ -55,7 +54,12 @@ public class ServiceConfig {
      * @return MobileService array
      */
     public func getConfiguration(_ serviceRef: String) -> [MobileService] {
-        return config.services.filter { $0.name == serviceRef }
+        print(config)
+        if let config = config {
+             return config.services.filter { $0.name == serviceRef }
+        } else {
+            return [];
+        }
     }
 
     private func readConfiguration() {
