@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Menu View Controller-->
+        <scene sceneID="tIE-bL-HqK">
+            <objects>
+                <viewController storyboardIdentifier="MenuViewController" id="XEQ-jw-s0W" customClass="MenuViewController" customModule="AeroGearSdkExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EUA-8j-XP9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imS-Sk-o9F">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCloseMenuClick:" destination="XEQ-jw-s0W" eventType="touchUpInside" id="f5E-1Z-vzq"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q6O-3P-xKq">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="200"/>
+                                <color key="backgroundColor" red="0.26804439549999998" green="0.26804439549999998" blue="0.26804439549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="jDy-v0-27Q"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" estimatedRowHeight="-1" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uOM-YI-iNe">
+                                <rect key="frame" x="0.0" y="200" width="275" height="467"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellMenu" id="SKa-dE-Fss">
+                                        <rect key="frame" x="0.0" y="22" width="275" height="54"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SKa-dE-Fss" id="bu9-wP-E0M">
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="53.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X7k-Jt-VMW">
+                                                    <rect key="frame" x="8" y="11" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="45M-kv-qWg"/>
+                                                        <constraint firstAttribute="height" constant="30" id="crW-sl-b3P"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBJ-KY-iRO">
+                                                    <rect key="frame" x="81" y="16" width="200" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="mMn-Sg-wtg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tBJ-KY-iRO" firstAttribute="centerY" secondItem="bu9-wP-E0M" secondAttribute="centerY" id="FT5-gp-cSk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tBJ-KY-iRO" secondAttribute="trailing" constant="8" id="YrL-SW-fXQ"/>
+                                                <constraint firstItem="tBJ-KY-iRO" firstAttribute="leading" secondItem="X7k-Jt-VMW" secondAttribute="trailing" constant="16" id="agR-Th-17l"/>
+                                                <constraint firstItem="X7k-Jt-VMW" firstAttribute="centerY" secondItem="bu9-wP-E0M" secondAttribute="centerY" id="q6B-ew-u3D"/>
+                                                <constraint firstItem="X7k-Jt-VMW" firstAttribute="leading" secondItem="bu9-wP-E0M" secondAttribute="leading" constant="8" id="ueE-Yw-3ec"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="XEQ-jw-s0W" id="Au0-zD-T6Z"/>
+                                    <outlet property="delegate" destination="XEQ-jw-s0W" id="T2N-oa-6H1"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AeroGear" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iS-6C-3MN">
+                                <rect key="frame" x="20" y="152" width="110" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="www.aerogear.org" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zo-RS-e7w">
+                                <rect key="frame" x="20" y="171" width="165" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aerogear_icon" translatesAutoresizingMaskIntoConstraints="NO" id="mdj-xL-PUn">
+                                <rect key="frame" x="20" y="96" width="56" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q6O-3P-xKq" firstAttribute="leading" secondItem="JTU-H9-cUT" secondAttribute="leading" id="2Ff-3y-jHU"/>
+                            <constraint firstItem="JTU-H9-cUT" firstAttribute="trailing" secondItem="imS-Sk-o9F" secondAttribute="trailing" id="2jU-qP-teM"/>
+                            <constraint firstItem="JTU-H9-cUT" firstAttribute="bottom" secondItem="imS-Sk-o9F" secondAttribute="bottom" id="5ci-Nl-xJw"/>
+                            <constraint firstItem="imS-Sk-o9F" firstAttribute="top" secondItem="EUA-8j-XP9" secondAttribute="top" id="6oh-sd-bfS"/>
+                            <constraint firstItem="Q6O-3P-xKq" firstAttribute="top" secondItem="imS-Sk-o9F" secondAttribute="top" id="7bl-5j-Ucj"/>
+                            <constraint firstItem="imS-Sk-o9F" firstAttribute="leading" secondItem="JTU-H9-cUT" secondAttribute="leading" id="8II-FS-6sm"/>
+                            <constraint firstItem="uOM-YI-iNe" firstAttribute="top" secondItem="Q6O-3P-xKq" secondAttribute="bottom" id="9p0-QV-7uC"/>
+                            <constraint firstItem="JTU-H9-cUT" firstAttribute="trailing" secondItem="uOM-YI-iNe" secondAttribute="trailing" constant="100" id="al7-bV-Fve"/>
+                            <constraint firstItem="JTU-H9-cUT" firstAttribute="trailing" secondItem="Q6O-3P-xKq" secondAttribute="trailing" constant="100" id="j8p-cd-IbD"/>
+                            <constraint firstAttribute="bottom" secondItem="uOM-YI-iNe" secondAttribute="bottom" id="nOG-Qy-dg8"/>
+                            <constraint firstItem="uOM-YI-iNe" firstAttribute="leading" secondItem="JTU-H9-cUT" secondAttribute="leading" id="tae-Vk-J42"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JTU-H9-cUT"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCloseDrawerOverlay" destination="imS-Sk-o9F" id="3aO-pp-6Cf"/>
+                        <outlet property="tblMenuOptions" destination="uOM-YI-iNe" id="XMf-se-Yzr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zi4-jC-fei" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-984.05797101449286" y="116.57608695652175"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="aerogear_icon" width="256" height="256"/>
+    </resources>
+</document>
