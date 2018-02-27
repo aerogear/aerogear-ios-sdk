@@ -7,7 +7,7 @@ import AGSCore
 import UIKit
 
 class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    
+
     static let homeStoryBoard = UIStoryboard(name: "home", bundle: nil)
 
     @IBOutlet var pickerView: UIPickerView!
@@ -76,7 +76,7 @@ class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     static func loadViewController() -> UIViewController {
         return homeStoryBoard.instantiateViewController(withIdentifier: "HomeViewController")
     }

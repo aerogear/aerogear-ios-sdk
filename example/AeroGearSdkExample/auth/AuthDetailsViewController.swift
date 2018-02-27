@@ -9,15 +9,15 @@ struct UserIdentity {
 
 class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var userInfoView: UITableView!
-    
-    //TODO: assign the user value after succesfully login
+    @IBOutlet var userInfoView: UITableView!
+
+    // TODO: assign the user value after succesfully login
     let testUser = UserIdentity(userName: "John", fullName: "John Doe", emailAddress: "john.doe@example.com", reamlRoles: ["read", "write"])
-    
+
     var navbarItem: UINavigationItem?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         userInfoView.dataSource = self
         // Do any additional setup after loading the view.
     }
@@ -26,59 +26,58 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showLogoutBtn()
+        showLogoutBtn()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.removeLogoutBtn()
+        removeLogoutBtn()
     }
-    
+
     func removeView() {
         ViewHelper.removeViewController(viewController: self)
     }
-    
+
     func showLogoutBtn() {
-        guard  let rootViewController = self.parent?.parent else {
+        guard let rootViewController = self.parent?.parent else {
             return
         }
         if rootViewController.isKind(of: RootViewController.self) {
-            self.navbarItem = rootViewController.navigationItem
-            self.navbarItem!.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutTapped))
+            navbarItem = rootViewController.navigationItem
+            navbarItem!.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutTapped))
         }
     }
-    
+
     func removeLogoutBtn() {
-        if self.navbarItem != nil {
-            self.navbarItem!.rightBarButtonItem = nil;
+        if navbarItem != nil {
+            navbarItem!.rightBarButtonItem = nil
         }
     }
-    
-    //TODO: allow pass in the user info
+
+    // TODO: allow pass in the user info
     func displayUserDetails(from: UIViewController) {
         ViewHelper.showChildViewController(parentViewController: from, childViewController: self)
     }
-    
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
+
+    @IBAction func logoutTapped(_: UIBarButtonItem) {
         let alertView = UIAlertController(title: "Logout", message: "Are you sure to logout?", preferredStyle: UIAlertControllerStyle.alert)
-        alertView.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            //TODO: implement logout
+        alertView.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            // TODO: implement logout
             self.removeView()
         }))
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+
         }))
-        self.present(alertView, animated: true, completion: nil)
+        present(alertView, animated: true, completion: nil)
     }
-    
-    
+
     /*
      // MARK: - tableView datasource delegation
      */
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 2
@@ -88,14 +87,14 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionNum = indexPath.section
-        if (sectionNum == 0) {
+        if sectionNum == 0 {
             let userInfoCell = tableView.dequeueReusableCell(withIdentifier: "userInfoCell")!
             let fieldNameLabel = userInfoCell.contentView.viewWithTag(1) as! UILabel
             let fieldValueLabel = userInfoCell.contentView.viewWithTag(2) as! UILabel
-            if (indexPath.row == 0) {
+            if indexPath.row == 0 {
                 fieldNameLabel.text = "Name"
                 fieldValueLabel.text = testUser.fullName
             } else {
@@ -110,8 +109,8 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             return roleNameCell
         }
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+    func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
             return "User Details"
@@ -121,21 +120,18 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             return ""
         }
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2;
+
+    func numberOfSections(in _: UITableView) -> Int {
+        return 2
     }
-    
-    
 
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }

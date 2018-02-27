@@ -1,27 +1,29 @@
 import UIKit
 
 class RootViewController: BaseViewController, DrawerMenuDelegate {
-    
+
+    // swiftlint:disable identifier_name
     static let MENU_HOME_TITLE = "Home"
+    // swiftlint:disable identifier_name
     static let MENU_AUTHENTICATION_TITLE = "Authentication"
-    
+
     let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.menuDelegate = self
+        menuDelegate = self
         // Do any additional setup after loading the view.
         addMenuItem(titleOfChildView: RootViewController.MENU_HOME_TITLE, iconName: "ic_home")
         addMenuItem(titleOfChildView: RootViewController.MENU_AUTHENTICATION_TITLE, iconName: "ic_account_circle")
-        self.showFirstChild();
+        showFirstChild()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    func drawerMenuItemSelectedAtIndex(_ index: Int, _ animated: Bool) {
-        if (index >= 0) {
+
+    func drawerMenuItemSelectedAtIndex(_ index: Int, _: Bool) {
+        if index >= 0 {
             let selectedMenuItem = arrayMenuOptions[index]
             switch selectedMenuItem.title {
             case RootViewController.MENU_HOME_TITLE:
@@ -33,15 +35,14 @@ class RootViewController: BaseViewController, DrawerMenuDelegate {
             }
         }
     }
-    
+
     func launchHomeView() {
         let homeViewController = HomeViewController.loadViewController()
-        self.presentViewController(homeViewController)
-    }
-    
-    func launchAuthView() {
-        let authViewController = AuthViewController.loadViewController()
-        self.presentViewController(authViewController)
+        presentViewController(homeViewController)
     }
 
+    func launchAuthView() {
+        let authViewController = AuthViewController.loadViewController()
+        presentViewController(authViewController)
+    }
 }
