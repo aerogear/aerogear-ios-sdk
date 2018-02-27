@@ -59,14 +59,15 @@ open class AgsMetrics: MetricsPublishable {
             let result = metric.collect()
             payload[metric.identifier] = result
         }
-        payload = metricsRoot().merging(payload) { orig, _ in orig }
-        publisher.publish(payload)
+        publisher.publish(appendToRootMetrics(payload))
     }
 
-    private func metricsRoot() -> [String: Any] {
+    private func appendToRootMetrics(_ payload: MetricsData) -> [String: Any] {
         return [
             "clientId": appData.clientId,
             "timestamp": Int(NSDate().timeIntervalSince1970 * 1000),
+            "data": payload
         ]
     }
+
 }
