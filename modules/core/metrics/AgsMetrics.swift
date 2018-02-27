@@ -66,7 +66,7 @@ open class AgsMetrics: MetricsPublishable {
     private func metricsRoot() -> [String: Any] {
         return [
             "clientId": appData.clientId,
-            "timestamp": (Int) (NSDate().timeIntervalSince1970 * 1000),
+            "timestamp": Int(NSDate().timeIntervalSince1970 * 1000),
         ]
     }
 }
