@@ -1,10 +1,6 @@
 ## Default owners (going to be removed at later stage)
-@wtrocki @danielpassos
-
-## module owners
-modules/core       @wtrocki
-modules/metrics    @wtrocki
+* @wtrocki @danielpassos
 
 ## Docs and examples
 docs               @wtrocki
-example            @wtrocki
+scripts            @wtrocki
