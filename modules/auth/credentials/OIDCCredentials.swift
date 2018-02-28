@@ -12,7 +12,7 @@ class OIDCCredentials {
         authState = state
     }
 
-    func getAccessToken() -> String {
+    func getAccessToken() -> String? {
         return nil
     }
 }
