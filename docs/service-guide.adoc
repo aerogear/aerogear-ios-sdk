@@ -42,11 +42,19 @@ link:./core[Core SDK documentation]
 
 Instruction bellow explains how to crete new IOS based SDK
 
+1. Install https://www.gnu.org/software/gettext/[GNU gettext]. You only need to do this once.
++
+[source,bash]
+----
+   brew install gettext
+   brew link --force gettext
+----
++
 1. Execute script that will create all required artifacts
 +
 [source,bash]
 ----
-   ./scripts/generate-service.sh --name myservice
+   ./scripts/generate-service.sh --name=myservice
 ----
 +
 1. Review generated podspec file

@@ -1,0 +1,12 @@
+= AeroGear Services auth documentation
+
+AeroGear Services auth
+
+== Usage
+
+TODO: Add usage
+
+[source,swift]
+----
+   import AeroGearServices/auth
+----

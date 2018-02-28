@@ -20,7 +20,7 @@ public class AppMetrics: Metrics {
         return [
             "appId": self.appData.bundleId,
             "appVersion": self.appData.appVersion,
-            "sdkVersion": self.appData.sdkVersion,
+            "sdkVersion": self.appData.sdkVersion
         ]
     }
 }

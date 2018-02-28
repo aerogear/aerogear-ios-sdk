@@ -58,7 +58,7 @@ public class ServiceConfig {
         if let config = config {
              return config.services.filter { $0.name == serviceRef }
         } else {
-            return [];
+            return []
         }
     }
 
