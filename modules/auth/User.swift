@@ -1,9 +1,6 @@
 //
 //  AgsUser.swift
 //  AGSAuth
-//
-//  Created by Wei Li on 27/02/2018.
-//
 
 import Foundation
 
