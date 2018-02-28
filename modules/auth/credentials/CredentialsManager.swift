@@ -9,8 +9,8 @@ class CredentialsManager {
     func load() -> OIDCCredentials? {
         return nil
     }
-    
+
     func save(credentials: OIDCCredentials) {
-        
+
     }
 }

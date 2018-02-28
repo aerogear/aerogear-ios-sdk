@@ -2,7 +2,6 @@
 //  AuthenticationConfig.swift
 //  AGSAuth
 
-
 import Foundation
 
 /** Configurations for the authentication service */

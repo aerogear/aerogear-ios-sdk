@@ -8,9 +8,9 @@ import AGSCore
 /** All the configurations related to Keycloak */
 class KeycloakConfig {
     private let sdkId = "keycloak"
-    
+
     public var rawConfig: MobileService?
-    
+
     init(_ configService: ServiceConfig) {
         if let serviceConfig = configService[sdkId] {
             rawConfig = serviceConfig
