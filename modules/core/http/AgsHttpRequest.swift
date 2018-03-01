@@ -1,11 +1,21 @@
 import Alamofire
 import Foundation
 
+public protocol AgsHttpRequestProtocol {
+    func get(_ url: String, params: [String: AnyObject]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+
+    func post(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+
+    func put(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+
+    func delete(_ url: String, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+}
+
 /**
  * This is a implementation of HttpRequest based on AlamoFire
  * Implementation is designed to work with Json payload
  */
-public class AgsHttpRequest {
+public class AgsHttpRequest: AgsHttpRequestProtocol {
 
     public func get(_ url: String, params: [String: AnyObject]? = [:], headers: [String: String]? = [:],
                     _ handler: @escaping (Any?, Error?) -> Void) {

@@ -14,7 +14,7 @@ open class AgsAuth {
         keycloakConfig = KeycloakConfig(serviceConfig)
         authServiceConfig = authConfig
         credentialManager = CredentialsManager()
-        authenticator = OIDCAuthenticator()
+        authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig, authConfig: authConfig, credentialManager: credentialManager)
     }
 
     public func login(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {

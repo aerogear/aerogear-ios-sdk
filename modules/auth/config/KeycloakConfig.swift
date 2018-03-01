@@ -22,4 +22,9 @@ class KeycloakConfig {
             """)
         }
     }
+
+    func getLogoutUrl(idToken: String) -> String {
+        //TODO: implement this
+        return ""
+    }
 }
