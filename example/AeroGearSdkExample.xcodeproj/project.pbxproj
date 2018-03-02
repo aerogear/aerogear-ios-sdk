@@ -29,6 +29,9 @@
 		B352665A2044B1C1004BACC7 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35266592044B1C1004BACC7 /* AuthViewController.swift */; };
 		B352665C2044BBCD004BACC7 /* AuthDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352665B2044BBCD004BACC7 /* AuthDetailsViewController.swift */; };
 		B352665F20455FBC004BACC7 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352665E20455FBC004BACC7 /* ViewHelper.swift */; };
+		B3AC1A83204815E000BEB12B /* AuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A82204815E000BEB12B /* AuthTests.swift */; };
+		B3AC1A862048184600BEB12B /* OIDCAuthenticatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A852048184600BEB12B /* OIDCAuthenticatorTest.swift */; };
+		B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A88204825EC00BEB12B /* MockHttpRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		B35266592044B1C1004BACC7 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		B352665B2044BBCD004BACC7 /* AuthDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDetailsViewController.swift; sourceTree = "<group>"; };
 		B352665E20455FBC004BACC7 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
+		B3AC1A82204815E000BEB12B /* AuthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTests.swift; sourceTree = "<group>"; };
+		B3AC1A852048184600BEB12B /* OIDCAuthenticatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCAuthenticatorTest.swift; sourceTree = "<group>"; };
+		B3AC1A88204825EC00BEB12B /* MockHttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHttpRequest.swift; sourceTree = "<group>"; };
 		BF3FA3B26CCABCDADAC6AB94 /* Pods-AeroGearSdkExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		D7E51B1D502165078E140C8B /* Pods_AeroGearSdkExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearSdkExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -134,6 +140,8 @@
 		018FBE6920123AEE00E763A5 /* AeroGearSdkExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				B3AC1A87204825DE00BEB12B /* mocks */,
+				B3AC1A81204815E000BEB12B /* auth */,
 				018FBE6A20123AEE00E763A5 /* AeroGearSdkExampleTests.swift */,
 				018FBE6C20123AEE00E763A5 /* Info.plist */,
 				63722015BF5E5190986AE905 /* core */,
@@ -206,6 +214,31 @@
 				B352665E20455FBC004BACC7 /* ViewHelper.swift */,
 			);
 			path = helpers;
+			sourceTree = "<group>";
+		};
+		B3AC1A81204815E000BEB12B /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				B3AC1A84204815E700BEB12B /* authenticator */,
+				B3AC1A82204815E000BEB12B /* AuthTests.swift */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
+		B3AC1A84204815E700BEB12B /* authenticator */ = {
+			isa = PBXGroup;
+			children = (
+				B3AC1A852048184600BEB12B /* OIDCAuthenticatorTest.swift */,
+			);
+			path = authenticator;
+			sourceTree = "<group>";
+		};
+		B3AC1A87204825DE00BEB12B /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B3AC1A88204825EC00BEB12B /* MockHttpRequest.swift */,
+			);
+			path = mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,9 +482,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3AC1A862048184600BEB12B /* OIDCAuthenticatorTest.swift in Sources */,
+				B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */,
 				01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */,
 				017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */,
 				018FBE6B20123AEE00E763A5 /* AeroGearSdkExampleTests.swift in Sources */,
+				B3AC1A83204815E000BEB12B /* AuthTests.swift in Sources */,
 				659F2EDBD50348EBB799D1EF /* MetricsServiceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
