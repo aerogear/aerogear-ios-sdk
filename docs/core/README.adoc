@@ -11,6 +11,7 @@ The core SDK currently supports the following areas:
 1. Configuration parser
 2. Network library 
 3. Default logger shared between SDK.
+4. Metrics (documented in separate chapter)
 
 === Logger
 

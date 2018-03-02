@@ -1,0 +1,45 @@
+= Extending metrics
+
+User Apps and other SDK Modules can send their own metrics at any time.
+
+== Sending app and device metrics
+
+To send bundled application metrics add following code to main application delegate:
+[source,swift]
+----
+func applicationDidBecomeActive(_: UIApplication) {
+    AgsCore.instance.sendAppAndDeviceMetrics()
+}
+----
+
+== Adding new metrics 
+
+Users can also create their own metrics by extending `Metrics` prototype. 
+
+1.Create new metrics by extending `Metrics` prototype
+[source,swift]
+----
+ public class MyMetrics: Metrics {
+    public private(set) var identifier: String = "mymetricsid"
+    public func collect() -> MetricsData {
+        return ["mylabel","my value"]
+    }
+ }
+----
+2. Append metrics to metrics container  
+[source,swift]
+----
+AgsCore.instance.getMetrics().publish(MyMetrics())
+----
+
+ == Replacing default metrics publisher
+
+Developers can provide custom publishers to change the way metrics are sent or stored:
+
+[source,swift]
+----
+MyPublisher publisher: MetricsPublisher = MyPublisher()
+AgsCore.instance.getMetrics().setMetricsPublisher(publisher) 
+----
+
+

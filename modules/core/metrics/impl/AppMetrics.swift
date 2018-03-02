@@ -4,7 +4,7 @@ import Foundation
  * Collect application metrics:
  *
  *  - appId - application bundle id
- *  - appVersion - version of the applicatoon
+ *  - appVersion - version of the application
  *  - sdkVersion - AeroGear Services SDK version
  */
 public class AppMetrics: Metrics {

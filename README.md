@@ -13,9 +13,9 @@ AeroGear Services IOS Swift SDK (AGS)
 AeroGear Services consist of set of separate SDKs
 
 - [Core](./docs/core/README.adoc)
-Common base for all SDKs
+Core library used as base for other SDKs
 - [Metrics](./docs/metrics/README.adoc)
-Mobile application metrics SDK
+Mobile application Metrics SDK (part of the core bundle)
 
 ## Contributing
 

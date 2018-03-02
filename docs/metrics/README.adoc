@@ -1,41 +1,24 @@
-= AeroGear Services metrics documentation
+= AeroGear Services Metrics documentation
 
-AeroGear Services metrics
+This document explains how to use the AeroGear Metrics SDK on the IOS platform and integrate it with an App.
 
+== Provided metrics
 
-== Internal metrics
+The default metrics contain App metrics, Device metrics and possibly other types in the future.
+A Client ID and a timestamp are added to the top level of the Metrics object for categorization and visualization purposes. 
+The Client ID will be generated and stored on the device when the App is started the first time.
 
-1. SDK and application version 
-Tracking AeroGear Service SDK version and Application version
-+
-1. Application started timestamp metrics
-Metrics sending current timestamp 
+=== App metrics
 
+- *App ID*: The package name of your App
+- *App version*: The version of your App
+- *SDK version*: The version of the Aerogear SDK that is used
 
-== Application usage
+=== Device metrics
 
-Add to your app delegate following code
+- *Platform*: Hardcoded to `ios`
+- *Platform Version*: Version of the platform (IOS10 etc.)
 
-[source,swift]
-----
-    func applicationDidBecomeActive(_: UIApplication) {
-        AgsCore.instance.sendAppDeviceMetrics()
-    }
-----
+=== Extending metrics
 
-== Contributing to metrics SDK 
-
-1.Create new metrics collector by extending `MetricsCollectable` prototype
-[source,swift]
-----
- public class MyMetrics: Metrics {
-    public func collect() -> MetricsData {
-        return ["mylabel","my value"]
-    }
- }
-----
-2. Append metrics to metrics container  
-[source,swift]
-----
-    AgsCore.instance.getMetrics().publish(MyMetrics())
-----
+See link:./extending-metrics.adoc[Extending Metrics Guide] 
