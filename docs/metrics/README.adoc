@@ -1,51 +1,24 @@
-= AeroGear Services metrics documentation
+= AeroGear Services Metrics documentation
 
-AeroGear Services metrics
+This document explains how to use the AeroGear Metrics SDK on the IOS platform and integrate it with an App.
 
+== Provided metrics
 
-== Internal metrics
+The default metrics contain App metrics, Device metrics and possibly other types in the future.
+A Client ID and a timestamp are added to the top level of the Metrics object for categorization and visualization purposes. 
+The Client ID will be generated and stored on the device when the App is started the first time.
 
-1. SDK and application version 
-Tracking AeroGear Service SDK version and Application version
-+
-1. Device metrics
-Metrics sending device and platform information
+=== App metrics
 
-== Sending app and device metrics
+- *App ID*: The package name of your App
+- *App version*: The version of your App
+- *SDK version*: The version of the Aerogear SDK that is used
 
-To send bundled application metrics add to following code to main application delegate:
-[source,swift]
-----
-func applicationDidBecomeActive(_: UIApplication) {
-    AgsCore.instance.sendAppAndDeviceMetrics()
-}
-----
+=== Device metrics
 
-== Adding new metrics 
+- *Platform*: Hardcoded to `ios`
+- *Platform Version*: Version of the platform (IOS10 etc.)
 
-1.Create new metrics collector by extending `Metrics` prototype
-[source,swift]
-----
- public class MyMetrics: Metrics {
-    public func collect() -> MetricsData {
-        return ["mylabel","my value"]
-    }
- }
-----
-2. Append metrics to metrics container  
-[source,swift]
-----
-AgsCore.instance.getMetrics().publish(MyMetrics())
-----
+=== Extending metrics
 
- == Replacing default metrics publisher
-
-Developers can provide custom publishers to change the way metrics are sent or stored:
-
-[source,swift]
-----
-MyPublisher publisher: MetricsPublisher = MyPublisher()
-AgsCore.instance.getMetrics().setMetricsPublisher(publisher) 
-----
-
-
+See link:./extending-metrics.adoc[Extending Metrics Guide] 
