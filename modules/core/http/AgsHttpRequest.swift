@@ -12,8 +12,8 @@ public protocol AgsHttpRequestProtocol {
 }
 
 /**
- * This is a implementation of HttpRequest based on AlamoFire
- * Implementation is designed to work with Json payload
+ This is a implementation of HttpRequest based on AlamoFire
+ Implementation is designed to work with Json payload
  */
 public class AgsHttpRequest: AgsHttpRequestProtocol {
 
@@ -66,11 +66,11 @@ public class AgsHttpRequest: AgsHttpRequestProtocol {
 }
 
 /**
- * Extending encodable in order to support Encodable => Dictionary conversion
+ Extending encodable in order to support Encodable => Dictionary conversion
  */
 public extension Encodable {
     /**
-     * Encodable => Dictionary conversion
+     Encodable => Dictionary conversion
      */
     public func adaptToDictionary() throws -> [String: Any] {
         let data = try JSONEncoder().encode(self)

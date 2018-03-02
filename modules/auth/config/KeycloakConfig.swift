@@ -2,8 +2,8 @@
 //  AuthConfig.swift
 //  AGSAuth
 
-import Foundation
 import AGSCore
+import Foundation
 
 /** All the configurations related to Keycloak */
 class KeycloakConfig {
@@ -23,8 +23,8 @@ class KeycloakConfig {
         }
     }
 
-    func getLogoutUrl(idToken: String) -> String {
-        //TODO: implement this
+    func getLogoutUrl(idToken _: String) -> String {
+        // TODO: implement this
         return ""
     }
 }

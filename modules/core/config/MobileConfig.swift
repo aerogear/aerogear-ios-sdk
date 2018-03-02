@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- * Model for mobile backend configuration
+ Model for mobile backend configuration
  */
 public struct MobileConfig: Codable {
     // Version of configuration
@@ -17,8 +17,8 @@ public struct MobileConfig: Codable {
 }
 
 /**
- * Backend service model containing configuration
- * Represents individual service metadata
+ Backend service model containing configuration
+ Represents individual service metadata
  */
 public struct MobileService: Codable {
     /** Unique id for service */
@@ -30,7 +30,7 @@ public struct MobileService: Codable {
 }
 
 /**
- * Represents dynamic values for configuration
+ Represents dynamic values for configuration
  */
 public enum ConfigType: Codable {
     case string(String)

@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- * Wrapper class used for network requests
+   Wrapper class used for network requests
  */
 public class AgsHttp {
 
@@ -11,7 +11,7 @@ public class AgsHttp {
     }
 
     /**
-     * Return shared Http instance
+       Return shared Http instance
      */
     public func getHttp() -> AgsHttpRequest {
         return defaultHttp

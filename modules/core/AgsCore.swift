@@ -2,7 +2,7 @@ import Foundation
 import XCGLogger
 
 /**
- * AeroGear Core interface to be used directly by SDK services
+ AeroGear Core interface to be used directly by SDK services
  */
 public class AgsCore {
     public static let instance: AgsCore = AgsCore()
@@ -19,36 +19,35 @@ public class AgsCore {
     }
 
     /**
-     * Get configuration for specific service reference
-     * @param serviceRef unique service reference uset to fetch configuration
-     * @return MobileService instance or nil if configuration is missing service of that type
+     Get configuration for specific service reference
+
+     - returns: MobileService instance or nil if configuration is missing service of that type
+     - parameter serviceRef: unique service reference uset to fetch configuration
      */
     public func getConfiguration(_ serviceRef: String) -> MobileService? {
         return config[serviceRef]
     }
 
     /**
-     * Get instance of http interface
-     *
-     * @param
-     * @return instance of network interface
+     Get instance of http interface
+
+     - returns:  instance of network interface
      */
     public func getHttp() -> AgsHttpRequest {
         return http.getHttp()
     }
 
     /**
-     * Allows to retrieve metrics protocol to interact with application metrics.
-     *
-     * @return Metrics protocol to interact with metrics
-     * @see AgsCore.sendAppDeviceMetrics helper method
+     Allows to retrieve metrics protocol to interact with application metrics.
+
+     - returns:  Metrics protocol to interact with metrics
      */
     public func getMetrics() -> MetricsPublishable {
         return metrics
     }
 
     /**
-     * Logger instance used for logging across SDK's
+     Logger instance used for logging across SDK's
      */
     public static var logger: AgsLoggable = {
         let log = XCGLogger(identifier: "AeroGearSDK", includeDefaultDestinations: true)
@@ -57,16 +56,16 @@ public class AgsCore {
     }()
 
     /**
-     * Provides way do dynamically change logger implementation
-     *
-     * @param newLogger - new logger implementation
+     Provides way do dynamically change logger implementation
+
+     - parameter newLogger: new logger implementation
      */
     public static func setLogger(newLogger: AgsLoggable) {
         logger = newLogger
     }
 
     /**
-     * Returns metadata for SDK including version
+     Returns metadata for SDK including version
      */
     public static func getMetadata() -> AgsMetaData {
         return AppData().metadata

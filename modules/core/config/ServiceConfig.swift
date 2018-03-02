@@ -1,18 +1,17 @@
 import Foundation
 
 /**
- * AeroGear Mobile Services Configuration
- * Entrypoint for parsing and processing configuration for individual services.
- *
- * This class is responsible for providing configurations for services of certain types.
- * Configuration is stored in single json file
- * that contains multiple individual service configurations and metadata.
- * Service developers can query configuration for certain types.
- * See top level core interface for more information
- *
- * Usage:
- *
- *     `config['myServiceType']`
+ AeroGear Mobile Services Configuration
+ Entrypoint for parsing and processing configuration for individual services.
+
+ This class is responsible for providing configurations for services of certain types.
+ Configuration is stored in single json file
+ that contains multiple individual service configurations and metadata.
+ Service developers can query configuration for certain types.
+ See top level core interface for more information
+
+ - Example usage:
+ `config['myServiceType']`
  */
 public class ServiceConfig {
 
@@ -25,9 +24,9 @@ public class ServiceConfig {
     }
 
     /**
-     * Fetch single service configuration from configuration files.
-     *
-     *  @return MobileService instance or nil if
+     Fetch single service configuration from configuration files.
+
+     - return: MobileService instance or nil if service cannot be found
      */
     public subscript(serviceRef: String) -> MobileService? {
         let configuration = getConfiguration(serviceRef)
@@ -49,14 +48,13 @@ public class ServiceConfig {
     }
 
     /**
-     * Fetch configuration for specific type
-     *
-     * @return MobileService array
+     Fetch configuration for specific type
+
+     - return: MobileService array
      */
     public func getConfiguration(_ serviceRef: String) -> [MobileService] {
-        print(config)
         if let config = config {
-             return config.services.filter { $0.name == serviceRef }
+            return config.services.filter { $0.name == serviceRef }
         } else {
             return []
         }

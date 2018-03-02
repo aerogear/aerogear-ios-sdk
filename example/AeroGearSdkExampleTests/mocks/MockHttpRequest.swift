@@ -3,10 +3,10 @@
 //  AeroGearSdkExampleTests
 //
 
-import Foundation
 import AGSCore
+import Foundation
 
-enum  MockHttpErrors : Error {
+enum MockHttpErrors: Error {
     case NetworkError
 }
 
@@ -19,32 +19,32 @@ class MockHttpRequest: AgsHttpRequestProtocol {
     var errorForPut: Error?
     var dataForDelete: Any?
     var errorForDelete: Error?
-    
-    func get(_ url: String, params: [String : AnyObject]?, headers: [String : String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+
+    func get(_: String, params _: [String: AnyObject]?, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
         if let err = errorForGet {
             handler(nil, err)
         } else {
             handler(dataForGet, nil)
         }
     }
-    
-    func post(_ url: String, body: [String : Any]?, headers: [String : String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+
+    func post(_: String, body _: [String: Any]?, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
         if let err = errorForPost {
             handler(nil, err)
         } else {
             handler(dataForPost, nil)
         }
     }
-    
-    func put(_ url: String, body: [String : Any]?, headers: [String : String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+
+    func put(_: String, body _: [String: Any]?, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
         if let err = errorForPut {
             handler(nil, err)
         } else {
             handler(dataForPut, nil)
         }
     }
-    
-    func delete(_ url: String, headers: [String : String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+
+    func delete(_: String, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
         if let err = errorForDelete {
             handler(nil, err)
         } else {
@@ -52,4 +52,3 @@ class MockHttpRequest: AgsHttpRequestProtocol {
         }
     }
 }
-

@@ -5,6 +5,6 @@
 import Foundation
 
 /** Configurations for the authentication service */
-struct  AuthenticationConfig {
+struct AuthenticationConfig {
     let redirectURL: URL
 }

@@ -4,7 +4,7 @@ struct MetricsConfigData {
 }
 
 /**
- * Wrapper used to manage metrics service configuration
+ Wrapper used to manage metrics service configuration
  */
 class MetricsConfig {
 
@@ -24,7 +24,7 @@ class MetricsConfig {
     }
 
     /**
-     * @return base url for metrics server
+     - Returns: base url for metrics server
      */
     public func getRemoteMetricsUrl() -> String? {
         return config?.url
