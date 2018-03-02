@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- * Contains metadata for SDK
+   Contains metadata for SDK
  */
 public struct AgsMetaData {
 

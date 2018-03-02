@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- * AeroGear Services metrics
+ AeroGear Services metrics
  */
 open class AgsMetrics: MetricsPublishable {
 
@@ -18,10 +18,7 @@ open class AgsMetrics: MetricsPublishable {
     }
 
     /**
-     * Set default metrics publisher depending on metrics configuration
-     *
-     * @see MetricsNetworkPublisher
-     * @see MetricsLoggerPublisher
+     Set default metrics publisher depending on metrics configuration
      */
     open func setDefaultPublisher() {
         if let url = config.getRemoteMetricsUrl() {
@@ -32,26 +29,26 @@ open class AgsMetrics: MetricsPublishable {
     }
 
     /**
-     * Allows to override default metrics publisher
-     *
-     * @param publisher - implementation of metrics publisher
+     Allows to override default metrics publisher
+
+     - Parameter publisher: implementation of metrics publisher
      */
     public func setMetricsPublisher(_ publisher: MetricsPublisher) {
         self.publisher = publisher
     }
 
     /**
-     * Collect metrics for all active metrics collectors
-     * Send data using metrics publisher
+     Collect metrics for all active metrics collectors
+     Send data using metrics publisher
      */
     open func sendAppAndDeviceMetrics() {
         publish(AppMetrics(appData), DeviceMetrics())
     }
 
     /**
-     * Publish metrics using predefined publisher
-     *
-     * @param - metrics instances that should be published
+     Publish metrics using predefined publisher
+
+     - Parameter metrics: instances that should be published
      */
     open func publish(_ metrics: Metrics...) {
         var payload = MetricsData()
@@ -66,8 +63,7 @@ open class AgsMetrics: MetricsPublishable {
         return [
             "clientId": appData.clientId,
             "timestamp": Int(NSDate().timeIntervalSince1970 * 1000),
-            "data": payload
+            "data": payload,
         ]
     }
-
 }

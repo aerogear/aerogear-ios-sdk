@@ -2,8 +2,8 @@
 //  OIDCCredentials
 //  AGSAuth
 
-import Foundation
 import AppAuth
+import Foundation
 
 class OIDCCredentials {
     let authState: OIDAuthState

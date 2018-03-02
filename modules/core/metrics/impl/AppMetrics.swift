@@ -1,11 +1,11 @@
 import Foundation
 
 /**
- * Collect application metrics:
- *
- *  - appId - application bundle id
- *  - appVersion - version of the application
- *  - sdkVersion - AeroGear Services SDK version
+ Collect application metrics:
+
+ - appId - application bundle id
+ - appVersion - version of the application
+ - sdkVersion - AeroGear Services SDK version
  */
 public class AppMetrics: Metrics {
     public private(set) var identifier: String = "app"
@@ -20,7 +20,7 @@ public class AppMetrics: Metrics {
         return [
             "appId": self.appData.bundleId,
             "appVersion": self.appData.appVersion,
-            "sdkVersion": self.appData.sdkVersion
+            "sdkVersion": self.appData.sdkVersion,
         ]
     }
 }

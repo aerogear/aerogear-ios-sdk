@@ -1,8 +1,8 @@
 import Foundation
 
 /**
- * Metrics publisher that logs metrics to console
- * Can be used when remote server is not available/supported
+   Metrics publisher that logs metrics to console
+   Can be used when remote server is not available/supported
  */
 public class MetricsLoggerPublisher: MetricsPublisher {
     let clientId: String

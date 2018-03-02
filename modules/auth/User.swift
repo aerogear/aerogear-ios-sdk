@@ -7,9 +7,9 @@ import Foundation
 /**
  Represents the user roles
  */
-struct  UserRole: Hashable {
+struct UserRole: Hashable {
     /** Possible role types. */
-    enum  Types {
+    enum Types {
         case REALM, CLIENT
     }
 
@@ -19,12 +19,10 @@ struct  UserRole: Hashable {
     let roleName: String
     /** the type of the role **/
     var roleType: Types {
-        get {
-            if (nameSpace.isEmpty) {
-                return Types.REALM
-            } else {
-                return Types.CLIENT
-            }
+        if nameSpace.isEmpty {
+            return Types.REALM
+        } else {
+            return Types.CLIENT
         }
     }
 
@@ -32,7 +30,7 @@ struct  UserRole: Hashable {
         return nameSpace.hashValue ^ roleName.hashValue
     }
 
-    static func ==(lhs: UserRole, rhs: UserRole) -> Bool {
+    static func == (lhs: UserRole, rhs: UserRole) -> Bool {
         return lhs.nameSpace == rhs.nameSpace && lhs.roleName == rhs.roleName
     }
 }
@@ -47,11 +45,11 @@ public struct User {
     let identityToken: String
     let roles: Set<UserRole>
 
-    public func hasClientRole(clientName: String, roleName: String) -> Bool {
+    public func hasClientRole(clientName _: String, roleName _: String) -> Bool {
         return false
     }
 
-    public func hasRealmRole(roleName: String) -> Bool {
+    public func hasRealmRole(roleName _: String) -> Bool {
         return false
     }
 }

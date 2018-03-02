@@ -1,8 +1,8 @@
 import Foundation
 
 /**
- * Metrics publisher that sends payload to remote server
- * Publisher requires remote server URL
+   Metrics publisher that sends payload to remote server
+   Publisher requires remote server URL
  */
 public class MetricsNetworkPublisher: MetricsPublisher {
 

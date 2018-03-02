@@ -1,12 +1,12 @@
 import Foundation
 
 /**
- * Static helper class responsible for parsing mobile configuration
+   Static helper class responsible for parsing mobile configuration
  */
 public final class ConfigParser {
 
     /**
-     * Helper method for reading json file
+       Helper method for reading json file
      */
     public static func readLocalJsonData(_ resource: String) -> Data? {
         var data: Data?

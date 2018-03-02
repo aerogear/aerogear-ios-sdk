@@ -7,7 +7,7 @@
 import XCTest
 
 /**
- * General tests for example app
+   General tests for example app
  */
 class AeroGearSdkExampleTests: XCTestCase {
 

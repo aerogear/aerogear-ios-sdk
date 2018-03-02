@@ -1,8 +1,8 @@
-import Foundation
 import AGSCore
+import Foundation
 
 /**
- * AeroGear Auth Service
+ AeroGear Auth Service
  */
 open class AgsAuth {
     let authenticator: Authenticator
@@ -17,16 +17,14 @@ open class AgsAuth {
         authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig, authConfig: authConfig, credentialManager: credentialManager)
     }
 
-    public func login(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
-
+    public func login(presentingViewController _: UIViewController, onCompleted _: @escaping (User?, Error?) -> Void) {
     }
 
-    public func resumeAuth(url: URL) -> Bool {
+    public func resumeAuth(url _: URL) -> Bool {
         return false
     }
 
-    public func logout(onCompleted: @escaping (Error?) -> Void) {
-
+    public func logout(onCompleted _: @escaping (Error?) -> Void) {
     }
 
     public func currentUser() -> User? {

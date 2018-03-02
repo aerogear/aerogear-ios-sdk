@@ -16,12 +16,10 @@ class CredentialsManager: CredentialManagerProtocol {
         return nil
     }
 
-    func save(credentials: OIDCCredentials) {
-
+    func save(credentials _: OIDCCredentials) {
     }
 
-    /** Remove local credentials*/
+    /** Remove local credentials */
     func clear() {
-
     }
 }
