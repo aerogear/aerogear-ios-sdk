@@ -69,7 +69,7 @@ public class ServiceConfig {
         do {
             config = try decoder.decode(MobileConfig.self, from: data)
         } catch {
-            AgsCore.logger.error("Error when decoding configuration file. Cannot decode \(configFileName)")
+            AgsCore.logger.error("Error when decoding configuration file. Cannot decode \(configFileName). Error = \(error.localizedDescription)")
         }
     }
 }

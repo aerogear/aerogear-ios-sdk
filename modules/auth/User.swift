@@ -5,29 +5,43 @@
 import Foundation
 
 /**
- Represents the user roles
+ Represents the user roles. It has 2 types
+ - Realm
+ - Client
+ 
+ A user role is a realm role it the nameSpace is not set. Otherwise it is a client role.
  */
-struct UserRole: Hashable {
-    /** Possible role types. */
-    enum Types {
+struct  UserRole: Hashable {
+    /** Supported role types. */
+    enum  Types {
         case REALM, CLIENT
     }
 
     /** namespace of the role. It should be empty or nil for realm roles. Otherwise it should be the client name for a client role */
-    let nameSpace: String
+    let nameSpace: String?
     /** the name of the role **/
     let roleName: String
     /** the type of the role **/
     var roleType: Types {
-        if nameSpace.isEmpty {
-            return Types.REALM
-        } else {
-            return Types.CLIENT
+        get {
+            if let ns = nameSpace {
+                if (ns.isEmpty) {
+                    return Types.REALM
+                } else {
+                    return Types.CLIENT
+                }
+            } else {
+                return Types.REALM
+            }
         }
     }
 
     var hashValue: Int {
-        return nameSpace.hashValue ^ roleName.hashValue
+        if let ns = nameSpace {
+            return ns.hashValue ^ roleName.hashValue
+        } else {
+            return roleName.hashValue
+        }
     }
 
     static func == (lhs: UserRole, rhs: UserRole) -> Bool {
@@ -36,7 +50,7 @@ struct UserRole: Hashable {
 }
 
 /**
- Represent the user
+ Represent a user.
  */
 public struct User {
     let userName: String
