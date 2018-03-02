@@ -34,7 +34,7 @@ public struct MobileService: Codable {
  */
 public class JSONValue: Codable {
     var rawValue: Any?
-    
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         //the order here is important. An integer can be casted to double, and sometimes vice-versa (e.g 1.0 -> 1). So integer needs to be checked first.
@@ -48,7 +48,7 @@ public class JSONValue: Codable {
             rawValue = value
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         if let boolValue = getBool() {
@@ -61,7 +61,7 @@ public class JSONValue: Codable {
             try container.encode(stringValue)
         }
     }
-    
+
     /**
      Return the string value
      - returns: a string if the value is a valid string, otherwise nil
@@ -72,7 +72,7 @@ public class JSONValue: Codable {
         }
         return nil
     }
-    
+
     /**
      Return the integer value
      - returns: an integer if the value is a valid integer, otherwise nil
@@ -83,7 +83,7 @@ public class JSONValue: Codable {
         }
         return nil
     }
-    
+
     /**
      Return the boolean value
      - returns: a boolean if the value is a valid boolean, otherwise nil
@@ -94,7 +94,7 @@ public class JSONValue: Codable {
         }
         return nil
     }
-    
+
     /**
      Return the double value
      - returns: a double if the value is a valid double or integer, otherwise nil

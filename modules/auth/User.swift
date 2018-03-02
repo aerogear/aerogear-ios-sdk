@@ -59,11 +59,13 @@ public struct User {
     let identityToken: String
     let roles: Set<UserRole>
 
-    public func hasClientRole(clientName _: String, roleName _: String) -> Bool {
-        return false
+    public func hasClientRole(client: String, role: String) -> Bool {
+        let roleToFind = UserRole(nameSpace: client, roleName: role)
+        return roles.contains(roleToFind)
     }
 
-    public func hasRealmRole(roleName _: String) -> Bool {
-        return false
+    public func hasRealmRole(_ roleName: String) -> Bool {
+        let roleToFind = UserRole(nameSpace: nil, roleName: roleName)
+        return roles.contains(roleToFind)
     }
 }

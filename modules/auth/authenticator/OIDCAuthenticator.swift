@@ -24,12 +24,13 @@ public class OIDCAuthenticator: Authenticator {
     }
 
     /**
-     * Perform the logout operation. It will send a HTTP request to the server to invalidate the session for the user.
-     * If the request is successful, it will remove the local credential data automatically and invoke the onCompleted function.
-     * Otherwise it will invoke the onCompleted callback with an error.
-     *
-     * @param - currentUser the user that should be logged out
-     * @param - onCompleted a block function that will be invoked when the logout is completed.
+     Perform the logout operation. It will send a HTTP request to the server to invalidate the session for the user.
+     If the request is successful, it will remove the local credential data automatically and invoke the onCompleted function.
+     Otherwise it will invoke the onCompleted callback with an error.
+     
+     - parameters:
+       - currentUser: the user that should be logged out
+       - onCompleted: a block function that will be invoked when the logout is completed.
      */
     public func logout(currentUser: User, onCompleted: @escaping (Error?) -> Void) {
         let logoutUrl = keycloakConfig.getLogoutUrl(idToken: currentUser.identityToken)

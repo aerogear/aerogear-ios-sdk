@@ -63,7 +63,7 @@ open class AgsMetrics: MetricsPublishable {
         return [
             "clientId": appData.clientId,
             "timestamp": Int(NSDate().timeIntervalSince1970 * 1000),
-            "data": payload,
+            "data": payload
         ]
     }
 }
