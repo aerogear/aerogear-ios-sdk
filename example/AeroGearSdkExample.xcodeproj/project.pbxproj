@@ -63,7 +63,6 @@
 		018FBE6C20123AEE00E763A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		018FBE75201257F300E763A5 /* mobile-services.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mobile-services.json"; sourceTree = "<group>"; };
 		1E4CCBAD4A8932216C3DF790 /* Pods-AeroGearSdkExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample.release.xcconfig"; sourceTree = "<group>"; };
-		505845F7204D5B0000396DFC /* keycloakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keycloakTests.swift; sourceTree = "<group>"; };
 		6372266C9F61265244A81632 /* ConfigParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigParserTests.swift; sourceTree = "<group>"; };
 		659F2A7D4D01A03C0143073E /* MetricsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsServiceTests.swift; sourceTree = "<group>"; };
 		744F18714F44DAF3A960E045 /* Pods-AeroGearSdkExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -233,7 +232,6 @@
 				B3AC1A84204815E700BEB12B /* authenticator */,
 				B3AC1A82204815E000BEB12B /* AuthTests.swift */,
 				B3AC1A8C2049E11900BEB12B /* UsersTests.swift */,
-				505845F7204D5B0000396DFC /* keycloakTests.swift */,
 			);
 			path = auth;
 			sourceTree = "<group>";
@@ -516,7 +514,6 @@
 				B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */,
 				01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */,
 				B3AC1A8B2049951900BEB12B /* MobileServiceTest.swift in Sources */,
-				505845F8204D5B0000396DFC /* keycloakTests.swift in Sources */,
 				017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */,
 				B3AC1A8D2049E11900BEB12B /* UsersTests.swift in Sources */,
 				018FBE6B20123AEE00E763A5 /* AeroGearSdkExampleTests.swift in Sources */,

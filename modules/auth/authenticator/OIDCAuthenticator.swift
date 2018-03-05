@@ -33,7 +33,7 @@ public class OIDCAuthenticator: Authenticator {
        - onCompleted: a block function that will be invoked when the logout is completed.
      */
     public func logout(currentUser: User, onCompleted: @escaping (Error?) -> Void) {
-        let logoutUrl = keycloakConfig.getLogoutUrl(idToken: currentUser.identityToken)
+        let logoutUrl = keycloakConfig.getLogoutUrl(idToken: currentUser.identityToken, redirectUri: authConfig.redirectURL)
         http.get(logoutUrl, params: nil, headers: nil, { (_, error) -> Void in
             if let err = error {
                 AgsCore.logger.error("Failed to perform logout operation due to error \(err.localizedDescription)")

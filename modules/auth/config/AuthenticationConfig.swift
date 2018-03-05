@@ -13,12 +13,4 @@ struct AuthenticationConfig {
         self.redirectURL = URL(string: redirectURL)!
         self.minTimeBetweenJwksRequests = minTimeBetweenJwksRequests
     }
-    
-    public func getRedirectURL() -> URL {
-        return redirectURL
-    }
-    
-    public func getMinTimeBetweenJwksRequests() -> Int {
-        return minTimeBetweenJwksRequests
-    }
 }
