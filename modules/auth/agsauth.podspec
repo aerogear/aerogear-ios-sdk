@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   ## Default core dependency
   s.dependency 'AGSCore'
   ## Add other dependencies if needed
-  s.dependency 'AppAuth'
-  s.dependency 'SwiftKeychainWrapper'
+  s.dependency 'AppAuth', '~> 0.92'
+  s.dependency 'SwiftKeychainWrapper', '~> 3.0.1'
   s.requires_arc = true
 end
