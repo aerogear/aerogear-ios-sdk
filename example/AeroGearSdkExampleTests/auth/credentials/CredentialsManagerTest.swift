@@ -20,9 +20,9 @@ class CredentialsManagerTest: XCTestCase {
         let testCredential = OIDCCredentialsTest.buildCredentialsWithParameters(parameters: OIDCCredentialsTest.defaultParameters)
         testCredentialManager.save(credentials: testCredential)
         let loadedCredentials = testCredentialManager.load()
-        XCTAssertTrue(loadedCredentials?.getAccessToken() == OIDCCredentialsTest.paramAccessTokenVal)
-        XCTAssertTrue(loadedCredentials?.getRefreshToken() == OIDCCredentialsTest.paramRefreshTokenVal)
-        XCTAssertTrue(loadedCredentials?.getIdentitityToken() == OIDCCredentialsTest.paramIdTokenVal)
+        XCTAssertEqual(loadedCredentials?.getAccessToken(), OIDCCredentialsTest.paramAccessTokenVal)
+        XCTAssertEqual(loadedCredentials?.getRefreshToken(), OIDCCredentialsTest.paramRefreshTokenVal)
+        XCTAssertEqual(loadedCredentials?.getIdentitityToken(), OIDCCredentialsTest.paramIdTokenVal)
     }
 
     func testLoadNil() {

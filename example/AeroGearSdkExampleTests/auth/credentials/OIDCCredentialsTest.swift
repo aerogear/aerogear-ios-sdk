@@ -52,15 +52,15 @@ internal class OIDCCredentialsTest: XCTestCase {
     }
 
     func testGetAccessToken() {
-        XCTAssert(testCredentials?.getAccessToken() == OIDCCredentialsTest.paramAccessTokenVal)
+        XCTAssertEqual(testCredentials?.getAccessToken(), OIDCCredentialsTest.paramAccessTokenVal)
     }
 
     func testGetIdentityToken() {
-        XCTAssert(testCredentials?.getIdentitityToken() == OIDCCredentialsTest.paramIdTokenVal)
+        XCTAssertEqual(testCredentials?.getIdentitityToken(), OIDCCredentialsTest.paramIdTokenVal)
     }
 
     func testGetRefreshToken() {
-        XCTAssert(testCredentials?.getRefreshToken() == OIDCCredentialsTest.paramRefreshTokenVal)
+        XCTAssertEqual(testCredentials?.getRefreshToken(), OIDCCredentialsTest.paramRefreshTokenVal)
     }
 
     func testIsExpired() {
