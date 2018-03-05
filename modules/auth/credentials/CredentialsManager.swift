@@ -15,7 +15,7 @@ public protocol CredentialManagerProtocol {
 
 /** Persist/load the OIDCCredentials */
 public class CredentialsManager: CredentialManagerProtocol {
-    let authStateKey = "authState"
+    let authStateKey = "org.aerogear.AuthState"
     var authState: OIDAuthState?
 
     public init() {}
