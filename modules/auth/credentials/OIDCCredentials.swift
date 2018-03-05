@@ -5,57 +5,39 @@
 import AppAuth
 import Foundation
 
-/// A class to represent the OpenID Connect state for an entity.
-/// This is backed by a standard OIDC token.
+/**
+ A class to represent the OpenID Connect state for an entity.
+ This is backed by a standard OIDC token.
+*/
 public class OIDCCredentials {
     let authState: OIDAuthState
-
-    public init(state: OIDAuthState) {
-        authState = state
-    }
-
-    /**
-     Get the access token for the credential.
- 
-     - Returns: An access token.
-    */
-    public func getAccessToken() -> String? {
+    
+    /** Access token of the credential. Will be nil if not authorized. */
+    var accessToken: String? {
         return authState.lastTokenResponse?.accessToken
     }
-
-    /**
-     Get the identity token for the credential.
-
-     - Returns: An identity token.
-    */
-    public func getIdentitityToken() -> String? {
+    
+    /** Identity token of the credential. Will be nil if not authorized. */
+    var identityToken: String? {
         return authState.lastTokenResponse?.idToken
     }
-
-    /**
-     Get the refresh token for the credential.
-
-     - Returns: A refresh token.
-    */
-    public func getRefreshToken() -> String? {
+    
+    /** Refresh token of the credential. Will be nil if not authorized. */
+    var refreshToken: String? {
         return authState.lastTokenResponse?.refreshToken
     }
-
-    /**
-     Check whether the token is expired. This is based on the expires_in value of the token response.
-
-     - Returns: true if the token is expired.
-    */
-    public func isExpired() -> Bool {
+    
+    /** Whether the credential is currently authorized. */
+    var isAuthorized: Bool {
+        return authState.isAuthorized
+    }
+    
+    /** Whether the token backing the credential is expired. Will be nil if not authorized. */
+    var isExpired: Bool {
         return (authState.lastTokenResponse?.accessTokenExpirationDate)! < Date()
     }
-
-    /**
-     If the credential is in an authorized state.
- 
-     - Returns: true if the credential is authorized.
-    */
-    public func isAuthorized() -> Bool {
-        return authState.isAuthorized
+    
+    public init(state: OIDAuthState) {
+        authState = state
     }
 }

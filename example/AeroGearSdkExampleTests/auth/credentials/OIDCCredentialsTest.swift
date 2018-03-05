@@ -52,19 +52,19 @@ internal class OIDCCredentialsTest: XCTestCase {
     }
 
     func testGetAccessToken() {
-        XCTAssertEqual(testCredentials?.getAccessToken(), OIDCCredentialsTest.paramAccessTokenVal)
+        XCTAssertEqual(testCredentials?.accessToken, OIDCCredentialsTest.paramAccessTokenVal)
     }
 
     func testGetIdentityToken() {
-        XCTAssertEqual(testCredentials?.getIdentitityToken(), OIDCCredentialsTest.paramIdTokenVal)
+        XCTAssertEqual(testCredentials?.identityToken, OIDCCredentialsTest.paramIdTokenVal)
     }
 
     func testGetRefreshToken() {
-        XCTAssertEqual(testCredentials?.getRefreshToken(), OIDCCredentialsTest.paramRefreshTokenVal)
+        XCTAssertEqual(testCredentials?.refreshToken, OIDCCredentialsTest.paramRefreshTokenVal)
     }
 
     func testIsExpired() {
-        XCTAssertFalse((testCredentials?.isExpired())!)
+        XCTAssertFalse((testCredentials?.isExpired)!)
     }
 
     func testIsExpiredWithExpiredToken() {
@@ -72,16 +72,16 @@ internal class OIDCCredentialsTest: XCTestCase {
         expiredParameters[OIDCCredentialsTest.paramExpiresInKey] = 0 as NSNumber
 
         let expiredCredentials = OIDCCredentialsTest.buildCredentialsWithParameters(parameters: expiredParameters)
-        XCTAssertTrue(expiredCredentials.isExpired())
+        XCTAssertTrue(expiredCredentials.isExpired)
     }
 
     func testIsAuthorized() {
-        XCTAssertTrue((testCredentials?.isAuthorized())!)
+        XCTAssertTrue((testCredentials?.isAuthorized)!)
     }
 
     func testIsAuthorizedWithUnauthorizedState() {
         let unauthorizedCredentials = OIDCCredentialsTest.buildCredentialsWithParameters(parameters: [:])
-        XCTAssertFalse(unauthorizedCredentials.isAuthorized())
+        XCTAssertFalse(unauthorizedCredentials.isAuthorized)
     }
 
     /**
