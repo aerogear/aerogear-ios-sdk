@@ -52,12 +52,12 @@ struct  UserRole: Hashable {
  Describe the structure of user profile returned by Keycloak
  */
 struct KeycloakUserProfile: Codable {
-    
+
     /** Internal structure for AccessRoles. The JSON object contains other fields but we only interested in "roles" */
     struct AccessRoles: Codable {
         let roles: [String]?
     }
-    
+
     private let name: String?
     private let preferredName: String?
     private let realmAccess: AccessRoles?
@@ -66,8 +66,7 @@ struct KeycloakUserProfile: Codable {
     let firstName: String?
     let lastName: String?
     let email: String?
-    
-    
+
     enum CodingKeys: String, CodingKey {
         case name
         case preferredName = "preferred_username"
@@ -77,12 +76,12 @@ struct KeycloakUserProfile: Codable {
         case firstName = "given_name"
         case lastName = "family_name"
     }
-    
+
     /** Get the name of the user. If `preferred_username` is set, it will be used. Otherwise `name` field will be used */
     var username: String? {
         return preferredName ?? ( name ?? nil)
     }
-    
+
     /** Return all the realm roles of the user */
     var realmRoles: [String] {
         get {
@@ -95,7 +94,7 @@ struct KeycloakUserProfile: Codable {
             return realmRoles
         }
     }
-    
+
     /**
      Return the client roles of the user
      - parameters:
@@ -113,7 +112,7 @@ struct KeycloakUserProfile: Codable {
         }
         return clientRoles
     }
-    
+
     /**
      Return both realm roles and client roles of the user
      - parameters:
@@ -164,7 +163,7 @@ public struct User {
         }
         return name
     }
-    
+
     /** Used for testing */
     internal init(userName: String?, email: String?, firstName: String?, lastName: String?, accessToken: String?, identityToken: String?, roles: Set<UserRole>?) {
         self.userName = userName
@@ -177,7 +176,7 @@ public struct User {
             self.roles = roles
         }
     }
-    
+
     /**
      Build the User instance from the credential data and the Keycloak client name.
      - parameters:

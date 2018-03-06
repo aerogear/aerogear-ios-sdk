@@ -47,7 +47,7 @@ public class OIDCAuthenticator: Authenticator {
             }
         })
     }
-    
+
     public func resumeAuth(url: URL) -> Bool {
         return false
     }

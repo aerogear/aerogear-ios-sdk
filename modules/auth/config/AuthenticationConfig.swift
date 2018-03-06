@@ -10,7 +10,7 @@ import Foundation
 public struct AuthenticationConfig {
     let redirectURL: URL
     let minTimeBetweenJwksRequests: UInt
-    
+
     /**
      Initialises the authentication configuration
      
