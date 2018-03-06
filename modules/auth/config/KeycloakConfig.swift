@@ -84,7 +84,6 @@ class KeycloakConfig {
      
      - parameters:
         - idToken: the identity token
-        - redirectURI: the redirect uri
      - returns: logout URL
      */
     func buildLogoutURL(idToken: String) -> String {
