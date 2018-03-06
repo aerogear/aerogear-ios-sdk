@@ -8,8 +8,6 @@ import Foundation
  All the configurations related to Keycloak
  */
 class KeycloakConfig {
-    private let sdkId = "keycloak"
-    
     private let serverUrlName = "auth-server-url"
     private let realmIdName = "realm"
     private let clientIdName = "resource"
@@ -38,24 +36,16 @@ class KeycloakConfig {
      *rawConfig* variable is set to the keycloak service configuration.
      
      - parameters:
-        - configService: mobile services configuration
+        - mobileService: mobile services configuration
         - authConfig: configuration for the authentication service
      */
-    init(_ configService: ServiceConfig, _ authConfig: AuthenticationConfig) {
+    init(_ mobileService: MobileService, _ authConfig: AuthenticationConfig) {
         self.authConfig = authConfig
-        if let serviceConfig = configService[sdkId] {
-            rawConfig = serviceConfig
-            serverUrl = (serviceConfig.config![serverUrlName]?.getString())!
-            realmId = (serviceConfig.config![realmIdName]?.getString())!
-            clientId = (serviceConfig.config![clientIdName]?.getString())!
-            baseUrl = String(format: baseUrlTemplate, serverUrl, realmId)
-        } else {
-            AgsCore.logger.error("""
-                Mobile configuration is missing auth service.
-                Auth will not be enabled
-                Please review sdk configuration file.
-            """)
-        }
+        rawConfig = mobileService
+        serverUrl = (mobileService.config![serverUrlName]?.getString())!
+        realmId = (mobileService.config![realmIdName]?.getString())!
+        clientId = (mobileService.config![clientIdName]?.getString())!
+        baseUrl = String(format: baseUrlTemplate, serverUrl, realmId)
     }
     
     /**

@@ -48,12 +48,25 @@ struct  UserRole: Hashable {
     }
 }
 
+/**
+ Describe the structure of user profile returned by Keycloak
+ */
 struct KeycloakUserProfile: Codable {
+    
+    /** Internal structure for AccessRoles. The JSON object contains other fields but we only interested in "roles" */
+    struct AccessRoles: Codable {
+        let roles: [String]?
+    }
+    
     private let name: String?
     private let preferredName: String?
+    private let realmAccess: AccessRoles?
+    private let resourceAccess: [String: AccessRoles]?
+
+    let firstName: String?
+    let lastName: String?
     let email: String?
-    private let realmAccess: [String: String]?
-    private let resourceAccess: [String: [String: String]]?
+    
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -61,41 +74,67 @@ struct KeycloakUserProfile: Codable {
         case email
         case realmAccess = "realm_access"
         case resourceAccess = "resource_access"
+        case firstName = "given_name"
+        case lastName = "family_name"
     }
     
-    var username: String {
-        return preferredName ?? ( name ?? "UNKNOWN_USERNAME")
+    /** Get the name of the user. If `preferred_username` is set, it will be used. Otherwise `name` field will be used */
+    var username: String? {
+        return preferredName ?? ( name ?? nil)
     }
     
+    /** Return all the realm roles of the user */
     var realmRoles: [String] {
         get {
-            var realmRolesArr = [String]()
+            let realmRolesArr = [String]()
             guard let realmData = realmAccess,
-                let realmRoles = realmData["roles"]
+                let realmRoles = realmData.roles
             else {
                 return realmRolesArr
             }
-            let startIndex = realmRoles.index(realmRoles.startIndex, offsetBy: 1)
-            let endIndex = realmRoles.index(realmRoles.endIndex, offsetBy: -1)
-            let rolesStr = realmRoles[startIndex..<endIndex]
-            realmRolesArr = rolesStr.components(separatedBy: ",")
-            return realmRolesArr
+            return realmRoles
         }
     }
     
-    func getRoles(forClient clientName: String) -> [String] {
-        var clientRolesArr = [String]()
+    /**
+     Return the client roles of the user
+     - parameters:
+         - clientName: the name of the client
+     - returns:
+     An array of the role names
+    */
+    func getClientRoles(_ clientName: String) -> [String] {
+        let clientRolesArr = [String]()
         guard  let resourceData = resourceAccess,
             let clientData = resourceData[clientName],
-            let clientRoles = clientData["roles"]
+            let clientRoles = clientData.roles
         else {
             return clientRolesArr
         }
-        let startIndex = clientRoles.index(clientRoles.startIndex, offsetBy: 1)
-        let endIndex = clientRoles.index(clientRoles.endIndex, offsetBy: -1)
-        let rolesStr = clientRoles[startIndex..<endIndex]
-        clientRolesArr = rolesStr.components(separatedBy: ",")
-        return clientRolesArr
+        return clientRoles
+    }
+    
+    /**
+     Return both realm roles and client roles of the user
+     - parameters:
+         - clientName: the name of the client
+     - returns:
+     A set of UserRole
+     */
+    func getUserRoles(forClient clientName: String) -> Set<UserRole> {
+        var userRoles = Set<UserRole>()
+        for role in realmRoles {
+            if !role.isEmpty {
+                userRoles.insert(UserRole(nameSpace: nil, roleName: role))
+            }
+        }
+        let clientRoles = getClientRoles(clientName)
+        for role in clientRoles {
+            if !role.isEmpty {
+                userRoles.insert(UserRole(nameSpace: clientName, roleName: role))
+            }
+        }
+        return userRoles
     }
 }
 
@@ -103,55 +142,89 @@ struct KeycloakUserProfile: Codable {
  Represent a user.
  */
 public struct User {
-    let userName: String
-    let email: String
-    let accessToken: String
-    let identityToken: String
-    var roles: Set<UserRole> = Set<UserRole>()
-    
-    init(userName: String , email: String, accessToken: String, identityToken: String, roles: Set<UserRole>) {
-        self.userName = userName
-        self.email = email
-        self.accessToken = accessToken
-        self.identityToken = identityToken
-        self.roles = roles
+    /** Username */
+    let userName: String?
+    /** Email */
+    let email: String?
+    /** First Name */
+    let firstName: String?
+    /** Last Name */
+    let lastName: String?
+    /** Realm roles and client roles of the user*/
+    var roles: Set<UserRole>? = Set<UserRole>()
+    /** Raw value of the access token. Should be used to perform other requests*/
+    let accessToken: String?
+    /** Identity token*/
+    let identityToken: String?
+    /** Full Name built using firstName and lastName. If both are not set or empty, nil will be returned */
+    var fullName: String? {
+        let name = "\(firstName ?? "") \(lastName ?? "")"
+        if name.isEmpty {
+            return nil
+        }
+        return name
     }
     
-    init?(credential: OIDCCredentials, clientName: String) {
-        guard let token = credential.getAccessToken(),
+    /** Used for testing */
+    internal init(userName: String?, email: String?, firstName: String?, lastName: String?, accessToken: String?, identityToken: String?, roles: Set<UserRole>?) {
+        self.userName = userName
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+        self.accessToken = accessToken
+        self.identityToken = identityToken
+        if let _ = roles {
+            self.roles = roles
+        }
+    }
+    
+    /**
+     Build the User instance from the credential data and the Keycloak client name.
+     - parameters:
+         - credential: the OIDCCredentials
+         - clientName: the name of the Keycloak client
+     */
+    internal init?(credential: OIDCCredentials, clientName: String) {
+        guard let token = credential.accessToken,
             let jwt = try? Jwt.decode(token)
         else {
             return nil
         }
-        accessToken = token
-        identityToken = credential.getIdentityToken()!
         let payload = jwt.payload
         guard let keycloakUserProfile = try? JSONDecoder().decode(KeycloakUserProfile.self, from: payload) else {
             return nil
         }
+        accessToken = token
+        identityToken = credential.identityToken
         userName = keycloakUserProfile.username
-        email = keycloakUserProfile.email!
-        let realmRoles = keycloakUserProfile.realmRoles
-        for role in realmRoles {
-            if !role.isEmpty {
-                roles.insert(UserRole(nameSpace: nil, roleName: role))
-            }
-        }
-        let clientRoles = keycloakUserProfile.getRoles(forClient: clientName)
-        for role in clientRoles {
-            if !role.isEmpty {
-                roles.insert(UserRole(nameSpace: clientName, roleName: role))
-            }
-        }
+        firstName = keycloakUserProfile.firstName
+        lastName = keycloakUserProfile.lastName
+        email = keycloakUserProfile.email
+        roles = keycloakUserProfile.getUserRoles(forClient: clientName)
     }
 
+    /**
+     Check if the user has a client role.
+     - parameters:
+         - client: name of the client
+         - role: name of the role to check
+     - returns:
+     If user has the role
+     */
     public func hasClientRole(client: String, role: String) -> Bool {
         let roleToFind = UserRole(nameSpace: client, roleName: role)
-        return roles.contains(roleToFind)
+        return roles!.contains(roleToFind)
     }
 
+    /**
+     Check if the user has a realm fole
+     - parameters:
+         - roleName: Name of the role
+     - returns:
+     If user has the role
+     */
     public func hasRealmRole(_ roleName: String) -> Bool {
         let roleToFind = UserRole(nameSpace: nil, roleName: roleName)
-        return roles.contains(roleToFind)
+        return roles!.contains(roleToFind)
     }
 }

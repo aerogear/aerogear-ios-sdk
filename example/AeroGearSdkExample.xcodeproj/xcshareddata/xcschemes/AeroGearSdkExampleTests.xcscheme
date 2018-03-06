@@ -43,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "018FBE5120123AEE00E763A5"
-            BuildableName = "AeroGearSdkExample.app"
-            BlueprintName = "AeroGearSdkExample"
+            BlueprintIdentifier = "018FBE6520123AEE00E763A5"
+            BuildableName = "AeroGearSdkExampleTests.xctest"
+            BlueprintName = "AeroGearSdkExampleTests"
             ReferencedContainer = "container:AeroGearSdkExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

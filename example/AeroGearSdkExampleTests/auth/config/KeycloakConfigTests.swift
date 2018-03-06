@@ -6,21 +6,39 @@
 //
 
 @testable import AGSAuth
-import AGSCore
+@testable import AGSCore
 import Foundation
 import XCTest
 
 class KeycloakConfigTests: XCTestCase {
     
-    var configService: ServiceConfig?
+    let mobileServiceData =
+    """
+    {
+      "id": "keycloak",
+      "name": "keycloak",
+      "type": "keycloak",
+      "url": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6",
+      "config": {
+        "auth-server-url": "https://keycloak-myproject.192.168.64.74.nip.io/auth",
+        "clientId": "juYAlRlhTyYYmOyszFa",
+        "realm": "myproject",
+        "resource": "juYAlRlhTyYYmOyszFa",
+        "ssl-required": "external",
+        "url": "https://keycloak-myproject.192.168.64.74.nip.io/auth"
+      }
+    }
+    """.data(using: .utf8)
+    
+    var configService: MobileService?
     var keycloakConfig: KeycloakConfig?
     var authConfig: AuthenticationConfig?
     
     override func setUp() {
         super.setUp()
-        configService = ServiceConfig.init()
+        configService = try? JSONDecoder().decode(MobileService.self, from: mobileServiceData!)
         authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
-        keycloakConfig = KeycloakConfig.init(configService!, authConfig!)
+        keycloakConfig = KeycloakConfig(configService!, authConfig!)
     }
     
     override func tearDown() {
@@ -30,12 +48,6 @@ class KeycloakConfigTests: XCTestCase {
     
     func testKeycloakConfig() {
         XCTAssertNotNil(keycloakConfig?.rawConfig)
-    }
-    
-    func testKeycloakConfigNull() {
-        let nilConfigService = ServiceConfig.init("nonExistent")
-        let nilKeycloakConfig = KeycloakConfig.init(nilConfigService, authConfig!)
-        XCTAssertNil(nilKeycloakConfig.rawConfig)
     }
     
     func testAuthenticationEndpoint() {

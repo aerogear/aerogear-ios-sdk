@@ -21,6 +21,8 @@ func base64Decode(_ input: String) -> Data? {
     return Data(base64Encoded: base64)
 }
 
+
+//TODO: use a proper library and add verification
 class Jwt {
     enum Errors: Error {
         case InvalidToken(String)
