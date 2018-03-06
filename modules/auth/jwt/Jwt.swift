@@ -24,13 +24,13 @@ func base64Decode(_ input: String) -> Data? {
 //TODO: use a proper library and add verification
 class Jwt {
     enum Errors: Error {
-        case InvalidToken(String)
+        case invalidToken(String)
     }
 
     static public func decode(_ jwt: String) throws -> JSONWebToken {
         let parts = jwt.components(separatedBy: ".")
         if parts.count != 3 {
-            throw Errors.InvalidToken("wrong segements")
+            throw Errors.invalidToken("wrong segements")
         }
         let headerValue = parts[0]
         let payloadValue = parts[1]
@@ -39,7 +39,7 @@ class Jwt {
         let payload = base64Decode(payloadValue)
 
         guard let _ = payload else {
-            throw Errors.InvalidToken("can not decode payload")
+            throw Errors.invalidToken("can not decode payload")
         }
 
         return JSONWebToken(header: headerValue, payload: payload!, signature: signatureValue)

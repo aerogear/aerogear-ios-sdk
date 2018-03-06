@@ -34,7 +34,7 @@ public class OIDCAuthenticator: Authenticator {
      */
     public func logout(currentUser: User, onCompleted: @escaping (Error?) -> Void) {
         guard let identityToken = currentUser.identityToken else {
-            return onCompleted(AgsAuth.Errors.NoIdentityTokenError)
+            return onCompleted(AgsAuth.Errors.noIdentityTokenError)
         }
         let logoutURL = keycloakConfig.buildLogoutURL(idToken: identityToken)
         http.get(logoutURL, params: nil, headers: nil, { (_, error) -> Void in
