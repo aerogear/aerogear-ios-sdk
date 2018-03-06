@@ -2,7 +2,7 @@
 // Copyright (c) 2018 AeroGear. All rights reserved.
 //
 
-@testable import AGSCore
+@testable import AGSAuth
 import Foundation
 import XCTest
 
