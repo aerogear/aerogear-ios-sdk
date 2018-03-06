@@ -18,7 +18,6 @@
 		018FBE77201257F300E763A5 /* mobile-services.json in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE75201257F300E763A5 /* mobile-services.json */; };
 		01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372266C9F61265244A81632 /* ConfigParserTests.swift */; };
 		4436E282BDD390473AD840EE /* Pods_AeroGearSdkExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126BB257CFC9A2A188E6B84 /* Pods_AeroGearSdkExampleTests.framework */; };
-		659F2EDBD50348EBB799D1EF /* MetricsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F2A7D4D01A03C0143073E /* MetricsServiceTests.swift */; };
 		8DB04C4CC96666E5C481162F /* Pods_AeroGearSdkExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E51B1D502165078E140C8B /* Pods_AeroGearSdkExample.framework */; };
 		B352664D204437DE004BACC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352664B204437DE004BACC7 /* BaseViewController.swift */; };
 		B352664E204437DE004BACC7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352664C204437DE004BACC7 /* MenuViewController.swift */; };
