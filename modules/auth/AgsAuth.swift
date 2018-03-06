@@ -11,7 +11,7 @@ open class AgsAuth {
     let authServiceConfig: AuthenticationConfig
 
     init(serviceConfig: ServiceConfig, authConfig: AuthenticationConfig) {
-        keycloakConfig = KeycloakConfig(serviceConfig, authConfig)
+        keycloakConfig = KeycloakConfig(serviceConfig)
         authServiceConfig = authConfig
         credentialManager = CredentialsManager()
         authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig, authConfig: authConfig, credentialManager: credentialManager)
