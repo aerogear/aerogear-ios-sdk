@@ -20,6 +20,8 @@ class KeycloakConfig {
     private let baseUrlTemplate = "%@/realms/%@/protocol/openid-connect"
     private let logoutUrlTemplate = "%@/logout?%@=%@&%@=%@"
     
+    private let authConfig: AuthenticationConfig
+    
     private var serverUrl: String = ""
     private var realmId: String = ""
     private var clientId: String = ""
@@ -39,7 +41,8 @@ class KeycloakConfig {
         - configService: mobile services configuration
         - authConfig: configuration for the authentication service
      */
-    init(_ configService: ServiceConfig) {
+    init(_ configService: ServiceConfig, _ authConfig: AuthenticationConfig) {
+        self.authConfig = authConfig
         if let serviceConfig = configService[sdkId] {
             rawConfig = serviceConfig
             serverUrl = (serviceConfig.config![serverUrlName]?.getString())!
@@ -84,8 +87,8 @@ class KeycloakConfig {
         - redirectURI: the redirect uri
      - returns: logout URL
      */
-    func buildLogoutURL(idToken: String, redirectURI: URL) -> String {
-        return String(format: logoutUrlTemplate, baseUrl, tokenHintFragment, idToken, redirectFragment, redirectURI.absoluteString)
+    func buildLogoutURL(idToken: String) -> String {
+        return String(format: logoutUrlTemplate, baseUrl, tokenHintFragment, idToken, redirectFragment, authConfig.redirectURL.absoluteString)
     }
     
     /**

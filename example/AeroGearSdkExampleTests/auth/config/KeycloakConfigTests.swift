@@ -14,11 +14,13 @@ class KeycloakConfigTests: XCTestCase {
     
     var configService: ServiceConfig?
     var keycloakConfig: KeycloakConfig?
+    var authConfig: AuthenticationConfig?
     
     override func setUp() {
         super.setUp()
         configService = ServiceConfig.init()
-        keycloakConfig = KeycloakConfig.init(configService!)
+        authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
+        keycloakConfig = KeycloakConfig.init(configService!, authConfig!)
     }
     
     override func tearDown() {
@@ -32,7 +34,7 @@ class KeycloakConfigTests: XCTestCase {
     
     func testKeycloakConfigNull() {
         let nilConfigService = ServiceConfig.init("nonExistent")
-        let nilKeycloakConfig = KeycloakConfig.init(nilConfigService)
+        let nilKeycloakConfig = KeycloakConfig.init(nilConfigService, authConfig!)
         XCTAssertNil(nilKeycloakConfig.rawConfig)
     }
     
@@ -58,7 +60,7 @@ class KeycloakConfigTests: XCTestCase {
     }
     
     func testLogoutURL() {
-        let actual = keycloakConfig?.buildLogoutURL(idToken: "testToken", redirectURI: URL(string: "com.aerogear.mobile.test://calback")!)
+        let actual = keycloakConfig?.buildLogoutURL(idToken: "testToken")
         let expected = "https://keycloak-myproject.192.168.64.74.nip.io/auth/realms/myproject/protocol/openid-connect/logout?id_token_hint=testToken&redirect_uri=com.aerogear.mobile.test://calback"
         
         XCTAssertEqual(expected, actual)

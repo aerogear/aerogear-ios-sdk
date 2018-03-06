@@ -38,8 +38,8 @@ class OIDCAuthenticatorTest: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let serviceConfig = ServiceConfig()
-        keycloakConfig = KeycloakConfig(serviceConfig)
         authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
+        keycloakConfig = KeycloakConfig(serviceConfig, authConfig!)
         credentialManager = MockCredentialManager()
         oidcAuthenticatorToTest = OIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!)
     }
