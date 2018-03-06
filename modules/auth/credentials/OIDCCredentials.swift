@@ -49,4 +49,8 @@ public class OIDCCredentials: NSObject, NSCoding {
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(authState, forKey: OIDCCredentials.authStateEncodingKey)
     }
+    
+    func getIdentityToken() -> String? {
+        return nil
+    }
 }

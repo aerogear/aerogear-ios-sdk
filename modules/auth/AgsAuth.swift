@@ -5,6 +5,11 @@ import Foundation
  AeroGear Auth Service
  */
 open class AgsAuth {
+    
+    enum Errors: Error {
+        case NoLoggedInUserError
+    }
+    
     let authenticator: Authenticator
     let credentialManager: CredentialsManager
     let keycloakConfig: KeycloakConfig
@@ -17,14 +22,20 @@ open class AgsAuth {
         authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig, authConfig: authConfig, credentialManager: credentialManager)
     }
 
-    public func login(presentingViewController _: UIViewController, onCompleted _: @escaping (User?, Error?) -> Void) {
+    public func login(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
+        authenticator.authenticate(presentingViewController: presentingViewController, onCompleted: onCompleted)
     }
 
-    public func resumeAuth(url _: URL) -> Bool {
-        return false
+    public func resumeAuth(url: URL) -> Bool {
+        return authenticator.resumeAuth(url: url)
     }
 
-    public func logout(onCompleted _: @escaping (Error?) -> Void) {
+    public func logout(onCompleted: @escaping (Error?) -> Void) {
+        if let currentUser = currentUser() {
+            authenticator.logout(currentUser: currentUser, onCompleted: onCompleted)
+        } else {
+            onCompleted(Errors.NoLoggedInUserError)
+        }
     }
 
     public func currentUser() -> User? {

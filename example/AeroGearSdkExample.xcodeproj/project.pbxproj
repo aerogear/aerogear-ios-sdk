@@ -36,6 +36,7 @@
 		B3AC1A8D2049E11900BEB12B /* UsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A8C2049E11900BEB12B /* UsersTests.swift */; };
 		EF85064F204D4B5C008033AD /* OIDCCredentialsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85064E204D4B5C008033AD /* OIDCCredentialsTest.swift */; };
 		EF850651204D6D45008033AD /* CredentialsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF850650204D6D45008033AD /* CredentialsManagerTest.swift */; };
+		B3AC1A93204EA7E200BEB12B /* JwtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A92204EA7E200BEB12B /* JwtTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		B3AC1A88204825EC00BEB12B /* MockHttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHttpRequest.swift; sourceTree = "<group>"; };
 		B3AC1A8A2049951900BEB12B /* MobileServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileServiceTest.swift; sourceTree = "<group>"; };
 		B3AC1A8C2049E11900BEB12B /* UsersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTests.swift; sourceTree = "<group>"; };
+		B3AC1A92204EA7E200BEB12B /* JwtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JwtTests.swift; sourceTree = "<group>"; };
 		BF3FA3B26CCABCDADAC6AB94 /* Pods-AeroGearSdkExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		D7E51B1D502165078E140C8B /* Pods_AeroGearSdkExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearSdkExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF85064E204D4B5C008033AD /* OIDCCredentialsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCCredentialsTest.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				50F2A03E204EC7140071778E /* config */,
 				EF85064D204D4B0A008033AD /* credentials */,
+				B3AC1A91204EA7D000BEB12B /* jwt */,
 				B3AC1A84204815E700BEB12B /* authenticator */,
 				B3AC1A82204815E000BEB12B /* AuthTests.swift */,
 				B3AC1A8C2049E11900BEB12B /* UsersTests.swift */,
@@ -269,6 +272,12 @@
 				EF850650204D6D45008033AD /* CredentialsManagerTest.swift */,
 			);
 			path = credentials;
+		B3AC1A91204EA7D000BEB12B /* jwt */ = {
+			isa = PBXGroup;
+			children = (
+				B3AC1A92204EA7E200BEB12B /* JwtTests.swift */,
+			);
+			path = jwt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -521,6 +530,7 @@
 			files = (
 				B3AC1A862048184600BEB12B /* OIDCAuthenticatorTest.swift in Sources */,
 				EF85064F204D4B5C008033AD /* OIDCCredentialsTest.swift in Sources */,
+				B3AC1A93204EA7E200BEB12B /* JwtTests.swift in Sources */,
 				B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */,
 				01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */,
 				B3AC1A8B2049951900BEB12B /* MobileServiceTest.swift in Sources */,

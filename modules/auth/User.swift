@@ -3,7 +3,6 @@
 //  AGSAuth
 
 import Foundation
-
 /**
  Represents the user roles. It has 2 types
  - Realm
@@ -49,6 +48,57 @@ struct  UserRole: Hashable {
     }
 }
 
+struct KeycloakUserProfile: Codable {
+    private let name: String?
+    private let preferredName: String?
+    let email: String?
+    private let realmAccess: [String: String]?
+    private let resourceAccess: [String: [String: String]]?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case preferredName = "preferred_username"
+        case email
+        case realmAccess = "realm_access"
+        case resourceAccess = "resource_access"
+    }
+    
+    var username: String {
+        return preferredName ?? ( name ?? "UNKNOWN_USERNAME")
+    }
+    
+    var realmRoles: [String] {
+        get {
+            var realmRolesArr = [String]()
+            guard let realmData = realmAccess,
+                let realmRoles = realmData["roles"]
+            else {
+                return realmRolesArr
+            }
+            let startIndex = realmRoles.index(realmRoles.startIndex, offsetBy: 1)
+            let endIndex = realmRoles.index(realmRoles.endIndex, offsetBy: -1)
+            let rolesStr = realmRoles[startIndex..<endIndex]
+            realmRolesArr = rolesStr.components(separatedBy: ",")
+            return realmRolesArr
+        }
+    }
+    
+    func getRoles(forClient clientName: String) -> [String] {
+        var clientRolesArr = [String]()
+        guard  let resourceData = resourceAccess,
+            let clientData = resourceData[clientName],
+            let clientRoles = clientData["roles"]
+        else {
+            return clientRolesArr
+        }
+        let startIndex = clientRoles.index(clientRoles.startIndex, offsetBy: 1)
+        let endIndex = clientRoles.index(clientRoles.endIndex, offsetBy: -1)
+        let rolesStr = clientRoles[startIndex..<endIndex]
+        clientRolesArr = rolesStr.components(separatedBy: ",")
+        return clientRolesArr
+    }
+}
+
 /**
  Represent a user.
  */
@@ -57,7 +107,43 @@ public struct User {
     let email: String
     let accessToken: String
     let identityToken: String
-    let roles: Set<UserRole>
+    var roles: Set<UserRole> = Set<UserRole>()
+    
+    init(userName: String , email: String, accessToken: String, identityToken: String, roles: Set<UserRole>) {
+        self.userName = userName
+        self.email = email
+        self.accessToken = accessToken
+        self.identityToken = identityToken
+        self.roles = roles
+    }
+    
+    init?(credential: OIDCCredentials, clientName: String) {
+        guard let token = credential.getAccessToken(),
+            let jwt = try? Jwt.decode(token)
+        else {
+            return nil
+        }
+        accessToken = token
+        identityToken = credential.getIdentityToken()!
+        let payload = jwt.payload
+        guard let keycloakUserProfile = try? JSONDecoder().decode(KeycloakUserProfile.self, from: payload) else {
+            return nil
+        }
+        userName = keycloakUserProfile.username
+        email = keycloakUserProfile.email!
+        let realmRoles = keycloakUserProfile.realmRoles
+        for role in realmRoles {
+            if !role.isEmpty {
+                roles.insert(UserRole(nameSpace: nil, roleName: role))
+            }
+        }
+        let clientRoles = keycloakUserProfile.getRoles(forClient: clientName)
+        for role in clientRoles {
+            if !role.isEmpty {
+                roles.insert(UserRole(nameSpace: clientName, roleName: role))
+            }
+        }
+    }
 
     public func hasClientRole(client: String, role: String) -> Bool {
         let roleToFind = UserRole(nameSpace: client, roleName: role)
