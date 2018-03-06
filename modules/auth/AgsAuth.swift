@@ -4,16 +4,17 @@ import Foundation
 /**
  AeroGear auth module.
  
- It will allow users to perform login/logout actions against an Keycloak service provisioned by the AeroGear mobile service on OpenShift.
+ It allows users to perform login/logout actions against an Keycloak service provisioned by the AeroGear mobile service on OpenShift.
  
- You can use the module like this:
- 
-     // init the auth service instance
-     let authConfig = AuthenticationConfig(redirectURL: "com.youapp://callback")
-     AgsAuth.instance.configure(authConfig: authConfig)
- 
-     //now login
-     AgsAuth.instance.login()
+ ### Example ###
+ ````
+ // init the auth service instance
+ let authConfig = AuthenticationConfig(redirectURL: "com.youapp://callback")
+ AgsAuth.instance.configure(authConfig: authConfig)
+
+ //now login
+ AgsAuth.instance.login()
+ ````
  */
 open class AgsAuth {
     private static let serviceId = "keycloak"

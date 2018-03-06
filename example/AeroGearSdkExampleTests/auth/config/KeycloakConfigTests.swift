@@ -12,31 +12,13 @@ import XCTest
 
 class KeycloakConfigTests: XCTestCase {
     
-    let mobileServiceData =
-    """
-    {
-      "id": "keycloak",
-      "name": "keycloak",
-      "type": "keycloak",
-      "url": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6",
-      "config": {
-        "auth-server-url": "https://keycloak-myproject.192.168.64.74.nip.io/auth",
-        "clientId": "juYAlRlhTyYYmOyszFa",
-        "realm": "myproject",
-        "resource": "juYAlRlhTyYYmOyszFa",
-        "ssl-required": "external",
-        "url": "https://keycloak-myproject.192.168.64.74.nip.io/auth"
-      }
-    }
-    """.data(using: .utf8)
-    
     var configService: MobileService?
     var keycloakConfig: KeycloakConfig?
     var authConfig: AuthenticationConfig?
     
     override func setUp() {
         super.setUp()
-        configService = try? JSONDecoder().decode(MobileService.self, from: mobileServiceData!)
+        configService = getMockKeycloakConfig()
         authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
         keycloakConfig = KeycloakConfig(configService!, authConfig!)
     }

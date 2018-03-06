@@ -85,11 +85,10 @@ struct KeycloakUserProfile: Codable {
     /** Return all the realm roles of the user */
     var realmRoles: [String] {
         get {
-            let realmRolesArr = [String]()
             guard let realmData = realmAccess,
                 let realmRoles = realmData.roles
             else {
-                return realmRolesArr
+                return [String]()
             }
             return realmRoles
         }
@@ -103,12 +102,11 @@ struct KeycloakUserProfile: Codable {
      An array of the role names
     */
     func getClientRoles(_ clientName: String) -> [String] {
-        let clientRolesArr = [String]()
         guard  let resourceData = resourceAccess,
             let clientData = resourceData[clientName],
             let clientRoles = clientData.roles
         else {
-            return clientRolesArr
+            return [String]()
         }
         return clientRoles
     }
@@ -150,7 +148,7 @@ public struct User {
     /** Last Name */
     let lastName: String?
     /** Realm roles and client roles of the user*/
-    var roles: Set<UserRole>? = Set<UserRole>()
+    var roles: Set<UserRole> = Set<UserRole>()
     /** Raw value of the access token. Should be used to perform other requests*/
     let accessToken: String?
     /** Identity token*/
@@ -165,7 +163,7 @@ public struct User {
     }
 
     /** Used for testing */
-    internal init(userName: String?, email: String?, firstName: String?, lastName: String?, accessToken: String?, identityToken: String?, roles: Set<UserRole>?) {
+    init(userName: String?, email: String?, firstName: String?, lastName: String?, accessToken: String?, identityToken: String?, roles: Set<UserRole>?) {
         self.userName = userName
         self.email = email
         self.firstName = firstName
@@ -173,7 +171,7 @@ public struct User {
         self.accessToken = accessToken
         self.identityToken = identityToken
         if let _ = roles {
-            self.roles = roles
+            self.roles = roles!
         }
     }
 
@@ -183,7 +181,7 @@ public struct User {
          - credential: the OIDCCredentials
          - clientName: the name of the Keycloak client
      */
-    internal init?(credential: OIDCCredentials, clientName: String) {
+    init?(credential: OIDCCredentials, clientName: String) {
         guard let token = credential.accessToken,
             let jwt = try? Jwt.decode(token)
         else {
@@ -212,7 +210,7 @@ public struct User {
      */
     public func hasClientRole(client: String, role: String) -> Bool {
         let roleToFind = UserRole(nameSpace: client, roleName: role)
-        return roles!.contains(roleToFind)
+        return roles.contains(roleToFind)
     }
 
     /**
@@ -224,6 +222,6 @@ public struct User {
      */
     public func hasRealmRole(_ roleName: String) -> Bool {
         let roleToFind = UserRole(nameSpace: nil, roleName: roleName)
-        return roles!.contains(roleToFind)
+        return roles.contains(roleToFind)
     }
 }
