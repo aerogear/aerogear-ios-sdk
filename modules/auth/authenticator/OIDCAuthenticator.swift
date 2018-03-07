@@ -26,21 +26,22 @@ public class OIDCAuthenticator: Authenticator {
     }
 
     public func authenticate(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
-        //Add implementation
-    }
-
-    func performAuthentication(presentingViewController viewController:UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
         self.onCompleted = onCompleted
-        let oidServiceConfiguration = OIDServiceConfiguration(authorizationEndpoint: self.keycloakConfig.authenticationEndpoint!, tokenEndpoint: self.keycloakConfig.tokenEndPoint!)
-        let oidAuthRequest = OIDAuthorizationRequest(configuration: oidServiceConfiguration, clientId: self.keycloakConfig.clientId!, scopes: [OIDScopeOpenID, OIDScopeProfile], redirectURL: authConfig.redirectURL, responseType: OIDResponseTypeCode, additionalParameters: nil)
+        let oidServiceConfiguration = OIDServiceConfiguration(authorizationEndpoint: self.keycloakConfig.authenticationEndpoint, tokenEndpoint: self.keycloakConfig.tokenEndpoint)
+        let oidAuthRequest = OIDAuthorizationRequest(configuration: oidServiceConfiguration, clientId: self.keycloakConfig.clientID, scopes: [OIDScopeOpenID, OIDScopeProfile], redirectURL: authConfig.redirectURL, responseType: OIDResponseTypeCode, additionalParameters: nil)
         
         //this will automatically exchange the token to get the user info
-        self.currentAuthorisationFlow = OIDAuthState.authState(byPresenting: oidAuthRequest, presenting: viewController) {
+        self.currentAuthorisationFlow = OIDAuthState.authState(byPresenting: oidAuthRequest, presenting: presentingViewController) {
             authState,error in
-            if authState != nil && authState?.authorizationError == nil {
-                self.authSuccess(authState: authState!)
+            
+            if let state = authState {
+                if let err = state.authorizationError {
+                    self.authFailure(authState: state, error: err)
+                } else {
+                    self.authSuccess(authState: state)
+                }
             } else {
-                self.authFailure(authState: authState, error: error)
+                self.authFailure(error: error)
             }
         }
     }
@@ -56,10 +57,12 @@ public class OIDCAuthenticator: Authenticator {
     }
     
     fileprivate func getIdentity(authState: OIDAuthState?) -> User? {
-        if authState == nil {
-            return nil
+        if let state = authState {
+            let credentials = OIDCCredentials(state: state)
+            return User(credential: credentials, clientName: self.keycloakConfig.clientID)
         }
-        return User(accessToken: authState!.lastTokenResponse?.accessToken)
+        
+        return nil
     }
     
     func authSuccess(authState: OIDAuthState) {
@@ -67,10 +70,9 @@ public class OIDCAuthenticator: Authenticator {
         self.authCompleted(identity: self.identity, error: nil)
     }
     
-    func authFailure(authState: OIDAuthState?, error: Error?) {
-        let e = authState?.authorizationError ?? error
-        self.assignAuthState(authState: nil)
-        self.authCompleted(identity: nil, error: e)
+    func authFailure(authState: OIDAuthState? = nil, error: Error?) {
+        credentialManager.clear()
+        self.authCompleted(identity: nil, error: error)
     }
     
     /**
@@ -105,6 +107,10 @@ public class OIDCAuthenticator: Authenticator {
     }
     
     public func resumeAuth(url: URL) -> Bool {
+        if self.currentAuthorisationFlow!.resumeAuthorizationFlow(with: url) {
+            self.currentAuthorisationFlow = nil;
+            return true
+        }
         return false
     }
 
@@ -118,35 +124,4 @@ func base64urlToBase64(base64url: String) -> String {
         base64.append(String(repeating: "=", count: 4 - base64.characters.count % 4))
     }
     return base64
-}
-
-extension User {
-    init?(accessToken: String!) {
-        if accessToken == nil {
-            return nil
-        }
-        let parts = accessToken?.components(separatedBy: ".")
-        guard let encodedToken = parts?[1] else {
-            return nil
-        }
-        guard let jsonData = Data(base64Encoded: base64urlToBase64(base64url: encodedToken)) else {
-            return nil
-        }
-        let tokenJson = try? JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
-        guard let userName = tokenJson!["name"] as? String,
-        let emailAddress = tokenJson!["email"] as? String,
-        let realmAccess = tokenJson!["realm_access"] as? [String: [String]],
-        let realmRoles = realmAccess["roles"]
-        else {
-            return nil
-        }
-        self.userName = userName
-        self.accessToken = accessToken
-        self.email = emailAddress
-        // TODO: set identity token
-        self.identityToken = ""
-        
-        // TODO: parse roles
-        self.roles = []
-    }
 }
