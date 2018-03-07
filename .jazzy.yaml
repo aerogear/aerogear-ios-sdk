@@ -1,0 +1,7 @@
+module: AeroGearServices
+author: AeroGear
+readme: README.md
+hide_documentation_coverage: true
+skip_undocumented: false
+objc: false
+clean: true
