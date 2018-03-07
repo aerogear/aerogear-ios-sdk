@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source_files = '**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
   ## Default core dependency
-  s.dependency 'AGSCore'
+  ## s.dependency 'AGSCore', :path => '../core'
   ## Add other dependencies if needed
   s.dependency 'AppAuth', '~> 0.92'
   s.dependency 'SwiftKeychainWrapper', '~> 3.0.1'
