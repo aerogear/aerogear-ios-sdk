@@ -37,7 +37,7 @@ class OIDCAuthenticatorTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let serviceConfig = ServiceConfig()
+        let serviceConfig = getMockKeycloakConfig()
         authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
         keycloakConfig = KeycloakConfig(serviceConfig, authConfig!)
         credentialManager = MockCredentialManager()
@@ -50,7 +50,7 @@ class OIDCAuthenticatorTest: XCTestCase {
     }
 
     func testLogoutSuccess() {
-        let testUser = User(userName: "test", email: "test@example.com", accessToken: "testAccessToken", identityToken: "testIdentityToken", roles: [])
+        let testUser = User(userName: "test", email: "test@example.com", firstName: nil, lastName: nil, accessToken: "testAccessToken", identityToken: "testIdentityToken", roles: [])
         http.dataForGet = "success"
         var onCompletedCalled = false
         oidcAuthenticatorToTest?.logout(currentUser: testUser, onCompleted: { error in
@@ -62,7 +62,7 @@ class OIDCAuthenticatorTest: XCTestCase {
     }
 
     func testLogoutError() {
-        let testUser = User(userName: "test", email: "test@example.com", accessToken: "testAccessToken", identityToken: "testIdentityToken", roles: [])
+        let testUser = User(userName: "test", email: "test@example.com", firstName: nil, lastName: nil, accessToken: "testAccessToken", identityToken: "testIdentityToken", roles: [])
         http.errorForGet = MockHttpErrors.NetworkError
         var onCompletedCalled = false
         oidcAuthenticatorToTest?.logout(currentUser: testUser, onCompleted: { error in

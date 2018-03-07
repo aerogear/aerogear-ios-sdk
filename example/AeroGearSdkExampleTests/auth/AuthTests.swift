@@ -2,14 +2,22 @@
 // Copyright (c) 2018 AeroGear. All rights reserved.
 //
 
+@testable import AGSCore
 @testable import AGSAuth
 import Foundation
 import XCTest
 
 class AuthTests: XCTestCase {
+    
+    var mobileServiceConfig: MobileService?
+    var authService: AgsAuth?
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        mobileServiceConfig = getMockKeycloakConfig()
+        authService = AgsAuth(mobileServiceConfig!)
+        authService?.configure(authConfig: AuthenticationConfig(redirectURL: "com.aerogear.auth://callback"))
     }
 
     override func tearDown() {
@@ -17,7 +25,17 @@ class AuthTests: XCTestCase {
         super.tearDown()
     }
 
-    func testauth() {
-        XCTAssertTrue(true)
+    func testConfigureNotCalled() {
+        let authServiceNotConfigured = AgsAuth(mobileServiceConfig!)
+        func callback(user: User?, error: Error?) {
+            
+        }
+        XCTAssertThrowsError(try authServiceNotConfigured.login(presentingViewController: UIViewController(), onCompleted: callback))
+        XCTAssertThrowsError(try authServiceNotConfigured.logout(onCompleted: { _ in
+            
+        }))
+        XCTAssertThrowsError(try authServiceNotConfigured.currentUser())
+        let url = URL(string: "http://example.com")
+        XCTAssertThrowsError(try authServiceNotConfigured.resumeAuth(url: url!))
     }
 }

@@ -6,21 +6,21 @@
 //
 
 @testable import AGSAuth
-import AGSCore
+@testable import AGSCore
 import Foundation
 import XCTest
 
 class KeycloakConfigTests: XCTestCase {
     
-    var configService: ServiceConfig?
+    var configService: MobileService?
     var keycloakConfig: KeycloakConfig?
     var authConfig: AuthenticationConfig?
     
     override func setUp() {
         super.setUp()
-        configService = ServiceConfig.init()
+        configService = getMockKeycloakConfig()
         authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
-        keycloakConfig = KeycloakConfig.init(configService!, authConfig!)
+        keycloakConfig = KeycloakConfig(configService!, authConfig!)
     }
     
     override func tearDown() {
@@ -30,12 +30,6 @@ class KeycloakConfigTests: XCTestCase {
     
     func testKeycloakConfig() {
         XCTAssertNotNil(keycloakConfig?.rawConfig)
-    }
-    
-    func testKeycloakConfigNull() {
-        let nilConfigService = ServiceConfig.init("nonExistent")
-        let nilKeycloakConfig = KeycloakConfig.init(nilConfigService, authConfig!)
-        XCTAssertNil(nilKeycloakConfig.rawConfig)
     }
     
     func testAuthenticationEndpoint() {
