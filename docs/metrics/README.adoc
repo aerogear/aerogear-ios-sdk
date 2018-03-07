@@ -18,7 +18,3 @@ The Client ID will be generated and stored on the device when the App is started
 
 - *Platform*: Hardcoded to `ios`
 - *Platform Version*: Version of the platform (IOS10 etc.)
-
-=== Extending metrics
-
-See link:./extending-metrics.adoc[Extending Metrics Guide] 
