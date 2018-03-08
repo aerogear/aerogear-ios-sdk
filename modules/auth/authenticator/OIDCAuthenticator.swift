@@ -13,7 +13,6 @@ public class OIDCAuthenticator: Authenticator {
     let authConfig: AuthenticationConfig
     let credentialManager: CredentialManagerProtocol
 
-    var onCompleted: ((User?, Error?) -> Void)?
     var currentAuthorisationFlow: OIDAuthorizationFlowSession?
     
     init(http: AgsHttpRequestProtocol, keycloakConfig: KeycloakConfig, authConfig: AuthenticationConfig, credentialManager: CredentialManagerProtocol) {
@@ -24,9 +23,13 @@ public class OIDCAuthenticator: Authenticator {
     }
 
     public func authenticate(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
-        self.onCompleted = onCompleted
         let oidServiceConfiguration = OIDServiceConfiguration(authorizationEndpoint: self.keycloakConfig.authenticationEndpoint, tokenEndpoint: self.keycloakConfig.tokenEndpoint)
-        let oidAuthRequest = OIDAuthorizationRequest(configuration: oidServiceConfiguration, clientId: self.keycloakConfig.clientID, scopes: [OIDScopeOpenID, OIDScopeProfile], redirectURL: authConfig.redirectURL, responseType: OIDResponseTypeCode, additionalParameters: nil)
+        let oidAuthRequest = OIDAuthorizationRequest(configuration: oidServiceConfiguration,
+                                                     clientId: self.keycloakConfig.clientID,
+                                                     scopes: [OIDScopeOpenID, OIDScopeProfile],
+                                                     redirectURL: authConfig.redirectURL,
+                                                     responseType: OIDResponseTypeCode,
+                                                     additionalParameters: nil)
         
         //this will automatically exchange the token to get the user info
         self.currentAuthorisationFlow = OIDAuthState.authState(byPresenting: oidAuthRequest, presenting: presentingViewController) {
@@ -34,34 +37,36 @@ public class OIDCAuthenticator: Authenticator {
             
             if let state = authState {
                 if let err = state.authorizationError {
-                    self.authFailure(authState: state, error: err)
+                    self.authFailure(error: err, onCompleted: onCompleted)
                 } else {
-                    self.authSuccess(authState: state)
+                    self.authSuccess(authState: state, onCompleted: onCompleted)
                 }
             } else {
-                self.authFailure(error: error)
+                self.authFailure(error: error, onCompleted: onCompleted)
             }
         }
     }
     
-    fileprivate func getIdentity(authState: OIDAuthState?) -> User? {
-        if let state = authState {
-            let credentials = OIDCCredentials(state: state)
-            return User(credential: credentials, clientName: self.keycloakConfig.clientID)
-        }
-        
-        return nil
-    }
-    
-    func authSuccess(authState: OIDAuthState) {
+    func authSuccess(authState: OIDAuthState, onCompleted: @escaping (User?, Error?) -> Void) {
         let credentials = OIDCCredentials(state: authState)
         credentialManager.save(credentials: credentials)
-        self.authCompleted(identity: self.getIdentity(authState: authState), error: nil)
+        onCompleted(User(credential: credentials, clientName: self.keycloakConfig.clientID), nil)
     }
     
-    func authFailure(authState: OIDAuthState? = nil, error: Error?) {
+    func authFailure(error: Error?, onCompleted: @escaping (User?, Error?) -> Void) {
         credentialManager.clear()
-        self.authCompleted(identity: nil, error: error)
+        onCompleted(nil, error)
+    }
+    
+    public func resumeAuth(url: URL) -> Bool {
+        guard let flow = self.currentAuthorisationFlow else {
+            return false
+        }
+        if flow.resumeAuthorizationFlow(with: url) {
+            self.currentAuthorisationFlow = nil
+            return true
+        }
+        return false
     }
     
     /**
@@ -88,19 +93,4 @@ public class OIDCAuthenticator: Authenticator {
             }
         })
     }
-    
-    func authCompleted(identity: User?, error: Error?) {
-        if (self.onCompleted != nil) {
-            self.onCompleted!(identity, error)
-        }
-    }
-    
-    public func resumeAuth(url: URL) -> Bool {
-        if self.currentAuthorisationFlow!.resumeAuthorizationFlow(with: url) {
-            self.currentAuthorisationFlow = nil;
-            return true
-        }
-        return false
-    }
-
 }

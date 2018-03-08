@@ -36,8 +36,8 @@ class KeycloakConfig {
      *rawConfig* variable is set to the keycloak service configuration.
      
      - parameters:
-       - mobileService: mobile services configuration
-       - authConfig: configuration for the authentication service
+        - mobileService: mobile services configuration
+        - authConfig: configuration for the authentication service
      */
     init(_ mobileService: MobileService, _ authConfig: AuthenticationConfig) {
         self.authConfig = authConfig
@@ -73,7 +73,7 @@ class KeycloakConfig {
      Constructs the logout URL
      
      - parameters:
-     - idToken: the identity token
+        - idToken: the identity token
      - returns: logout URL
      */
     func buildLogoutURL(idToken: String) -> String {
