@@ -15,8 +15,6 @@ public class OIDCAuthenticator: Authenticator {
 
     var onCompleted: ((User?, Error?) -> Void)?
     var currentAuthorisationFlow: OIDAuthorizationFlowSession?
-    var authState: OIDAuthState?
-    var identity: User?
     
     init(http: AgsHttpRequestProtocol, keycloakConfig: KeycloakConfig, authConfig: AuthenticationConfig, credentialManager: CredentialManagerProtocol) {
         self.http = http
@@ -46,16 +44,6 @@ public class OIDCAuthenticator: Authenticator {
         }
     }
     
-    fileprivate func assignAuthState(authState: OIDAuthState?) {
-        self.authState = authState
-        self.identity = self.getIdentity(authState: authState)
-        self.saveState()
-    }
-    
-    fileprivate func saveState() {
-        // TODO: implement
-    }
-    
     fileprivate func getIdentity(authState: OIDAuthState?) -> User? {
         if let state = authState {
             let credentials = OIDCCredentials(state: state)
@@ -66,11 +54,9 @@ public class OIDCAuthenticator: Authenticator {
     }
     
     func authSuccess(authState: OIDAuthState) {
-        self.assignAuthState(authState: authState)
-        
         let credentials = OIDCCredentials(state: authState)
         credentialManager.save(credentials: credentials)
-        self.authCompleted(identity: self.identity, error: nil)
+        self.authCompleted(identity: self.getIdentity(authState: authState), error: nil)
     }
     
     func authFailure(authState: OIDAuthState? = nil, error: Error?) {
@@ -117,14 +103,4 @@ public class OIDCAuthenticator: Authenticator {
         return false
     }
 
-}
-
-func base64urlToBase64(base64url: String) -> String {
-    var base64 = base64url
-    .replacingOccurrences(of: "-", with: "+")
-    .replacingOccurrences(of: "_", with: "/")
-    if base64.characters.count % 4 != 0 {
-        base64.append(String(repeating: "=", count: 4 - base64.characters.count % 4))
-    }
-    return base64
 }
