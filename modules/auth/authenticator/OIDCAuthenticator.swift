@@ -67,6 +67,9 @@ public class OIDCAuthenticator: Authenticator {
     
     func authSuccess(authState: OIDAuthState) {
         self.assignAuthState(authState: authState)
+        
+        let credentials = OIDCCredentials(state: authState)
+        credentialManager.save(credentials: credentials)
         self.authCompleted(identity: self.identity, error: nil)
     }
     
