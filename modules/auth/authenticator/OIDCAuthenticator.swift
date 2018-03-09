@@ -42,29 +42,31 @@ public class OIDCAuthenticator: Authenticator {
         
         //this will automatically exchange the token to get the user info
         self.currentAuthorisationFlow = startAuthorizationFlow(byPresenting: oidAuthRequest, presenting: presentingViewController) {
-            authState,error in
+            oidcCredentials,error in
             
-            if let state = authState {
-                if let err = state.authorizationError {
-                    self.authFailure(error: err, onCompleted: onCompleted)
-                } else {
-                    self.authSuccess(authState: state, onCompleted: onCompleted)
-                }
-            } else {
-                self.authFailure(error: error, onCompleted: onCompleted)
+            guard let credentials = oidcCredentials else  {
+                return self.authFailure(error: error, onCompleted: onCompleted)
             }
+            
+            return self.authSuccess(credentials: credentials, onCompleted: onCompleted)
         }
     }
     
-    /**
-     This one liner function has been created to facilitate testing, so that OIDxxx object can be mocked
-     */
-    func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping OIDAuthStateAuthorizationCallback) -> OIDAuthorizationFlowSession {
-        return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: callback)
+    func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping (OIDCCredentials?, Error?) -> Void) -> OIDAuthorizationFlowSession {
+        return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: {authState, error  in
+            if let state = authState {
+                if let err = state.authorizationError {
+                    callback(nil, err)
+                } else {
+                    callback(OIDCCredentials(state: authState!), nil)
+                }
+            } else {
+                callback(nil, error)
+            }
+        })
     }
     
-    func authSuccess(authState: OIDAuthState, onCompleted: @escaping (User?, Error?) -> Void) {
-        let credentials = OIDCCredentials(state: authState)
+    func authSuccess(credentials: OIDCCredentials, onCompleted: @escaping (User?, Error?) -> Void) {
         credentialManager.save(credentials: credentials)
         onCompleted(User(credential: credentials, clientName: self.keycloakConfig.clientID), nil)
     }
