@@ -13,7 +13,7 @@ class AuthViewController: UIViewController {
     @IBOutlet var backgroundImage: UIImageView!
 
     override func viewDidLoad() {
-        let authenticationConfig = AuthenticationConfig(redirectURL: "org.aerogear.AeroGearSdkExample:/callback")
+        let authenticationConfig = AuthenticationConfig(redirectURL: "org.aerogear.mobile.example:/callback")
         AgsAuth.instance.configure(authConfig: authenticationConfig)
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,18 +26,20 @@ class AuthViewController: UIViewController {
 
     @IBAction func onAuthButtonTapped(_: UIButton) {
         do {
-            try AgsAuth.instance.login(presentingViewController: self, onCompleted: onLoginComplete)
+            guard let currentUser = try AgsAuth.instance.currentUser() else {
+                try AgsAuth.instance.login(presentingViewController: self, onCompleted: onLoginComplete)
+                return
+            }
+            onLoginComplete(user: currentUser, err: nil)
         } catch AgsAuth.Errors.serviceNotConfigured {
-            showServiceNotConfiguredDialog()
+            showSimpleAlert(title: "Login Error", message: "Auth Service is not configured. Use AgsAuth.instance.configure")
         } catch {
             fatalError("Unexpected error: \(error).")
         }
-        // TODO: Remove me once login is properly implemented.
-        onLoginComplete(user: nil, err: nil)
     }
     
-    func showServiceNotConfiguredDialog() {
-        let alertView = UIAlertController(title: "Login Error", message: "Auth Service is not configured. Use AgsAuth.instance.configure", preferredStyle: UIAlertControllerStyle.alert)
+    func showSimpleAlert(title: String, message: String) {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
             
         }))
@@ -45,11 +47,14 @@ class AuthViewController: UIViewController {
     }
     
     func onLoginComplete(user: User?, err: Error?) {
-        print("Login complete")
+        if let error = err {
+            showSimpleAlert(title: "Login Error", message: "Error occurred during login flow \(error)")
+            return
+        }
         if authDetailsVC == nil {
             authDetailsVC = AuthViewController.authStoryBoard.instantiateViewController(withIdentifier: "AuthenticationDetailsViewController") as? AuthDetailsViewController
         }
-        authDetailsVC!.displayUserDetails(from: self)
+        authDetailsVC!.displayUserDetails(from: self, user: user!)
     }
 
     static func loadViewController() -> UIViewController {

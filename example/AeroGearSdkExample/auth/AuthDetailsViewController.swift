@@ -5,14 +5,12 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet var userInfoView: UITableView!
 
-    // TODO: assign the user value after succesfully login
     var currentUser: User?
     
     var navbarItem: UINavigationItem?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        try? currentUser = AgsAuth.instance.currentUser()
     }
     
     override func viewDidLoad() {
@@ -57,8 +55,8 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
 
-    // TODO: allow pass in the user info
-    func displayUserDetails(from: UIViewController) {
+    func displayUserDetails(from: UIViewController, user: User) {
+        currentUser = user
         ViewHelper.showChildViewController(parentViewController: from, childViewController: self)
     }
 
@@ -97,8 +95,7 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         case 0:
             return 2
         case 1:
-            // TODO: This should be the amount of roles the user has
-            return 0
+            return currentUser?.realmRoles.count ?? 0
         default:
             return 0
         }

@@ -4,11 +4,6 @@
 
 import Foundation
 
-/** Supported role types for UserRole. */
-enum UserRoleTypes {
-    case REALM, CLIENT
-}
-
 /**
  Represents the user roles. It has 2 types
  - Realm
@@ -16,27 +11,26 @@ enum UserRoleTypes {
  
  A user role is a realm role it the nameSpace is not set. Otherwise it is a client role.
  */
-struct  UserRole: Hashable {
-    
-    enum  Types {
+struct UserRole: Hashable {
+    /** Supported role types for UserRole. */
+    enum Types {
         case REALM, CLIENT
     }
-
     /** namespace of the role. It should be empty or nil for realm roles. Otherwise it should be the client name for a client role */
     let nameSpace: String?
     /** the name of the role **/
     let roleName: String
     /** the type of the role **/
-    var roleType: UserRoleTypes {
+    var roleType: Types {
         get {
             if let ns = nameSpace {
                 if (ns.isEmpty) {
-                    return UserRoleTypes.REALM
+                    return Types.REALM
                 } else {
-                    return UserRoleTypes.CLIENT
+                    return Types.CLIENT
                 }
             } else {
-                return UserRoleTypes.REALM
+                return Types.REALM
             }
         }
     }
@@ -157,12 +151,12 @@ public struct User {
     var roles: Set<UserRole> = Set<UserRole>()
     /** Realm roles of the user */
     public var realmRoles: [String] {
-        let realmRoles = roles.filter({ $0.roleType == UserRoleTypes.REALM }).map({ $0.roleName })
+        let realmRoles = roles.filter({ $0.roleType == UserRole.Types.REALM }).map({ $0.roleName })
         return realmRoles
     }
     /** Client roles of the user */
     public var clientRoles: [String] {
-        let clientRoles = roles.filter({ $0.roleType == UserRoleTypes.CLIENT }).map({ $0.roleName })
+        let clientRoles = roles.filter({ $0.roleType == UserRole.Types.CLIENT }).map({ $0.roleName })
         return clientRoles
     }
     /** Raw value of the access token. Should be used to perform other requests*/

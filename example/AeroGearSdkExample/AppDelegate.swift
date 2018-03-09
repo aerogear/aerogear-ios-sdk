@@ -4,6 +4,7 @@
 //  Copyright © 2018 AeroGear. All rights reserved.
 //
 
+import AGSAuth
 import AGSCore
 import UIKit
 
@@ -16,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        do {
+            return try AgsAuth.instance.resumeAuth(url: url as URL)
+        } catch AgsAuth.Errors.serviceNotConfigured {
+            print("AeroGear auth service is not configured")
+        } catch {
+            fatalError("Unexpected error: \(error).")
+        }
+        return false
     }
 
     func applicationWillResignActive(_: UIApplication) {
