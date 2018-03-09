@@ -3,6 +3,7 @@
 //  AGSAuth
 
 import Foundation
+
 /**
  Represents the user roles. It has 2 types
  - Realm
@@ -10,12 +11,11 @@ import Foundation
  
  A user role is a realm role it the nameSpace is not set. Otherwise it is a client role.
  */
-struct  UserRole: Hashable {
-    /** Supported role types. */
-    enum  Types {
+struct UserRole: Hashable {
+    /** Supported role types for UserRole. */
+    enum Types {
         case REALM, CLIENT
     }
-
     /** namespace of the role. It should be empty or nil for realm roles. Otherwise it should be the client name for a client role */
     let nameSpace: String?
     /** the name of the role **/
@@ -140,21 +140,31 @@ struct KeycloakUserProfile: Codable {
  */
 public struct User {
     /** Username */
-    let userName: String?
+    public let userName: String?
     /** Email */
-    let email: String?
+    public let email: String?
     /** First Name */
-    let firstName: String?
+    public let firstName: String?
     /** Last Name */
-    let lastName: String?
+    public let lastName: String?
     /** Realm roles and client roles of the user*/
     var roles: Set<UserRole> = Set<UserRole>()
+    /** Realm roles of the user */
+    public var realmRoles: [String] {
+        let realmRoles = roles.filter({ $0.roleType == UserRole.Types.REALM }).map({ $0.roleName })
+        return realmRoles
+    }
+    /** Client roles of the user */
+    public var clientRoles: [String] {
+        let clientRoles = roles.filter({ $0.roleType == UserRole.Types.CLIENT }).map({ $0.roleName })
+        return clientRoles
+    }
     /** Raw value of the access token. Should be used to perform other requests*/
-    let accessToken: String?
+    public let accessToken: String?
     /** Identity token*/
-    let identityToken: String?
+    public let identityToken: String?
     /** Full Name built using firstName and lastName. If both are not set or empty, nil will be returned */
-    var fullName: String? {
+    public var fullName: String? {
         let name = "\(firstName ?? "") \(lastName ?? "")"
         if name.isEmpty {
             return nil
@@ -199,7 +209,7 @@ public struct User {
         email = keycloakUserProfile.email
         roles = keycloakUserProfile.getUserRoles(forClient: clientName)
     }
-
+    
     /**
      Check if the user has a client role.
      - parameters:

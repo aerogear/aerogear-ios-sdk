@@ -1,20 +1,18 @@
+import AGSAuth
 import UIKit
 
-struct UserIdentity {
-    var userName: String = "Unknown Username"
-    var fullName: String = "Unknown Name"
-    var emailAddress: String = "Unknown Email"
-    var reamlRoles: [String] = []
-}
-
 class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet var userInfoView: UITableView!
 
-    // TODO: assign the user value after succesfully login
-    let testUser = UserIdentity(userName: "John", fullName: "John Doe", emailAddress: "john.doe@example.com", reamlRoles: ["read", "write"])
-
+    var currentUser: User?
+    
     var navbarItem: UINavigationItem?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,21 +55,36 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
 
-    // TODO: allow pass in the user info
-    func displayUserDetails(from: UIViewController) {
+    func displayUserDetails(from: UIViewController, user: User) {
+        currentUser = user
         ViewHelper.showChildViewController(parentViewController: from, childViewController: self)
     }
 
     @IBAction func logoutTapped(_: UIBarButtonItem) {
         let alertView = UIAlertController(title: "Logout", message: "Are you sure to logout?", preferredStyle: UIAlertControllerStyle.alert)
         alertView.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-            // TODO: implement logout
-            self.removeView()
+            do {
+                try AgsAuth.instance.logout(onCompleted: self.onLogoutComplete)
+            } catch AgsAuth.Errors.serviceNotConfigured {
+                self.showServiceNotFoundDialog()
+            } catch {
+                fatalError("Unexpected error: \(error).")
+            }
         }))
         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
 
         }))
         present(alertView, animated: true, completion: nil)
+    }
+    
+    func showServiceNotFoundDialog() {
+        let alertView = UIAlertController(title: "Logout Error", message: "Auth Service is not configured. Use AgsAuth.instance.configure", preferredStyle: UIAlertControllerStyle.alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in }))
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    func onLogoutComplete(_: Error?) {
+        self.removeView()
     }
 
     /*
@@ -82,13 +95,14 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         case 0:
             return 2
         case 1:
-            return testUser.reamlRoles.count
+            return currentUser?.realmRoles.count ?? 0
         default:
             return 0
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let sectionNum = indexPath.section
         if sectionNum == 0 {
             let userInfoCell = tableView.dequeueReusableCell(withIdentifier: "userInfoCell")!
@@ -96,16 +110,16 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
             let fieldValueLabel = userInfoCell.contentView.viewWithTag(2) as! UILabel
             if indexPath.row == 0 {
                 fieldNameLabel.text = "Name"
-                fieldValueLabel.text = testUser.fullName
+                fieldValueLabel.text = currentUser?.fullName
             } else {
                 fieldNameLabel.text = "Email"
-                fieldValueLabel.text = testUser.emailAddress
+                fieldValueLabel.text = currentUser?.email
             }
             return userInfoCell
         } else {
             let roleNameCell = tableView.dequeueReusableCell(withIdentifier: "roleNameCell")!
             let roleValueLabel = roleNameCell.contentView.viewWithTag(1) as! UILabel
-            roleValueLabel.text = testUser.reamlRoles[indexPath.row]
+            roleValueLabel.text = currentUser?.realmRoles[indexPath.row]
             return roleNameCell
         }
     }
