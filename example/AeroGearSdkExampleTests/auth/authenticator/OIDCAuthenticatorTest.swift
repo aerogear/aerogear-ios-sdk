@@ -6,9 +6,19 @@
 @testable import AGSAuth
 @testable import AGSCore
 import XCTest
+import AppAuth
 
 class OIDCAuthenticatorTest: XCTestCase {
 
+    class MockOIDCAuthenticator : OIDCAuthenticator {
+        override func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping OIDAuthStateAuthorizationCallback) -> OIDAuthorizationFlowSession {
+            let err = NSError(domain: "errordomain", code: 123, userInfo: nil)
+            callback(nil, err)
+
+            return MockOIDAuthorizationFlowSession()
+        }
+    }
+    
     class MockCredentialManager: CredentialManagerProtocol {
         var loadCalled = false
         var saveCalled = false
@@ -27,7 +37,20 @@ class OIDCAuthenticatorTest: XCTestCase {
             clearCalled = true
         }
     }
-
+    
+    class MockOIDAuthorizationFlowSession : NSObject, OIDAuthorizationFlowSession {
+        func cancel() {
+        }
+        func resumeAuthorizationFlow(with URL: URL) -> Bool {
+            return false
+        }
+        func failAuthorizationFlowWithError(_ error: Error) {
+        }
+    }
+    
+    class MockUIViewController : UIViewController {
+    }
+    
     var http = MockHttpRequest()
     var keycloakConfig: KeycloakConfig?
     var authConfig: AuthenticationConfig?
@@ -72,5 +95,18 @@ class OIDCAuthenticatorTest: XCTestCase {
         })
         XCTAssertTrue(onCompletedCalled)
     }
+    
+    func testLoginFail() {
+        var onCompletedCalled = false
+        let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!)
+        
+        authenticator.authenticate(presentingViewController: MockUIViewController()) {
+            authState, error in
+            
+            XCTAssertNil(authState)
+            XCTAssertNotNil(error)
+            onCompletedCalled = true
+        }
+        XCTAssertTrue(onCompletedCalled)
+    }
 }
-

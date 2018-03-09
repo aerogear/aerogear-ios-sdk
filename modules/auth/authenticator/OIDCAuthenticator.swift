@@ -22,6 +22,15 @@ public class OIDCAuthenticator: Authenticator {
         self.credentialManager = credentialManager
     }
     
+    /**
+     Perform the logoin operation. It will open a browser to the configured login url.
+     If the login is successful, it will save the credential data automatically and invoke the onCompleted function with the logged in user.
+     Otherwise it will invoke the onCompleted callback with an error.
+     
+     - parameters:
+     - presentingViewController: The view controller from which to present the SafariViewController
+     - onCompleted: a block function that will be invoked when the login is completed.
+     */
     public func authenticate(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
         let oidServiceConfiguration = OIDServiceConfiguration(authorizationEndpoint: self.keycloakConfig.authenticationEndpoint, tokenEndpoint: self.keycloakConfig.tokenEndpoint)
         let oidAuthRequest = OIDAuthorizationRequest(configuration: oidServiceConfiguration,
@@ -47,6 +56,9 @@ public class OIDCAuthenticator: Authenticator {
         }
     }
     
+    /**
+     This one liner function has been created to facilitate testing, so that OIDxxx object can be mocked
+     */
     func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping OIDAuthStateAuthorizationCallback) -> OIDAuthorizationFlowSession {
         return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: callback)
     }
@@ -79,8 +91,8 @@ public class OIDCAuthenticator: Authenticator {
      Otherwise it will invoke the onCompleted callback with an error.
      
      - parameters:
-     - currentUser: the user that should be logged out
-     - onCompleted: a block function that will be invoked when the logout is completed.
+       - currentUser: the user that should be logged out
+       - onCompleted: a block function that will be invoked when the logout is completed.
      */
     public func logout(currentUser: User, onCompleted: @escaping (Error?) -> Void) {
         guard let identityToken = currentUser.identityToken else {
