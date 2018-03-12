@@ -20,22 +20,26 @@ public class AgsHttpRequest: AgsHttpRequestProtocol {
     public func get(_ url: String, params: [String: AnyObject]? = [:], headers: [String: String]? = [:],
                     _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, parameters: params, headers: headers).responseJSON { (responseObject) -> Void in
-            if responseObject.result.isSuccess {
+            if self.isHTTPResponseSuccess(responseObject)  {
                 handler(responseObject.result.value, nil)
+                return
             }
             if responseObject.result.isFailure {
                 handler(nil, responseObject.result.error)
+                return
             }
         }
     }
 
     public func post(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
-            if responseObject.result.isSuccess {
+            if self.isHTTPResponseSuccess(responseObject) {
                 handler(responseObject.result.value, nil)
+                return
             }
             if responseObject.result.isFailure {
                 handler(nil, responseObject.result.error)
+                return
             }
         }
     }
@@ -43,11 +47,13 @@ public class AgsHttpRequest: AgsHttpRequestProtocol {
     public func put(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, method: .put, parameters: body, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
 
-            if responseObject.result.isSuccess {
+            if self.isHTTPResponseSuccess(responseObject) {
                 handler(responseObject.result.value, nil)
+                return
             }
             if responseObject.result.isFailure {
                 handler(nil, responseObject.result.error)
+                return
             }
         }
     }
@@ -55,13 +61,22 @@ public class AgsHttpRequest: AgsHttpRequestProtocol {
     public func delete(_ url: String, headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
 
-            if responseObject.result.isSuccess {
+            if self.isHTTPResponseSuccess(responseObject) {
                 handler(responseObject.result.value, nil)
+                return
             }
             if responseObject.result.isFailure {
                 handler(nil, responseObject.result.error)
+                return
             }
         }
+    }
+    
+    /**
+     Check whether a response is successful.
+    */
+    private func isHTTPResponseSuccess(_ responseObject: DataResponse<Any>) -> Bool {
+        return responseObject.result.isSuccess || (200..<300).contains(responseObject.response?.statusCode ?? 0)
     }
 }
 
