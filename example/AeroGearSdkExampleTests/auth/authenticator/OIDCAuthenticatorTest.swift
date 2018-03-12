@@ -6,28 +6,9 @@
 @testable import AGSAuth
 @testable import AGSCore
 import XCTest
+import AppAuth
 
 class OIDCAuthenticatorTest: XCTestCase {
-
-    class MockCredentialManager: CredentialManagerProtocol {
-        var loadCalled = false
-        var saveCalled = false
-        var clearCalled = false
-
-        func load() -> OIDCCredentials? {
-            loadCalled = true
-            return nil
-        }
-
-        func save(credentials _: OIDCCredentials) {
-            saveCalled = true
-        }
-
-        func clear() {
-            clearCalled = true
-        }
-    }
-
     var http = MockHttpRequest()
     var keycloakConfig: KeycloakConfig?
     var authConfig: AuthenticationConfig?
@@ -72,5 +53,32 @@ class OIDCAuthenticatorTest: XCTestCase {
         })
         XCTAssertTrue(onCompletedCalled)
     }
-}
+    
+    func testLoginFail() {
+        var onCompletedCalled = false
+        let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!, fail: true)
+        
+        authenticator.authenticate(presentingViewController: UIViewController()) {
+            user, error in
+            
+            XCTAssertNil(user)
+            XCTAssertNotNil(error)
+            onCompletedCalled = true
+        }
+        XCTAssertTrue(onCompletedCalled)
+    }
+    
+    func testLoginSuccess() {
+        var onCompletedCalled = false
+        let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!)
 
+        authenticator.authenticate(presentingViewController: UIViewController()) {
+            user, error in
+
+            XCTAssertNil(error)
+            XCTAssertNotNil(user)
+            onCompletedCalled = true
+        }
+        XCTAssertTrue(onCompletedCalled)
+    }
+}
