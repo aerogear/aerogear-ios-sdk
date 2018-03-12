@@ -9,11 +9,29 @@ import XCTest
 import AppAuth
 
 class OIDCAuthenticatorTest: XCTestCase {
-
+    
     class MockOIDCAuthenticator : OIDCAuthenticator {
-        override func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping OIDAuthStateAuthorizationCallback) -> OIDAuthorizationFlowSession {
-            let err = NSError(domain: "errordomain", code: 123, userInfo: nil)
-            callback(nil, err)
+        
+        let fail: Bool
+        
+        init(http: AgsHttpRequestProtocol, keycloakConfig: KeycloakConfig, authConfig: AuthenticationConfig, credentialManager: CredentialManagerProtocol, fail: Bool = false) {
+            self.fail = fail
+            super.init(http: http, keycloakConfig: keycloakConfig, authConfig: authConfig, credentialManager: credentialManager)
+        }
+        
+        override func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping (OIDCCredentials?, Error?) -> Void) -> OIDAuthorizationFlowSession {
+            var testCredential: OIDCCredentials?
+            var err: NSError?
+            
+            if (fail) {
+                testCredential = nil
+                err = NSError(domain: "errordomain", code: 123, userInfo: nil)
+            } else {
+                testCredential = OIDCCredentialsTest.buildCredentialsWithParameters(parameters: OIDCCredentialsTest.defaultParameters)
+                err = nil
+            }
+            
+            callback(testCredential, err)
 
             return MockOIDAuthorizationFlowSession()
         }
@@ -98,13 +116,27 @@ class OIDCAuthenticatorTest: XCTestCase {
     
     func testLoginFail() {
         var onCompletedCalled = false
-        let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!)
+        let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!, fail: true)
         
         authenticator.authenticate(presentingViewController: MockUIViewController()) {
-            authState, error in
+            user, error in
             
-            XCTAssertNil(authState)
+            XCTAssertNil(user)
             XCTAssertNotNil(error)
+            onCompletedCalled = true
+        }
+        XCTAssertTrue(onCompletedCalled)
+    }
+    
+    func testLoginSuccess() {
+        var onCompletedCalled = false
+        let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!)
+
+        authenticator.authenticate(presentingViewController: MockUIViewController()) {
+            user, error in
+
+            XCTAssertNil(error)
+            XCTAssertNotNil(user)
             onCompletedCalled = true
         }
         XCTAssertTrue(onCompletedCalled)
