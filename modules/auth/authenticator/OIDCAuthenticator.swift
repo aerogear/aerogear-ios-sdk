@@ -68,8 +68,7 @@ public class OIDCAuthenticator: Authenticator {
     
     func authSuccess(credentials: OIDCCredentials, onCompleted: @escaping (User?, Error?) -> Void) {
         credentialManager.save(credentials: credentials)
-        var user = User(credential: credentials, clientName: self.keycloakConfig.clientID)
-        onCompleted(user, nil)
+        onCompleted(User(credential: credentials, clientName: self.keycloakConfig.clientID), nil)
     }
     
     func authFailure(error: Error?, onCompleted: @escaping (User?, Error?) -> Void) {
