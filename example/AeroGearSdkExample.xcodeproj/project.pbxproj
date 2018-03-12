@@ -22,6 +22,8 @@
 		018FBE77201257F300E763A5 /* mobile-services.json in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE75201257F300E763A5 /* mobile-services.json */; };
 		01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372266C9F61265244A81632 /* ConfigParserTests.swift */; };
 		4436E282BDD390473AD840EE /* Pods_AeroGearSdkExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126BB257CFC9A2A188E6B84 /* Pods_AeroGearSdkExampleTests.framework */; };
+		500FDA5E2058324C001E66B0 /* JwkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FDA5D2058324C001E66B0 /* JwkManagerTests.swift */; };
+		500FDA6020583F48001E66B0 /* MockJwk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FDA5F20583F48001E66B0 /* MockJwk.swift */; };
 		50F2A040204EC7380071778E /* KeycloakConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2A03F204EC7380071778E /* KeycloakConfigTests.swift */; };
 		8DB04C4CC96666E5C481162F /* Pods_AeroGearSdkExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E51B1D502165078E140C8B /* Pods_AeroGearSdkExample.framework */; };
 		B30606E720569357008FD9A0 /* MockOIDCAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30606E620569357008FD9A0 /* MockOIDCAuthenticator.swift */; };
@@ -77,6 +79,8 @@
 		018FBE6C20123AEE00E763A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		018FBE75201257F300E763A5 /* mobile-services.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mobile-services.json"; sourceTree = "<group>"; };
 		1E4CCBAD4A8932216C3DF790 /* Pods-AeroGearSdkExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample.release.xcconfig"; sourceTree = "<group>"; };
+		500FDA5D2058324C001E66B0 /* JwkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JwkManagerTests.swift; sourceTree = "<group>"; };
+		500FDA5F20583F48001E66B0 /* MockJwk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJwk.swift; sourceTree = "<group>"; };
 		50F2A03F204EC7380071778E /* KeycloakConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConfigTests.swift; sourceTree = "<group>"; };
 		6372266C9F61265244A81632 /* ConfigParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigParserTests.swift; sourceTree = "<group>"; };
 		659F2A7D4D01A03C0143073E /* MetricsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsServiceTests.swift; sourceTree = "<group>"; };
@@ -198,6 +202,14 @@
 			path = AeroGearSdkExampleTests;
 			sourceTree = "<group>";
 		};
+		500FDA5C20583221001E66B0 /* jwk */ = {
+			isa = PBXGroup;
+			children = (
+				500FDA5D2058324C001E66B0 /* JwkManagerTests.swift */,
+			);
+			path = jwk;
+			sourceTree = "<group>";
+		};
 		50F2A03E204EC7140071778E /* config */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +289,7 @@
 		B3AC1A81204815E000BEB12B /* auth */ = {
 			isa = PBXGroup;
 			children = (
+				500FDA5C20583221001E66B0 /* jwk */,
 				50F2A03E204EC7140071778E /* config */,
 				B3AC1A94204ECE7900BEB12B /* credentials */,
 				B3AC1A91204EA7D000BEB12B /* jwt */,
@@ -303,6 +316,7 @@
 				B30606E620569357008FD9A0 /* MockOIDCAuthenticator.swift */,
 				B30606E8205696AC008FD9A0 /* MockOIDAuthorizationFlowSession.swift */,
 				B30606EA20569774008FD9A0 /* MockCredentialManager.swift */,
+				500FDA5F20583F48001E66B0 /* MockJwk.swift */,
 			);
 			path = mocks;
 			sourceTree = "<group>";
@@ -587,6 +601,7 @@
 				B3AC1A93204EA7E200BEB12B /* JwtTests.swift in Sources */,
 				B30606E9205696AC008FD9A0 /* MockOIDAuthorizationFlowSession.swift in Sources */,
 				B3AC1A97204ECE7900BEB12B /* CredentialsManagerTest.swift in Sources */,
+				500FDA6020583F48001E66B0 /* MockJwk.swift in Sources */,
 				B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */,
 				B30606E720569357008FD9A0 /* MockOIDCAuthenticator.swift in Sources */,
 				B30606EB20569774008FD9A0 /* MockCredentialManager.swift in Sources */,
@@ -594,6 +609,7 @@
 				B3AC1A8B2049951900BEB12B /* MobileServiceTest.swift in Sources */,
 				01590FE42059880C0099677E /* DeviceRegistrationTests.swift in Sources */,
 				B3AC1A98204ECE7900BEB12B /* OIDCCredentialsTest.swift in Sources */,
+				500FDA5E2058324C001E66B0 /* JwkManagerTests.swift in Sources */,
 				017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */,
 				B34F3B83204F44DD005970E1 /* Configurations.swift in Sources */,
 				B3AC1A8D2049E11900BEB12B /* UsersTests.swift in Sources */,
@@ -687,6 +703,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -736,6 +753,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
