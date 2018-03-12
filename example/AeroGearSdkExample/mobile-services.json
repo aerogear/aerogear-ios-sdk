@@ -5,14 +5,6 @@
   "clientId": "example_client_id",
   "services": [
     {
-      "id": "fh-sync-server",
-      "name": "fh-sync-server",
-      "type": "fh-sync-server",
-      "url": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6",
-      "config": {
-      }
-    },
-    {
       "id": "keycloak",
       "name": "keycloak",
       "type": "keycloak",
@@ -27,17 +19,10 @@
       }
     },
     {
-      "id": "prometheus",
-      "name": "prometheus",
-      "type": "prometheus",
-      "url": "https://www.mocky.io/v2/5a6b59fb31000088191b8ac6",
-      "config": {}
-    },
-    {
       "id": "metrics",
       "name": "metrics",
       "type": "metrics",
-      "url": "http://www.mocky.io/v2/5a79c6572e000028009a5c4f",
+      "url": "https://www.mocky.io/v2/5aa696133100001335e716e0",
       "config": {}
    }
   ]

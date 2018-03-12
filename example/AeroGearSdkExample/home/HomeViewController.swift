@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     var currentConfig: MobileService?
 
-    var pickerDataSource = ["fh-sync-server", "prometheus", "keycloak", "metrics"]
+    var pickerDataSource = ["keycloak", "metrics"]
 
     @IBAction func buttonClick(sender _: UIButton) {
         if let uri = currentConfig?.url {
