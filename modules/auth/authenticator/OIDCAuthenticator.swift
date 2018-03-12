@@ -76,6 +76,14 @@ public class OIDCAuthenticator: Authenticator {
         onCompleted(nil, error)
     }
     
+    /**
+     Resume the authentication process. This function should be called when user finished login using the browser and redirected back to the app that started the login.
+     
+     - parameters:
+        - url: The redirect url passed backed from the login process
+     - returns:
+        Whether there is an authentication to be resumed or not
+     */
     public func resumeAuth(url: URL) -> Bool {
         guard let flow = self.currentAuthorisationFlow else {
             return false
