@@ -55,7 +55,7 @@ class KeycloakConfigTests: XCTestCase {
     
     func testLogoutURL() {
         let actual = keycloakConfig?.buildLogoutURL(idToken: "testToken")
-        let expected = "https://keycloak-myproject.192.168.64.74.nip.io/auth/realms/myproject/protocol/openid-connect/logout?id_token_hint=testToken&redirect_uri=com.aerogear.mobile.test://calback"
+        let expected = "https://keycloak-myproject.192.168.64.74.nip.io/auth/realms/myproject/protocol/openid-connect/logout?id_token_hint=testToken"
         
         XCTAssertEqual(expected, actual)
     }
