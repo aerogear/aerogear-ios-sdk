@@ -209,7 +209,7 @@ public struct User {
         email = keycloakUserProfile.email
         roles = keycloakUserProfile.getUserRoles(forClient: clientName)
     }
-    
+
     /**
      Check if the user has a client role.
      - parameters:
