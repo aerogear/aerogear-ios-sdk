@@ -16,7 +16,7 @@ class KeycloakConfig {
     private let redirectFragment = "redirect_uri"
 
     private let baseUrlTemplate = "%@/realms/%@/protocol/openid-connect"
-    private let logoutUrlTemplate = "%@/logout?%@=%@&%@=%@"
+    private let logoutUrlTemplate = "%@/logout?%@=%@"
 
     private let authConfig: AuthenticationConfig
 
@@ -77,7 +77,7 @@ class KeycloakConfig {
      - returns: logout URL
      */
     func buildLogoutURL(idToken: String) -> String {
-        return String(format: logoutUrlTemplate, baseUrl, tokenHintFragment, idToken, redirectFragment, authConfig.redirectURL.absoluteString)
+        return String(format: logoutUrlTemplate, baseUrl, tokenHintFragment, idToken)
     }
 
     /**
