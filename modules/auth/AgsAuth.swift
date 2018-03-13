@@ -3,9 +3,9 @@ import Foundation
 
 /**
  AeroGear auth module.
- 
+
  It allows users to perform login/logout actions against an Keycloak service provisioned by the AeroGear mobile service on OpenShift.
- 
+
  ### Example ###
  ````
  // init the auth service instance
@@ -41,7 +41,7 @@ open class AgsAuth {
     private var configured: Bool = false
     /**
      Initialise the auth module
-     
+
      - parameters:
          - mobileConfig: the configuration for the auth service from the service definition file
          - authConfig: Configurations for the auth module
@@ -53,7 +53,7 @@ open class AgsAuth {
 
     /**
      Configure the auth module. It should be called before any other functions call be used. Only need to call this once.
-     
+
      - parameters:
          - authConfig: Configuration options for the auth module
      */
@@ -69,7 +69,7 @@ open class AgsAuth {
 
     /**
      Perform user login action.
-     
+
      - parameters:
          - presentingViewController: the ViewController that initiates the login process
          - onCompleted: callback function that will be invoked when the login is finished
@@ -83,10 +83,10 @@ open class AgsAuth {
 
     /**
      Resume the authentication process. This function should be called when user finished login using the browser and redirected back to the app that started the login.
-     
+
      - parameters:
          - url: The redirect url passed backed from the login process
-     
+
      - returns:
      If the login process can be resumed
      */
@@ -99,7 +99,7 @@ open class AgsAuth {
 
     /**
      Perform the logout action.
-     
+
      - parameters:
          - onCompleted: callback function that will be invoked when the logout process is completed
      */
@@ -116,7 +116,7 @@ open class AgsAuth {
 
     /**
      Get the current logged in user.
-     
+
      - returns:
      The user that is currently logged in
      */
@@ -124,7 +124,7 @@ open class AgsAuth {
         guard configured else {
             throw Errors.serviceNotConfigured
         }
-        guard  let currentCredential = credentialManager.load() else {
+        guard let currentCredential = credentialManager.load() else {
             return nil
         }
         guard let user = User(credential: currentCredential, clientName: keycloakConfig!.clientID) else {

@@ -5,8 +5,8 @@
 
 @testable import AGSAuth
 @testable import AGSCore
-import XCTest
 import AppAuth
+import XCTest
 
 class OIDCAuthenticatorTest: XCTestCase {
     var http = MockHttpRequest()
@@ -53,21 +53,21 @@ class OIDCAuthenticatorTest: XCTestCase {
         })
         XCTAssertTrue(onCompletedCalled)
     }
-    
+
     func testLoginFail() {
         var onCompletedCalled = false
         let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!, fail: true)
-        
+
         authenticator.authenticate(presentingViewController: UIViewController()) {
             user, error in
-            
+
             XCTAssertNil(user)
             XCTAssertNotNil(error)
             onCompletedCalled = true
         }
         XCTAssertTrue(onCompletedCalled)
     }
-    
+
     func testLoginSuccess() {
         var onCompletedCalled = false
         let authenticator = MockOIDCAuthenticator(http: http, keycloakConfig: keycloakConfig!, authConfig: authConfig!, credentialManager: credentialManager!)

@@ -2,17 +2,17 @@ import AGSAuth
 import UIKit
 
 class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+
     @IBOutlet var userInfoView: UITableView!
 
     var currentUser: User?
-    
+
     var navbarItem: UINavigationItem?
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,13 +76,13 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
         }))
         present(alertView, animated: true, completion: nil)
     }
-    
+
     func showServiceNotFoundDialog() {
         let alertView = UIAlertController(title: "Logout Error", message: "Auth Service is not configured. Use AgsAuth.instance.configure", preferredStyle: UIAlertControllerStyle.alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in }))
         present(alertView, animated: true, completion: nil)
     }
-    
+
     func onLogoutComplete(_: Error?) {
         self.removeView()
     }
@@ -102,7 +102,7 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let sectionNum = indexPath.section
         if sectionNum == 0 {
             let userInfoCell = tableView.dequeueReusableCell(withIdentifier: "userInfoCell")!

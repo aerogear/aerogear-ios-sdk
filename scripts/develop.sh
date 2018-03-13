@@ -9,4 +9,4 @@
 set -eo pipefail
 
 swiftlint autocorrect
-swiftformat --indent 4 .
+swiftformat --disable trailingCommas,redundantSelf,unusedArguments --comments ignore --indent 4 . 

@@ -4,11 +4,11 @@
 //
 //
 
-import XCTest
 @testable import AGSCore
+import XCTest
 
 class MobileServiceTest: XCTestCase {
-    
+
     static let example = "example"
     static let exampleService = "exampleService"
     static let exampleType = "exampleType"
@@ -18,7 +18,7 @@ class MobileServiceTest: XCTestCase {
     static let configBool = true
     static let configDouble: Double = 2.1
     static let configAnotherDouble: Double = 2.0
-    
+
     let mobileServiceData = """
     {
         "id": "\(example)",
@@ -34,20 +34,20 @@ class MobileServiceTest: XCTestCase {
         }
     }
     """.data(using: .utf8)!
-    
+
     var mobileServiceToTest: MobileService?
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         mobileServiceToTest = try? JSONDecoder().decode(MobileService.self, from: mobileServiceData)
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testParse() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -62,5 +62,4 @@ class MobileServiceTest: XCTestCase {
         XCTAssertEqual(serviceConfig["double"]!.getDouble()!, MobileServiceTest.configDouble)
         XCTAssertEqual(serviceConfig["double2"]!.getDouble()!, MobileServiceTest.configAnotherDouble)
     }
-    
 }

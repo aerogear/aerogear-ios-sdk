@@ -27,7 +27,7 @@ class Jwt {
         case invalidToken(String)
     }
 
-    static public func decode(_ jwt: String) throws -> JSONWebToken {
+    public static func decode(_ jwt: String) throws -> JSONWebToken {
         let parts = jwt.components(separatedBy: ".")
         if parts.count != 3 {
             throw Errors.invalidToken("wrong segements")

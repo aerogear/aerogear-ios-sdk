@@ -3,11 +3,11 @@ import Foundation
 
 public protocol AgsHttpRequestProtocol {
     func get(_ url: String, params: [String: AnyObject]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
-    
+
     func post(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
-    
+
     func put(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
-    
+
     func delete(_ url: String, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
 }
 
@@ -16,50 +16,50 @@ public protocol AgsHttpRequestProtocol {
  Implementation is designed to work with Json payload
  */
 public class AgsHttpRequest: AgsHttpRequestProtocol {
-    
+
     public func get(_ url: String, params: [String: AnyObject]? = [:], headers: [String: String]? = [:],
                     _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, parameters: params, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
-    
+
     public func post(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
-    
+
     public func put(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, method: .put, parameters: body, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
-    
+
     public func delete(_ url: String, headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
-    
-    private func handleResponse(_ response: DataResponse<Any>, _ handler: @escaping (Any?, Error?) -> Void) -> Void {
+
+    private func handleResponse(_ response: DataResponse<Any>, _ handler: @escaping (Any?, Error?) -> Void) {
         guard case let .failure(error) = response.result else {
             handler(response.result.value, nil)
             return
         }
-        
+
         if let error = error as? AFError {
             switch error {
             case .responseSerializationFailed(let reason):
-                if case .inputDataNilOrZeroLength = reason  {
+                if case .inputDataNilOrZeroLength = reason {
                     // Return success if empty
                     handler(nil, nil)
                     return
                 }
-                handler(nil,error)
+                handler(nil, error)
                 break
             default:
-                handler(nil,error)
+                handler(nil, error)
                 return
             }
         }

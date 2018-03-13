@@ -2,16 +2,16 @@
 // Copyright (c) 2018 AeroGear. All rights reserved.
 //
 
-@testable import AGSCore
 @testable import AGSAuth
+@testable import AGSCore
 import Foundation
 import XCTest
 
 class AuthTests: XCTestCase {
-    
+
     var mobileServiceConfig: MobileService?
     var authService: AgsAuth?
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,11 +28,10 @@ class AuthTests: XCTestCase {
     func testConfigureNotCalled() {
         let authServiceNotConfigured = AgsAuth(mobileServiceConfig!)
         func callback(user: User?, error: Error?) {
-            
         }
         XCTAssertThrowsError(try authServiceNotConfigured.login(presentingViewController: UIViewController(), onCompleted: callback))
         XCTAssertThrowsError(try authServiceNotConfigured.logout(onCompleted: { _ in
-            
+
         }))
         XCTAssertThrowsError(try authServiceNotConfigured.currentUser())
         let url = URL(string: "http://example.com")

@@ -37,15 +37,15 @@ class AuthViewController: UIViewController {
             fatalError("Unexpected error: \(error).")
         }
     }
-    
+
     func showSimpleAlert(title: String, message: String) {
         let alertView = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alertView.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
-            
+
         }))
         present(alertView, animated: true, completion: nil)
     }
-    
+
     func onLoginComplete(user: User?, err: Error?) {
         if let error = err {
             showSimpleAlert(title: "Login Error", message: "Error occurred during login flow \(error)")
