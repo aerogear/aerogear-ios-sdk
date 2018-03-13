@@ -2,9 +2,9 @@
 //  OIDCAuthenticator.swift
 //  AGSAuth
 
-import Foundation
 import AGSCore
 import AppAuth
+import Foundation
 
 public class OIDCAuthenticator: Authenticator {
 
@@ -26,7 +26,7 @@ public class OIDCAuthenticator: Authenticator {
      Perform the logoin operation. It will open a browser to the configured login url.
      If the login is successful, it will save the credential data automatically and invoke the onCompleted function with the logged in user.
      Otherwise it will invoke the onCompleted callback with an error.
-     
+
      - parameters:
      - presentingViewController: The view controller from which to present the SafariViewController
      - onCompleted: a block function that will be invoked when the login is completed.
@@ -53,7 +53,7 @@ public class OIDCAuthenticator: Authenticator {
     }
 
     func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping (OIDCCredentials?, Error?) -> Void) -> OIDAuthorizationFlowSession {
-        return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: {authState, error  in
+        return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: { authState, error in
             if let state = authState {
                 if let err = state.authorizationError {
                     callback(nil, err)
@@ -78,7 +78,7 @@ public class OIDCAuthenticator: Authenticator {
 
     /**
      Resume the authentication process. This function should be called when user finished login using the browser and redirected back to the app that started the login.
-     
+
      - parameters:
         - url: The redirect url passed backed from the login process
      - returns:
@@ -99,7 +99,7 @@ public class OIDCAuthenticator: Authenticator {
      Perform the logout operation. It will send a HTTP request to the server to invalidate the session for the user.
      If the request is successful, it will remove the local credential data automatically and invoke the onCompleted function.
      Otherwise it will invoke the onCompleted callback with an error.
-     
+
      - parameters:
        - currentUser: the user that should be logged out
        - onCompleted: a block function that will be invoked when the logout is completed.

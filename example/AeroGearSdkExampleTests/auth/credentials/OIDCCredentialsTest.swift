@@ -87,7 +87,7 @@ internal class OIDCCredentialsTest: XCTestCase {
     /**
      Create an OIDCCredentials instance backed by an OIDAuthState with the provided parameters for a token response.
      This allows for mocking most of the important values that are used by OIDCCredentials.
- 
+
      - Parameter parameters: The parameters to mock being provided by a token response e.g. access_token, expires_in.
      - Returns: An OIDCCredentials instance backed by a mocked AuthState using the parameters provided.
     */

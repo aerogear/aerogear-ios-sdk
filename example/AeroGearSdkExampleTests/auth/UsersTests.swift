@@ -3,8 +3,8 @@
 //  AeroGearSdkExampleTests
 //
 
-import XCTest
 @testable import AGSAuth
+import XCTest
 
 class KeycloakUserProfileTests: XCTestCase {
     let userProfileJson = """
@@ -26,18 +26,18 @@ class KeycloakUserProfileTests: XCTestCase {
         }
     }
     """.data(using: .utf8)
-    
+
     var userProfileToTest: KeycloakUserProfile?
-    
+
     override func setUp() {
         super.setUp()
         userProfileToTest = try! JSONDecoder().decode(KeycloakUserProfile.self, from: userProfileJson!)
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     func testParsedUserProfile() {
         XCTAssertNotNil(userProfileToTest)
         XCTAssertEqual(userProfileToTest?.email, "username@example.com")
@@ -55,32 +55,31 @@ class KeycloakUserProfileTests: XCTestCase {
 }
 
 class UsersTests: XCTestCase {
-    
+
     let realmRole: UserRole = UserRole(nameSpace: nil, roleName: "realmRole")
     let clientRole: UserRole = UserRole(nameSpace: "client", roleName: "clientRole")
     var userToTest: User?
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let roles: Set<UserRole> = [realmRole, clientRole]
         userToTest = User(userName: "test", email: "test@example.com", firstName: "First", lastName: "Last", accessToken: "", identityToken: "", roles: roles)
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testProperties() {
         XCTAssertEqual(userToTest?.fullName, "First Last")
     }
-    
+
     func testHasRoles() {
         XCTAssertTrue(userToTest!.hasRealmRole("realmRole"))
         XCTAssertTrue(userToTest!.hasClientRole(client: "client", role: "clientRole"))
         XCTAssertFalse(userToTest!.hasRealmRole("wrongRealmRole"))
         XCTAssertFalse(userToTest!.hasClientRole(client: "clientNotExist", role: "clientRole"))
     }
-    
 }

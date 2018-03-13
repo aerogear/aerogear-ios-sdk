@@ -30,11 +30,11 @@ class KeycloakConfig {
 
     /**
      Initialises the keycloak configuration
-     
+
      Tries to get the keycloak service configuration from the mobile services
      configuration. If the keycloak service configuration is nil, an error is logged. Else,
      *rawConfig* variable is set to the keycloak service configuration.
-     
+
      - parameters:
         - mobileService: mobile services configuration
         - authConfig: configuration for the authentication service
@@ -71,7 +71,7 @@ class KeycloakConfig {
 
     /**
      Constructs the logout URL
-     
+
      - parameters:
         - idToken: the identity token
      - returns: logout URL
@@ -107,5 +107,4 @@ class KeycloakConfig {
     var issuer: String {
         return String(format: "%@/realms/%@", hostUrl, realmName)
     }
-
 }

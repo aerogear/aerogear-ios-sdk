@@ -8,7 +8,7 @@ import Foundation
  Represents the user roles. It has 2 types
  - Realm
  - Client
- 
+
  A user role is a realm role it the nameSpace is not set. Otherwise it is a client role.
  */
 struct UserRole: Hashable {
@@ -16,22 +16,21 @@ struct UserRole: Hashable {
     enum Types {
         case REALM, CLIENT
     }
+
     /** namespace of the role. It should be empty or nil for realm roles. Otherwise it should be the client name for a client role */
     let nameSpace: String?
     /** the name of the role **/
     let roleName: String
     /** the type of the role **/
     var roleType: Types {
-        get {
-            if let ns = nameSpace {
-                if (ns.isEmpty) {
-                    return Types.REALM
-                } else {
-                    return Types.CLIENT
-                }
-            } else {
+        if let ns = nameSpace {
+            if ns.isEmpty {
                 return Types.REALM
+            } else {
+                return Types.CLIENT
             }
+        } else {
+            return Types.REALM
         }
     }
 
@@ -79,19 +78,17 @@ struct KeycloakUserProfile: Codable {
 
     /** Get the name of the user. If `preferred_username` is set, it will be used. Otherwise `name` field will be used */
     var username: String? {
-        return preferredName ?? ( name ?? nil)
+        return preferredName ?? (name ?? nil)
     }
 
     /** Return all the realm roles of the user */
     var realmRoles: [String] {
-        get {
-            guard let realmData = realmAccess,
-                let realmRoles = realmData.roles
-            else {
-                return [String]()
-            }
-            return realmRoles
+        guard let realmData = realmAccess,
+            let realmRoles = realmData.roles
+        else {
+            return [String]()
         }
+        return realmRoles
     }
 
     /**
@@ -102,7 +99,7 @@ struct KeycloakUserProfile: Codable {
      An array of the role names
     */
     func getClientRoles(_ clientName: String) -> [String] {
-        guard  let resourceData = resourceAccess,
+        guard let resourceData = resourceAccess,
             let clientData = resourceData[clientName],
             let clientRoles = clientData.roles
         else {
@@ -154,11 +151,13 @@ public struct User {
         let realmRoles = roles.filter({ $0.roleType == UserRole.Types.REALM }).map({ $0.roleName })
         return realmRoles
     }
+
     /** Client roles of the user */
     public var clientRoles: [String] {
         let clientRoles = roles.filter({ $0.roleType == UserRole.Types.CLIENT }).map({ $0.roleName })
         return clientRoles
     }
+
     /** Raw value of the access token. Should be used to perform other requests*/
     public let accessToken: String?
     /** Identity token*/
