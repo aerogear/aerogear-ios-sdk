@@ -32,7 +32,7 @@ pod install
 
 3) Open the `AeroGearSdkExample.xcworkspace` file with Xcode and click the 'Build & Run' button in Xcode. This should start the example application in an emulator.
 
-> Do not use `.xcodeproj`. If you open up a project file instead of a workspace, dependencies will not be correctly configured.
+> **Do not use `.xcodeproj`. If you open up a project file instead of a workspace, dependencies will not be correctly configured.**
 
 === Notes About the Example Project
 
