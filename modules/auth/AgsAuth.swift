@@ -72,6 +72,7 @@ open class AgsAuth {
                 authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig!, authConfig: authConfig, credentialManager: credentialManager)
                 return;
             }
+            AgsCore.logger.warning("Auth SDK configure method called more than once.")
         } else {
             throw Errors.missingConfig
         }
