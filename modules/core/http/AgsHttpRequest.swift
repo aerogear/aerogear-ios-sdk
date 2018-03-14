@@ -1,7 +1,7 @@
 import Alamofire
 import Foundation
 
-public protocol AgsHttpRequestProtocol {
+@objc public protocol AgsHttpRequestProtocol {
     func get(_ url: String, params: [String: AnyObject]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
 
     func post(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
@@ -15,7 +15,7 @@ public protocol AgsHttpRequestProtocol {
  This is a implementation of HttpRequest based on AlamoFire
  Implementation is designed to work with Json payload
  */
-public class AgsHttpRequest: AgsHttpRequestProtocol {
+@objc public class AgsHttpRequest: NSObject, AgsHttpRequestProtocol {
 
     public func get(_ url: String, params: [String: AnyObject]? = [:], headers: [String: String]? = [:],
                     _ handler: @escaping (Any?, Error?) -> Void) {

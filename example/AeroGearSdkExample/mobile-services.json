@@ -24,6 +24,13 @@
       "type": "metrics",
       "url": "https://www.mocky.io/v2/5aa696133100001335e716e0",
       "config": {}
+   },
+   {
+        "id": "push",
+        "name": "push",
+        "type": "push",
+        "url": "https://testing.zeta.feedhenry.com/api/v2/ag-push/",
+        "config": {}
    }
   ]
 }

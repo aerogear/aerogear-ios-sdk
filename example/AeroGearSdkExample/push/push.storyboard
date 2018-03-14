@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Push View Controller-->
+        <scene sceneID="gBY-47-FTA">
+            <objects>
+                <viewController storyboardIdentifier="PushViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6oc-g2-H5J" customClass="PushViewController" customModule="AeroGearSdkExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Shv-x6-lUk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bOj-t9-nND">
+                                <rect key="frame" x="10" y="30" width="394" height="696"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="background-push" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ws2-ZG-rcE">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="610"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2G3-7g-iDW" userLabel="Request Permissions Button">
+                                        <rect key="frame" x="0.0" y="620" width="394" height="33"/>
+                                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Request Permissions">
+                                            <color key="titleColor" red="1" green="0.95531639229999998" blue="0.99100059770000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="permissionsButtonClicked:" destination="6oc-g2-H5J" eventType="touchUpInside" id="HJu-Ck-EYD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEi-1Y-Bw1" userLabel="Enable Push Button">
+                                        <rect key="frame" x="0.0" y="663" width="394" height="33"/>
+                                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.59075342465753422" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Register Device">
+                                            <color key="titleColor" red="1" green="0.95531639229999998" blue="0.99100059770000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="registerButtonClicked:" destination="6oc-g2-H5J" eventType="touchUpInside" id="1Yb-0g-K1I"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2G3-7g-iDW" firstAttribute="top" secondItem="ws2-ZG-rcE" secondAttribute="bottom" constant="10" id="9qX-x8-2g5"/>
+                                    <constraint firstItem="YEi-1Y-Bw1" firstAttribute="top" secondItem="2G3-7g-iDW" secondAttribute="bottom" constant="10" id="M4l-LM-i2F"/>
+                                    <constraint firstItem="YEi-1Y-Bw1" firstAttribute="leading" secondItem="bOj-t9-nND" secondAttribute="leading" id="PRI-u9-0XM"/>
+                                    <constraint firstAttribute="trailing" secondItem="ws2-ZG-rcE" secondAttribute="trailing" id="RAS-EP-xke"/>
+                                    <constraint firstItem="2G3-7g-iDW" firstAttribute="leading" secondItem="bOj-t9-nND" secondAttribute="leading" id="Rbh-hS-0Ro"/>
+                                    <constraint firstItem="YEi-1Y-Bw1" firstAttribute="top" secondItem="2G3-7g-iDW" secondAttribute="bottom" constant="10" id="RvI-3o-WZN"/>
+                                    <constraint firstAttribute="bottom" secondItem="YEi-1Y-Bw1" secondAttribute="bottom" id="YeK-Sb-TbM"/>
+                                    <constraint firstItem="ws2-ZG-rcE" firstAttribute="top" secondItem="bOj-t9-nND" secondAttribute="top" id="hbw-kO-pKs"/>
+                                    <constraint firstItem="2G3-7g-iDW" firstAttribute="top" secondItem="ws2-ZG-rcE" secondAttribute="bottom" constant="10" id="iUe-tP-b09"/>
+                                    <constraint firstItem="ws2-ZG-rcE" firstAttribute="leading" secondItem="bOj-t9-nND" secondAttribute="leading" id="jTi-HS-QAX"/>
+                                    <constraint firstAttribute="trailing" secondItem="2G3-7g-iDW" secondAttribute="trailing" id="pwd-W6-0qI"/>
+                                    <constraint firstAttribute="trailing" secondItem="YEi-1Y-Bw1" secondAttribute="trailing" id="uCP-jf-n2D"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="agv-x7-U6s" firstAttribute="trailing" secondItem="bOj-t9-nND" secondAttribute="trailing" constant="10" id="5Ch-oj-6qj"/>
+                            <constraint firstItem="bOj-t9-nND" firstAttribute="leading" secondItem="agv-x7-U6s" secondAttribute="leading" constant="10" id="D8a-lB-V3C"/>
+                            <constraint firstItem="agv-x7-U6s" firstAttribute="bottom" secondItem="bOj-t9-nND" secondAttribute="bottom" constant="10" id="DHv-zf-OQy"/>
+                            <constraint firstItem="bOj-t9-nND" firstAttribute="top" secondItem="agv-x7-U6s" secondAttribute="top" constant="10" id="lti-1s-UJC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="agv-x7-U6s"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F3w-IS-9Oo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="844.22788605697156"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background-push" width="213" height="320"/>
+    </resources>
+</document>

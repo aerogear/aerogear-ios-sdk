@@ -1,11 +1,7 @@
-//
-//  AppDelegate.swift
-//  AeroGearSdkExample
-//  Copyright © 2018 AeroGear. All rights reserved.
-//
-
+ 
 import AGSAuth
 import AGSCore
+ import AGSPush
 import UIKit
 
 @UIApplicationMain
@@ -15,7 +11,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Register with APNs
+        UIApplication.shared.registerForRemoteNotifications()
         return true
     }
 
@@ -29,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return false
     }
-
+    
+    
     func applicationWillResignActive(_: UIApplication) {
     }
 
@@ -45,4 +44,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_: UIApplication) {
     }
+    
+    
+    // Handle remote notification registration.
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+        AgsCore.logger.info("Registered for notifications with token: \(deviceToken)")
+        let notification:Notification = Notification(name: Notification.Name(rawValue: "success_registered"), object: deviceToken)
+        NotificationCenter.default.post(notification)
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // The token is not currently available.
+        AgsCore.logger.error("Failure to register for notifications: \(error)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // When a message is received, send Notification, would be handled by registered ViewController
+        let notification:Notification = Notification(name: Notification.Name(rawValue: "message_received"), object:nil, userInfo:userInfo)
+        NotificationCenter.default.post(notification)
+        AgsCore.logger.info("Push message recieved: \(userInfo)")
+        
+        // No additioanl data to fetch
+        fetchCompletionHandler(UIBackgroundFetchResult.noData)
+    }
+    
 }

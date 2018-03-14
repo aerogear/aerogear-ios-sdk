@@ -8,6 +8,7 @@ target 'AeroGearSdkExample' do
   # Should contain each individual mobile services
   pod 'AGSCore', :path => '../modules/core'
   pod 'AGSAuth', :path => '../modules/auth'
+  pod 'AGSPush', :path => '../modules/push'
 
   target 'AeroGearSdkExampleTests' do
     inherit! :search_paths

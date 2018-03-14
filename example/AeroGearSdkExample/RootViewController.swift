@@ -6,6 +6,8 @@ class RootViewController: BaseViewController, DrawerMenuDelegate {
     static let MENU_HOME_TITLE = "Home"
     // swiftlint:disable identifier_name
     static let MENU_AUTHENTICATION_TITLE = "Authentication"
+    // swiftlint:disable identifier_name
+    static let MENU_PUSH_TITLE = "Push"
 
     let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
 
@@ -15,6 +17,7 @@ class RootViewController: BaseViewController, DrawerMenuDelegate {
         // Do any additional setup after loading the view.
         addMenuItem(titleOfChildView: RootViewController.MENU_HOME_TITLE, iconName: "ic_home")
         addMenuItem(titleOfChildView: RootViewController.MENU_AUTHENTICATION_TITLE, iconName: "ic_account_circle")
+        addMenuItem(titleOfChildView: RootViewController.MENU_PUSH_TITLE, iconName: "ic_notification")
         showFirstChild()
     }
 
@@ -30,6 +33,8 @@ class RootViewController: BaseViewController, DrawerMenuDelegate {
                 launchHomeView()
             case RootViewController.MENU_AUTHENTICATION_TITLE:
                 launchAuthView()
+            case RootViewController.MENU_PUSH_TITLE:
+                launchPushView()
             default:
                 print("no view to show")
             }
@@ -44,5 +49,10 @@ class RootViewController: BaseViewController, DrawerMenuDelegate {
     func launchAuthView() {
         let authViewController = AuthViewController.loadViewController()
         presentViewController(authViewController)
+    }
+    
+    func launchPushView() {
+        let pushViewController = PushViewController.loadViewController()
+        presentViewController(pushViewController)
     }
 }

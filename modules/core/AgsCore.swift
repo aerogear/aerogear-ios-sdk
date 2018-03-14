@@ -2,7 +2,8 @@ import Foundation
 import XCGLogger
 
 /**
- AeroGear Core interface to be used directly by SDK services
+ AeroGear Core SDK
+ Internal SDK to be used directly by SDK modules
  */
 public class AgsCore {
     public static let instance: AgsCore = AgsCore()
