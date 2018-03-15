@@ -17,7 +17,7 @@ class AuthTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         mobileServiceConfig = getMockKeycloakConfig()
         authService = AgsAuth(mobileServiceConfig!)
-        authService?.configure(authConfig: AuthenticationConfig(redirectURL: "com.aerogear.auth://callback"))
+        try! authService?.configure(authConfig: AuthenticationConfig(redirectURL: "com.aerogear.auth://callback"))
     }
 
     override func tearDown() {
