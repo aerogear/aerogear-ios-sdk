@@ -18,11 +18,11 @@ import UIKit
 public class PushHelper {
     
     /**
-      Called when push message was recieved.
+      Called when push message was received.
       Presents dialog with message
     */
-    public func onPushMessageRecieved(_ userInfo: [AnyHashable : Any], _ fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {
-        AgsCore.logger.info("Push message recieved: \(userInfo)")
+    public func onPushMessageReceived(_ userInfo: [AnyHashable : Any], _ fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {
+        AgsCore.logger.info("Push message received: \(userInfo)")
         // When a message is received, send Notification, would be handled by registered ViewController
         let notification:Notification = Notification(name: Notification.Name(rawValue: "message_received"), object:nil, userInfo:userInfo)
         NotificationCenter.default.post(notification)
@@ -54,9 +54,9 @@ public class PushHelper {
                 clientDevice.osVersion = currentDevice.systemVersion
                 clientDevice.deviceType = currentDevice.model
         }, success: {
-            AgsCore.logger.info("Successfully registered to unified push server")
+            AgsCore.logger.info("Successfully registered to Unified Push Server")
         }, failure: { (error: Error!) in
-            AgsCore.logger.error("Failure to register for notifications on UPS server: \(error)")
+            AgsCore.logger.error("Failure to register for notifications on Unified Push Server: \(error)")
         })
     }
     
