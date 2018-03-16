@@ -6,6 +6,10 @@ import AGSCore
  */
 open class DeviceRegistration: NSObject {
     
+    
+    public static let deviceTokenKey = "AgsPushSDK.deviceToken";
+    public static let apiPath = "rest/registry/device";
+    
     struct DeviceRegistrationError {
         static let PushErrorDomain = "PushErrorDomain"
         static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
@@ -52,7 +56,7 @@ open class DeviceRegistration: NSObject {
         // deviceToken could be nil then retrieved it from local storage (from previous register).
         // This is the use case when you update categories.
         if clientInfoObject.deviceToken == nil {
-            clientInfoObject.deviceToken = UserDefaults.standard.object(forKey: "AgsPush.deviceToken") as? Data
+            clientInfoObject.deviceToken = UserDefaults.standard.object(forKey: DeviceRegistration.deviceTokenKey) as? Data
         }
         guard let serverURLGuard = self.serverURL else {
             failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'serverURL' should be set"]))
@@ -65,7 +69,7 @@ open class DeviceRegistration: NSObject {
         // serialize request
         let postData = clientInfoObject.extractValues()
     
-        let registerUrl = serverURLGuard.appendingPathComponent("rest/registry/device").absoluteString;
+        let registerUrl = serverURLGuard.appendingPathComponent(DeviceRegistration.apiPath).absoluteString;
         self.requestApi.post(registerUrl,body:postData,headers:headers, {(data, error) in
             if error != nil {
                 failure(error as NSError!)
@@ -79,10 +83,7 @@ open class DeviceRegistration: NSObject {
     // Storing data in UserDefaults
     fileprivate func saveClientDeviceInformation(_ clientInfoObject: ClientDeviceInformation, _ serverURLGuard: URL) {
         // locally stored information
-        UserDefaults.standard.set(clientInfoObject.deviceToken, forKey: "AgsPushSDK.deviceToken")
-        UserDefaults.standard.set(clientInfoObject.variantID, forKey: "AgsPushSDK.variantID")
-        UserDefaults.standard.set(clientInfoObject.variantSecret, forKey: "AgsPushSDK.variantSecret")
-        UserDefaults.standard.set(serverURLGuard.absoluteString, forKey: "AgsPushSDK.serverURL")
+        UserDefaults.standard.set(clientInfoObject.deviceToken, forKey: DeviceRegistration.deviceTokenKey)
     }
     
     // Validate client information
