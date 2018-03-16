@@ -49,6 +49,7 @@ public class PushHelper {
                 clientDevice.variantSecret = "d727538d-af49-4d60-b91d-dc37c1c2011a"
                 
                 let currentDevice = UIDevice()
+                clientDevice.alias = currentDevice.name
                 clientDevice.operatingSystem = currentDevice.systemName
                 clientDevice.osVersion = currentDevice.systemVersion
                 clientDevice.deviceType = currentDevice.model
