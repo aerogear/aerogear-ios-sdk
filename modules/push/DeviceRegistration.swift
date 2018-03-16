@@ -60,7 +60,6 @@ open class DeviceRegistration: NSObject {
         }
     
         validateClientInfoObject(clientInfoObject, failure);
-        saveClientDeviceInformation(clientInfoObject, serverURLGuard)
         let headers = buildAuthHeaders(clientInfoObject)
       
         // serialize request
@@ -72,6 +71,7 @@ open class DeviceRegistration: NSObject {
                 failure(error as NSError!)
                 return
             }
+            self.saveClientDeviceInformation(clientInfoObject, serverURLGuard)
             success();
         });
     }

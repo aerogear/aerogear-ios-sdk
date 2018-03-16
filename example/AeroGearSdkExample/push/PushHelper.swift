@@ -22,11 +22,11 @@ public class PushHelper {
       Presents dialog with message
     */
     public func onPushMessageRecieved(_ userInfo: [AnyHashable : Any], _ fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {
+        AgsCore.logger.info("Push message recieved: \(userInfo)")
         // When a message is received, send Notification, would be handled by registered ViewController
         let notification:Notification = Notification(name: Notification.Name(rawValue: "message_received"), object:nil, userInfo:userInfo)
         NotificationCenter.default.post(notification)
-        AgsCore.logger.info("Push message recieved: \(userInfo)")
-        
+
         // No additioanl data to fetch
         fetchCompletionHandler(UIBackgroundFetchResult.noData)
     }
