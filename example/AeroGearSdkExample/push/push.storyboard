@@ -22,48 +22,15 @@
                                 <rect key="frame" x="10" y="30" width="394" height="696"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="background-push" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ws2-ZG-rcE">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="610"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="665.66666666666663"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2G3-7g-iDW" userLabel="Request Permissions Button">
-                                        <rect key="frame" x="0.0" y="620" width="394" height="33"/>
-                                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="yyb-JZ-IiX"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send push notifications from UPS server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zt-o7-saa">
+                                        <rect key="frame" x="0.0" y="675.66666666666663" width="394" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Request Permissions">
-                                            <color key="titleColor" red="1" green="0.95531639229999998" blue="0.99100059770000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="permissionsButtonClicked:" destination="6oc-g2-H5J" eventType="touchUpInside" id="HJu-Ck-EYD"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEi-1Y-Bw1" userLabel="Enable Push Button">
-                                        <rect key="frame" x="0.0" y="663" width="394" height="33"/>
-                                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.59075342465753422" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Register Device">
-                                            <color key="titleColor" red="1" green="0.95531639229999998" blue="0.99100059770000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="registerButtonClicked:" destination="6oc-g2-H5J" eventType="touchUpInside" id="1Yb-0g-K1I"/>
-                                        </connections>
-                                    </button>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="2G3-7g-iDW" firstAttribute="top" secondItem="ws2-ZG-rcE" secondAttribute="bottom" constant="10" id="9qX-x8-2g5"/>
-                                    <constraint firstAttribute="bottom" secondItem="2G3-7g-iDW" secondAttribute="bottom" constant="43" id="DWL-mu-iqQ"/>
-                                    <constraint firstItem="YEi-1Y-Bw1" firstAttribute="leading" secondItem="bOj-t9-nND" secondAttribute="leading" id="PRI-u9-0XM"/>
-                                    <constraint firstAttribute="trailing" secondItem="ws2-ZG-rcE" secondAttribute="trailing" id="RAS-EP-xke"/>
-                                    <constraint firstItem="2G3-7g-iDW" firstAttribute="leading" secondItem="bOj-t9-nND" secondAttribute="leading" id="Rbh-hS-0Ro"/>
-                                    <constraint firstItem="YEi-1Y-Bw1" firstAttribute="top" secondItem="2G3-7g-iDW" secondAttribute="bottom" constant="10" id="RvI-3o-WZN"/>
-                                    <constraint firstAttribute="bottom" secondItem="YEi-1Y-Bw1" secondAttribute="bottom" id="YeK-Sb-TbM"/>
-                                    <constraint firstItem="ws2-ZG-rcE" firstAttribute="top" secondItem="bOj-t9-nND" secondAttribute="top" id="hbw-kO-pKs"/>
-                                    <constraint firstItem="2G3-7g-iDW" firstAttribute="top" secondItem="ws2-ZG-rcE" secondAttribute="bottom" constant="10" id="iUe-tP-b09"/>
-                                    <constraint firstItem="ws2-ZG-rcE" firstAttribute="leading" secondItem="bOj-t9-nND" secondAttribute="leading" id="jTi-HS-QAX"/>
-                                    <constraint firstAttribute="trailing" secondItem="2G3-7g-iDW" secondAttribute="trailing" id="pwd-W6-0qI"/>
-                                    <constraint firstAttribute="trailing" secondItem="YEi-1Y-Bw1" secondAttribute="trailing" id="uCP-jf-n2D"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <constraints>
