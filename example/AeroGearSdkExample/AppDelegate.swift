@@ -1,23 +1,16 @@
-//
-//  AppDelegate.swift
-//  AeroGearSdkExample
-//  Copyright © 2018 AeroGear. All rights reserved.
-//
-
+ 
 import AGSAuth
 import AGSCore
+import AGSPush
 import UIKit
-
+import UserNotifications
+ 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var pushHelper = PushHelper();
 
-    func application(_: UIApplication,
-                     didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
-    }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         do {
@@ -29,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return false
     }
-
+    
+    
     func applicationWillResignActive(_: UIApplication) {
     }
 
@@ -45,4 +39,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_: UIApplication) {
     }
+    
+    func application(_: UIApplication,
+                     didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        pushHelper.setupPush()
+        return true
+    }
+
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+        pushHelper.registerUPS(deviceToken)
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        pushHelper.onRegistrationFailed(error);
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        pushHelper.onPushMessageReceived(userInfo, fetchCompletionHandler)
+    }
+    
+    
+    
 }

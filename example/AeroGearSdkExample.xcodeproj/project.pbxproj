@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0156A54620584CEE0054F056 /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156A54520584CED0054F056 /* PushViewController.swift */; };
+		0156A54820584CF30054F056 /* push.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0156A54720584CF30054F056 /* push.storyboard */; };
+		01590FE42059880C0099677E /* DeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01590FE22059880C0099677E /* DeviceRegistrationTests.swift */; };
+		016D7D81205BEB75001DE653 /* PushHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D7D80205BEB75001DE653 /* PushHelper.swift */; };
 		017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017F3707201F4014001A9009 /* ServiceConfigTests.swift */; };
 		018FBE5620123AEE00E763A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE5520123AEE00E763A5 /* AppDelegate.swift */; };
 		018FBE5820123AEE00E763A5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE5720123AEE00E763A5 /* HomeViewController.swift */; };
@@ -55,6 +59,11 @@
 
 /* Begin PBXFileReference section */
 		0126BB257CFC9A2A188E6B84 /* Pods_AeroGearSdkExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearSdkExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AeroGearSdkExample.entitlements; sourceTree = "<group>"; };
+		0156A54520584CED0054F056 /* PushViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
+		0156A54720584CF30054F056 /* push.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = push.storyboard; sourceTree = "<group>"; };
+		01590FE22059880C0099677E /* DeviceRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationTests.swift; sourceTree = "<group>"; };
+		016D7D80205BEB75001DE653 /* PushHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushHelper.swift; sourceTree = "<group>"; };
 		017F3707201F4014001A9009 /* ServiceConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceConfigTests.swift; sourceTree = "<group>"; };
 		018FBE5220123AEE00E763A5 /* AeroGearSdkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroGearSdkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018FBE5520123AEE00E763A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +127,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0156A5442058301F0054F056 /* push */ = {
+			isa = PBXGroup;
+			children = (
+				0156A54720584CF30054F056 /* push.storyboard */,
+				0156A54520584CED0054F056 /* PushViewController.swift */,
+				016D7D80205BEB75001DE653 /* PushHelper.swift */,
+			);
+			path = push;
+			sourceTree = "<group>";
+		};
+		01590FE12059880C0099677E /* push */ = {
+			isa = PBXGroup;
+			children = (
+				01590FE22059880C0099677E /* DeviceRegistrationTests.swift */,
+			);
+			path = push;
+			sourceTree = "<group>";
+		};
 		018FBE4920123AEE00E763A5 = {
 			isa = PBXGroup;
 			children = (
@@ -141,17 +168,19 @@
 		018FBE5420123AEE00E763A5 /* AeroGearSdkExample */ = {
 			isa = PBXGroup;
 			children = (
-				B352665D20455FAE004BACC7 /* helpers */,
+				0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */,
+				0156A5442058301F0054F056 /* push */,
 				B35266562044AF07004BACC7 /* auth */,
 				B35266532044AD85004BACC7 /* home */,
 				B352664A204437DE004BACC7 /* menu */,
+				B352665D20455FAE004BACC7 /* helpers */,
 				018FBE75201257F300E763A5 /* mobile-services.json */,
+				B352665120443D52004BACC7 /* RootViewController.swift */,
 				018FBE5520123AEE00E763A5 /* AppDelegate.swift */,
 				018FBE5920123AEE00E763A5 /* Main.storyboard */,
 				018FBE5C20123AEE00E763A5 /* Assets.xcassets */,
 				018FBE5E20123AEE00E763A5 /* LaunchScreen.storyboard */,
 				018FBE6120123AEE00E763A5 /* Info.plist */,
-				B352665120443D52004BACC7 /* RootViewController.swift */,
 			);
 			path = AeroGearSdkExample;
 			sourceTree = "<group>";
@@ -161,9 +190,10 @@
 			children = (
 				B3AC1A87204825DE00BEB12B /* mocks */,
 				B3AC1A81204815E000BEB12B /* auth */,
+				01590FE12059880C0099677E /* push */,
+				63722015BF5E5190986AE905 /* core */,
 				018FBE6A20123AEE00E763A5 /* AeroGearSdkExampleTests.swift */,
 				018FBE6C20123AEE00E763A5 /* Info.plist */,
-				63722015BF5E5190986AE905 /* core */,
 			);
 			path = AeroGearSdkExampleTests;
 			sourceTree = "<group>";
@@ -210,9 +240,9 @@
 		B352664A204437DE004BACC7 /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				B352664F204438A2004BACC7 /* menu.storyboard */,
 				B352664B204437DE004BACC7 /* BaseViewController.swift */,
 				B352664C204437DE004BACC7 /* MenuViewController.swift */,
-				B352664F204438A2004BACC7 /* menu.storyboard */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -220,8 +250,8 @@
 		B35266532044AD85004BACC7 /* home */ = {
 			isa = PBXGroup;
 			children = (
-				018FBE5720123AEE00E763A5 /* HomeViewController.swift */,
 				B35266542044AD9C004BACC7 /* home.storyboard */,
+				018FBE5720123AEE00E763A5 /* HomeViewController.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -352,8 +382,14 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -394,6 +430,7 @@
 				018FBE76201257F300E763A5 /* mobile-services.json in Resources */,
 				018FBE5D20123AEE00E763A5 /* Assets.xcassets in Resources */,
 				B3526650204438A2004BACC7 /* menu.storyboard in Resources */,
+				0156A54820584CF30054F056 /* push.storyboard in Resources */,
 				018FBE5B20123AEE00E763A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +455,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AGSAuth/AGSAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/AGSCore/AGSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AGSPush/AGSPush.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
@@ -428,6 +466,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AGSAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AGSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AGSPush.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
@@ -532,7 +571,9 @@
 				018FBE5620123AEE00E763A5 /* AppDelegate.swift in Sources */,
 				B352664D204437DE004BACC7 /* BaseViewController.swift in Sources */,
 				B352665A2044B1C1004BACC7 /* AuthViewController.swift in Sources */,
+				0156A54620584CEE0054F056 /* PushViewController.swift in Sources */,
 				B352664E204437DE004BACC7 /* MenuViewController.swift in Sources */,
+				016D7D81205BEB75001DE653 /* PushHelper.swift in Sources */,
 				B352665F20455FBC004BACC7 /* ViewHelper.swift in Sources */,
 				B352665C2044BBCD004BACC7 /* AuthDetailsViewController.swift in Sources */,
 			);
@@ -551,6 +592,7 @@
 				B30606EB20569774008FD9A0 /* MockCredentialManager.swift in Sources */,
 				01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */,
 				B3AC1A8B2049951900BEB12B /* MobileServiceTest.swift in Sources */,
+				01590FE42059880C0099677E /* DeviceRegistrationTests.swift in Sources */,
 				B3AC1A98204ECE7900BEB12B /* OIDCCredentialsTest.swift in Sources */,
 				017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */,
 				B34F3B83204F44DD005970E1 /* Configurations.swift in Sources */,
@@ -703,10 +745,11 @@
 			baseConfigurationReference = 744F18714F44DAF3A960E045 /* Pods-AeroGearSdkExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AeroGearSdkExample/AeroGearSdkExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHPBX39444;
 				INFOPLIST_FILE = AeroGearSdkExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.aerogear.AeroGearSdkExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -720,10 +763,11 @@
 			baseConfigurationReference = 1E4CCBAD4A8932216C3DF790 /* Pods-AeroGearSdkExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AeroGearSdkExample/AeroGearSdkExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHPBX39444;
 				INFOPLIST_FILE = AeroGearSdkExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.aerogear.AeroGearSdkExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
