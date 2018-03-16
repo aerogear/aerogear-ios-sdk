@@ -18,10 +18,8 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         super.init()        
     }
     
-    // TODO replace with codable
     @objc func extractValues() -> [String: AnyObject] {
         var jsonObject =  [String: AnyObject]()
-        
         jsonObject["deviceToken"] = convertToString(deviceToken) as AnyObject?
         jsonObject["alias"] = alias as AnyObject?
         jsonObject["categories"] = categories as AnyObject?
@@ -32,7 +30,6 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         return jsonObject;
     }
 
-    // TODO this is not needed
     // Helper to transform the Data-based token into a (useful) String:
     fileprivate func convertToString(_ deviceToken: Data?) -> String? {
         if let token = (deviceToken as NSData?)?.description {
@@ -40,7 +37,6 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
                 .replacingOccurrences(of: ">", with: "")
                 .replacingOccurrences(of: " ", with: "")
         }
-        
         return nil
     }
 

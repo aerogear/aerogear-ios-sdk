@@ -81,3 +81,15 @@ public extension Encodable {
         return dictionary
     }
 }
+
+/**
+ Extension allows to debug requests that are made to the Push server
+*/
+extension Request {
+    public func debugLog() -> Self {
+        #if DEBUG
+            debugPrint(self)
+        #endif
+        return self
+    }
+}
