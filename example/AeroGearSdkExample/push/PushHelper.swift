@@ -67,13 +67,18 @@ public class PushHelper {
     */
     public func setupPush() {
         UIApplication.shared.registerForRemoteNotifications()
-        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) {
-            granted, error in
-            if granted {
-                print("Approval granted to send notifications")
-            } else {
-                print(error ?? "")
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) {
+                granted, error in
+                if granted {
+                    print("Approval granted to send notifications")
+                } else {
+                    print(error ?? "")
+                }
             }
+        } else {
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
         }
     }
     
