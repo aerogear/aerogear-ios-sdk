@@ -14,6 +14,8 @@ AeroGear Services consist of set of separate SDKs
 
 - [Core](./docs/core/README.adoc)
 Core library used as base for other SDKs
+- [Metrics](./docs/auth/README.adoc)
+Mobile application Auth SDK (part of the core bundle)
 - [Metrics](./docs/metrics/README.adoc)
 Mobile application Metrics SDK (part of the core bundle)
 
@@ -21,6 +23,6 @@ Mobile application Metrics SDK (part of the core bundle)
 
 See [General Contributing Guide](./CONTRIBUTING.md)
 
-## License 
+## License
 
  See [LICENSE file](./LICENSE)

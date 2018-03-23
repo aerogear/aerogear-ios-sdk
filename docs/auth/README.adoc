@@ -1,12 +1,33 @@
-= AeroGear Services auth documentation
+= AeroGear Services Auth SDK
 
-AeroGear Services auth
+Mobile authentication SDK based on link:http://www.keycloak.org/[Keycloak] using link:http://openid.net/connect/[OpenID Connect].
 
 == Usage
-
-TODO: Add usage
 
 [source,swift]
 ----
    import AeroGearServices/auth
 ----
+
+=== Adding dependency
+
+
+=== Configuration file
+
+
+=== Initializing the SDK
+
+
+=== Retrieving the current user
+
+
+=== Authenticating
+
+
+=== Retrieving a users roles
+
+
+=== Logging out
+
+
+=== Single Sign-on
