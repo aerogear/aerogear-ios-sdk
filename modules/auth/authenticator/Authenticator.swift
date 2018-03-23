@@ -12,8 +12,10 @@ public protocol Authenticator {
      - parameters:
         - presentingViewController: the view controller
         - onCompleted: callback function that is invoked when the login is completed
+        - user: the user returned in the `onCompleted` callback function.  Will be nil if authentication failed
+        - error: the error returned in the `onCompleted` callback function. Will be nil if authentication was successful
      */
-    func authenticate(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void)
+    func authenticate(presentingViewController: UIViewController, onCompleted: @escaping (_ user: User?, _ error: Error?) -> Void)
     
     /**
      Resumes the login operation.
@@ -32,6 +34,7 @@ public protocol Authenticator {
      - parameters:
         - currentUser: the user to be logged out
         - onCompleted: callback function that is invoked when the logout is completed
+        - error: the error returned in the `onCompleted` callback function. Will be nil if login was successful
     */
-    func logout(currentUser: User, onCompleted: @escaping (Error?) -> Void)
+    func logout(currentUser: User, onCompleted: @escaping (_ error: Error?) -> Void)
 }

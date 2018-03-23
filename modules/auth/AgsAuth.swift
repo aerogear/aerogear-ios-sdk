@@ -85,12 +85,13 @@ open class AgsAuth {
      Perform user login action.
      
      - parameters:
-         - presentingViewController: the ViewController that initiates the login process
-         - onCompleted: callback function that will be invoked when the login is finished
-     
+        - presentingViewController: the ViewController that initiates the login process
+        - onCompleted: callback function that will be invoked when the login is finished
+        - user: the user returned in the `onCompleted` callback function.  Will be nil if login failed
+        - error: the error returned in the `onCompleted` callback function. Will be nil if login was successful
      - throws: a `serviceNotConfigured` error if the Auth SDK has not been configured
      */
-    public func login(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) throws {
+    public func login(presentingViewController: UIViewController, onCompleted: @escaping (_ user: User?, _ error: Error?) -> Void) throws {
         guard configured else {
             throw Errors.serviceNotConfigured
         }
@@ -120,12 +121,13 @@ open class AgsAuth {
      Perform the logout action.
      
      - parameters:
-         - onCompleted: callback function that will be invoked when the logout process is completed
+        - onCompleted: callback function that will be invoked when the logout process has completed
+        - error: the `serviceNotConfigured` error returned in the `onCompleted` callback function
      
      - throws: a `serviceNotConfigured` error if the Auth SDK has not been configured or
         a `noLoggedInUserError` if no user is logged in
      */
-    public func logout(onCompleted: @escaping (Error?) -> Void) throws {
+    public func logout(onCompleted: @escaping (_ error: Error?) -> Void) throws {
         guard configured else {
             throw Errors.serviceNotConfigured
         }

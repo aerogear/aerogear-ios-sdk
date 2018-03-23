@@ -33,7 +33,7 @@ struct UserRole: Hashable {
             return Types.REALM
         }
     }
-    
+
     var hashValue: Int {
         if let ns = nameSpace {
             return ns.hashValue ^ roleName.hashValue
