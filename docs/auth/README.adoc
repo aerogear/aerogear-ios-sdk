@@ -4,30 +4,31 @@ Mobile authentication SDK based on link:http://www.keycloak.org/[Keycloak] using
 
 == Usage
 
-[source,swift]
-----
-   import AeroGearServices/auth
-----
+=== Adding Dependency
 
-=== Adding dependency
+Add dependency to your Podfile:
+
+```
+pod 'AGSAuth'
+```
 
 
-=== Configuration file
+=== Configuration File
 
 
 === Initializing the SDK
 
 
-=== Retrieving the current user
+=== Retrieving the Current User
 
 
 === Authenticating
 
 
-=== Retrieving a users roles
+=== Retrieving a Users Roles
 
 
-=== Logging out
+=== Logging Out
 
 
 === Single Sign-on
