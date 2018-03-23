@@ -9,7 +9,7 @@ import Foundation
  - Realm
  - Client
 
- A user role is a realm role it the nameSpace is not set. Otherwise it is a client role.
+ A user role is a realm role if the nameSpace is not set. Otherwise it is a client role.
  */
 struct UserRole: Hashable {
     /** Supported role types for UserRole. */
@@ -19,9 +19,9 @@ struct UserRole: Hashable {
 
     /** namespace of the role. It should be empty or nil for realm roles. Otherwise it should be the client name for a client role */
     let nameSpace: String?
-    /** the name of the role **/
+    /** the name of the role */
     let roleName: String
-    /** the type of the role **/
+    /** the type of the role */
     var roleType: Types {
         if let ns = nameSpace {
             if ns.isEmpty {
@@ -33,7 +33,7 @@ struct UserRole: Hashable {
             return Types.REALM
         }
     }
-
+    
     var hashValue: Int {
         if let ns = nameSpace {
             return ns.hashValue ^ roleName.hashValue
@@ -47,12 +47,10 @@ struct UserRole: Hashable {
     }
 }
 
-/**
- Describe the structure of user profile returned by Keycloak
- */
+/** Describes the structure of user profile returned by Keycloak */
 struct KeycloakUserProfile: Codable {
 
-    /** Internal structure for AccessRoles. The JSON object contains other fields but we only interested in "roles" */
+    /** Internal structure for AccessRoles. The JSON object contains other fields but we are only interested in "roles" */
     struct AccessRoles: Codable {
         let roles: [String]?
     }
@@ -62,10 +60,14 @@ struct KeycloakUserProfile: Codable {
     private let realmAccess: AccessRoles?
     private let resourceAccess: [String: AccessRoles]?
 
+    /** first name of Keycloak user */
     let firstName: String?
+    /** last name of Keycloak user */
     let lastName: String?
+    /** email of Keycloak user */
     let email: String?
 
+    /** The properties used for the `KeycloakUserProfile` representation  */
     enum CodingKeys: String, CodingKey {
         case name
         case preferredName = "preferred_username"
@@ -92,11 +94,12 @@ struct KeycloakUserProfile: Codable {
     }
 
     /**
-     Return the client roles of the user
+     Return the client roles of the user.
+     
      - parameters:
          - clientName: the name of the client
-     - returns:
-     An array of the role names
+     
+     - returns: an array of the role names
     */
     func getClientRoles(_ clientName: String) -> [String] {
         guard let resourceData = resourceAccess,
@@ -109,11 +112,12 @@ struct KeycloakUserProfile: Codable {
     }
 
     /**
-     Return both realm roles and client roles of the user
+     Return both realm roles and client roles of the user.
+     
      - parameters:
          - clientName: the name of the client
-     - returns:
-     A set of UserRole
+     
+     - returns: a set of UserRole
      */
     func getUserRoles(forClient clientName: String) -> Set<UserRole> {
         var userRoles = Set<UserRole>()
@@ -132,9 +136,7 @@ struct KeycloakUserProfile: Codable {
     }
 }
 
-/**
- Represent a user.
- */
+/** Represents a user. */
 public struct User {
     /** Username */
     public let userName: String?
@@ -144,7 +146,7 @@ public struct User {
     public let firstName: String?
     /** Last Name */
     public let lastName: String?
-    /** Realm roles and client roles of the user*/
+    /** Realm roles and client roles of the user */
     var roles: Set<UserRole> = Set<UserRole>()
     /** Realm roles of the user */
     public var realmRoles: [String] {
@@ -158,9 +160,9 @@ public struct User {
         return clientRoles
     }
 
-    /** Raw value of the access token. Should be used to perform other requests*/
+    /** Raw value of the access token. Should be used to perform other requests */
     public let accessToken: String?
-    /** Identity token*/
+    /** Identity token */
     public let identityToken: String?
     /** Full Name built using firstName and lastName. If both are not set or empty, nil will be returned */
     public var fullName: String? {
@@ -186,8 +188,9 @@ public struct User {
 
     /**
      Build the User instance from the credential data and the Keycloak client name.
+     
      - parameters:
-         - credential: the OIDCCredentials
+         - credential: the `OIDCCredentials`
          - clientName: the name of the Keycloak client
      */
     init?(credential: OIDCCredentials, clientName: String) {
@@ -211,11 +214,12 @@ public struct User {
 
     /**
      Check if the user has a client role.
+     
      - parameters:
          - client: name of the client
          - role: name of the role to check
-     - returns:
-     If user has the role
+     
+     - returns: true if user has the client role, otherwise false
      */
     public func hasClientRole(client: String, role: String) -> Bool {
         let roleToFind = UserRole(nameSpace: client, roleName: role)
@@ -223,11 +227,12 @@ public struct User {
     }
 
     /**
-     Check if the user has a realm fole
+     Check if the user has a realm role.
+     
      - parameters:
          - roleName: Name of the role
-     - returns:
-     If user has the role
+     
+     - returns: true if user has the realm role, otherwise false
      */
     public func hasRealmRole(_ roleName: String) -> Bool {
         let roleToFind = UserRole(nameSpace: nil, roleName: roleName)

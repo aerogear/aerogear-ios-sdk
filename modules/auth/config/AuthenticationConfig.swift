@@ -4,11 +4,11 @@
 
 import Foundation
 
-/**
- Configurations for the authentication service
-*/
+/** Configurations for the authentication service */
 public struct AuthenticationConfig {
+    /** redirect url used during the authentication process */
     let redirectURL: URL
+    /** the minimum time between making JWKS requests */
     let minTimeBetweenJwksRequests: UInt
 
     /**

@@ -10,7 +10,9 @@ import Foundation
  This is backed by a standard OIDC token.
  */
 public class OIDCCredentials: NSObject, NSCoding {
+    /** key used to identify the auth state */
     static let authStateEncodingKey = "authState"
+    /** the authentication state */
     let authState: OIDAuthState
 
     /** Access token of the credential. Will be nil if not authorized. */
@@ -38,6 +40,12 @@ public class OIDCCredentials: NSObject, NSCoding {
         return (authState.lastTokenResponse?.accessTokenExpirationDate)! < Date()
     }
 
+    /**
+     Initialises the `openid` credentials.
+     
+     - parameters:
+        - state: the authentication state that monitors authorisation and token requests/responses
+     */
     public init(state: OIDAuthState) {
         authState = state
     }

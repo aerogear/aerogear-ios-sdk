@@ -6,15 +6,30 @@ import AGSCore
 import AppAuth
 import Foundation
 
+/** Represents `openid` authentication actions like logout and login. */
 public class OIDCAuthenticator: Authenticator {
 
+    /** http instance used to make network requests */
     let http: AgsHttpRequestProtocol
+    /** Keycloak configuration */
     let keycloakConfig: KeycloakConfig
+    /** authentication configuration */
     let authConfig: AuthenticationConfig
+    /** interface for persisting, loading and removing user credentials */
     let credentialManager: CredentialManagerProtocol
 
+    /**  represents the `openid` authorisation flow used during login.
+         The flow used is code flow.
+     */
     var currentAuthorisationFlow: OIDAuthorizationFlowSession?
 
+    /**
+     Initialises the `openid` authenticator.
+     
+     - parameters:
+        - http: http instance used to make network requests
+        - keycloakConfig: Keycloak configuration used to perform login and logout against the server defined in the config
+    */
     init(http: AgsHttpRequestProtocol, keycloakConfig: KeycloakConfig, authConfig: AuthenticationConfig, credentialManager: CredentialManagerProtocol) {
         self.http = http
         self.keycloakConfig = keycloakConfig
@@ -28,8 +43,8 @@ public class OIDCAuthenticator: Authenticator {
      Otherwise it will invoke the onCompleted callback with an error.
 
      - parameters:
-     - presentingViewController: The view controller from which to present the SafariViewController
-     - onCompleted: a block function that will be invoked when the login is completed.
+        - presentingViewController: The view controller from which to present the SafariViewController
+        - onCompleted: a block function that will be invoked when the login is completed
      */
     public func authenticate(presentingViewController: UIViewController, onCompleted: @escaping (User?, Error?) -> Void) {
         let oidServiceConfiguration = OIDServiceConfiguration(authorizationEndpoint: self.keycloakConfig.authenticationEndpoint, tokenEndpoint: self.keycloakConfig.tokenEndpoint)
@@ -52,6 +67,17 @@ public class OIDCAuthenticator: Authenticator {
         }
     }
 
+    /**
+     Sends a request to the Keycloak server to perform token exchange.
+     
+     On successfully completing the token exchange the callback is invoked with the `openid` credentials for the user.
+     Otherwise the callback is invoked with the error that occured during token exchange.
+     
+     - parameters:
+        - byPresenting: an `openid` authorisation request
+        - presenting: The view controller from which to present the SafariViewController
+        - callback: a block function that will be invoked when the token exchange is completed
+     */
     func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping (OIDCCredentials?, Error?) -> Void) -> OIDAuthorizationFlowSession {
         return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: { authState, error in
             if let state = authState {
@@ -66,23 +92,41 @@ public class OIDCAuthenticator: Authenticator {
         })
     }
 
+    /**
+     Invoked when a user has been successfully authenticated.
+     
+     This function saves the users credentials and returns a `User` object in the callback.
+     
+     - parameters:
+        - credentials: `openid` credentials of the user that has been authenticated
+        - onCompleted: a block function invoked containing a `User` object
+     */
     func authSuccess(credentials: OIDCCredentials, onCompleted: @escaping (User?, Error?) -> Void) {
         credentialManager.save(credentials: credentials)
         onCompleted(User(credential: credentials, clientName: self.keycloakConfig.clientID), nil)
     }
 
+    /**
+     Invoked when a user authentication fails.
+     
+     This function removes the stored credentials and returns the error that occured during the authentication process
+     
+     - parameters:
+        - error: the error that occured during the authentication process
+        - onCompleted: a block function invoked containing the error
+     */
     func authFailure(error: Error?, onCompleted: @escaping (User?, Error?) -> Void) {
         credentialManager.clear()
         onCompleted(nil, error)
     }
 
     /**
-     Resume the authentication process. This function should be called when user finished login using the browser and redirected back to the app that started the login.
+     Resumes the authentication process. This function should be called when a user has finished logging in via the browser and is redirected back to the app that started the login.
 
      - parameters:
         - url: The redirect url passed backed from the login process
-     - returns:
-        Whether there is an authentication to be resumed or not
+     
+     - returns: true if the authentication can be resumed, false otherwise
      */
     public func resumeAuth(url: URL) -> Bool {
         guard let flow = self.currentAuthorisationFlow else {
