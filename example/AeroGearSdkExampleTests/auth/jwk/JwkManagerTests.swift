@@ -20,23 +20,26 @@ class JwkManagerTests: XCTestCase {
         let serviceConfig = getMockKeycloakConfig()
         authConfig = AuthenticationConfig(redirectURL: "com.aerogear.mobile.test://calback")
         keycloakConfig = KeycloakConfig(serviceConfig, authConfig!)
-        jwksManagerToTest = JwksManager.init(http, authConfig!)
+        jwksManagerToTest = JwksManager(http, authConfig!)
+        
+        // create JWKS
+        let jwks = try? JSONSerialization.data(withJSONObject: getMockJwks(), options: [])
+        let jwksString = String(data: jwks!, encoding: String.Encoding.ascii)
+        
+
+        // persist JWKS & date
+        KeychainWrapper.standard.set(jwksString!, forKey: "myproject_jwks_content")
+        KeychainWrapper.standard.set(Date().description , forKey: "myproject_requested_date")
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        KeychainWrapper.standard.removeObject(forKey: "myproject_jwks_content")
+        KeychainWrapper.standard.removeObject(forKey: "myproject_requested_date")
     }
     
     func testLoadExistingJwks() {
-        // create JWKS
-        let jwks = try? JSONSerialization.data(withJSONObject: getMockJwks(), options: [])
-        let jwksString = String(data: jwks!, encoding: String.Encoding.ascii)
-        
-        // persist JWKS & date
-        KeychainWrapper.standard.set(jwksString!, forKey: "myproject_jwks_content")
-        KeychainWrapper.standard.set(Date().description , forKey: "myproject_requested_date")
-        
         let jwksResult = jwksManagerToTest?.load(keycloakConfig!)
         let jwksKey: [String: String] = jwksResult!["keys"] as! [String : String]
         XCTAssertEqual(jwksKey["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")

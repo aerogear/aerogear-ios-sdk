@@ -86,13 +86,9 @@ class JwksManager {
                 }
                 AgsCore.logger.error("Error fetching JWKS: \(error)")
             }
-            if let response = response as? [String: Any] {
-                if let resData = try? JSONSerialization.data(withJSONObject: response, options: []),
-                    let resString = String(data: resData, encoding: String.Encoding.ascii) {
-                    self.persistJwks(keycloakConfig.realmName, resString)
-                } else {
-                    AgsCore.logger.error("Error persisting JWKS")
-                }
+            else if let response = response as? [String: Any] {
+                let resString = response.description
+                self.persistJwks(keycloakConfig.realmName, resString)
                 if (onCompleted != nil) {
                     return onCompleted!(response, nil)
                 }
@@ -135,7 +131,7 @@ class JwksManager {
         - jwks: the content of the JWKS
     */
     private func persistJwks(_ keycloakRealmName: String, _ jwks: String) {
-        let timeFetched = Date().description
+        let timeFetched = Date.init(timeIntervalSince1970: Date().timeIntervalSince1970).description
         KeychainWrapper.standard.set(jwks, forKey: buildEntryNameForJwksContent(keycloakRealmName))
         KeychainWrapper.standard.set(timeFetched, forKey: buildEntryNameForQuestedDate(keycloakRealmName))
     }
