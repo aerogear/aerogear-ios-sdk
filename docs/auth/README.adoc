@@ -30,7 +30,7 @@ The Auth SDK will use this configuration to communicate with Keycloak.
 === Initializing the SDK
 The Auth SDK can be initialised with configuration options. The redirect URL should match the App's Bundle Identifier.
 
-[source,java]
+[source,swift]
 ----
 let authenticationConfig = AuthenticationConfig(redirectURL: "org.aerogear.mobile.example:/callback")
 try! AgsAuth.instance.configure(authConfig: authenticationConfig)
@@ -40,7 +40,7 @@ try! AgsAuth.instance.configure(authConfig: authenticationConfig)
 The current authenticated user can be retrieved using the `currentUser()` method.
 This function can be be used to check whether to start the authentication flow or not if the user is not authenticated.
 
-[source,java]
+[source,swift]
 ----
 do {
     guard let currentUser = try AgsAuth.instance.currentUser() else {
@@ -67,7 +67,41 @@ do {
 ----
 
 === Authenticating
+[source,swift]
+----
+// start the authentication flow
+try AgsAuth.instance.login(presentingViewController: self, onCompleted: onLoginComplete)
 
+...
+
+// handle the authentication result
+func onLoginComplete(user: User?, err: Error?) {
+    // login failed
+    if let error = err {
+        showSimpleAlert(title: "Login Error", message: "Error occurred during login flow \(error)")
+        return
+    }
+    // login suceeded
+    var currentUser = user
+    ...
+}
+----
+
+In your app's https://developer.apple.com/documentation/uikit/uiapplicationdelegate[AppDelegate], you will need to allow your application to handle the redirect.
+
+[source,swift]
+----
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    do {
+        return try AgsAuth.instance.resumeAuth(url: url as URL)
+    } catch AgsAuth.Errors.serviceNotConfigured {
+        print("AeroGear auth service is not configured")
+    } catch {
+        fatalError("Unexpected error: \(error).")
+    }
+    return false
+}
+----
 
 === Retrieving a Users Roles
 
