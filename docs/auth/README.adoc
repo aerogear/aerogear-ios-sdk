@@ -48,19 +48,19 @@ do {
         return
     }
     // Get the users username
-    var username = currentUser.userName
+    let username = currentUser.userName
     // Get the users first name
-    var firstName = currentUser.firstName
+    let firstName = currentUser.firstName
     // Get the users last name
-    var lastName = currentUser.lastName
+    let lastName = currentUser.lastName
     // Get the users full name
-    var fullName = currentUser.fullName
+    let fullName = currentUser.fullName
     // Get the users email address
-    var emailAddress = currentUser.email
+    let emailAddress = currentUser.email
     // Get the users access token
-    var accessToken = currentUser.accessToken
+    let accessToken = currentUser.accessToken
     // Get the users identity token
-    var identityToken = currentUser.identityToken
+    let identityToken = currentUser.identityToken
 } catch {
     fatalError("Error Retrieving User: \(error).")
 }
@@ -78,11 +78,11 @@ try AgsAuth.instance.login(presentingViewController: self, onCompleted: onLoginC
 func onLoginComplete(user: User?, err: Error?) {
     // login failed
     if let error = err {
-        showSimpleAlert(title: "Login Error", message: "Error occurred during login flow \(error)")
+        // login error
         return
     }
-    // login suceeded
-    var currentUser = user
+    // login succeeded
+    let currentUser = user
     ...
 }
 ----
@@ -104,9 +104,35 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 ----
 
 === Retrieving a Users Roles
+Once a User has been retrieved, the roles of the user can be listed and checked. This can be used to perform client side access control.
 
+Roles are divided into two types. Client roles which belong to the client the user has authenticated against, and Realm roles which belong to the realm the client is in.
+
+The users roles are available on the authenticated user.
+
+[source,swift]
+----
+// client roles
+let clientRoles = currentUser.clientRoles
+// realm roles
+let realmRoles = currentUser.realmRoles
+----
+
+In order to check if a user has a specific role you can invoke the `hasClientRole()` and `hasRealmRole() methods and provide the role name to check for.
+
+[source,swift]
+----
+// check if the user has a given realm role
+let hasAdminRole = currentUser.hasRealmRole("admin")
+if (hasAdminRole)! {
+  // user has the admin role
+}
+
+// check if the user has a given client role
+let hasModeratorRole = currentUser.hasClientRole("my_client", "moderator")
+if (hasModeratorRole)! {
+  // user has the moderator role in my_client
+}
+----
 
 === Logging Out
-
-
-=== Single Sign-on
