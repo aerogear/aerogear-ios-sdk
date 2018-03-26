@@ -37,6 +37,34 @@ try! AgsAuth.instance.configure(authConfig: authenticationConfig)
 ----
 
 === Retrieving the Current User
+The current authenticated user can be retrieved using the `currentUser()` method.
+This function can be be used to check whether to start the authentication flow or not if the user is not authenticated.
+
+[source,java]
+----
+do {
+    guard let currentUser = try AgsAuth.instance.currentUser() else {
+        // user not authenticated, start authentication flow
+        return
+    }
+    // Get the users username
+    var username = currentUser.userName
+    // Get the users first name
+    var firstName = currentUser.firstName
+    // Get the users last name
+    var lastName = currentUser.lastName
+    // Get the users full name
+    var fullName = currentUser.fullName
+    // Get the users email address
+    var emailAddress = currentUser.email
+    // Get the users access token
+    var accessToken = currentUser.accessToken
+    // Get the users identity token
+    var identityToken = currentUser.identityToken
+} catch {
+    fatalError("Error Retrieving User: \(error).")
+}
+----
 
 === Authenticating
 
