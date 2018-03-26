@@ -58,7 +58,7 @@ node('osx') {
         }
     }
     
-    if ( prLabels.contains("integration test") ) {
+    if ( prLabels.contains("test/integration") ) {
       stage ("Integration test") {
         runIntegrationTest()
       }
