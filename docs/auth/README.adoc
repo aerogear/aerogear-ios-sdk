@@ -68,6 +68,8 @@ do {
 ----
 
 === Authenticating
+The authentication flow can be triggered using the `login()` function which provided a callback.
+
 [source,swift]
 ----
 // start the authentication flow
