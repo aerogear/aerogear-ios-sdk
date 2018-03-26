@@ -1,0 +1,143 @@
+---
+# PV configuration commented out (see below)
+apiVersion: v1
+kind: Template
+metadata:
+  name: test
+objects:
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: aerogear-app-metrics
+      service: aerogear-app-metrics
+    name: aerogear-app-metrics
+  spec:
+    ports:
+    - name: 3000-tcp
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: aerogear-app-metrics
+      service: aerogear-app-metrics
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: postgres
+      app: aerogear-app-metrics
+    name: postgres-internal
+  spec:
+    ports:
+    - name: 5432-tcp
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      app: postgres
+      service: aerogear-app-metrics
+
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: aerogear-app-metrics
+      service: aerogear-app-metrics
+    name: aerogear-app-metrics
+  spec:
+    port:
+      targetPort: 3000
+    to:
+      kind: Service
+      name: aerogear-app-metrics
+
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: aerogear-app-metrics
+      service: aerogear-app-metrics
+    name: aerogear-app-metrics
+  spec:
+    replicas: 1
+    selector:
+      app: aerogear-app-metrics
+      service: aerogear-app-metrics
+    template:
+      metadata:
+        labels:
+          app: aerogear-app-metrics
+          service: aerogear-app-metrics
+      spec:
+        containers:
+        - env:
+          - name: PGHOST
+            value: postgres-internal
+          - name: PGUSER
+            value: postgresql
+          - name: PGPASSWORD
+            value: postgres
+          - name: PGDATABASE
+            value: aerogear_mobile_metrics
+          image: docker.io/aerogear/aerogear-app-metrics
+          imagePullPolicy: Always
+          name: aerogear-app-metrics
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: postgres
+      service: aerogear-app-metrics
+    name: postgres
+  spec:
+    replicas: 1
+    selector:
+      app: postgres
+      service: aerogear-app-metrics
+    template:
+      metadata:
+        labels:
+          app: postgres
+          service: aerogear-app-metrics
+      spec:
+        containers:
+        - env:
+          - name: POSTGRESQL_DATABASE
+            value: aerogear_mobile_metrics
+          - name: POSTGRESQL_PASSWORD
+            value: postgres
+          - name: POSTGRESQL_USER
+            value: postgresql
+          image: registry.access.redhat.com/rhscl/postgresql-96-rhel7
+          imagePullPolicy: IfNotPresent
+          name: postgresql
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+#          volumeMounts:
+#          - mountPath: /var/lib/pgsql/data
+#            name: postgres-volume
+#        volumes:
+#        - name: postgres-volume
+#          persistentVolumeClaim:
+#            claimName: postgres-pvc
+#- apiVersion: v1
+#  kind: PersistentVolumeClaim
+#  metadata:
+#    name: postgres-pvc
+#    labels:
+#      app: aerogear-app-metrics
+#      service: aerogear-app-metrics
+#  spec:
+#    accessModes:
+#    - ReadWriteMany
+#    resources:
+#      requests:
+#        storage: 10Gi
