@@ -28,10 +28,15 @@ For an example of Keycloak configuration see the example apps link:../../example
 The Auth SDK will use this configuration to communicate with Keycloak.
 
 === Initializing the SDK
+The Auth SDK can be initialised with configuration options. The redirect URL should match the App's Bundle Identifier.
 
+[source,java]
+----
+let authenticationConfig = AuthenticationConfig(redirectURL: "org.aerogear.mobile.example:/callback")
+try! AgsAuth.instance.configure(authConfig: authenticationConfig)
+----
 
 === Retrieving the Current User
-
 
 === Authenticating
 
