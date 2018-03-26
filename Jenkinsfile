@@ -48,16 +48,6 @@ node('osx') {
     stage("Checkout") {
       checkout scm
     }
-
-    stage('Install cocoapods') {
-        env.SCAN_DEVICE="iPhone 6"
-        env.SCAN_SCHEME="AeroGearSdkExample"
-        sh 'pod setup'
-        dir('example') {
-            sh 'pod install'
-            sh 'fastlane scan'
-        }
-    }
     
     if ( prLabels.contains("test/integration") ) {
       stage ("Integration test") {
