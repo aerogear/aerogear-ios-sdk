@@ -40,12 +40,13 @@ def runIntegrationTest() {
 }
  
 node('osx') {
-    stage("Checkout") {
-      checkout scm
-    }
     stage('Preparation') {                    
         // Clean workspace
         deleteDir()
+    }
+    
+    stage("Checkout") {
+      checkout scm
     }
 
     stage('Install cocoapods') {
