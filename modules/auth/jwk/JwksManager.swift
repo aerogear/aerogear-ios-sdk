@@ -81,9 +81,9 @@ class JwksManager {
         http.get(jwksUrl, params: nil, headers: nil, { (response, error) -> Void in
             if let error = error {
                 if onCompleted != nil {
+                    AgsCore.logger.error("Error fetching JWKS: \(error)")
                     return onCompleted!(nil, error)
                 }
-                AgsCore.logger.error("Error fetching JWKS: \(error)")
             } else if let response = response as? [String: Any] {
                 if let resData = try? JSONSerialization.data(withJSONObject: response, options: []) {
                     let resString = String(data: resData, encoding: .utf8)
@@ -113,7 +113,7 @@ class JwksManager {
             let currentTime: Double = Date().timeIntervalSince1970
             let duration = currentTime - lastRequestDate
             let durationInMinutes = duration / 60
-            if abs(durationInMinutes) < Double(authConfig.minTimeBetweenJwksRequests) {
+            if (durationInMinutes < Double(authConfig.minTimeBetweenJwksRequests)) {
                 return false
             }
         }
