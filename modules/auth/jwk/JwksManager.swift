@@ -7,6 +7,19 @@ import Foundation
 import AGSCore
 import SwiftKeychainWrapper
 
+public struct Jwks: Codable {
+    public let keys: [JwksContent]?
+}
+
+public struct JwksContent: Codable {
+    public let alg: String?
+    public let kty: String?
+    public let use: String?
+    public let n: String?
+    public let e: String?
+    public let kid: String?
+}
+
 /**
   Manages JSON Web Key Set(JWKS)
  */
@@ -87,8 +100,10 @@ class JwksManager {
                 AgsCore.logger.error("Error fetching JWKS: \(error)")
             }
             else if let response = response as? [String: Any] {
-                let resString = response.description
-                self.persistJwks(keycloakConfig.realmName, resString)
+                if let resData = try? JSONSerialization.data(withJSONObject: response, options: []) {
+                    let resString = String(data: resData, encoding: .utf8)
+                    self.persistJwks(keycloakConfig.realmName, resString!)
+                }
                 if (onCompleted != nil) {
                     return onCompleted!(response, nil)
                 }
