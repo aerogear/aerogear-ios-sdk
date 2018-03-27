@@ -128,13 +128,13 @@ In order to check if a user has a specific role you can invoke the `hasClientRol
 ----
 // check if the user has a given realm role
 let hasAdminRole = currentUser.hasRealmRole("admin")
-if (hasAdminRole)! {
+if (hasAdminRole) {
   // user has the admin role
 }
 
 // check if the user has a given client role
-let hasModeratorRole = currentUser.hasClientRole("my_client", "moderator")
-if (hasModeratorRole)! {
+let hasModeratorRole = currentUser.hasClientRole(client: "my_client", role: "moderator")
+if (hasModeratorRole) {
   // user has the moderator role in my_client
 }
 ----
