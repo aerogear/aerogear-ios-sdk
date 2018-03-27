@@ -4,7 +4,6 @@ import Foundation
    Static helper class responsible for parsing mobile configuration
  */
 public final class ConfigParser {
-
     /**
        Helper method for reading json file
      */

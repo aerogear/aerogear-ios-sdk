@@ -1,10 +1,9 @@
- import Foundation
+import Foundation
 
 /**
  * Internal implementation of the ClientDeviceInformation protocol
  */
 class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
-
     var deviceToken: Data?
     var variantID: String?
     var variantSecret: String?
@@ -13,13 +12,13 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
     var operatingSystem: String?
     var osVersion: String?
     var deviceType: String?
- 
+
     override init() {
-        super.init()        
+        super.init()
     }
-    
+
     @objc func extractValues() -> [String: AnyObject] {
-        var jsonObject =  [String: AnyObject]()
+        var jsonObject = [String: AnyObject]()
         jsonObject["deviceToken"] = convertToString(deviceToken) as AnyObject?
         jsonObject["alias"] = alias as AnyObject?
         jsonObject["categories"] = categories as AnyObject?
@@ -27,7 +26,7 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         jsonObject["osVersion"] = osVersion as AnyObject?
         jsonObject["deviceType"] = deviceType as AnyObject?
 
-        return jsonObject;
+        return jsonObject
     }
 
     // Helper to transform the Data-based token into a (useful) String:
@@ -39,5 +38,4 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         }
         return nil
     }
-
 }

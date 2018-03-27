@@ -1,7 +1,6 @@
 import UIKit
 
 class RootViewController: BaseViewController, DrawerMenuDelegate {
-
     // swiftlint:disable identifier_name
     static let MENU_HOME_TITLE = "Home"
     // swiftlint:disable identifier_name
@@ -50,7 +49,7 @@ class RootViewController: BaseViewController, DrawerMenuDelegate {
         let authViewController = AuthViewController.loadViewController()
         presentViewController(authViewController)
     }
-    
+
     func launchPushView() {
         let pushViewController = PushViewController.loadViewController()
         presentViewController(pushViewController)

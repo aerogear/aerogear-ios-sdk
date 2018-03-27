@@ -8,7 +8,6 @@ import Foundation
 import XCTest
 
 class AuthTests: XCTestCase {
-
     var mobileServiceConfig: MobileService?
     var authService: AgsAuth?
 

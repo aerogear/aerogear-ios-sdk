@@ -7,7 +7,6 @@ struct MetricsConfigData {
  Wrapper used to manage metrics service configuration
  */
 class MetricsConfig {
-
     private let sdkId = "metrics"
     public var config: MobileService?
 

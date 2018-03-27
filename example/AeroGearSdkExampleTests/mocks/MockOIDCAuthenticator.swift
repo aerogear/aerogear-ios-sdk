@@ -12,7 +12,6 @@ import AppAuth
 import Foundation
 
 class MockOIDCAuthenticator: OIDCAuthenticator {
-
     let fail: Bool
 
     init(http: AgsHttpRequestProtocol, keycloakConfig: KeycloakConfig, authConfig: AuthenticationConfig, credentialManager: CredentialManagerProtocol, fail: Bool = false) {

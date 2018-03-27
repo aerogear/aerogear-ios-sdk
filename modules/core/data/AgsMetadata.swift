@@ -4,7 +4,6 @@ import Foundation
    Contains metadata for SDK
  */
 public struct AgsMetaData {
-
     /** Version of Core SDK */
     // NOTE: This version is being replacted by automation script
     public let sdkVersion = "DEVELOPMENT"

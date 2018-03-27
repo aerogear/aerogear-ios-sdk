@@ -2,7 +2,6 @@ import AGSAuth
 import UIKit
 
 class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     @IBOutlet var userInfoView: UITableView!
 
     var currentUser: User?
@@ -102,7 +101,6 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let sectionNum = indexPath.section
         if sectionNum == 0 {
             let userInfoCell = tableView.dequeueReusableCell(withIdentifier: "userInfoCell")!

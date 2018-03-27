@@ -5,7 +5,6 @@ protocol DrawerMenuDelegate {
 }
 
 class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     /** Menu options */
     @IBOutlet var tblMenuOptions: UITableView!
 

@@ -3,8 +3,8 @@
 //  AeroGearSdkExampleTests
 //
 
-import Foundation
 import AGSAuth
+import Foundation
 
 func getMockJwks() -> [String: Any] {
     let jwks = [
@@ -16,7 +16,6 @@ func getMockJwks() -> [String: Any] {
             "e": "AQAB",
             "kid": "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM"
         ]
-    
     ]
     return jwks
 }
