@@ -9,6 +9,8 @@ if ( prLabels.contains("test/integration") ) {
     def metricsApiHost
     def repositoryName = "ios-sdk"
     def projectName = "test-${repositoryName}-${currentBuild.number}-${currentBuild.startTimeInMillis}"
+    def linkToApiMetricsTemplate = "https://raw.githubusercontent.com/aerogear/aerogear-app-metrics/master/openshift-template.yml"
+    def apiMetricsTemplateFilename = "api-metrics-template.yml"
 
     stage('Trust') {
       enforceTrustedApproval('aerogear')
@@ -18,17 +20,16 @@ if ( prLabels.contains("test/integration") ) {
         node ('jenkins-openshift') {
             stage ('Deploy app metrics service') {
 
-                checkout scm
+                sh "curl ${linkToApiMetricsTemplate} > ${apiMetricsTemplateFilename}"
 
                 openshift.newProject(projectName)
                 openshift.withProject(projectName) {
-                    def metricsApiTemplatePath = "./ci/aerogear-app-metrics.yml"
                     def routeSelector
 
-                    openshift.newApp( "--file", "${metricsApiTemplatePath}" )
+                    openshift.newApp( "--file", "${apiMetricsTemplateFilename}" )
                     // Get URL of deployed metricsApi
                     routeSelector = openshift.selector("route", "aerogear-app-metrics")
-                    metricsApiHost = "http://" + routeSelector.object().spec.host
+                    metricsApiHost = "https://" + routeSelector.object().spec.host
                 }
             }
 
