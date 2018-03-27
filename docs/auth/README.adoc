@@ -142,7 +142,7 @@ let clientRoles = currentUser.clientRoles
 let realmRoles = currentUser.realmRoles
 ----
 
-In order to check if a user has a specific role, you can invoke the `hasClientRole()` method or a `hasRealmRole() methods and provide the role name to check for.
+In order to check if a user has a specific role, you can invoke the `hasClientRole()` method or the `hasRealmRole()` method and provide the role name to check for.
 
 [source,swift]
 ----
