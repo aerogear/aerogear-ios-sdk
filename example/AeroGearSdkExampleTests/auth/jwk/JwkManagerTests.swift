@@ -29,7 +29,7 @@ class JwkManagerTests: XCTestCase {
 
         // persist JWKS & date
         KeychainWrapper.standard.set(jwksString!, forKey: "myproject_jwks_content")
-        KeychainWrapper.standard.set(Date().description , forKey: "myproject_requested_date")
+        KeychainWrapper.standard.set(Date().timeIntervalSince1970, forKey: "myproject_requested_date")
     }
     
     override func tearDown() {
@@ -52,7 +52,7 @@ class JwkManagerTests: XCTestCase {
     
     func testFetchJwksIfNeededShouldRequest() {
         let day: TimeInterval = 60.0 * 60.0 * 24
-        let yesterday = Date().addingTimeInterval(-day).description
+        let yesterday = Date().addingTimeInterval(-day).timeIntervalSince1970
         KeychainWrapper.standard.set(yesterday, forKey: "myproject_requested_date")
         
         let needsFetch = jwksManagerToTest?.fetchJwksIfNeeded(keycloakConfig!, false)

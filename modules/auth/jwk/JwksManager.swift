@@ -109,13 +109,11 @@ class JwksManager {
         let namespace = keycloakConfig.realmName
         let requestedDateEntryName = buildEntryNameForQuestedDate(namespace)
 
-        if let lastRequestDateString = KeychainWrapper.standard.string(forKey: requestedDateEntryName) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
-            let lastRequestDate = dateFormatter.date(from: lastRequestDateString)
+        if let lastRequestDate = KeychainWrapper.standard.double(forKey: requestedDateEntryName) {
 
-            let duration = lastRequestDate?.timeIntervalSinceNow
-            let durationInMinutes = duration!/60
+            let currentTime : Double = Date().timeIntervalSince1970
+            let duration = currentTime - lastRequestDate
+            let durationInMinutes = duration/60
             if (abs(durationInMinutes) < Double(authConfig.minTimeBetweenJwksRequests)) {
                 return false
             }
@@ -131,7 +129,7 @@ class JwksManager {
         - jwks: the content of the JWKS
     */
     private func persistJwks(_ keycloakRealmName: String, _ jwks: String) {
-        let timeFetched = Date.init(timeIntervalSince1970: Date().timeIntervalSince1970).description
+        let timeFetched = Date().timeIntervalSince1970
         KeychainWrapper.standard.set(jwks, forKey: buildEntryNameForJwksContent(keycloakRealmName))
         KeychainWrapper.standard.set(timeFetched, forKey: buildEntryNameForQuestedDate(keycloakRealmName))
     }
