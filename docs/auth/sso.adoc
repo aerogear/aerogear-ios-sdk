@@ -1,6 +1,6 @@
 == Single Sign-On (SSO)
 
-The Auth SDK uses OpenID Connect http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth[Auhtorization Code Flow] to achieve SSO via a mobile device browser. 
+The Auth SDK uses OpenID Connect http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth[Authorization Code Flow] to achieve SSO via a mobile device browser. 
 
 '''
 
