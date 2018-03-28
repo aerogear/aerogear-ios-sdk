@@ -80,8 +80,8 @@ class JwksManager {
         let jwksUrl = keycloakConfig.jwksUrl
         http.get(jwksUrl, params: nil, headers: nil, { (response, error) -> Void in
             if let error = error {
+                AgsCore.logger.error("Error fetching JWKS: \(error)")
                 if onCompleted != nil {
-                    AgsCore.logger.error("Error fetching JWKS: \(error)")
                     return onCompleted!(nil, error)
                 }
             } else if let response = response as? [String: Any] {
