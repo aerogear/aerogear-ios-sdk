@@ -2,7 +2,6 @@ import AGSAuth
 import UIKit
 
 class AuthViewController: UIViewController {
-
     static let authStoryBoard = UIStoryboard(name: "auth", bundle: nil)
 
     var authVC: UIViewController?

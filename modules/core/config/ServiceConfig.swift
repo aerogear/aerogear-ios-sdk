@@ -14,7 +14,6 @@ import Foundation
  `config['myServiceType']`
  */
 public class ServiceConfig {
-
     let configFileName: String
     var config: MobileConfig?
 

@@ -11,7 +11,6 @@ import Foundation
 import XCTest
 
 class KeycloakConfigTests: XCTestCase {
-
     var configService: MobileService?
     var keycloakConfig: KeycloakConfig?
     var authConfig: AuthenticationConfig?

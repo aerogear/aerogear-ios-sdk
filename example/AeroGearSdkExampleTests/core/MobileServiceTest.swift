@@ -8,7 +8,6 @@
 import XCTest
 
 class MobileServiceTest: XCTestCase {
-
     static let example = "example"
     static let exampleService = "exampleService"
     static let exampleType = "exampleType"

@@ -3,9 +3,9 @@ import Foundation
 
 /**
  AeroGear Services Auth SDK
- 
- Allows users to perform login/logout actions against a Keycloak service provisioned by the AeroGear mobile service on OpenShift.
- 
+
+ Allows users to perform login/logout actions against an Keycloak service provisioned by the AeroGear mobile service on OpenShift.
+
  ### Example ###
   *initialise the authentication configuration service and configure the Auth SDK*
  ````
@@ -38,17 +38,17 @@ open class AgsAuth {
 
     private let credentialManager: CredentialsManager
     private var authenticator: Authenticator?
-    
+
     private let serviceConfig: MobileService?
     private var keycloakConfig: KeycloakConfig?
 
     private var configured: Bool {
-        return keycloakConfig != nil;
-    };
-    
+        return keycloakConfig != nil
+    }
+
     /**
      Initialise the auth SDK
-     
+
      - parameters:
          - mobileConfig: the configuration for the auth service from the service definition file
      */
@@ -70,10 +70,10 @@ open class AgsAuth {
      */
     public func configure(authConfig: AuthenticationConfig) throws {
         if let config = serviceConfig {
-            guard configured else{
+            guard configured else {
                 keycloakConfig = KeycloakConfig(config, authConfig)
                 authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig!, authConfig: authConfig, credentialManager: credentialManager)
-                return;
+                return
             }
             AgsCore.logger.warning("Auth SDK configure method called more than once.")
         } else {
@@ -83,7 +83,7 @@ open class AgsAuth {
 
     /**
      Perform user login action.
-     
+
      - parameters:
         - presentingViewController: the ViewController that initiates the login process
         - onCompleted: callback function that will be invoked when the login is finished
@@ -119,7 +119,7 @@ open class AgsAuth {
 
     /**
      Perform the logout action.
-     
+
      - parameters:
         - onCompleted: callback function that will be invoked when the logout process has completed
         - error: the `serviceNotConfigured` error returned in the `onCompleted` callback function
@@ -149,7 +149,7 @@ open class AgsAuth {
         guard configured else {
             throw Errors.serviceNotConfigured
         }
-        guard  let currentCredential = credentialManager.load() else {
+        guard let currentCredential = credentialManager.load() else {
             return nil
         }
         guard let user = User(credential: currentCredential, clientName: keycloakConfig!.clientID) else {

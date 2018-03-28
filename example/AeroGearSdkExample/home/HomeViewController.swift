@@ -7,7 +7,6 @@ import AGSCore
 import UIKit
 
 class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
     static let homeStoryBoard = UIStoryboard(name: "home", bundle: nil)
 
     @IBOutlet var pickerView: UIPickerView!
@@ -59,7 +58,6 @@ class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
 
     func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
-
         AgsCore.logger.info("Loading configuration")
         currentConfig = AgsCore.instance.getConfiguration(pickerDataSource[row])
         let jsonEncoder = JSONEncoder()

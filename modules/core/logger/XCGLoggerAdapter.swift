@@ -7,7 +7,6 @@ import XCGLogger
  Class implements AgsLoggable for https://github.com/DaveWoodCom/XCGLogger
  */
 open class XCGLoggerAdapter: AgsLoggable {
-
     let defaultLoggerInstance: XCGLogger
 
     init(_ instance: XCGLogger) {

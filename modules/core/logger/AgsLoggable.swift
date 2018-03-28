@@ -7,7 +7,6 @@ import Foundation
  Class can be also used to disable SDK logging
  */
 open class AgsLoggable {
-
     /**
      Log something at the verbose log level.
 

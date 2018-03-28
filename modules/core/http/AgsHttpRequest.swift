@@ -16,7 +16,6 @@ import Foundation
  Implementation is designed to work with Json payload
  */
 @objc public class AgsHttpRequest: NSObject, AgsHttpRequestProtocol {
-
     public func get(_ url: String, params: [String: AnyObject]? = [:], headers: [String: String]? = [:],
                     _ handler: @escaping (Any?, Error?) -> Void) {
         Alamofire.request(url, parameters: params, headers: headers).responseJSON { (responseObject) -> Void in
@@ -50,7 +49,7 @@ import Foundation
 
         if let error = error as? AFError {
             switch error {
-            case .responseSerializationFailed(let reason):
+            case let .responseSerializationFailed(reason):
                 if case .inputDataNilOrZeroLength = reason {
                     // Return success if empty
                     handler(nil, nil)

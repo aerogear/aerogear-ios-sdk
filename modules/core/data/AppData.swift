@@ -1,7 +1,6 @@
 import Foundation
 
 public class AppData {
-
     private let defaults = UserDefaults.standard
 
     public var metadata: AgsMetaData!

@@ -55,7 +55,6 @@ class KeycloakUserProfileTests: XCTestCase {
 }
 
 class UsersTests: XCTestCase {
-
     let realmRole: UserRole = UserRole(nameSpace: nil, roleName: "realmRole")
     let clientRole: UserRole = UserRole(nameSpace: "client", roleName: "clientRole")
     var userToTest: User?
