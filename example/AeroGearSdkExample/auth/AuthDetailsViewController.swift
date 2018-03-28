@@ -57,6 +57,7 @@ class AuthDetailsViewController: UIViewController, UITableViewDataSource, UITabl
     func displayUserDetails(from: UIViewController, user: User) {
         currentUser = user
         ViewHelper.showChildViewController(parentViewController: from, childViewController: self)
+        userInfoView.reloadData()
     }
 
     @IBAction func logoutTapped(_: UIBarButtonItem) {
