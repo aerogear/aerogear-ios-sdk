@@ -4,9 +4,7 @@
 import AGSCore
 import Foundation
 
-/**
- All the configurations related to Keycloak
- */
+/** All the configurations related to Keycloak */
 class KeycloakConfig {
     private let serverUrlName = "auth-server-url"
     private let realmIdName = "realm"
@@ -26,6 +24,7 @@ class KeycloakConfig {
     private var baseUrl: String = ""
     private var logoutUrl: String = ""
 
+    /** the mobile service configuration */
     public var rawConfig: MobileService?
 
     /**
@@ -33,7 +32,7 @@ class KeycloakConfig {
 
      Tries to get the keycloak service configuration from the mobile services
      configuration. If the keycloak service configuration is nil, an error is logged. Else,
-     *rawConfig* variable is set to the keycloak service configuration.
+     `rawConfig` variable is set to the keycloak service configuration.
 
      - parameters:
         - mobileService: mobile services configuration
@@ -48,29 +47,23 @@ class KeycloakConfig {
         baseUrl = String(format: baseUrlTemplate, serverUrl, realmId)
     }
 
-    /**
-     Get the URL for the Keycloak authentication endpoint
-     */
+    /** The URL for the Keycloak authentication endpoint. */
     var authenticationEndpoint: URL {
         return URL(string: "\(baseUrl)/auth")!
     }
 
-    /**
-     Get the URL for the token exchange endpoint
-     */
+    /** The URL for the token exchange endpoint */
     var tokenEndpoint: URL {
         return URL(string: "\(baseUrl)/token")!
     }
 
-    /**
-     Get the client id string
-     */
+    /** The client id string */
     var clientID: String {
         return clientId
     }
 
     /**
-     Constructs the logout URL
+     Constructs the logout URL.
 
      - parameters:
         - idToken: the identity token
@@ -80,30 +73,22 @@ class KeycloakConfig {
         return String(format: logoutUrlTemplate, baseUrl, tokenHintFragment, idToken)
     }
 
-    /**
-     Get the URL string of the Keycloak service
-     */
+    /** The URL string of the Keycloak service */
     var hostUrl: String {
         return serverUrl
     }
 
-    /**
-     Get the realm name of the Keycloak service
-     */
+    /** The realm name of the Keycloak service */
     var realmName: String {
         return realmId
     }
 
-    /**
-     Get the URL where JWKs can be retrieved
-     */
+    /** The URL where JWKs can be retrieved */
     var jwksUrl: String {
         return "\(baseUrl)/certs"
     }
 
-    /**
-     Get the JWK Issuer
-     */
+    /** The JWK Issuer */
     var issuer: String {
         return String(format: "%@/realms/%@", hostUrl, realmName)
     }
