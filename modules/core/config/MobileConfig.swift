@@ -5,7 +5,7 @@ import Foundation
  */
 public struct MobileConfig: Codable {
     // Version of configuration
-    public let version: String?
+    public let version: Int?
     // Name of the mobile client used to generate this config
     public let clientId: String?
     // Name of the server used to generate configuration
