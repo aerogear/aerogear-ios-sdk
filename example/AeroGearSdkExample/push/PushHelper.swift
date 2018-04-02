@@ -35,12 +35,8 @@ public class PushHelper {
     */
     public func registerUPS(_ deviceToken: Data) {
         AgsCore.logger.info("Registered for notifications with token")
-        guard let registration = AgsPush.instance.createDeviceRegistration() else {
-            AgsCore.logger.error("Unified Push server configuration is missing. Please review mobile-config.json")
-            return
-        }
-        // attempt to register
-        registration.register(
+
+        AgsPush.instance.register(
             clientInfo: { (clientDevice: ClientDeviceInformation!) in
                 // setup configuration
                 clientDevice.deviceToken = deviceToken

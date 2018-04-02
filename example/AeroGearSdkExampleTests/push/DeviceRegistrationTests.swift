@@ -2,7 +2,7 @@ import AGSPush
 import UIKit
 import XCTest
 
-class DeviceRegistrationTests: XCTestCase {
+class AgsPushTests: XCTestCase {
     override func setUp() {
         super.setUp()
     }
@@ -16,11 +16,9 @@ class DeviceRegistrationTests: XCTestCase {
         // async test expectation
         let registrationExpectation = expectation(description: "UPS registration")
 
-        // setup registration
-        let registration = DeviceRegistration(URL(string: "http://server.com")!, request)
-
         // attemp to register
-        registration.register(clientInfo: { (config: ClientDeviceInformation!) in
+        AgsPush.instance.register(
+                clientInfo: { (config: ClientDeviceInformation!) in
 
             // setup configuration
             config.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
@@ -55,11 +53,8 @@ class DeviceRegistrationTests: XCTestCase {
         // async test expectation
         let registrationExpectation = expectation(description: "UPS registration")
 
-        // setup registration
-        let registration = DeviceRegistration(URL(string: "http://server.com")!, request)
-
         // attemp to register
-        registration.register(clientInfo: { (config: ClientDeviceInformation!) in
+        AgsPush.instance.register(clientInfo: { (config: ClientDeviceInformation!) in
 
             // setup configuration
             config.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
