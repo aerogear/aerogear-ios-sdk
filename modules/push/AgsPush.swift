@@ -49,8 +49,8 @@ public class AgsPush {
     public func register(_ deviceToken: Data,
                   _ config: UnifiedPushConfig,
                   _ credentials: UnifiedPushCredentials,
-                  success: (() -> Void)!,
-                  failure: ((NSError) -> Void)!) {
+                  success: @escaping (() -> Void),
+                  failure: @escaping ((NSError) -> Void)) {
 
         let currentDevice = UIDevice()
 
