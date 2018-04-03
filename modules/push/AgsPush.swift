@@ -20,7 +20,7 @@ public class AgsPush {
         static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
 
-    let serverURL: URL!
+    let serverURL: URL
     let requestApi: AgsHttpRequestProtocol
 
     /**
@@ -38,81 +38,65 @@ public class AgsPush {
     Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
     Registration information can be provided within clientInfo block
 
-     - parameter clientInfo: A block object which passes in an implementation of the ClientDeviceInformation protocol that holds configuration metadata that would be posted to the server during the registration process.
+     - parameter config: Metadata that would be posted to the server during the registration process.
+
+     - parameter credentials: Credentials used to register the device
 
      - parameter success: A block object to be executed when the registration operation finishes successfully. This block has no return value.
 
      - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.This block has no return value and takes one argument: The `NSError` object describing the error that occurred during the registration process.
     */
-    @objc open func register(clientInfo: ((ClientDeviceInformation) -> Void)!,
-                             success: (() -> Void)!, failure: ((NSError) -> Void)!) {
-        // can't proceed with no configuration block set
-        guard let clientInfoConfigurationBlock = clientInfo else {
-            failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "configuration block not set"]))
-            return
-        }
+    public func register(_ deviceToken: Data,
+                  _ config: UnifiedPushConfig,
+                  _ credentials: UnifiedPushCredentials,
+                  success: (() -> Void)!,
+                  failure: ((NSError) -> Void)!) {
 
-        let clientInfoObject = ClientDeviceInformationImpl()
-        clientInfoConfigurationBlock(clientInfoObject)
+        let currentDevice = UIDevice()
 
-        // deviceToken could be nil then retrieved it from local storage (from previous register).
-        // This is the use case when you update categories.
-        if clientInfoObject.deviceToken == nil {
-            clientInfoObject.deviceToken = UserDefaults.standard.object(forKey: AgsPush.deviceTokenKey) as? Data
-        }
-        guard let serverURLGuard = self.serverURL else {
-            failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'serverURL' should be set"]))
-            return
-        }
+        let headers = buildAuthHeaders(credentials)
 
-        validateClientInfoObject(clientInfoObject, failure)
-        let headers = buildAuthHeaders(clientInfoObject)
+        let postData = [
+            "deviceToken": convertToString(deviceToken) as Any,
+            "deviceType": currentDevice.model,
+            "operatingSystem": currentDevice.systemName,
+            "osVersion": currentDevice.systemVersion,
+            "alias": config.alias ?? "",
+            "categories": config.categories ?? ""
+        ] as [String: Any]
 
-        // serialize request
-        let postData = clientInfoObject.extractValues()
-
-        let registerUrl = serverURLGuard.appendingPathComponent(AgsPush.apiPath).absoluteString
+        let registerUrl = self.serverURL.appendingPathComponent(AgsPush.apiPath).absoluteString
         self.requestApi.post(registerUrl, body: postData, headers: headers, { data, error in
             if error != nil {
                 failure(error as NSError!)
                 return
             }
-            self.saveClientDeviceInformation(clientInfoObject, serverURLGuard)
+            self.saveClientDeviceInformation(deviceToken, self.serverURL)
             success()
         })
     }
 
     // Storing data in UserDefaults
-    fileprivate func saveClientDeviceInformation(_ clientInfoObject: ClientDeviceInformation, _ serverURLGuard: URL) {
+    fileprivate func saveClientDeviceInformation(_ token: Data, _ serverURLGuard: URL) {
         // locally stored information
-        UserDefaults.standard.set(clientInfoObject.deviceToken, forKey: AgsPush.deviceTokenKey)
-    }
-
-    // Validate client information
-    fileprivate func validateClientInfoObject(_ clientInfoObject: ClientDeviceInformation, _ failure: ((NSError) -> Void)) {
-        // Fail if not all config mandatory items are present
-        if clientInfoObject.deviceToken == nil {
-            failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'token' should be set"]))
-            return
-        }
-
-        if clientInfoObject.variantID == nil {
-            failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'variantID' should be set"]))
-            return
-        }
-
-        if clientInfoObject.variantSecret == nil {
-            failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'variantSecret' should be set"]))
-            return
-        }
+        UserDefaults.standard.set(token, forKey: AgsPush.deviceTokenKey)
     }
 
     // Build headers used for Authentication
-    fileprivate func buildAuthHeaders(_ clientInfoObject: ClientDeviceInformationImpl) -> [String: String] {
+    fileprivate func buildAuthHeaders(_ credentials: UnifiedPushCredentials) -> [String: String] {
         // apply HTTP Basic Extract method
-        let basicAuthCredentials: Data! = "\(clientInfoObject.variantID!):\(clientInfoObject.variantSecret!)".data(using: String.Encoding.utf8)
+        let basicAuthCredentials: Data! = "\(credentials.variantID):\(credentials.variantSecret)".data(using: String.Encoding.utf8)
         let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         return ["Authorization": "Basic \(base64Encoded)"]
     }
 
+    // Helper to transform the Data-based token into a (useful) String:
+    fileprivate func convertToString(_ deviceToken: Data?) -> String? {
+        if let token = (deviceToken as NSData?)?.description {
+            return token.replacingOccurrences(of: "<", with: "")
+                    .replacingOccurrences(of: ">", with: "")
+                    .replacingOccurrences(of: " ", with: "")
+        }
+        return nil
+    }
 }

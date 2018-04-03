@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0156A54620584CEE0054F056 /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156A54520584CED0054F056 /* PushViewController.swift */; };
 		0156A54820584CF30054F056 /* push.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0156A54720584CF30054F056 /* push.storyboard */; };
-		01590FE42059880C0099677E /* DeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01590FE22059880C0099677E /* DeviceRegistrationTests.swift */; };
 		016D7D81205BEB75001DE653 /* PushHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D7D80205BEB75001DE653 /* PushHelper.swift */; };
 		017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017F3707201F4014001A9009 /* ServiceConfigTests.swift */; };
 		018FBE5620123AEE00E763A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE5520123AEE00E763A5 /* AppDelegate.swift */; };
@@ -64,7 +63,6 @@
 		0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AeroGearSdkExample.entitlements; sourceTree = "<group>"; };
 		0156A54520584CED0054F056 /* PushViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
 		0156A54720584CF30054F056 /* push.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = push.storyboard; sourceTree = "<group>"; };
-		01590FE22059880C0099677E /* DeviceRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationTests.swift; sourceTree = "<group>"; };
 		016D7D80205BEB75001DE653 /* PushHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushHelper.swift; sourceTree = "<group>"; };
 		017F3707201F4014001A9009 /* ServiceConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceConfigTests.swift; sourceTree = "<group>"; };
 		018FBE5220123AEE00E763A5 /* AeroGearSdkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroGearSdkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,7 +142,6 @@
 		01590FE12059880C0099677E /* push */ = {
 			isa = PBXGroup;
 			children = (
-				01590FE22059880C0099677E /* DeviceRegistrationTests.swift */,
 			);
 			path = push;
 			sourceTree = "<group>";
@@ -607,7 +604,6 @@
 				B30606EB20569774008FD9A0 /* MockCredentialManager.swift in Sources */,
 				01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */,
 				B3AC1A8B2049951900BEB12B /* MobileServiceTest.swift in Sources */,
-				01590FE42059880C0099677E /* DeviceRegistrationTests.swift in Sources */,
 				B3AC1A98204ECE7900BEB12B /* OIDCCredentialsTest.swift in Sources */,
 				500FDA5E2058324C001E66B0 /* JwkManagerTests.swift in Sources */,
 				017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */,
