@@ -8,7 +8,6 @@ Pod::Spec.new do |s|
   s.homepage     = 'http://aerogear.org'
   s.license      = 'Apache License, Version 2.0'
   s.authors      = 'AeroGear'
-  s.swift_version = '4.0'
   s.platform     = :ios, '9.0'
   s.ios.deployment_target = '9.0'
   s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-sdk.git',
