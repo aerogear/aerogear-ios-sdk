@@ -206,7 +206,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods
+  cocoapods (>= 1.1.0)
   fastlane
   jazzy
   xcodeproj
