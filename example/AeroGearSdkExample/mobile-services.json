@@ -29,7 +29,7 @@
         "id": "push",
         "name": "push",
         "type": "push",
-        "url": "https://testing.zeta.feedhenry.com/api/v2/ag-push/",
+        "url": "https://ups-dm-myproject-1.193b.starter-ca-central-1.openshiftapps.com/",
         "config": {}
    }
   ]
