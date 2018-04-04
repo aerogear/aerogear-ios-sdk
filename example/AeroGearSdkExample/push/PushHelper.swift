@@ -30,8 +30,8 @@ public class PushHelper {
         AgsCore.logger.info("Registered for notifications with token")
 
         let credentials = UnifiedPushCredentials(
-                "01862a41-4d17-45d9-b0ab-5b5047d5d15d",
-                "d727538d-af49-4d60-b91d-dc37c1c2011a"
+                "f85015b4-a762-49a7-a36f-34a451f819a4",
+                "978b35d6-7058-43b4-8c37-4dc30022ebda"
         )
 
         var config = UnifiedPushConfig()
