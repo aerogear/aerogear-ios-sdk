@@ -43,7 +43,7 @@ jobs:
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             pod install
-
+            
       # Build the app and run tests
       - run:
           name: Build and run tests
