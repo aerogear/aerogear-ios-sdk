@@ -20,8 +20,9 @@ public class AgsPush {
         static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
 
-    let serverURL: URL
     let requestApi: AgsHttpRequestProtocol
+    let serverURL: URL
+    let credentials: UnifiedPushCredentials
 
     /**
      Initialise the push module
@@ -30,8 +31,13 @@ public class AgsPush {
         - mobileConfig: the configuration for the auth service from the service definition file
      */
     private init(_ mobileConfig: MobileService?) {
-        self.serverURL = URL(string: (mobileConfig?.url)!)!
         self.requestApi = AgsCore.instance.getHttp()
+        self.serverURL = URL(string: (mobileConfig?.url)!)!
+
+        let variant = mobileConfig?.config!["ios"]?.getObject()?["variantId"]?.getString()
+        let secret = mobileConfig?.config!["ios"]?.getObject()?["variantSecret"]?.getString()
+
+        self.credentials = UnifiedPushCredentials(variant!, secret!)
     }
 
     /**
@@ -48,13 +54,12 @@ public class AgsPush {
     */
     public func register(_ deviceToken: Data,
                          _ config: UnifiedPushConfig,
-                         _ credentials: UnifiedPushCredentials,
                          success: @escaping (() -> Void),
                          failure: @escaping ((Error) -> Void)) {
 
         let currentDevice = UIDevice()
 
-        let headers = buildAuthHeaders(credentials)
+        let headers = buildAuthHeaders(self.credentials)
 
         let postData = [
             "deviceToken": convertToString(deviceToken) as Any,
@@ -85,7 +90,7 @@ public class AgsPush {
     // Build headers used for Authentication
     fileprivate func buildAuthHeaders(_ credentials: UnifiedPushCredentials) -> [String: String] {
         // apply HTTP Basic Extract method
-        let basicAuthCredentials: Data! = "\(credentials.variantID):\(credentials.variantSecret)".data(using: String.Encoding.utf8)
+        let basicAuthCredentials: Data! = "\(self.credentials.variantID):\(self.credentials.variantSecret)".data(using: String.Encoding.utf8)
         let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         return ["Authorization": "Basic \(base64Encoded)"]
     }
