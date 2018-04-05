@@ -95,10 +95,10 @@ struct KeycloakUserProfile: Codable {
 
     /**
      Return the client roles of the user.
-     
+
      - parameters:
          - clientName: the name of the client
-     
+
      - returns: an array of the role names
     */
     func getClientRoles(_ clientName: String) -> [String] {
@@ -113,10 +113,10 @@ struct KeycloakUserProfile: Codable {
 
     /**
      Return both realm roles and client roles of the user.
-     
+
      - parameters:
          - clientName: the name of the client
-     
+
      - returns: a set of UserRole
      */
     func getUserRoles(forClient clientName: String) -> Set<UserRole> {
@@ -188,7 +188,7 @@ public struct User {
 
     /**
      Build the User instance from the credential data and the Keycloak client name.
-     
+
      - parameters:
          - credential: the `OIDCCredentials`
          - clientName: the name of the Keycloak client
@@ -214,11 +214,11 @@ public struct User {
 
     /**
      Check if the user has a client role.
-     
+
      - parameters:
          - client: name of the client
          - role: name of the role to check
-     
+
      - returns: true if user has the client role, otherwise false
      */
     public func hasClientRole(client: String, role: String) -> Bool {
@@ -228,10 +228,10 @@ public struct User {
 
     /**
      Check if the user has a realm role.
-     
+
      - parameters:
          - roleName: Name of the role
-     
+
      - returns: true if user has the realm role, otherwise false
      */
     public func hasRealmRole(_ roleName: String) -> Bool {

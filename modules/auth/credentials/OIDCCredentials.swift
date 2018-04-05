@@ -42,7 +42,7 @@ public class OIDCCredentials: NSObject, NSCoding {
 
     /**
      Initialises the `openid` credentials.
-     
+
      - parameters:
         - state: the authentication state that monitors authorisation and token requests/responses
      */

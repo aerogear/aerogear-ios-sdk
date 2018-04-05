@@ -1,6 +1,3 @@
-//
-//  Jwt.swift
-//  AGSAuth
 
 import Foundation
 
@@ -13,10 +10,10 @@ struct JSONWebToken {
 
 /**
  Converts a string to base64 encoded data.
- 
+
  - parameters:
     - input: the string to be converted
- 
+
  - returns: a base64 encoded version of the `input`
  */
 func base64Decode(_ input: String) -> Data? {
@@ -32,7 +29,7 @@ func base64Decode(_ input: String) -> Data? {
 
 /**
  Responible for decoding JWT strings.
- 
+
  - ToDo: use a proper library and add verification.
  */
 class Jwt {
@@ -43,12 +40,12 @@ class Jwt {
 
     /**
      Decodes a JSON Web Token.
-     
+
      - parameters:
         - jwt: the JSON Web Token string to be decoded
-     
+
      - throws: an `invalidToken` token error if the JWT is malformed
-     
+
      - returns: `JSONWebToken`
      */
     public static func decode(_ jwt: String) throws -> JSONWebToken {

@@ -55,7 +55,15 @@ open class AgsMetrics: MetricsPublishable {
             let result = metric.collect()
             payload[metric.identifier] = result
         }
-        publisher.publish(appendToRootMetrics(payload))
+        publisher.publish(appendToRootMetrics(payload)) { (response: AgsHttpResponse?) -> Void in
+            if let error = response?.error {
+                AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")
+                return
+            }
+            if let response = response?.response as? [String: Any] {
+                AgsCore.logger.debug("Metrics response \(response)")
+            }
+        }
     }
 
     private func appendToRootMetrics(_ payload: MetricsData) -> [String: Any] {

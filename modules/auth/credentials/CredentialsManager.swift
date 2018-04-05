@@ -37,7 +37,7 @@ public class CredentialsManager: CredentialManagerProtocol {
 
     /**
      Fetches the `openid` credentials from local storage.
-     
+
      - returns: `openid` credentials
      */
     public func load() -> OIDCCredentials? {
@@ -49,7 +49,7 @@ public class CredentialsManager: CredentialManagerProtocol {
 
     /**
      Persists and overwrites the current `openid` credentials.
-     
+
      - parameters:
         - credentials: `openid` credentials to save
      */

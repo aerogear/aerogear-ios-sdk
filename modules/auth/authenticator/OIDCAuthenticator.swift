@@ -25,7 +25,7 @@ public class OIDCAuthenticator: Authenticator {
 
     /**
      Initialises the `openid` authenticator.
-     
+
      - parameters:
         - http: http instance used to make network requests
         - keycloakConfig: Keycloak configuration used to perform login and logout against the server defined in the config
@@ -71,10 +71,10 @@ public class OIDCAuthenticator: Authenticator {
 
     /**
      Sends a request to the Keycloak server to perform token exchange.
-     
+
      On successfully completing the token exchange the callback is invoked with the `openid` credentials for the user.
      Otherwise the callback is invoked with the error that occured during token exchange.
-     
+
      - parameters:
         - byPresenting: an `openid` authorisation request
         - presenting: The view controller from which to present the SafariViewController
@@ -98,9 +98,9 @@ public class OIDCAuthenticator: Authenticator {
 
     /**
      Invoked when a user has been successfully authenticated.
-     
+
      This function saves the users credentials and returns a `User` object in the callback.
-     
+
      - parameters:
         - credentials: `openid` credentials of the user that has been authenticated
         - onCompleted: a block function invoked containing a `User` object
@@ -114,9 +114,9 @@ public class OIDCAuthenticator: Authenticator {
 
     /**
      Invoked when a user authentication fails.
-     
+
      This function removes the stored credentials and returns the error that occured during the authentication process
-     
+
      - parameters:
         - error: the error that occured during the authentication process
         - onCompleted: a block function invoked containing the error
@@ -133,7 +133,7 @@ public class OIDCAuthenticator: Authenticator {
 
      - parameters:
         - url: The redirect url passed backed from the login process
-     
+
      - returns: true if the authentication can be resumed, false otherwise
      */
     public func resumeAuth(url: URL) -> Bool {
@@ -162,8 +162,8 @@ public class OIDCAuthenticator: Authenticator {
             return onCompleted(AgsAuth.Errors.noIdentityTokenError)
         }
         let logoutURL = keycloakConfig.buildLogoutURL(idToken: identityToken)
-        http.get(logoutURL, params: nil, headers: nil, { (_, error) -> Void in
-            if let err = error {
+        http.get(logoutURL, params: nil, headers: nil, { (response) -> Void in
+            if let err = response.error {
                 AgsCore.logger.error("Failed to perform logout operation due to error \(err.localizedDescription)")
                 onCompleted(err)
             } else {
