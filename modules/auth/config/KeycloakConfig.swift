@@ -41,9 +41,22 @@ class KeycloakConfig {
     init(_ mobileService: MobileService, _ authConfig: AuthenticationConfig) {
         self.authConfig = authConfig
         rawConfig = mobileService
-        serverUrl = (mobileService.config![serverUrlName]?.getString())!
-        realmId = (mobileService.config![realmIdName]?.getString())!
-        clientId = (mobileService.config![clientIdName]?.getString())!
+        guard let config = mobileService.config else {
+            AgsCore.logger.error("Missing keycloak configuration");
+            return;
+        }
+        
+        if let url = config[serverUrlName] {
+            serverUrl = url.getString() ?? "";
+        }
+        
+        if let realm = config[realmIdName] {
+            realmId = realm.getString() ?? "";
+        }
+        
+        if let clientIdValue = config[clientIdName] {
+            clientId = clientIdValue.getString() ?? "";
+        }
         baseUrl = String(format: baseUrlTemplate, serverUrl, realmId)
     }
 

@@ -16,8 +16,8 @@ class MobileServiceTest: XCTestCase {
     static let configInt = 1
     static let configBool = true
     static let configDouble: Double = 2.1
-    static let configAnotherDouble: Double = 2.0
-
+    static let configAnotherDouble: Double = 2.7
+    static let arrayValues = [1];
     let mobileServiceData = """
     {
         "id": "\(example)",
@@ -29,7 +29,10 @@ class MobileServiceTest: XCTestCase {
             "int": \(configInt),
             "bool": \(configBool),
             "double": \(configDouble),
-            "double2": \(configAnotherDouble)
+            "object": {
+                "double2": \(configAnotherDouble)
+            },
+            "array": \(arrayValues)
         }
     }
     """.data(using: .utf8)!
@@ -38,18 +41,14 @@ class MobileServiceTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         mobileServiceToTest = try? JSONDecoder().decode(MobileService.self, from: mobileServiceData)
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
 
     func testParse() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
         XCTAssertEqual(mobileServiceToTest!.id, MobileServiceTest.example)
         XCTAssertEqual(mobileServiceToTest!.type, MobileServiceTest.exampleType)
         XCTAssertEqual(mobileServiceToTest!.name, MobileServiceTest.exampleService)
@@ -59,6 +58,16 @@ class MobileServiceTest: XCTestCase {
         XCTAssertEqual(serviceConfig["int"]!.getInt()!, MobileServiceTest.configInt)
         XCTAssertEqual(serviceConfig["bool"]!.getBool()!, MobileServiceTest.configBool)
         XCTAssertEqual(serviceConfig["double"]!.getDouble()!, MobileServiceTest.configDouble)
-        XCTAssertEqual(serviceConfig["double2"]!.getDouble()!, MobileServiceTest.configAnotherDouble)
+    }
+    
+    func testParseNested() {
+        let serviceConfig = mobileServiceToTest!.config!
+        // Nested config
+        let nestedObject = serviceConfig["object"]!.getObject();
+        let double2 = nestedObject!["double2"]!
+        XCTAssertEqual(double2.getDouble()!, MobileServiceTest.configAnotherDouble)
+        let array = serviceConfig["array"]!.getArray()!;
+        XCTAssertEqual(array[0].getInt(),MobileServiceTest.arrayValues[0])
+        
     }
 }

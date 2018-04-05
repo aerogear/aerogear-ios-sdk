@@ -60,14 +60,7 @@ class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
         AgsCore.logger.info("Loading configuration")
         currentConfig = AgsCore.instance.getConfiguration(pickerDataSource[row])
-        let jsonEncoder = JSONEncoder()
-        do {
-            let jsonData = try jsonEncoder.encode(currentConfig)
-            let jsonString = String(data: jsonData, encoding: .utf8)
-            AgsCore.logger.debug("JSON String \(jsonString ?? "")")
-            config.text = jsonString
-        } catch {
-        }
+        config.text = currentConfig?.getDescription()
     }
 
     override func didReceiveMemoryWarning() {
