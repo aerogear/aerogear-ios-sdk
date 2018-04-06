@@ -41,21 +41,7 @@ open class AgsMetrics: MetricsPublishable {
      Send data using metrics publisher
      */
     open func sendAppAndDeviceMetrics() {
-        publish(AppMetrics(appData), DeviceMetrics())
-    }
-
-    /**
-     Publish metrics using predefined publisher
-
-     - Parameter metrics: instances that should be published
-     */
-    open func publish(_ metrics: Metrics...) {
-        var payload = MetricsData()
-        for metric: Metrics in metrics {
-            let result = metric.collect()
-            payload[metric.identifier] = result
-        }
-        publisher.publish(appendToRootMetrics(payload)) { (response: AgsHttpResponse?) -> Void in
+        publish([AppMetrics(appData), DeviceMetrics()]) { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")
                 return
@@ -64,6 +50,21 @@ open class AgsMetrics: MetricsPublishable {
                 AgsCore.logger.debug("Metrics response \(response)")
             }
         }
+    }
+
+    /**
+     Publish metrics using predefined publisher
+
+     - Parameter metrics: instances that should be published
+     - Parameter handler: handler for success/failire
+     */
+    open func publish(_ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void) {
+        var payload = MetricsData()
+        for metric: Metrics in metrics {
+            let result = metric.collect()
+            payload[metric.identifier] = result
+        }
+        publisher.publish(appendToRootMetrics(payload), handler)
     }
 
     private func appendToRootMetrics(_ payload: MetricsData) -> [String: Any] {

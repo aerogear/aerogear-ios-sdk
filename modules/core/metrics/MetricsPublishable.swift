@@ -21,7 +21,8 @@ public protocol MetricsPublishable {
     /**
      Publish user defined metrics
 
-     - Parameter  metrics: Varargs of objects implementing MetricsCollectable
+     - Parameter metrics: instances that should be published
+     - Parameter handler: handler for success/failire
      */
-    func publish(_ metrics: Metrics...)
+    func publish(_ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void)
 }

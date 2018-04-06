@@ -1,4 +1,3 @@
-
 import Foundation
 
 /** Represents a JSON Web Token. */
