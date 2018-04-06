@@ -16,7 +16,7 @@ class MobileServiceTest: XCTestCase {
     static let configInt = 1
     static let configBool = true
     static let configDouble: Double = 2.1
-    static let configAnotherDouble: Double = 2.7
+    static let configDouble2: Double = 2.0
     static let arrayValues = [1];
     let mobileServiceData = """
     {
@@ -29,8 +29,8 @@ class MobileServiceTest: XCTestCase {
             "int": \(configInt),
             "bool": \(configBool),
             "double": \(configDouble),
-            "object": {
-                "double2": \(configAnotherDouble)
+            "double2": \(configDouble2),
+            "nestedObject": {
             },
             "array": \(arrayValues)
         }
@@ -53,21 +53,26 @@ class MobileServiceTest: XCTestCase {
         XCTAssertEqual(mobileServiceToTest!.type, MobileServiceTest.exampleType)
         XCTAssertEqual(mobileServiceToTest!.name, MobileServiceTest.exampleService)
         XCTAssertEqual(mobileServiceToTest!.url, MobileServiceTest.exampleUrl)
+    }
+    
+    func testParseTypes() {
         let serviceConfig = mobileServiceToTest!.config!
         XCTAssertEqual(serviceConfig["string"]!.getString()!, MobileServiceTest.configString)
         XCTAssertEqual(serviceConfig["int"]!.getInt()!, MobileServiceTest.configInt)
         XCTAssertEqual(serviceConfig["bool"]!.getBool()!, MobileServiceTest.configBool)
         XCTAssertEqual(serviceConfig["double"]!.getDouble()!, MobileServiceTest.configDouble)
+        XCTAssertEqual(serviceConfig["double2"]!.getDouble()!, MobileServiceTest.configDouble2)
     }
     
-    func testParseNested() {
+    func testParseNestedObj() {
         let serviceConfig = mobileServiceToTest!.config!
-        // Nested config
-        let nestedObject = serviceConfig["object"]!.getObject();
-        let double2 = nestedObject!["double2"]!
-        XCTAssertEqual(double2.getDouble()!, MobileServiceTest.configAnotherDouble)
+        let nestedObject = serviceConfig["nestedObject"]?.getObject();
+        XCTAssertNotNil(nestedObject)
+    }
+    
+    func testParseArray() {
+        let serviceConfig = mobileServiceToTest!.config!
         let array = serviceConfig["array"]!.getArray()!;
-        XCTAssertEqual(array[0].getInt(),MobileServiceTest.arrayValues[0])
-        
+        XCTAssertEqual(array[0].getInt(), MobileServiceTest.arrayValues[0])
     }
 }

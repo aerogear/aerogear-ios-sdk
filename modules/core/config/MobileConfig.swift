@@ -132,6 +132,8 @@ public enum JSONValue: Decodable {
         switch self {
         case let .double(value):
             return value;
+        case let .int(value):
+            return Double(value);
         default:
             break;
         }
