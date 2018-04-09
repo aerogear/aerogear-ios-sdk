@@ -57,16 +57,20 @@ if ( prLabels.contains("test/integration") ) {
                 }
 
                 stage ('Run integration test') {
-                    sh """
-                    xcodebuild \
-                    -workspace example/AeroGearSdkExample.xcworkspace \
-                    -scheme AeroGearSdkExampleTests \
-                    -sdk iphonesimulator \
-                    -destination 'platform=iOS Simulator,name=iPhone 7' \
-                    '-only-testing:AeroGearSdkExampleTests/MetricsIntegrationTests' \
-                    test \
-                    CODE_SIGNING_REQUIRED=NO
-                    """
+                    sh "pod setup"
+                    dir('example') {
+                        sh """
+                        pod install
+                        xcodebuild \
+                        -workspace AeroGearSdkExample.xcworkspace \
+                        -scheme AeroGearSdkExampleTests \
+                        -sdk iphonesimulator \
+                        -destination 'platform=iOS Simulator,name=iPhone 7' \
+                        '-only-testing:AeroGearSdkExampleTests/MetricsIntegrationTests' \
+                        test \
+                        CODE_SIGNING_REQUIRED=NO
+                        """
+                    }
                 }
             }
 
