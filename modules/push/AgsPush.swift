@@ -47,10 +47,10 @@ public class AgsPush {
      - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.This block has no return value and takes one argument: The `Error` object describing the error that occurred during the registration process.
     */
     public func register(_ deviceToken: Data,
-                  _ config: UnifiedPushConfig,
-                  _ credentials: UnifiedPushCredentials,
-                  success: @escaping (() -> Void),
-                  failure: @escaping ((Error) -> Void)) {
+                         _ config: UnifiedPushConfig,
+                         _ credentials: UnifiedPushCredentials,
+                         success: @escaping (() -> Void),
+                         failure: @escaping ((Error) -> Void)) {
 
         let currentDevice = UIDevice()
 
@@ -70,7 +70,7 @@ public class AgsPush {
             guard let requestError = response.error else {
                 self.saveClientDeviceInformation(deviceToken, self.serverURL)
                 success()
-                return; 
+                return
             }
             failure(requestError)
         })
@@ -94,8 +94,8 @@ public class AgsPush {
     fileprivate func convertToString(_ deviceToken: Data?) -> String? {
         if let token = (deviceToken as NSData?)?.description {
             return token.replacingOccurrences(of: "<", with: "")
-                    .replacingOccurrences(of: ">", with: "")
-                    .replacingOccurrences(of: " ", with: "")
+                .replacingOccurrences(of: ">", with: "")
+                .replacingOccurrences(of: " ", with: "")
         }
         return nil
     }

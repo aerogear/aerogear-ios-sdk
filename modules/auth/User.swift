@@ -23,8 +23,8 @@ struct UserRole: Hashable {
     let roleName: String
     /** the type of the role */
     var roleType: Types {
-        if let ns = nameSpace {
-            if ns.isEmpty {
+        if let nspace = nameSpace {
+            if nspace.isEmpty {
                 return Types.REALM
             } else {
                 return Types.CLIENT
@@ -35,8 +35,8 @@ struct UserRole: Hashable {
     }
 
     var hashValue: Int {
-        if let ns = nameSpace {
-            return ns.hashValue ^ roleName.hashValue
+        if let nspace = nameSpace {
+            return nspace.hashValue ^ roleName.hashValue
         } else {
             return roleName.hashValue
         }

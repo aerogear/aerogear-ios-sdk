@@ -17,7 +17,7 @@ class MobileServiceTest: XCTestCase {
     static let configBool = true
     static let configDouble: Double = 2.1
     static let configDouble2: Double = 2.0
-    static let arrayValues = [1];
+    static let arrayValues = [1]
     let mobileServiceData = """
     {
         "id": "\(example)",
@@ -54,7 +54,7 @@ class MobileServiceTest: XCTestCase {
         XCTAssertEqual(mobileServiceToTest!.name, MobileServiceTest.exampleService)
         XCTAssertEqual(mobileServiceToTest!.url, MobileServiceTest.exampleUrl)
     }
-    
+
     func testParseTypes() {
         let serviceConfig = mobileServiceToTest!.config!
         XCTAssertEqual(serviceConfig["string"]!.getString()!, MobileServiceTest.configString)
@@ -63,16 +63,16 @@ class MobileServiceTest: XCTestCase {
         XCTAssertEqual(serviceConfig["double"]!.getDouble()!, MobileServiceTest.configDouble)
         XCTAssertEqual(serviceConfig["double2"]!.getDouble()!, MobileServiceTest.configDouble2)
     }
-    
+
     func testParseNestedObj() {
         let serviceConfig = mobileServiceToTest!.config!
-        let nestedObject = serviceConfig["nestedObject"]?.getObject();
+        let nestedObject = serviceConfig["nestedObject"]?.getObject()
         XCTAssertNotNil(nestedObject)
     }
-    
+
     func testParseArray() {
         let serviceConfig = mobileServiceToTest!.config!
-        let array = serviceConfig["array"]!.getArray()!;
+        let array = serviceConfig["array"]!.getArray()!
         XCTAssertEqual(array[0].getInt(), MobileServiceTest.arrayValues[0])
     }
 }
