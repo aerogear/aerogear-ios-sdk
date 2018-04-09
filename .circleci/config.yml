@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     macos:
-      xcode: "9.0"
+      xcode: "9.3.0"
     shell: /bin/bash --login -eo pipefail
     steps:
       - checkout
@@ -50,7 +50,7 @@ jobs:
           working_directory: ./example
           command: fastlane scan
           environment:
-            SCAN_DEVICE: iPhone 6
+            SCAN_DEVICE: iPhone 7
             SCAN_SCHEME: AeroGearSdkExample
 
       # Collect XML test results data to show in the UI,
@@ -63,4 +63,4 @@ jobs:
           destination: scan-test-results
       - store_artifacts:
           path: ~/Library/Logs/scan
-          destination: scan-logs
+          destination: scan-logs      
