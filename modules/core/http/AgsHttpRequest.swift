@@ -1,49 +1,54 @@
 import Alamofire
 import Foundation
 
-@objc public protocol AgsHttpRequestProtocol {
-    func get(_ url: String, params: [String: AnyObject]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+/**
+Protocol used to make network requests by exposing standard REST methods.
+*/
+public protocol AgsHttpRequestProtocol {
+    func get(_ url: String, params: [String: AnyObject]?, headers: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void)
 
-    func post(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+    func post(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void)
 
-    func put(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+    func put(_ url: String, body: [String: Any]?, headers: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void)
 
-    func delete(_ url: String, headers: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void)
+    func delete(_ url: String, headers: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void)
 }
 
 /**
  This is a implementation of HttpRequest based on AlamoFire
  Implementation is designed to work with Json payload
  */
-@objc public class AgsHttpRequest: NSObject, AgsHttpRequestProtocol {
+public class AgsHttpRequest: NSObject, AgsHttpRequestProtocol {
     public func get(_ url: String, params: [String: AnyObject]? = [:], headers: [String: String]? = [:],
-                    _ handler: @escaping (Any?, Error?) -> Void) {
+                    _ handler: @escaping (AgsHttpResponse) -> Void) {
         Alamofire.request(url, parameters: params, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
 
-    public func post(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
+    public func post(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (AgsHttpResponse) -> Void) {
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
 
-    public func put(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
+    public func put(_ url: String, body: [String: Any]? = [:], headers: [String: String]? = [:], _ handler: @escaping (AgsHttpResponse) -> Void) {
         Alamofire.request(url, method: .put, parameters: body, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
 
-    public func delete(_ url: String, headers: [String: String]? = [:], _ handler: @escaping (Any?, Error?) -> Void) {
+    public func delete(_ url: String, headers: [String: String]? = [:], _ handler: @escaping (AgsHttpResponse) -> Void) {
         Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             self.handleResponse(responseObject, handler)
         }
     }
 
-    private func handleResponse(_ response: DataResponse<Any>, _ handler: @escaping (Any?, Error?) -> Void) {
+    private func handleResponse(_ response: DataResponse<Any>, _ handler: @escaping (AgsHttpResponse) -> Void) {
+        let statusCode = response.response?.statusCode
+
         guard case let .failure(error) = response.result else {
-            handler(response.result.value, nil)
+            handler(AgsHttpResponse(response: response.result.value, statusCode: statusCode))
             return
         }
 
@@ -52,16 +57,14 @@ import Foundation
             case let .responseSerializationFailed(reason):
                 if case .inputDataNilOrZeroLength = reason {
                     // Return success if empty
-                    handler(nil, nil)
+                    handler(AgsHttpResponse(response: [], statusCode: statusCode))
                     return
                 }
-                handler(nil, error)
-                break
             default:
-                handler(nil, error)
-                return
+                break
             }
         }
+        handler(AgsHttpResponse(error: error, statusCode: statusCode))
     }
 }
 

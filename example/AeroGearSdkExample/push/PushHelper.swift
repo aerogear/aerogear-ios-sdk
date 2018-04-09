@@ -30,8 +30,8 @@ public class PushHelper {
         AgsCore.logger.info("Registered for notifications with token")
 
         let credentials = UnifiedPushCredentials(
-                "f85015b4-a762-49a7-a36f-34a451f819a4",
-                "978b35d6-7058-43b4-8c37-4dc30022ebda"
+            "f85015b4-a762-49a7-a36f-34a451f819a4",
+            "978b35d6-7058-43b4-8c37-4dc30022ebda"
         )
 
         var config = UnifiedPushConfig()
@@ -39,15 +39,15 @@ public class PushHelper {
         config.categories = ["iOS", "Example"]
 
         AgsPush.instance.register(
-                deviceToken,
-                config,
-                credentials,
-                success: {
-                    AgsCore.logger.info("Successfully registered to Unified Push Server")
-                },
-                failure: { (error: Error!) in
-                    AgsCore.logger.error("Failure to register for on Unified Push Server: \(error)")
-                }
+            deviceToken,
+            config,
+            credentials,
+            success: {
+                AgsCore.logger.info("Successfully registered to Unified Push Server")
+            },
+            failure: { (error: Error!) in
+                AgsCore.logger.error("Failure to register for on Unified Push Server: \(error)")
+            }
         )
     }
 
@@ -80,5 +80,4 @@ public class PushHelper {
     public func onRegistrationFailed(_ error: Error) {
         AgsCore.logger.error("Failure to register for notifications: \(error)")
     }
-
 }

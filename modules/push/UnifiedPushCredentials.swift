@@ -5,7 +5,7 @@ public struct UnifiedPushCredentials {
     let variantSecret: String
 
     public init(_ variantID: String, _ variantSecret: String) {
-        self.variantID = variantID;
-        self.variantSecret = variantSecret;
+        self.variantID = variantID
+        self.variantSecret = variantSecret
     }
 }

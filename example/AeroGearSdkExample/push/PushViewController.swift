@@ -27,9 +27,8 @@ class PushViewController: UIViewController, UITableViewDelegate {
             let message = UIAlertController(title: "Push notification recieved!",
                                             message: pushMessage,
                                             preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-                print("Notification dismissed");
-                
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in
+                print("Notification dismissed")
             }
             message.addAction(OKAction)
             self.present(message, animated: true, completion: nil)

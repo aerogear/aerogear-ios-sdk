@@ -21,12 +21,12 @@ class HomeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     @IBAction func buttonClick(sender _: UIButton) {
         if let uri = currentConfig?.url {
-            AgsCore.instance.getHttp().get(uri, { (response, error) -> Void in
-                if let error = error {
+            AgsCore.instance.getHttp().get(uri, { (response) -> Void in
+                if let error = response.error {
                     AgsCore.logger.error("An error has occurred during read \(error)")
                     return
                 }
-                if let response = response as? [String: Any] {
+                if let response = response.response as? [String: Any] {
                     self.responseLabel.textColor = UIColor.blue
                     self.responseLabel.text = response.description
                 }

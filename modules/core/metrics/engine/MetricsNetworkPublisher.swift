@@ -13,16 +13,10 @@ public class MetricsNetworkPublisher: MetricsPublisher {
         self.url = url
     }
 
-    public func publish(_ payload: MetricsData) {
+    public func publish(_ payload: MetricsData, _ handler: @escaping (AgsHttpResponse?) -> Void) {
         AgsCore.logger.debug("Sending metrics \(payload)")
-        http.post(url, body: payload, { (response, error) -> Void in
-            if let error = error {
-                AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")
-                return
-            }
-            if let response = response as? [String: Any] {
-                AgsCore.logger.debug("Metrics response \(response)")
-            }
+        http.post(url, body: payload, { (response: AgsHttpResponse) -> Void in
+            handler(response)
         })
     }
 }

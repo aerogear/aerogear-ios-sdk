@@ -20,35 +20,35 @@ class MockHttpRequest: AgsHttpRequestProtocol {
     var dataForDelete: Any?
     var errorForDelete: Error?
 
-    func get(_: String, params _: [String: AnyObject]?, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+    func get(_: String, params _: [String: AnyObject]?, headers _: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void) {
         if let err = errorForGet {
-            handler(nil, err)
+            handler(AgsHttpResponse(error: err))
         } else {
-            handler(dataForGet, nil)
+            handler(AgsHttpResponse(response: dataForGet))
         }
     }
 
-    func post(_: String, body _: [String: Any]?, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+    func post(_: String, body _: [String: Any]?, headers _: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void) {
         if let err = errorForPost {
-            handler(nil, err)
+            handler(AgsHttpResponse(error: err))
         } else {
-            handler(dataForPost, nil)
+            handler(AgsHttpResponse(response: dataForPost))
         }
     }
 
-    func put(_: String, body _: [String: Any]?, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+    func put(_: String, body _: [String: Any]?, headers _: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void) {
         if let err = errorForPut {
-            handler(nil, err)
+            handler(AgsHttpResponse(error: err))
         } else {
-            handler(dataForPut, nil)
+            handler(AgsHttpResponse(response: dataForPut))
         }
     }
 
-    func delete(_: String, headers _: [String: String]?, _ handler: @escaping (Any?, Error?) -> Void) {
+    func delete(_: String, headers _: [String: String]?, _ handler: @escaping (AgsHttpResponse) -> Void) {
         if let err = errorForDelete {
-            handler(nil, err)
+            handler(AgsHttpResponse(error: err))
         } else {
-            handler(dataForDelete, nil)
+            handler(AgsHttpResponse(response: dataForDelete))
         }
     }
 }

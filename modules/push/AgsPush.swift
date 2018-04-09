@@ -47,10 +47,10 @@ public class AgsPush {
      - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.This block has no return value and takes one argument: The `NSError` object describing the error that occurred during the registration process.
     */
     public func register(_ deviceToken: Data,
-                  _ config: UnifiedPushConfig,
-                  _ credentials: UnifiedPushCredentials,
-                  success: @escaping (() -> Void),
-                  failure: @escaping ((NSError) -> Void)) {
+                         _ config: UnifiedPushConfig,
+                         _ credentials: UnifiedPushCredentials,
+                         success: @escaping (() -> Void),
+                         failure: @escaping ((NSError) -> Void)) {
 
         let currentDevice = UIDevice()
 
@@ -66,14 +66,14 @@ public class AgsPush {
         ] as [String: Any]
 
         let registerUrl = self.serverURL.appendingPathComponent(AgsPush.apiPath).absoluteString
-        self.requestApi.post(registerUrl, body: postData, headers: headers, { data, error in
-            if error != nil {
-                failure(error as NSError!)
+        self.requestApi.post(registerUrl, body: postData, headers: headers) { (response) -> Void in
+            if let error = response.error {
+                failure(error as NSError)
                 return
             }
             self.saveClientDeviceInformation(deviceToken, self.serverURL)
             success()
-        })
+        }
     }
 
     // Storing data in UserDefaults
@@ -94,8 +94,8 @@ public class AgsPush {
     fileprivate func convertToString(_ deviceToken: Data?) -> String? {
         if let token = (deviceToken as NSData?)?.description {
             return token.replacingOccurrences(of: "<", with: "")
-                    .replacingOccurrences(of: ">", with: "")
-                    .replacingOccurrences(of: " ", with: "")
+                .replacingOccurrences(of: ">", with: "")
+                .replacingOccurrences(of: " ", with: "")
         }
         return nil
     }

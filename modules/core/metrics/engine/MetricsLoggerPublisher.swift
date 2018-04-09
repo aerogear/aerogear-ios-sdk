@@ -11,7 +11,8 @@ public class MetricsLoggerPublisher: MetricsPublisher {
         self.clientId = clientId
     }
 
-    public func publish(_ payload: MetricsData) {
+    public func publish(_ payload: MetricsData, _ handler: @escaping (AgsHttpResponse?) -> Void) {
         AgsCore.logger.info("Metrics collected [\(clientId)]: \(payload)")
+        handler(nil)
     }
 }
