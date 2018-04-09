@@ -34,8 +34,9 @@ public class AgsPush {
         self.requestApi = AgsCore.instance.getHttp()
         self.serverURL = URL(string: (mobileConfig?.url)!)!
 
-        let variant = mobileConfig?.config!["ios"]?.getObject()?["variantId"]?.getString()
-        let secret = mobileConfig?.config!["ios"]?.getObject()?["variantSecret"]?.getString()
+        let pushSecurityConfig = mobileConfig?.config!["ios"]?.getObject();
+        let variant = pushSecurityConfig?["variantId"]?.getString()
+        let secret = pushSecurityConfig??["variantSecret"]?.getString()
 
         self.credentials = UnifiedPushCredentials(variant!, secret!)
     }
