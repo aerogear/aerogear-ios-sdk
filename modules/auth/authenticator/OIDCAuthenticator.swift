@@ -8,7 +8,6 @@ import Foundation
 
 /** Represents `openid` authentication actions like logout and login. */
 public class OIDCAuthenticator: Authenticator {
-
     /** http instance used to make network requests */
     let http: AgsHttpRequestProtocol
     /** Keycloak configuration */

@@ -49,7 +49,6 @@ struct UserRole: Hashable {
 
 /** Describes the structure of user profile returned by Keycloak */
 struct KeycloakUserProfile: Codable {
-
     /** Internal structure for AccessRoles. The JSON object contains other fields but we are only interested in "roles" */
     struct AccessRoles: Codable {
         let roles: [String]?

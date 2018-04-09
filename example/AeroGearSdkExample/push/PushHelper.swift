@@ -34,14 +34,14 @@ public class PushHelper {
         config.categories = ["iOS", "Example"]
 
         AgsPush.instance.register(
-                deviceToken,
-                config,
-                success: {
-                    AgsCore.logger.info("Successfully registered to Unified Push Server")
-                },
-                failure: { (error: Error!) in
-                    AgsCore.logger.error("Failure to register for on Unified Push Server: \(error)")
-                }
+            deviceToken,
+            config,
+            success: {
+                AgsCore.logger.info("Successfully registered to Unified Push Server")
+            },
+            failure: { (error: Error!) in
+                AgsCore.logger.error("Failure to register for on Unified Push Server: \(error)")
+            }
         )
     }
 

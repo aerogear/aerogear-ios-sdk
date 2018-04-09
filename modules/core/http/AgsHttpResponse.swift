@@ -5,7 +5,6 @@ import Foundation
     Represents data or error that was returned from request
 */
 public struct AgsHttpResponse {
-
     /**
      Contains response body if no error is thrown
     */
@@ -24,7 +23,6 @@ public struct AgsHttpResponse {
     public init(response: Any? = nil,
                 error: Error? = nil,
                 statusCode: Int? = nil) {
-
         self.response = response
         self.error = error
         self.statusCode = statusCode
