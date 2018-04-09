@@ -57,9 +57,16 @@ if ( prLabels.contains("test/integration") ) {
                 }
 
                 stage ('Run integration test') {
-                    /**
-                    * Code for running integration test
-                    */
+                    sh """
+                    xcodebuild \
+                    -workspace example/AeroGearSdkExample.xcworkspace \
+                    -scheme AeroGearSdkExampleTests \
+                    -sdk iphonesimulator \
+                    -destination 'platform=iOS Simulator,name=iPhone 7' \
+                    '-only-testing:AeroGearSdkExampleTests/MetricsIntegrationTests' \
+                    test \
+                    CODE_SIGNING_REQUIRED=NO
+                    """
                 }
             }
 
