@@ -44,13 +44,13 @@ public class AgsPush {
 
      - parameter success: A block object to be executed when the registration operation finishes successfully. This block has no return value.
 
-     - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.This block has no return value and takes one argument: The `NSError` object describing the error that occurred during the registration process.
+     - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.This block has no return value and takes one argument: The `Error` object describing the error that occurred during the registration process.
     */
     public func register(_ deviceToken: Data,
                          _ config: UnifiedPushConfig,
                          _ credentials: UnifiedPushCredentials,
                          success: @escaping (() -> Void),
-                         failure: @escaping ((NSError) -> Void)) {
+                         failure: @escaping ((Error) -> Void)) {
 
         let currentDevice = UIDevice()
 
@@ -66,14 +66,14 @@ public class AgsPush {
         ] as [String: Any]
 
         let registerUrl = self.serverURL.appendingPathComponent(AgsPush.apiPath).absoluteString
-        self.requestApi.post(registerUrl, body: postData, headers: headers) { (response) -> Void in
-            if let error = response.error {
-                failure(error as NSError)
+        self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
+            guard let requestError = response.error else {
+                self.saveClientDeviceInformation(deviceToken, self.serverURL)
+                success()
                 return
             }
-            self.saveClientDeviceInformation(deviceToken, self.serverURL)
-            success()
-        }
+            failure(requestError)
+        })
     }
 
     // Storing data in UserDefaults
