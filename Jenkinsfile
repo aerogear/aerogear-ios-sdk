@@ -33,48 +33,53 @@ if ( prLabels.contains("test/integration") ) {
                 }
             }
 
-            node ('osx') {
-                stage('Cleanup osx workspace') {                    
-                    // Clean workspace
-                    deleteDir()
-                }
-    
-                stage ('Checkout to osx slave') {
-                    checkout scm
-                }
-    
-                stage ('Prepare config file') {
-                    def servicesConfigJsonPath = "./example/AeroGearSdkExample/mobile-services.json"
-                    def servicesConfigJson = readJSON file: servicesConfigJsonPath
+            try {
 
-                    // Update URL for metrics in mobile-services.json file
-                    servicesConfigJson.services.each {
-                        if ( it.id == "metrics" ) {
-                            it.url = metricsApiHost + "/metrics"
+                node ('osx') {
+                    stage('Cleanup osx workspace') {                    
+                        // Clean workspace
+                        deleteDir()
+                    }
+        
+                    stage ('Checkout to osx slave') {
+                        checkout scm
+                    }
+        
+                    stage ('Prepare config file') {
+                        def servicesConfigJsonPath = "./example/AeroGearSdkExample/mobile-services.json"
+                        def servicesConfigJson = readJSON file: servicesConfigJsonPath
+
+                        // Update URL for metrics in mobile-services.json file
+                        servicesConfigJson.services.each {
+                            if ( it.id == "metrics" ) {
+                                it.url = metricsApiHost + "/metrics"
+                            }
+                        }
+                        writeJSON(file: servicesConfigJsonPath, json: servicesConfigJson)
+                    }
+
+                    stage ('Run integration test') {
+                        sh "pod setup"
+                        dir('example') {
+                            sh """
+                            pod install
+                            xcodebuild \
+                            -workspace AeroGearSdkExample.xcworkspace \
+                            -scheme AeroGearSdkExampleTests \
+                            -sdk iphonesimulator \
+                            -destination 'platform=iOS Simulator,name=iPhone 7' \
+                            '-only-testing:AeroGearSdkExampleTests/MetricsIntegrationTests' \
+                            test \
+                            CODE_SIGNING_REQUIRED=NO
+                            """
                         }
                     }
-                    writeJSON(file: servicesConfigJsonPath, json: servicesConfigJson)
                 }
-
-                stage ('Run integration test') {
-                    sh "pod setup"
-                    dir('example') {
-                        sh """
-                        pod install
-                        xcodebuild \
-                        -workspace AeroGearSdkExample.xcworkspace \
-                        -scheme AeroGearSdkExampleTests \
-                        -sdk iphonesimulator \
-                        -destination 'platform=iOS Simulator,name=iPhone 7' \
-                        '-only-testing:AeroGearSdkExampleTests/MetricsIntegrationTests' \
-                        test \
-                        CODE_SIGNING_REQUIRED=NO
-                        """
-                    }
-                }
+            } catch (Exception e) {
+                println("Integration test failed with exception: ${e} \nDeleting OpenShift App Metrics project...")
+            } finally {
+                openshift.delete("project", projectName)
             }
-
-            openshift.delete("project", projectName)
         }
     }
 }
