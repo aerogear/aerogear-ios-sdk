@@ -12,8 +12,13 @@ public class AgsPush {
 
     public static let deviceTokenKey = "AgsPushSDK.deviceToken"
     public static let apiPath = "rest/registry/device"
-    public static let instance: AgsPush = AgsPush(AgsCore.instance.getConfiguration(serviceName))
-
+    
+    public static let instance: AgsPush = {
+        let config = AgsCore.instance.getConfiguration(serviceName);
+        let httpInterface = AgsCore.instance.getHttp();
+        return AgsPush(config, httpInterface)
+    }()
+    
     struct DeviceRegistrationError {
         static let PushErrorDomain = "PushErrorDomain"
         static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
@@ -29,9 +34,10 @@ public class AgsPush {
 
      - parameters:
         - mobileConfig: the configuration for the auth service from the service definition file
+        - requestApi: http implementation
      */
-    private init(_ mobileConfig: MobileService?) {
-        self.requestApi = AgsCore.instance.getHttp()
+    init(_ mobileConfig: MobileService?,_ requestApi: AgsHttpRequestProtocol) {
+        self.requestApi = requestApi
         self.serverURL = URL(string: (mobileConfig?.url)!)!
 
         let pushSecurityConfig = mobileConfig?.config!["ios"]?.getObject()
