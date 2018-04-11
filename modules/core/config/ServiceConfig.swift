@@ -53,7 +53,7 @@ public class ServiceConfig {
      */
     public func getConfiguration(_ serviceRef: String) -> [MobileService] {
         if let config = config {
-            return config.services.filter { $0.name == serviceRef }
+            return config.services.filter { $0.id == serviceRef }
         } else {
             return []
         }
