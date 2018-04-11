@@ -25,4 +25,17 @@ class MetricsIntegrationTests: XCTestCase {
         })
         wait(for: [expectation], timeout: 10.0)
     }
+    
+    func testPublishingInvalidMetricsShouldReturnError () {
+        let expectation = XCTestExpectation(description: "Getting Server error from App Metrics after sending invalid (empty) metrics")
+        
+        metrics.publish([], { (response: AgsHttpResponse?) -> Void in
+            
+            if let statusCode = response?.statusCode {
+                XCTAssert(statusCode == 400, "Expecting returned statusCode to be 400, but it was \(statusCode)")
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 10.0)
+    }
 }
