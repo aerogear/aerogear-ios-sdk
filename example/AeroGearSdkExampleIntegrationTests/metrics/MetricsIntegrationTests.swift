@@ -6,18 +6,17 @@
 import Foundation
 import XCTest
 
-
 class MetricsIntegrationTests: XCTestCase {
-    
+
     let metrics = AgsCore.instance.getMetrics()
-    
-    func testPublishingDefaultMetricsShouldNotReturnError () {
+
+    func testPublishingDefaultMetricsShouldNotReturnError() {
         let expectation = XCTestExpectation(description: "Getting Success statusCode from App Metrics after sending device and app metrics")
-        
+
         metrics.publish([DeviceMetrics(), AppMetrics(AgsCore.getMetadata())], { (response: AgsHttpResponse?) -> Void in
-            
+
             XCTAssertNil(response?.error, "Expecting no error from response after sending valid metrics")
-            
+
             if let statusCode = response?.statusCode {
                 XCTAssert(statusCode < 300, "Expecting returned statusCode to be success (2xx), but it was \(statusCode)")
             }
@@ -25,12 +24,12 @@ class MetricsIntegrationTests: XCTestCase {
         })
         wait(for: [expectation], timeout: 10.0)
     }
-    
-    func testPublishingInvalidMetricsShouldReturnError () {
+
+    func testPublishingInvalidMetricsShouldReturnError() {
         let expectation = XCTestExpectation(description: "Getting Server error from App Metrics after sending invalid (empty) metrics")
-        
+
         metrics.publish([], { (response: AgsHttpResponse?) -> Void in
-            
+
             if let statusCode = response?.statusCode {
                 XCTAssert(statusCode == 400, "Expecting returned statusCode to be 400, but it was \(statusCode)")
             }

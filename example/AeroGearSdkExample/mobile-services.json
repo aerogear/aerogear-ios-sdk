@@ -23,13 +23,18 @@
       "type": "metrics",
       "url": "https://www.mocky.io/v2/5aa696133100001335e716e0",
       "config": {}
-   },
-   {
-        "id": "push",
-        "name": "push",
-        "type": "push",
-        "url": "https://ups-dm-myproject-1.193b.starter-ca-central-1.openshiftapps.com/",
-        "config": {}
-   }
+    },
+    {
+      "id": "push",
+      "name": "push",
+      "type": "push",
+      "url": "https://ups-dm-myproject-1.193b.starter-ca-central-1.openshiftapps.com/",
+      "config": {
+        "ios": {
+          "variantId": "f85015b4-a762-49a7-a36f-34a451f819a4",
+          "variantSecret": "978b35d6-7058-43b4-8c37-4dc30022ebda"
+        }
+      }
+    }
   ]
 }

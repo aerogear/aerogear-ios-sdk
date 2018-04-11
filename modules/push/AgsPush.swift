@@ -12,7 +12,12 @@ public class AgsPush {
 
     public static let deviceTokenKey = "AgsPushSDK.deviceToken"
     public static let apiPath = "rest/registry/device"
-    public static let instance: AgsPush = AgsPush(AgsCore.instance.getConfiguration(serviceName))
+
+    public static let instance: AgsPush = {
+        let config = AgsCore.instance.getConfiguration(serviceName)
+        let httpInterface = AgsCore.instance.getHttp()
+        return AgsPush(config, httpInterface)
+    }()
 
     struct DeviceRegistrationError {
         static let PushErrorDomain = "PushErrorDomain"
@@ -20,18 +25,26 @@ public class AgsPush {
         static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
 
-    let serverURL: URL
     let requestApi: AgsHttpRequestProtocol
+    let serverURL: URL
+    let credentials: UnifiedPushCredentials
 
     /**
      Initialise the push module
 
      - parameters:
         - mobileConfig: the configuration for the auth service from the service definition file
+        - requestApi: http implementation
      */
-    private init(_ mobileConfig: MobileService?) {
+    init(_ mobileConfig: MobileService?, _ requestApi: AgsHttpRequestProtocol) {
+        self.requestApi = requestApi
         self.serverURL = URL(string: (mobileConfig?.url)!)!
-        self.requestApi = AgsCore.instance.getHttp()
+
+        let pushSecurityConfig = mobileConfig?.config!["ios"]?.getObject()
+        let variant = pushSecurityConfig?["variantId"]?.getString()
+        let secret = pushSecurityConfig?["variantSecret"]?.getString()
+
+        self.credentials = UnifiedPushCredentials(variant!, secret!)
     }
 
     /**
@@ -48,13 +61,11 @@ public class AgsPush {
     */
     public func register(_ deviceToken: Data,
                          _ config: UnifiedPushConfig,
-                         _ credentials: UnifiedPushCredentials,
                          success: @escaping (() -> Void),
                          failure: @escaping ((Error) -> Void)) {
-
         let currentDevice = UIDevice()
 
-        let headers = buildAuthHeaders(credentials)
+        let headers = buildAuthHeaders(self.credentials)
 
         let postData = [
             "deviceToken": convertToString(deviceToken) as Any,
@@ -85,7 +96,7 @@ public class AgsPush {
     // Build headers used for Authentication
     fileprivate func buildAuthHeaders(_ credentials: UnifiedPushCredentials) -> [String: String] {
         // apply HTTP Basic Extract method
-        let basicAuthCredentials: Data! = "\(credentials.variantID):\(credentials.variantSecret)".data(using: String.Encoding.utf8)
+        let basicAuthCredentials: Data! = "\(self.credentials.variantID):\(self.credentials.variantSecret)".data(using: String.Encoding.utf8)
         let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         return ["Authorization": "Basic \(base64Encoded)"]
     }
