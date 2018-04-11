@@ -1,5 +1,5 @@
-@testable import AGSPush
 @testable import AGSCore
+@testable import AGSPush
 import UIKit
 import XCTest
 
@@ -14,11 +14,11 @@ class AgPushTests: XCTestCase {
 
     func testRegistrationWithServerShouldWork() {
         let registrationExpectation = expectation(description: "UPS registration")
-        let config = AgsCore.instance.getConfiguration("push");
-        
+        let config = AgsCore.instance.getConfiguration("push")
+
         let deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8)
         let request: MockHttpRequest = MockHttpRequest()
-        let push = AgsPush(config, request);
+        let push = AgsPush(config, request)
         // attemp to register
         push.register(
             deviceToken!,
