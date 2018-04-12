@@ -11,7 +11,6 @@ public typealias MetricsData = [String: Any]
 public protocol MetricsPublisher {
     /**
        Allows to publish metrics to external source
-
        - parameter payload: metrics payload containing all data to be sent
        - parameter handler: closure called when publish operation finished
      */
