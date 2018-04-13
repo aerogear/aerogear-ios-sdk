@@ -23,6 +23,7 @@
 		01AA3CAE207CD5760096D2EE /* Pods_AeroGearSdkExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126BB257CFC9A2A188E6B84 /* Pods_AeroGearSdkExampleTests.framework */; };
 		01AA3CB0207CD5760096D2EE /* mobile-services.json in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE75201257F300E763A5 /* mobile-services.json */; };
 		01AA3CBB207CDAE20096D2EE /* MetricsIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECD7E1E207BAFF8008DD3C1 /* MetricsIntegrationTests.swift */; };
+		1E0BBDD420809F940053703B /* MetricsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BBDD320809F940053703B /* MetricsServiceTests.swift */; };
 		4436E282BDD390473AD840EE /* Pods_AeroGearSdkExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126BB257CFC9A2A188E6B84 /* Pods_AeroGearSdkExampleTests.framework */; };
 		500FDA5E2058324C001E66B0 /* JwkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FDA5D2058324C001E66B0 /* JwkManagerTests.swift */; };
 		500FDA6020583F48001E66B0 /* MockJwk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500FDA5F20583F48001E66B0 /* MockJwk.swift */; };
@@ -90,13 +91,13 @@
 		018FBE75201257F300E763A5 /* mobile-services.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mobile-services.json"; sourceTree = "<group>"; };
 		01AA3CB6207CD5760096D2EE /* AeroGearSdkExampleIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearSdkExampleIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7A43AEBC8E2EEF4191ECB8 /* Pods_AeroGearSdkExampleIntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearSdkExampleIntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E0BBDD320809F940053703B /* MetricsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsServiceTests.swift; sourceTree = "<group>"; };
 		1E4CCBAD4A8932216C3DF790 /* Pods-AeroGearSdkExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample.release.xcconfig"; sourceTree = "<group>"; };
 		1ECD7E1E207BAFF8008DD3C1 /* MetricsIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsIntegrationTests.swift; sourceTree = "<group>"; };
 		500FDA5D2058324C001E66B0 /* JwkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JwkManagerTests.swift; sourceTree = "<group>"; };
 		500FDA5F20583F48001E66B0 /* MockJwk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJwk.swift; sourceTree = "<group>"; };
 		50F2A03F204EC7380071778E /* KeycloakConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConfigTests.swift; sourceTree = "<group>"; };
 		6372266C9F61265244A81632 /* ConfigParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigParserTests.swift; sourceTree = "<group>"; };
-		659F2A7D4D01A03C0143073E /* MetricsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsServiceTests.swift; sourceTree = "<group>"; };
 		744F18714F44DAF3A960E045 /* Pods-AeroGearSdkExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample.debug.xcconfig"; sourceTree = "<group>"; };
 		7DDD5B6111FAD967F8BF508F /* Pods-AeroGearSdkExampleIntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExampleIntegrationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FCEF41D5B3610C7EB6FB7CF /* Pods-AeroGearSdkExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,14 +167,6 @@
 			path = push;
 			sourceTree = "<group>";
 		};
-		01590FE12059880C0099677E /* push */ = {
-			isa = PBXGroup;
-			children = (
-				8AAC61A5207E430700638CB1 /* AgPushTests.swift */,
-			);
-			path = push;
-			sourceTree = "<group>";
-		};
 		018FBE4920123AEE00E763A5 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +176,7 @@
 				018FBE5320123AEE00E763A5 /* Products */,
 				73FD3EA9DB0E6E3866C5DE43 /* Pods */,
 				842886903733018D9DBFACE5 /* Frameworks */,
+				1E0BBDD2207FB2E90053703B /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,6 +238,14 @@
 			path = AeroGearSdkExampleIntegrationTests;
 			sourceTree = "<group>";
 		};
+		1E0BBDD2207FB2E90053703B /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8AAC61A5207E430700638CB1 /* AgPushTests.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		1ECD7E1D207BAFE6008DD3C1 /* metrics */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +275,8 @@
 			children = (
 				017F3707201F4014001A9009 /* ServiceConfigTests.swift */,
 				6372266C9F61265244A81632 /* ConfigParserTests.swift */,
-				659F2A7D4D01A03C0143073E /* MetricsServiceTests.swift */,
 				B3AC1A8A2049951900BEB12B /* MobileServiceTest.swift */,
+				1E0BBDD320809F940053703B /* MetricsServiceTests.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -750,6 +752,7 @@
 				018FBE6B20123AEE00E763A5 /* AeroGearSdkExampleTests.swift in Sources */,
 				B3AC1A83204815E000BEB12B /* AuthTests.swift in Sources */,
 				50F2A040204EC7380071778E /* KeycloakConfigTests.swift in Sources */,
+				1E0BBDD420809F940053703B /* MetricsServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,7 +988,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHPBX39444;
-				INFOPLIST_FILE = "AeroGearSdkExampleIntegrationTests/Info.plist";
+				INFOPLIST_FILE = AeroGearSdkExampleIntegrationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.aerogear.AeroGearSdkExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1003,7 +1006,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHPBX39444;
-				INFOPLIST_FILE = "AeroGearSdkExampleIntegrationTests/Info.plist";
+				INFOPLIST_FILE = AeroGearSdkExampleIntegrationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.aerogear.AeroGearSdkExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
