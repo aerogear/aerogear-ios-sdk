@@ -7,7 +7,7 @@ class MetricsServiceTest: XCTestCase {
         let metrics: MetricsPublishable = AgsCore.instance.getMetrics()
         XCTAssertNotNil(metrics)
     }
-
+    
     func testDeviceMetrics() {
         let metrics: DeviceMetrics = DeviceMetrics()
         XCTAssert(metrics.identifier == "device")
@@ -16,7 +16,7 @@ class MetricsServiceTest: XCTestCase {
         XCTAssertNotNil(data["platformVersion"])
         XCTAssertNotNil(data["device"])
     }
-
+    
     func testAppMetrics() {
         let metrics: AppMetrics = AppMetrics(AgsCore.getMetadata())
         let data: MetricsData = metrics.collect()
