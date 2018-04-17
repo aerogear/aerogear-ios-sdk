@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '9.0'
   s.ios.deployment_target = '9.0'
   s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-sdk.git',
-                     :branch => s.version.to_s }
+                     :tag => s.version.to_s }
   s.source_files = 'modules/core/**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
   s.dependency 'Alamofire', '~> 4.0'

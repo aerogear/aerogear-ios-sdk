@@ -13,10 +13,15 @@ Developers can use development pods. Please avoid releasing untested/not approve
 Prerelase script verify pod specification
 
 ----
-./scripts/release.sh
+./scripts/pre-release.sh
 ----
 
-=== Send pod to release
+=== Send Core pod to release
 ----
-pod trunk push AeroGearServices.podspec
+./scripts/release-core.sh
+----
+
+=== Release other SDK's pods
+----
+./scripts/release-modules.sh
 ----

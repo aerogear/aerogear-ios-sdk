@@ -1,6 +1,8 @@
 #!/bin/bash
 # Publish service modules
-MODULES="auth push"
+MODULES="AGSAuth AGSPush"
+SWIFT_VERSION=4.1
+
 echo "Lint pods specifications"
 for module in $MODULES
 do

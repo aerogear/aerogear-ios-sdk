@@ -33,8 +33,9 @@ use_frameworks!
 
 target :'YourTarget' do
     ## Require one of the AeroGear Services here
-    pod 'AeroGearServices/sync'
-    pod 'AeroGearServices/core'
+    pod 'AGSCore'
+    pod 'AGSPush'
+    pod 'AGSAuth'
 end
 ---- 
 
@@ -51,21 +52,15 @@ pod install
 
 == Getting Started with Swift
 
-1) Import the AgsCore in the application .
+1) Import SDK you want to use in the application.
+For example:
 
 [source,swift]
 ----
-   import AeroGearServices/core
+   import AGSAuth
 ----
 
-2) In the Swift file you want to use the SDK, import the appropriate library for the services you are using. The header file import convention is `import AgsServiceName`, as in the following examples:
-
-[source,swift]
-----
-   import AeroGearServices/sync
-----
-
-3) Use imported service library
+2) Use imported service library
 
 Please follow each individual service documentation for more information 
 about usage.
