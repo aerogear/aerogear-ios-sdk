@@ -1,6 +1,6 @@
 # AeroGear Services iOS Swift SDK
 
-AeroGear Services IOS Swift SDK (AGS)
+AeroGear Services iOS Swift SDK (AGS)
 
 ## Documentation
 

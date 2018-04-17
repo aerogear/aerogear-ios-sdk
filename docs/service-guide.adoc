@@ -28,12 +28,6 @@ See each script header for more information
 
 `./docs` - documentation for SDK. Contains documentation for each service
 
-`./AeroGearServices.podspec` - global pod specification that will be used for release purposes.
-While each module will have their own pod specification 
-
-`AeroGearServices.podspec` will aggregate all of them into single specification that 
-can be used to release changes under single namespace `AeroGearServices/ServiceName`
-
 === Core SDK 
 
 link:./core[Core SDK documentation]
