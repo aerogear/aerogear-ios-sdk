@@ -5,7 +5,7 @@ The Auth SDK uses OpenID Connect http://openid.net/specs/openid-connect-core-1_0
 '''
 
 === Prerequisite's
-. A running AeroGear auth service (Keycloak)
+. A running AeroGear Auth service (Keycloak)
 . Two iOS apps that have created and initialised with the Auth SDK module - link:README.adoc[AeroGear Services Auth SDK].
 
 '''

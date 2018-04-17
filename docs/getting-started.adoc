@@ -32,8 +32,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target :'YourTarget' do
-    ## Require one of the AeroGear Services here
-    pod 'AGSCore'
+    ## Require one of the AeroGear SDK's here
     pod 'AGSPush'
     pod 'AGSAuth'
 end
@@ -60,7 +59,7 @@ For example:
    import AGSAuth
 ----
 
-2) Use imported service library
+2) Use imported SDK library
 
-Please follow each individual service documentation for more information 
+Please follow each individual SDK documentation for more information 
 about usage.
