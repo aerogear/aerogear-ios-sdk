@@ -16,7 +16,6 @@
 		018FBE5B20123AEE00E763A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE5920123AEE00E763A5 /* Main.storyboard */; };
 		018FBE5D20123AEE00E763A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE5C20123AEE00E763A5 /* Assets.xcassets */; };
 		018FBE6020123AEE00E763A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE5E20123AEE00E763A5 /* LaunchScreen.storyboard */; };
-		018FBE6B20123AEE00E763A5 /* AeroGearSdkExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE6A20123AEE00E763A5 /* AeroGearSdkExampleTests.swift */; };
 		018FBE76201257F300E763A5 /* mobile-services.json in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE75201257F300E763A5 /* mobile-services.json */; };
 		018FBE77201257F300E763A5 /* mobile-services.json in Resources */ = {isa = PBXBuildFile; fileRef = 018FBE75201257F300E763A5 /* mobile-services.json */; };
 		01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372266C9F61265244A81632 /* ConfigParserTests.swift */; };
@@ -86,7 +85,6 @@
 		018FBE5F20123AEE00E763A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		018FBE6120123AEE00E763A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		018FBE6620123AEE00E763A5 /* AeroGearSdkExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearSdkExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		018FBE6A20123AEE00E763A5 /* AeroGearSdkExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AeroGearSdkExampleTests.swift; sourceTree = "<group>"; };
 		018FBE6C20123AEE00E763A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		018FBE75201257F300E763A5 /* mobile-services.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mobile-services.json"; sourceTree = "<group>"; };
 		01AA3CB6207CD5760096D2EE /* AeroGearSdkExampleIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearSdkExampleIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,7 +215,6 @@
 				B3AC1A87204825DE00BEB12B /* mocks */,
 				B3AC1A81204815E000BEB12B /* auth */,
 				63722015BF5E5190986AE905 /* core */,
-				018FBE6A20123AEE00E763A5 /* AeroGearSdkExampleTests.swift */,
 				018FBE6C20123AEE00E763A5 /* Info.plist */,
 			);
 			path = AeroGearSdkExampleTests;
@@ -405,7 +402,6 @@
 				018FBE4F20123AEE00E763A5 /* Frameworks */,
 				018FBE5020123AEE00E763A5 /* Resources */,
 				393D636BB40B732A8218624F /* [CP] Embed Pods Frameworks */,
-				64C56F2E49D34707F6447690 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -424,8 +420,6 @@
 				018FBE6220123AEE00E763A5 /* Sources */,
 				018FBE6320123AEE00E763A5 /* Frameworks */,
 				018FBE6420123AEE00E763A5 /* Resources */,
-				57D6FA75AE4C9A802B6691B9 /* [CP] Embed Pods Frameworks */,
-				DBB741977125C11688F80EC3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -445,8 +439,6 @@
 				01AA3C99207CD5760096D2EE /* Sources */,
 				01AA3CAD207CD5760096D2EE /* Frameworks */,
 				01AA3CAF207CD5760096D2EE /* Resources */,
-				01AA3CB1207CD5760096D2EE /* [CP] Embed Pods Frameworks */,
-				01AA3CB2207CD5760096D2EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -566,36 +558,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		01AA3CB1207CD5760096D2EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		01AA3CB2207CD5760096D2EE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		393D636BB40B732A8218624F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -626,36 +588,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		57D6FA75AE4C9A802B6691B9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		64C56F2E49D34707F6447690 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8EF84F6654BC56765EF987EB /* [CP] Check Pods Manifest.lock */ = {
@@ -692,21 +624,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBB741977125C11688F80EC3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -749,7 +666,6 @@
 				8AAC61A6207E430700638CB1 /* AgPushTests.swift in Sources */,
 				B34F3B83204F44DD005970E1 /* Configurations.swift in Sources */,
 				B3AC1A8D2049E11900BEB12B /* UsersTests.swift in Sources */,
-				018FBE6B20123AEE00E763A5 /* AeroGearSdkExampleTests.swift in Sources */,
 				B3AC1A83204815E000BEB12B /* AuthTests.swift in Sources */,
 				50F2A040204EC7380071778E /* KeycloakConfigTests.swift in Sources */,
 				1E0BBDD420809F940053703B /* MetricsServiceTests.swift in Sources */,

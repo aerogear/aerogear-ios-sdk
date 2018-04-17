@@ -7,7 +7,7 @@ echo "Update SDK Version to $SDK_VERSION"
 sed -i.bak -E "s/DEVELOPMENT/${SDK_VERSION}/" ./modules/core/data/AgsMetadata.swift
 for module in $MODULES
 do
-   sed -i.bak -E "s/\.version([ ]*)=([ ]*)(.*)/\.version\1=\2'$SDK_VERSION'/g" ./modules/$module/*.podspec
+   sed -i.bak -E "s/\.version([ ]*)=([ ]*)(.*)/\.version\1=\2'$SDK_VERSION'/g" ./$module.podspec
 done
 echo "SDK version is updated to $SDK_VERSION"
 
