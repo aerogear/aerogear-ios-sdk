@@ -20,21 +20,3 @@ target 'AeroGearSdkExample' do
     # Pods for testing
   end
 end
-
-# target 'AeroGearSdkCore' do
-#   use_frameworks!
-#   pod 'AGSCore', :path => '../modules/core'
-
-#   target 'AeroGearSdkCoreTests' do
-#     inherit! :search_paths
-#   end
-# end
-
-# target 'AeroGearSdkAuth' do
-#   use_frameworks!
-#   pod 'AGSAuth', :path => '../modules/auth'
-
-#   target 'AeroGearSdkAuthTests' do
-#     inherit! :search_paths
-#   end
-# end
