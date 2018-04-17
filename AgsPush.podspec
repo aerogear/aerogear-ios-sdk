@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-sdk.git',
                      :tag => s.version}
-  s.source_files = '**/*.swift'
+  s.source_files = 'modules/push/**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
   ## Default core dependency
   s.dependency 'AGSCore', '~> 1.0.0'

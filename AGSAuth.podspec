@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
-  s.name         = 'AGSCore'
+  s.name         = 'AGSAuth'
   s.version      = '1.0.0'
-  s.summary      = 'AeroGear Services Core SDK for iOS.'
+  s.summary      = 'AeroGear Auth Service'
 
-  s.description  = 'The AeroGear Core SDK for iOS provides a library to interact OpenShift based mobile services.'
+  s.description  = 'AeroGear Auth SDK for iOS'
 
   s.homepage     = 'http://aerogear.org'
   s.license      = 'Apache License, Version 2.0'
@@ -12,9 +12,12 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-sdk.git',
                      :tag => s.version}
-  s.source_files = '**/*.swift'
+  s.source_files = 'modules/auth/**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
-  s.dependency 'Alamofire', '~> 4.0'
-  s.dependency 'XCGLogger', '~> 6.0'
+  ## Default core dependency
+  s.dependency 'AGSCore', '~> 1.0.0'
+  ## Add other dependencies if needed
+  s.dependency 'AppAuth', '~> 0.92'
+  s.dependency 'SwiftKeychainWrapper', '~> 3.0.1'
   s.requires_arc = true
 end
