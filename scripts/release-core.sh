@@ -5,7 +5,6 @@ set -eo pipefail
 
 SWIFT_VERSION=4.1
 
-
 echo "Lint library locally before attepting to fetch remote sources "
 bundle exec pod lib lint AGSCore.podspec  --swift-version=${SWIFT_VERSION} --no-subspecs --no-clean --allow-warnings --verbose
 if [ $? -eq 0 ]; then
