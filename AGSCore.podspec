@@ -10,9 +10,9 @@ Pod::Spec.new do |s|
   s.authors      = 'AeroGear'
   s.platform     = :ios, '9.0'
   s.ios.deployment_target = '9.0'
-  s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-sdk.git',
-                     :tag => s.version}
-  s.source_files = '**/*.swift'
+  s.source       = { :git => 'https://github.com/wtrocki/aerogear-ios-sdk.git',
+                     :branch => s.version}
+  s.source_files = 'modules/core/**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
   s.dependency 'Alamofire', '~> 4.0'
   s.dependency 'XCGLogger', '~> 6.0'

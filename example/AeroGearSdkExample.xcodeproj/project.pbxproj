@@ -405,7 +405,6 @@
 				018FBE4F20123AEE00E763A5 /* Frameworks */,
 				018FBE5020123AEE00E763A5 /* Resources */,
 				393D636BB40B732A8218624F /* [CP] Embed Pods Frameworks */,
-				64C56F2E49D34707F6447690 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -424,8 +423,6 @@
 				018FBE6220123AEE00E763A5 /* Sources */,
 				018FBE6320123AEE00E763A5 /* Frameworks */,
 				018FBE6420123AEE00E763A5 /* Resources */,
-				57D6FA75AE4C9A802B6691B9 /* [CP] Embed Pods Frameworks */,
-				DBB741977125C11688F80EC3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -445,8 +442,6 @@
 				01AA3C99207CD5760096D2EE /* Sources */,
 				01AA3CAD207CD5760096D2EE /* Frameworks */,
 				01AA3CAF207CD5760096D2EE /* Resources */,
-				01AA3CB1207CD5760096D2EE /* [CP] Embed Pods Frameworks */,
-				01AA3CB2207CD5760096D2EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -566,36 +561,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		01AA3CB1207CD5760096D2EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		01AA3CB2207CD5760096D2EE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		393D636BB40B732A8218624F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -626,36 +591,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		57D6FA75AE4C9A802B6691B9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		64C56F2E49D34707F6447690 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8EF84F6654BC56765EF987EB /* [CP] Check Pods Manifest.lock */ = {
@@ -692,21 +627,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBB741977125C11688F80EC3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
