@@ -2,6 +2,21 @@ import AGSCore
 import Foundation
 import SwiftKeychainWrapper
 
+/** Represents the structure of a JSON Web Key Set */
+public struct Jwks: Codable {
+    public let keys: [JwksContent]
+}
+
+/** Represents a key in a JSON Web Key Set */
+public struct JwksContent: Codable {
+    public let alg: String
+    public let kty: String
+    public let use: String
+    public let n: String
+    public let e: String
+    public let kid: String
+}
+
 /**
   Manages JSON Web Key Set(JWKS)
  */

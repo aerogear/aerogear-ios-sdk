@@ -3,6 +3,7 @@
 //  AGSAuth
 
 import Foundation
+import KTVJSONWebToken
 
 /**
  Represents the user roles. It has 2 types
@@ -198,8 +199,8 @@ public struct User {
         else {
             return nil
         }
-        let payload = jwt.payload
-        guard let keycloakUserProfile = try? JSONDecoder().decode(KeycloakUserProfile.self, from: payload) else {
+        
+        guard let keycloakUserProfile = try? JSONDecoder().decode(KeycloakUserProfile.self, from: jwt.decodedDataForPart(JSONWebToken.Part.payload)) else {
             return nil
         }
         accessToken = token

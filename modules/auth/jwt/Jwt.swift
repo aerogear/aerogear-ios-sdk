@@ -1,11 +1,5 @@
 import Foundation
-
-/** Represents a JSON Web Token. */
-struct JSONWebToken {
-    let header: String
-    let payload: Data
-    let signature: String
-}
+import KTVJSONWebToken
 
 /**
  Converts a string to base64 encoded data.
@@ -23,18 +17,20 @@ func base64Decode(_ input: String) -> Data? {
     if base64.count % 4 != 0 {
         base64.append(String(repeating: "=", count: 4 - base64.count % 4))
     }
+    if (Data(base64Encoded: base64) == nil) {
+        
+    }
     return Data(base64Encoded: base64)
 }
 
-/**
- Responible for decoding JWT strings.
-
- - ToDo: use a proper library and add verification.
- */
+/** Responible for decoding and verifying Json Web Tokens. */
 class Jwt {
-    /** Represetns errors that can occur while decoding a JWT */
+    /** Represetns errors that can occur while decoding or validating a JWT */
     enum Errors: Error {
         case invalidToken(String)
+        case invalidModulus(String)
+        case invalidExponent(String)
+        case generatingPublicKey(String, Error)
     }
 
     /**
@@ -48,20 +44,51 @@ class Jwt {
      - returns: `JSONWebToken`
      */
     public static func decode(_ jwt: String) throws -> JSONWebToken {
-        let parts = jwt.components(separatedBy: ".")
-        if parts.count != 3 {
-            throw Errors.invalidToken("wrong segements")
+        do {
+            return try JSONWebToken(string: jwt)
+        } catch {
+            throw Errors.invalidToken("Error decoding JWT")
         }
-        let headerValue = parts[0]
-        let payloadValue = parts[1]
-        let signatureValue = parts[2]
-
-        let payload = base64Decode(payloadValue)
-
-        guard let _ = payload else {
-            throw Errors.invalidToken("can not decode payload")
+    }
+    
+    /**
+     Verifies a JSON Web Token.
+     
+     - parameters:
+        - jwks: the JSON Web Key Set to verify the JWT against
+        - jwt: the JSON Web Token to be verified
+     
+     - throws: an `invalidModulus` error if the decoded modulus is nil, an `invalidExponent` error if the decoded exponent is nil or a `generatingPublicKey` error if the RSA public key could not be generated
+     
+     - returns: true if the JWT is valid, false otherwise
+     */
+    public static func verifyJwt(jwks: Jwks, jwt: String) throws -> Bool {
+        guard let modulus = base64Decode(jwks.keys[0].n) else {
+            throw Errors.invalidModulus("Decoded modulus cannot be nil")
+        }
+        guard let exponent = base64Decode(jwks.keys[0].e) else {
+            throw Errors.invalidExponent("Decoded exponent cannot be nil")
         }
 
-        return JSONWebToken(header: headerValue, payload: payload!, signature: signatureValue)
+        do {
+            let publicKey: RSAKey = try RSAKey.registerOrUpdateKey(modulus: modulus, exponent: exponent, tag: "publicKey")
+            
+            let jwt = try Jwt.decode(jwt)
+            
+            let validator = RegisteredClaimValidator.expiration &
+                RegisteredClaimValidator.notBefore.optional &
+            RSAPKCS1Verifier(key: publicKey, hashFunction: .sha256)
+            
+            let validationResult = validator.validateToken(jwt)
+            
+            if (validationResult.isValid) {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            throw Errors.generatingPublicKey("Error creating RSA public Key using the provided modulus and exponent", error)
+        }
     }
 }
+
