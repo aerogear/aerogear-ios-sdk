@@ -12,7 +12,9 @@ public struct JwkContent: Codable {
     public let alg: String
     public let kty: String
     public let use: String
+    // swiftlint:disable identifier_name
     public let n: String
+    // swiftlint:disable identifier_name
     public let e: String
     public let kid: String
 }
