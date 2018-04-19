@@ -27,6 +27,7 @@ class JwtTests: XCTestCase {
     var jwks: Jwks!
     var malformedModulusJwks: Jwks!
     var malformedExponentJwks: Jwks!
+    var aesJwks: Jwks!
     
     override func setUp() {
         super.setUp()
@@ -34,6 +35,7 @@ class JwtTests: XCTestCase {
         jwks = getMockJwksData()
         malformedModulusJwks = getMockMalformedModulusJwksData()
         malformedExponentJwks = getMockMalformedExponentJwksData()
+        aesJwks = getMockAESJwksData()
     }
 
     override func tearDown() {
@@ -75,4 +77,7 @@ class JwtTests: XCTestCase {
         XCTAssertThrowsError(try Jwt.verifyJwt(jwks: malformedExponentJwks, jwt: validToken))
     }
     
+    func testVerifyClaimsAESJwks() {
+        XCTAssertThrowsError(try Jwt.verifyJwt(jwks: aesJwks, jwt: validToken))
+    }
 }

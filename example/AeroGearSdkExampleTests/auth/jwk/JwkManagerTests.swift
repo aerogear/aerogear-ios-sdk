@@ -23,7 +23,7 @@ class JwkManagerTests: XCTestCase {
 
         // create JWKS
         let jwks = try? JSONSerialization.data(withJSONObject: getMockJwks(), options: [])
-        let jwksString = String(data: jwks!, encoding: String.Encoding.ascii)
+        let jwksString = String(data: jwks!, encoding: .utf8)
 
         // persist JWKS & date
         KeychainWrapper.standard.set(jwksString!, forKey: "myproject_jwks_content")
@@ -39,8 +39,7 @@ class JwkManagerTests: XCTestCase {
 
     func testLoadExistingJwks() {
         let jwksResult = jwksManagerToTest?.load(keycloakConfig!)
-        let jwksKey: [String: String] = jwksResult!["keys"] as! [String: String]
-        XCTAssertEqual(jwksKey["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
+        XCTAssertEqual(jwksResult!.keys[0].kid, "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
     }
 
     func testFetchJwksIfNeededForceFetch() {

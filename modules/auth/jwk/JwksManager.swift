@@ -4,17 +4,35 @@ import SwiftKeychainWrapper
 
 /** Represents the structure of a JSON Web Key Set */
 public struct Jwks: Codable {
-    public let keys: [JwksContent]
+    public let keys: [JwkContent]
 }
 
 /** Represents a key in a JSON Web Key Set */
-public struct JwksContent: Codable {
+public struct JwkContent: Codable {
     public let alg: String
     public let kty: String
     public let use: String
     public let n: String
     public let e: String
     public let kid: String
+}
+
+/**
+ Performs RSA Key lookup in JSON Web Key Set
+ 
+ - parameters:
+    - jwks: JSON Web Key Set to do the lookup
+ 
+ - returns: the RSA JSON Web Key or nil if not found.
+ */
+public func rsaJwk(jwks: Jwks) -> JwkContent? {
+    var rsaJwk: JwkContent?
+    for (_, jwk) in jwks.keys.enumerated() {
+        if (jwk.kty == "RSA") {
+            rsaJwk = jwk
+        }
+    }
+    return rsaJwk
 }
 
 /**
@@ -47,14 +65,15 @@ class JwksManager {
         - keycloakConfig: the keycloak service configuration used to load the JWKS
      - returns: cached JWKS or nil if it doesn't exist
     */
-    public func load(_ keycloakConfig: KeycloakConfig) -> [String: Any]? {
+    public func load(_ keycloakConfig: KeycloakConfig) -> Jwks? {
         let namespace = keycloakConfig.realmName
         let jwksEntryName = buildEntryNameForJwksContent(namespace)
         if let jwksContent = KeychainWrapper.standard.string(forKey: jwksEntryName) {
             fetchJwksIfNeeded(keycloakConfig, false)
-            let jwksData = jwksContent.data(using: .utf8)
-            let jwks = try? JSONSerialization.jsonObject(with: jwksData!, options: .mutableLeaves)
-            return jwks as? [String: Any]
+            if let jwksData = jwksContent.data(using: .utf8) {
+                let jwks = try? JSONDecoder().decode(Jwks.self, from: jwksData)
+                return jwks
+            }
         }
         fetchJwksIfNeeded(keycloakConfig, true)
         return nil

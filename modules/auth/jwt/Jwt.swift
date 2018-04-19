@@ -17,9 +17,6 @@ func base64Decode(_ input: String) -> Data? {
     if base64.count % 4 != 0 {
         base64.append(String(repeating: "=", count: 4 - base64.count % 4))
     }
-    if (Data(base64Encoded: base64) == nil) {
-        
-    }
     return Data(base64Encoded: base64)
 }
 
@@ -28,6 +25,7 @@ class Jwt {
     /** Represetns errors that can occur while decoding or validating a JWT */
     enum Errors: Error {
         case invalidToken(String)
+        case noRSAKeyFound(String)
         case invalidModulus(String)
         case invalidExponent(String)
         case generatingPublicKey(String, Error)
@@ -63,16 +61,19 @@ class Jwt {
      - returns: true if the JWT is valid, false otherwise
      */
     public static func verifyJwt(jwks: Jwks, jwt: String) throws -> Bool {
-        guard let modulus = base64Decode(jwks.keys[0].n) else {
+        guard let jwk = rsaJwk(jwks: jwks) else {
+            throw Errors.noRSAKeyFound("Could not find RSA JSON Web Key from JSON Web Key Set provided")
+        }
+        guard let modulus = base64Decode(jwk.n) else {
             throw Errors.invalidModulus("Decoded modulus cannot be nil")
         }
-        guard let exponent = base64Decode(jwks.keys[0].e) else {
+        guard let exponent = base64Decode(jwk.e) else {
             throw Errors.invalidExponent("Decoded exponent cannot be nil")
         }
 
         do {
             let publicKey: RSAKey = try RSAKey.registerOrUpdateKey(modulus: modulus, exponent: exponent, tag: "publicKey")
-            
+              
             let jwt = try Jwt.decode(jwt)
             
             let validator = RegisteredClaimValidator.expiration &
@@ -86,8 +87,8 @@ class Jwt {
             } else {
                 return false
             }
-        } catch {
-            throw Errors.generatingPublicKey("Error creating RSA public Key using the provided modulus and exponent", error)
+        } catch RSAKey.KeyUtilError.badKeyFormat {
+            throw Errors.generatingPublicKey("Error creating RSA public Key using the provided modulus and exponent", RSAKey.KeyUtilError.badKeyFormat)
         }
     }
 }
