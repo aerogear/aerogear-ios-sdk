@@ -20,6 +20,13 @@ func base64Decode(_ input: String) -> Data? {
     return Data(base64Encoded: base64)
 }
 
+/** Describes the header of a JSON Web Token */
+public struct JwtHeader: Codable {
+    public let alg: String
+    public let typ: String
+    public let kid: String
+}
+
 /** Responible for decoding and verifying Json Web Tokens. */
 class Jwt {
     /** Represetns errors that can occur while decoding or validating a JWT */
@@ -61,7 +68,11 @@ class Jwt {
      - returns: true if the JWT is valid, false otherwise
      */
     public static func verifyJwt(jwks: Jwks, jwt: String) throws -> Bool {
-        guard let jwk = rsaJwk(jwks: jwks) else {
+        let jwt = try Jwt.decode(jwt)
+        let jwtHeaderData = jwt.decodedDataForPart(JSONWebToken.Part.header)
+        let jwtHeader = try JSONDecoder().decode(JwtHeader.self, from: jwtHeaderData)
+        
+        guard let jwk = rsaJwk(jwks: jwks, kid: jwtHeader.kid) else {
             throw Errors.noRSAKeyFound("Could not find RSA JSON Web Key from JSON Web Key Set provided")
         }
         guard let modulus = base64Decode(jwk.n) else {
@@ -73,8 +84,6 @@ class Jwt {
 
         do {
             let publicKey: RSAKey = try RSAKey.registerOrUpdateKey(modulus: modulus, exponent: exponent, tag: "publicKey")
-              
-            let jwt = try Jwt.decode(jwt)
             
             let validator = RegisteredClaimValidator.expiration &
                 RegisteredClaimValidator.notBefore.optional &

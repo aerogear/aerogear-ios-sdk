@@ -24,13 +24,14 @@ public struct JwkContent: Codable {
  
  - parameters:
     - jwks: JSON Web Key Set to do the lookup
+    - kid: the key identifier in the header of the JSON Web Token
  
  - returns: the RSA JSON Web Key or nil if not found.
  */
-public func rsaJwk(jwks: Jwks) -> JwkContent? {
+public func rsaJwk(jwks: Jwks, kid: String) -> JwkContent? {
     var rsaJwk: JwkContent?
     for (_, jwk) in jwks.keys.enumerated() {
-        if (jwk.kty == "RSA") {
+        if (jwk.kid == kid) {
             rsaJwk = jwk
         }
     }
