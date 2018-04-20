@@ -36,7 +36,24 @@ Update the version number in the `VERSION` file at the root of the repository. T
 ./scripts/prep-release.sh
 --
 
-You should now see the new version number inserted into the various `.podspec` files. Commit these changes and open a Pull Request to `master.`
+Use `git status` to verify that the version numbers in the correct files have been updated.
+
+[source, bash]
+--
+$ git status
+On branch release-x.y.z
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   AGSAuth.podspec
+        modified:   AGSCore.podspec
+        modified:   AgsPush.podspec
+        modified:   VERSION
+        modified:   modules/core/data/AgsMetadata.swift
+--
+
+Commit and push these changes, then open a Pull Request to `master`.
 
 [source, bash]
 --
