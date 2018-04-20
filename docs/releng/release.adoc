@@ -11,10 +11,10 @@ The release process takes place in CircleCI. CircleCI notices a new release bein
 
 * A standard build job runs, i.e. the code is built and tested.
 * If the build is successful then a release job runs.
-  * The podspec files are validated to make sure all the version numbers match
-  * The Release tag is validated to make sure it matches the version numbers in the podspec files
-  * The Core SDK is released first
-  * The associated SDKs are released.
+  ** The podspec files are validated to make sure all the version numbers match
+  ** The Release tag is validated to make sure it matches the version numbers in the podspec files
+  ** The Core SDK is released first
+  ** The associated SDKs are released.
 
 A small amount of preparation needs to take place before this process kicks off. Version numbers need to be updated accordingly using the scripts provided.
 
