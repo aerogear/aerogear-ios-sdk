@@ -61,8 +61,7 @@ class JwkManagerTests: XCTestCase {
         var onCompletedCalled = false
         jwksManagerToTest?.fetchJwks(keycloakConfig!, onCompleted: { response, error in
             XCTAssertNil(error)
-            let jwksKey: [String: String] = response!["keys"] as! [String: String]
-            XCTAssertEqual(jwksKey["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
+            XCTAssertEqual(response!.keys[0].kid, "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
             onCompletedCalled = true
         })
         XCTAssertTrue(onCompletedCalled)
@@ -72,8 +71,7 @@ class JwkManagerTests: XCTestCase {
         jwksManagerToTest?.fetchJwks(keycloakConfig!)
         let persistedContent = KeychainWrapper.standard.string(forKey: "myproject_jwks_content")
         let jwksData = persistedContent?.data(using: .utf8)
-        let jwks = try? JSONSerialization.jsonObject(with: jwksData!, options: .mutableLeaves) as! [String: Any]
-        let jwksKeys = jwks!["keys"] as! [String: String]
-        XCTAssertEqual(jwksKeys["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
+        let jwks = try! JSONDecoder().decode(Jwks.self, from: jwksData!)
+        XCTAssertEqual(jwks.keys[0].kid, "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
     }
 }

@@ -108,7 +108,7 @@ class JwksManager {
         - onCompleted: callback function to ebe invoked when the request is complete. Defaults to nil
 
     */
-    public func fetchJwks(_ keycloakConfig: KeycloakConfig, onCompleted: (([String: Any]?, Error?) -> Void)? = nil) {
+    public func fetchJwks(_ keycloakConfig: KeycloakConfig, onCompleted: ((Jwks?, Error?) -> Void)? = nil) {
         let jwksUrl = keycloakConfig.jwksUrl
         http.get(jwksUrl, params: nil, headers: nil, { (response) -> Void in
             if let error = response.error {
@@ -117,12 +117,17 @@ class JwksManager {
                     return onCompleted!(nil, error)
                 }
             } else if let response = response.response as? [String: Any] {
+                var responseData: Data?
                 if let resData = try? JSONSerialization.data(withJSONObject: response, options: []) {
+                    responseData = resData
                     let resString = String(data: resData, encoding: .utf8)
                     self.persistJwks(keycloakConfig.realmName, resString!)
                 }
                 if onCompleted != nil {
-                    return onCompleted!(response, nil)
+                    if let resData = responseData {
+                        let jwksResponse = try? JSONDecoder().decode(Jwks.self, from: resData)
+                        return onCompleted!(jwksResponse, nil)
+                    }
                 }
             }
         })
