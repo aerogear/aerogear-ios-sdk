@@ -23,7 +23,7 @@ class JwkManagerTests: XCTestCase {
 
         // create JWKS
         let jwks = try? JSONSerialization.data(withJSONObject: getMockJwks(), options: [])
-        let jwksString = String(data: jwks!, encoding: String.Encoding.ascii)
+        let jwksString = String(data: jwks!, encoding: .utf8)
 
         // persist JWKS & date
         KeychainWrapper.standard.set(jwksString!, forKey: "myproject_jwks_content")
@@ -39,8 +39,7 @@ class JwkManagerTests: XCTestCase {
 
     func testLoadExistingJwks() {
         let jwksResult = jwksManagerToTest?.load(keycloakConfig!)
-        let jwksKey: [String: String] = jwksResult!["keys"] as! [String: String]
-        XCTAssertEqual(jwksKey["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
+        XCTAssertEqual(jwksResult!.keys[0].kid, "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
     }
 
     func testFetchJwksIfNeededForceFetch() {
@@ -62,8 +61,7 @@ class JwkManagerTests: XCTestCase {
         var onCompletedCalled = false
         jwksManagerToTest?.fetchJwks(keycloakConfig!, onCompleted: { response, error in
             XCTAssertNil(error)
-            let jwksKey: [String: String] = response!["keys"] as! [String: String]
-            XCTAssertEqual(jwksKey["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
+            XCTAssertEqual(response!.keys[0].kid, "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
             onCompletedCalled = true
         })
         XCTAssertTrue(onCompletedCalled)
@@ -73,8 +71,7 @@ class JwkManagerTests: XCTestCase {
         jwksManagerToTest?.fetchJwks(keycloakConfig!)
         let persistedContent = KeychainWrapper.standard.string(forKey: "myproject_jwks_content")
         let jwksData = persistedContent?.data(using: .utf8)
-        let jwks = try? JSONSerialization.jsonObject(with: jwksData!, options: .mutableLeaves) as! [String: Any]
-        let jwksKeys = jwks!["keys"] as! [String: String]
-        XCTAssertEqual(jwksKeys["kid"], "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
+        let jwks = try! JSONDecoder().decode(Jwks.self, from: jwksData!)
+        XCTAssertEqual(jwks.keys[0].kid, "adSoyXNAgQxV43eqHSiRZf6hN9ytvBNQyb2fFSdCTVM")
     }
 }
