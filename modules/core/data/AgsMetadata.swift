@@ -7,7 +7,7 @@ public struct AgsMetaData {
     /** Version of Core SDK */
     // NOTE: This version is being replacted by automation script
     public let sdkVersion = "0.2.0"
-    
+
     /** Unique client id */
     public var clientId: String!
 
