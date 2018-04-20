@@ -5,7 +5,7 @@ The release process results in new versions of the Core and associated SDKs bein
 For more info about cocoapods releases please visit:
 https://guides.cocoapods.org/making/specs-and-specs-repo.html
 
-=== How do Releases Work?
+=== How Releases Work
 
 The release process takes place in CircleCI. CircleCI notices a new release being created and kicks off a special release workflow. The following steps take place:
 
