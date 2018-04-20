@@ -60,9 +60,9 @@ Commit and push these changes, then open a Pull Request to `master`.
 git commit -am 'release version x.y.z'
 --
 
-=== How to Release
-
 Once your changes have been merged to master, you can continue and release to Cocoapods.
+
+=== How to Release
 
 To kick off a release to Cocoapods, simply link:https://help.github.com/articles/creating-releases/[Create a Release] in Github. **You must use the exact `x.y.z` format** for the release tag or the release will fail.
 
