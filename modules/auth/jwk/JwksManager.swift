@@ -113,8 +113,8 @@ class JwksManager {
         http.get(jwksUrl, params: nil, headers: nil, { (response) -> Void in
             if let error = response.error {
                 AgsCore.logger.error("Error fetching JWKS: \(error)")
-                if onCompleted != nil {
-                    return onCompleted!(nil, error)
+                if let callback = onCompleted {
+                    return callback(nil, error)
                 }
             } else if let response = response.response as? [String: Any] {
                 var responseData: Data?
@@ -123,10 +123,10 @@ class JwksManager {
                     let resString = String(data: resData, encoding: .utf8)
                     self.persistJwks(keycloakConfig.realmName, resString!)
                 }
-                if onCompleted != nil {
+                if let callback = onCompleted {
                     if let resData = responseData {
                         let jwksResponse = try? JSONDecoder().decode(Jwks.self, from: resData)
-                        return onCompleted!(jwksResponse, nil)
+                        return callback(jwksResponse, nil)
                     }
                 }
             }
