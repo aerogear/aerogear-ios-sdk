@@ -29,11 +29,11 @@ jobs:
       - restore_cache:
           keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
-          
+
       # Install gems.
       - run:
           name: Bundle install
-          command: bundle check || bundle install
+          command: bundle install
           environment:
             BUNDLE_JOBS: 4
             BUNDLE_RETRY: 3
@@ -91,14 +91,10 @@ jobs:
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
-      - restore_cache:
-          keys:
-            - v1-gems-{{ checksum "Gemfile.lock" }}
-
       # Install gems.
       - run:
           name: Bundle install
-          command: bundle check || bundle install
+          command: bundle install
           environment:
             BUNDLE_JOBS: 4
             BUNDLE_RETRY: 3
@@ -115,12 +111,8 @@ jobs:
           command: TAG=$CIRCLE_TAG ./scripts/validate-release.sh
 
       - run:
-          name: Release Core Module
-          command: ./scripts/release-core.sh
-
-      - run:
-          name: Release Core Module
-          command: ./scripts/release-modules.sh
+          name: Release modules to Cocoapods
+          command: ./scripts/release.sh
 
 workflows:
   version: 2
