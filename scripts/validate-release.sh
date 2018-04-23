@@ -16,7 +16,7 @@ fi
 # validate that TAG == SDK_VERSION
 if [[ $TAG != $SDK_VERSION ]]; then
   echo "tag $TAG is not the same as sdk version $SDK_VERSION"
-  exit
+  exit 1
 fi
 
 ## check each podspec and ensure version numbers match
@@ -31,7 +31,7 @@ do
      echo "$specname valid"
    else
      echo "version number mismatch in $specname"
-     exit 1;
+     exit 1
    fi
 done
 
