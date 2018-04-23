@@ -72,54 +72,54 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install lint
-        command: brew install swiftlint
+          name: Install lint
+          command: brew install swiftlint
 
       - run:
-        name: Check style using swiftlint
-        command: swiftlint
+          name: Check style using swiftlint
+          command: swiftlint
 
       - run:
-        name: Set Ruby Version
-        command:  echo "ruby-2.4" > ~/.ruby-version
+          name: Set Ruby Version
+          command:  echo "ruby-2.4" > ~/.ruby-version
 
       - restore_cache:
-        keys:
-          - v1-gems-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v1-gems-{{ checksum "Gemfile.lock" }}
       
       # Install gems.
       - run:
-        name: Bundle install
-        command: bundle check || bundle install
-        environment:
-          BUNDLE_JOBS: 4
-          BUNDLE_RETRY: 3
-          # This is the path where all the gems will be installed, and
-          # which CircleCI will later cache.
-          BUNDLE_PATH: vendor/bundle
+          name: Bundle install
+          command: bundle check || bundle install
+          environment:
+            BUNDLE_JOBS: 4
+            BUNDLE_RETRY: 3
+            # This is the path where all the gems will be installed, and
+            # which CircleCI will later cache.
+            BUNDLE_PATH: vendor/bundle
       - save_cache:
-        key: v1-gems-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+          key: v1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
       # Install CocoaPods
       - run:
-        name: Install CocoaPods
-        working_directory: ./example
-        command: |
-          curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+          name: Install CocoaPods
+          working_directory: ./example
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
       - run:
-        name: Validate Release
-        command: TAG=$CIRCLE_TAG ./scripts/validate-release.sh
+          name: Validate Release
+          command: TAG=$CIRCLE_TAG ./scripts/validate-release.sh
 
       - run:
-        name: Release Core Module
-        command: ./scripts/release-core.sh
+          name: Release Core Module
+          command: ./scripts/release-core.sh
 
       - run:
-        name: Release Core Module
-        command: ./scripts/release-modules.sh
+          name: Release Core Module
+          command: ./scripts/release-modules.sh
 
 workflows:
   version: 2
