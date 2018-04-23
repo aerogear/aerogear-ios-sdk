@@ -29,11 +29,11 @@ jobs:
       - restore_cache:
           keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
-          
+
       # Install gems.
       - run:
           name: Bundle install
-          command: bundle check || bundle install
+          command: bundle install
           environment:
             BUNDLE_JOBS: 4
             BUNDLE_RETRY: 3
@@ -98,7 +98,7 @@ jobs:
       # Install gems.
       - run:
           name: Bundle install
-          command: bundle check || bundle install
+          command: bundle install
           environment:
             BUNDLE_JOBS: 4
             BUNDLE_RETRY: 3
