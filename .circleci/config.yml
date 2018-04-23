@@ -18,9 +18,18 @@ jobs:
           name: Set Ruby Version
           command:  echo "ruby-2.4" > ~/.ruby-version
 
+      # Install CocoaPods
+      - run:
+          name: Install CocoaPods
+          working_directory: ./example
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            pod install
+
       - restore_cache:
           keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
+          
       # Install gems.
       - run:
           name: Bundle install
@@ -36,14 +45,6 @@ jobs:
           paths:
             - vendor/bundle
 
-      # Install CocoaPods
-      - run:
-          name: Install CocoaPods
-          working_directory: ./example
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install
-            
       # Build the app and run tests
       - run:
           name: Build and run tests
@@ -82,11 +83,18 @@ jobs:
       - run:
           name: Set Ruby Version
           command:  echo "ruby-2.4" > ~/.ruby-version
+      
+      # Install CocoaPods
+      - run:
+          name: Install CocoaPods
+          working_directory: ./example
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
       - restore_cache:
           keys:
             - v1-gems-{{ checksum "Gemfile.lock" }}
-      
+
       # Install gems.
       - run:
           name: Bundle install
@@ -101,13 +109,6 @@ jobs:
           key: v1-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
-      # Install CocoaPods
-      - run:
-          name: Install CocoaPods
-          working_directory: ./example
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 
       - run:
           name: Validate Release
