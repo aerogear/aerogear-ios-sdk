@@ -6,7 +6,7 @@ import Foundation
 public struct AgsMetaData {
     /** Version of Core SDK */
     // NOTE: This version is being replacted by automation script
-    public let sdkVersion = "0.2.1"
+    public let sdkVersion = "0.2.2"
 
     /** Unique client id */
     public var clientId: String!
