@@ -1,6 +1,6 @@
 = AeroGear Service Push SDK
 
-AeroGear Push SDK for IOS integrates with AeroGear Unified Push Server in order to send push notifications to mobile iOS devices.
+AeroGear Push SDK for IOS integrates with link:https://github.com/aerogear/aerogear-unifiedpush-server/[AeroGear Unified Push Server] in order to receiving push notifications to mobile iOS devices.
 
 == Importing SDK
 
