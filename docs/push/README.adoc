@@ -8,7 +8,7 @@ Add the Push SDK to your application module
 
 [source,groovy]
 ----
-   import AgsPush
+import AgsPush
 ----
 
 == Application setup
@@ -31,32 +31,30 @@ This example demonstrates how to register a device to provide the values require
 
 [source,swift]
 ----
-    func application(_ application: UIApplication,
-                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        var config = UnifiedPushConfig()
-        AgsPush.instance.register(
-            deviceToken,
-            config,
-            success: {
-               print("Successfully registered to Unified Push Server")
-            },
-            failure: { (error: Error!) in
-               print("Failure to register for on Unified Push Server: \(error)")
-            }
-        )
-    }
+func application(_ application: UIApplication,
+                 didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    var config = UnifiedPushConfig()
+    AgsPush.instance.register(
+        deviceToken,
+        config,
+        success: {
+           print("Successfully registered to Unified Push Server")
+        },
+        failure: { (error: Error!) in
+           print("Failure to register for on Unified Push Server: \(error)")
+        }
+    )
+}
 ----
 
 You also can add some optional parameters using `UnifiedPushConfig`
 
 [source,java]
 ----
-    config.alias = "Example App"
-    config.categories = ["iOS", "Example"]
+config.alias = "Example App"
+config.categories = ["iOS", "Example"]
 ----
 
 == Handling messages
 
- Please follow Apple documentation for notification handlers:
-
- link:https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html[]
+Please follow Apple documentation for notification handlers: link:https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html[]
