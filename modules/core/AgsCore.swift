@@ -43,7 +43,7 @@ public class AgsCore {
 
      - returns:  Metrics protocol to interact with metrics
      */
-    public func getMetrics() -> MetricsPublishable {
+    public func getMetrics() -> AgsMetrics {
         return metrics
     }
 
