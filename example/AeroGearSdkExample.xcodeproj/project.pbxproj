@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0156A54620584CEE0054F056 /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156A54520584CED0054F056 /* PushViewController.swift */; };
 		0156A54820584CF30054F056 /* push.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0156A54720584CF30054F056 /* push.storyboard */; };
+		01681E0F20973652004A0C8E /* SdkStartupPerfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01681E0C20973652004A0C8E /* SdkStartupPerfTest.swift */; };
+		01681E1320973770004A0C8E /* PushRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01681E1220973770004A0C8E /* PushRegistrationTests.swift */; };
 		016D7D81205BEB75001DE653 /* PushHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D7D80205BEB75001DE653 /* PushHelper.swift */; };
 		017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017F3707201F4014001A9009 /* ServiceConfigTests.swift */; };
 		018FBE5620123AEE00E763A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE5520123AEE00E763A5 /* AppDelegate.swift */; };
@@ -26,7 +28,6 @@
 		50BC6DE0208654DA00B639A0 /* KTVJSONWebToken.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50BC6DE1208654DA00B639A0 /* KTVJSONWebToken.framework */; };
 		50F2A040204EC7380071778E /* KeycloakConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2A03F204EC7380071778E /* KeycloakConfigTests.swift */; };
 		603D6C7263A899DE1EDE8CD7 /* Pods_AeroGearSdkExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6C9244E7BA473314AA1B91E /* Pods_AeroGearSdkExample.framework */; };
-		8AAC61A6207E430700638CB1 /* AgPushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAC61A5207E430700638CB1 /* AgPushTests.swift */; };
 		8FB6B476D2E14635C8EA2386 /* Pods_AeroGearSdkExampleIntegrationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8F799AC8AC0F2AD0F6489B /* Pods_AeroGearSdkExampleIntegrationTests.framework */; };
 		B30606E720569357008FD9A0 /* MockOIDCAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30606E620569357008FD9A0 /* MockOIDCAuthenticator.swift */; };
 		B30606E9205696AC008FD9A0 /* MockOIDAuthorizationFlowSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30606E8205696AC008FD9A0 /* MockOIDAuthorizationFlowSession.swift */; };
@@ -73,6 +74,8 @@
 		0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AeroGearSdkExample.entitlements; sourceTree = "<group>"; };
 		0156A54520584CED0054F056 /* PushViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
 		0156A54720584CF30054F056 /* push.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = push.storyboard; sourceTree = "<group>"; };
+		01681E0C20973652004A0C8E /* SdkStartupPerfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkStartupPerfTest.swift; sourceTree = "<group>"; };
+		01681E1220973770004A0C8E /* PushRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRegistrationTests.swift; sourceTree = "<group>"; };
 		016D7D80205BEB75001DE653 /* PushHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushHelper.swift; sourceTree = "<group>"; };
 		017F3707201F4014001A9009 /* ServiceConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceConfigTests.swift; sourceTree = "<group>"; };
 		018FBE5220123AEE00E763A5 /* AeroGearSdkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroGearSdkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +102,6 @@
 		62B3CBB630EF770D9F5BB994 /* Pods-AeroGearSdkExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample.debug.xcconfig"; sourceTree = "<group>"; };
 		6372266C9F61265244A81632 /* ConfigParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigParserTests.swift; sourceTree = "<group>"; };
 		6C8F799AC8AC0F2AD0F6489B /* Pods_AeroGearSdkExampleIntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearSdkExampleIntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AAC61A5207E430700638CB1 /* AgPushTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AgPushTests.swift; path = AeroGearSdkExampleTests/AgPushTests.swift; sourceTree = SOURCE_ROOT; };
 		A50F76BA81DB65C2CA9C424B /* Pods-AeroGearSdkExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearSdkExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		AC4C49488ECD6A7C4BE459CF /* Pods_AeroGearSdkExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearSdkExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30606E620569357008FD9A0 /* MockOIDCAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOIDCAuthenticator.swift; sourceTree = "<group>"; };
@@ -165,6 +167,22 @@
 			path = push;
 			sourceTree = "<group>";
 		};
+		01681E0B20973652004A0C8E /* performance */ = {
+			isa = PBXGroup;
+			children = (
+				01681E0C20973652004A0C8E /* SdkStartupPerfTest.swift */,
+			);
+			path = performance;
+			sourceTree = "<group>";
+		};
+		01681E1120973770004A0C8E /* push */ = {
+			isa = PBXGroup;
+			children = (
+				01681E1220973770004A0C8E /* PushRegistrationTests.swift */,
+			);
+			path = push;
+			sourceTree = "<group>";
+		};
 		018FBE4920123AEE00E763A5 = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +190,6 @@
 				018FBE6920123AEE00E763A5 /* AeroGearSdkExampleTests */,
 				01AA3CBA207CD8910096D2EE /* AeroGearSdkExampleIntegrationTests */,
 				018FBE5320123AEE00E763A5 /* Products */,
-				1E0BBDD2207FB2E90053703B /* Recovered References */,
 				6E3C137A1C3B9286096644DE /* Pods */,
 				7E9E84570B91F4A3B0CA2A4C /* Frameworks */,
 			);
@@ -191,7 +208,6 @@
 		018FBE5420123AEE00E763A5 /* AeroGearSdkExample */ = {
 			isa = PBXGroup;
 			children = (
-				01AA3CB9207CD8650096D2EE /* AeroGearSdkExampleIntegrationTests */,
 				0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */,
 				0156A5442058301F0054F056 /* push */,
 				B35266562044AF07004BACC7 /* auth */,
@@ -212,19 +228,14 @@
 		018FBE6920123AEE00E763A5 /* AeroGearSdkExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				B3AC1A87204825DE00BEB12B /* mocks */,
+				01681E1120973770004A0C8E /* push */,
+				01681E0B20973652004A0C8E /* performance */,
 				B3AC1A81204815E000BEB12B /* auth */,
 				63722015BF5E5190986AE905 /* core */,
+				B3AC1A87204825DE00BEB12B /* mocks */,
 				018FBE6C20123AEE00E763A5 /* Info.plist */,
 			);
 			path = AeroGearSdkExampleTests;
-			sourceTree = "<group>";
-		};
-		01AA3CB9207CD8650096D2EE /* AeroGearSdkExampleIntegrationTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AeroGearSdkExampleIntegrationTests;
 			sourceTree = "<group>";
 		};
 		01AA3CBA207CD8910096D2EE /* AeroGearSdkExampleIntegrationTests */ = {
@@ -233,14 +244,6 @@
 				1ECD7E1D207BAFE6008DD3C1 /* metrics */,
 			);
 			path = AeroGearSdkExampleIntegrationTests;
-			sourceTree = "<group>";
-		};
-		1E0BBDD2207FB2E90053703B /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				8AAC61A5207E430700638CB1 /* AgPushTests.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		1ECD7E1D207BAFE6008DD3C1 /* metrics */ = {
@@ -659,6 +662,7 @@
 				B3AC1A97204ECE7900BEB12B /* CredentialsManagerTest.swift in Sources */,
 				500FDA6020583F48001E66B0 /* MockJwk.swift in Sources */,
 				B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */,
+				01681E0F20973652004A0C8E /* SdkStartupPerfTest.swift in Sources */,
 				B30606E720569357008FD9A0 /* MockOIDCAuthenticator.swift in Sources */,
 				B30606EB20569774008FD9A0 /* MockCredentialManager.swift in Sources */,
 				01928B8A201F202D0053EEB0 /* ConfigParserTests.swift in Sources */,
@@ -666,7 +670,7 @@
 				B3AC1A98204ECE7900BEB12B /* OIDCCredentialsTest.swift in Sources */,
 				500FDA5E2058324C001E66B0 /* JwkManagerTests.swift in Sources */,
 				017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */,
-				8AAC61A6207E430700638CB1 /* AgPushTests.swift in Sources */,
+				01681E1320973770004A0C8E /* PushRegistrationTests.swift in Sources */,
 				B34F3B83204F44DD005970E1 /* Configurations.swift in Sources */,
 				B3AC1A8D2049E11900BEB12B /* UsersTests.swift in Sources */,
 				B3AC1A83204815E000BEB12B /* AuthTests.swift in Sources */,

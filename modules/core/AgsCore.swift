@@ -12,7 +12,7 @@ public class AgsCore {
     let http: AgsHttp
     var metrics: AgsMetrics
 
-    private init() {
+    public init() {
         AgsCore.logger.debug("Initializing AeroGearServices Core SDK")
         http = AgsHttp()
         config = ServiceConfig()
