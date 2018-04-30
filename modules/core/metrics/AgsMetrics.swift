@@ -12,7 +12,7 @@ open class AgsMetrics {
     
     private let appData: AgsMetaData
     private let config: MetricsConfig
-    private var publisher: MetricsPublisher!
+    private var publisher: MetricsPublisher?
     private var http: AgsHttp
 
     private let defaultMetrics: [Metrics]
@@ -32,8 +32,6 @@ open class AgsMetrics {
     private func setDefaultPublisher() {
         if let url = config.getRemoteMetricsUrl() {
             self.publisher = MetricsNetworkPublisher(http.getHttp(), url)
-        } else {
-            self.publisher = MetricsLoggerPublisher(appData.clientId)
         }
     }
 
@@ -69,11 +67,14 @@ open class AgsMetrics {
      - Parameter handler: handler for success/failire
      */
     public func publish(_ type: String, _ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void) {
+        guard let activePublisher = publisher else {
+            return;
+        }
         var data = MetricsData()
         appendMetrics(metrics, &data)
         appendMetrics(defaultMetrics, &data)
         let payload = appendToRootMetrics(type, data)
-        publisher.publish(payload, handler)
+        activePublisher.publish(payload, handler)
     }
 
     private func appendToRootMetrics(_ type: String, _ payload: MetricsData) -> [String: Any] {
