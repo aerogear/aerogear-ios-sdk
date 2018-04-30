@@ -17,6 +17,8 @@ Core library used as base for other SDKs
 Mobile application Auth SDK (part of the core bundle)
 - [Metrics](./docs/metrics/README.adoc)
 Mobile application Metrics SDK (part of the core bundle)
+- [Push](./docs/push/README.adoc)
+Mobile application Unified Push SDK 
 
 ## Contributing
 
