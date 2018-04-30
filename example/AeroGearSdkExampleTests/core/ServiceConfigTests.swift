@@ -1,6 +1,4 @@
-//
-// Copyright (c) 2018 AeroGear. All rights reserved.
-//
+
 
 @testable import AGSCore
 import Foundation
