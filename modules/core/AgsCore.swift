@@ -18,7 +18,7 @@ public class AgsCore {
         config = ServiceConfig()
         metrics = AgsMetrics(http, config)
     }
-
+    
     /**
      Get configuration for specific service reference
 

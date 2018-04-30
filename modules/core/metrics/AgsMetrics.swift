@@ -23,11 +23,7 @@ open class AgsMetrics {
         appData = AgsCore.getMetadata()
         defaultMetrics = [AppMetrics(appData), DeviceMetrics()]
         setDefaultPublisher()
-        Timer.scheduledTimer(timeInterval: AgsMetrics.DefaultMetricsTimeout,
-                             target: self.sendAppAndDeviceMetrics(),
-                             selector: #selector(Operation.main),
-                             userInfo: nil,
-                             repeats: false)
+        self.sendAppAndDeviceMetrics();
     }
 
     /**
