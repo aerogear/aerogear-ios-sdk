@@ -12,13 +12,13 @@ public class AgsCore {
     let http: AgsHttp
     var metrics: AgsMetrics
 
-    private init() {
+    public init() {
         AgsCore.logger.debug("Initializing AeroGearServices Core SDK")
         http = AgsHttp()
         config = ServiceConfig()
         metrics = AgsMetrics(http, config)
     }
-
+    
     /**
      Get configuration for specific service reference
 
@@ -43,7 +43,7 @@ public class AgsCore {
 
      - returns:  Metrics protocol to interact with metrics
      */
-    public func getMetrics() -> MetricsPublishable {
+    public func getMetrics() -> AgsMetrics {
         return metrics
     }
 

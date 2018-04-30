@@ -3,13 +3,16 @@ import Foundation
 /**
  AeroGear Services metrics
  */
-open class AgsMetrics: MetricsPublishable {
+open class AgsMetrics {
     
+    // Default metrics type
     private static let InitMetricsType = "init"
+    // Default timeout for starting metrics
+    private static let DefaultMetricsTimeout = 5.0
     
     private let appData: AgsMetaData
     private let config: MetricsConfig
-    private var publisher: MetricsPublisher!
+    private var publisher: MetricsPublisher?
     private var http: AgsHttp
 
     private let defaultMetrics: [Metrics]
@@ -20,33 +23,23 @@ open class AgsMetrics: MetricsPublishable {
         appData = AgsCore.getMetadata()
         defaultMetrics = [AppMetrics(appData), DeviceMetrics()]
         setDefaultPublisher()
+        self.sendAppAndDeviceMetrics();
     }
 
     /**
      Set default metrics publisher depending on metrics configuration
      */
-    open func setDefaultPublisher() {
+    private func setDefaultPublisher() {
         if let url = config.getRemoteMetricsUrl() {
-            setMetricsPublisher(MetricsNetworkPublisher(http.getHttp(), url))
-        } else {
-            setMetricsPublisher(MetricsLoggerPublisher(appData.clientId))
+            self.publisher = MetricsNetworkPublisher(http.getHttp(), url)
         }
-    }
-
-    /**
-     Allows to override default metrics publisher
-
-     - Parameter publisher: implementation of metrics publisher
-     */
-    public func setMetricsPublisher(_ publisher: MetricsPublisher) {
-        self.publisher = publisher
     }
 
     /**
      Collect metrics for all active metrics collectors
      Send data using metrics publisher
      */
-    open func sendAppAndDeviceMetrics() {
+    private func sendAppAndDeviceMetrics() {
         publish(AgsMetrics.InitMetricsType, []) { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")
@@ -65,12 +58,23 @@ open class AgsMetrics: MetricsPublishable {
         }
     }
 
-    open func publish(_ type: String, _ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void) {
+    /**
+     Internal method for publishing SDK defined metrics.
+     Not to be called in end user application
+     
+     - Parameter type: represents metrics type
+     - Parameter metrics: instances that should be published
+     - Parameter handler: handler for success/failire
+     */
+    public func publish(_ type: String, _ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void) {
+        guard let activePublisher = publisher else {
+            return;
+        }
         var data = MetricsData()
         appendMetrics(metrics, &data)
         appendMetrics(defaultMetrics, &data)
         let payload = appendToRootMetrics(type, data)
-        publisher.publish(payload, handler)
+        activePublisher.publish(payload, handler)
     }
 
     private func appendToRootMetrics(_ type: String, _ payload: MetricsData) -> [String: Any] {

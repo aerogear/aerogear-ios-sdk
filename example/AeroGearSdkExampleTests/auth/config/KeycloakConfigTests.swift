@@ -1,9 +1,4 @@
-//
-//  KeycloakConfigTests.swift
-//  AeroGearSdkExampleTests
-//
-//  Copyright © 2018 AeroGear. All rights reserved.
-//
+
 
 @testable import AGSAuth
 @testable import AGSCore
