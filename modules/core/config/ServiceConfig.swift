@@ -28,7 +28,7 @@ public class ServiceConfig {
      - return: MobileService instance or nil if service cannot be found
      */
     public subscript(serviceRef: String) -> MobileService? {
-        let configuration = getConfiguration(serviceRef)
+        let configuration = getConfigurationByType(serviceRef)
         if configuration.count > 1 {
             AgsCore.logger.warning("""
              Mobile configuration \(configFileName) contains more than one service of the same type.
@@ -49,14 +49,29 @@ public class ServiceConfig {
     /**
      Fetch configuration for specific type
 
+     - Parameter type: type of the service to fetch
      - return: MobileService array
      */
-    public func getConfiguration(_ serviceRef: String) -> [MobileService] {
+    public func getConfigurationByType(_ type: String) -> [MobileService] {
         if let config = config {
-            return config.services.filter { $0.id == serviceRef }
+            return config.services.filter { $0.type == type }
         } else {
             return []
         }
+    }
+
+    /**
+     Fetch configuration for specific id
+     Should be used for elements that can appear multiple times in the config
+
+     - Parameter id: unique id of the service
+     - return: MobileService
+     */
+    public func getConfigurationById(_ id: String) -> MobileService? {
+        if let config = config {
+            return config.services.first { $0.id == id }
+        }
+        return nil
     }
 
     private func readConfiguration() {

@@ -28,4 +28,13 @@ class ServiceConfigTests: XCTestCase {
     func testConfigParsingInValidService() {
         XCTAssertNil(config[invalidServiceName])
     }
+    
+    
+    func testConfigParsingGetById() {
+        XCTAssertNotNil(config.getConfigurationById(validServiceName))
+    }
+    
+    func testConfigParsingGetByIdInvalid() {
+        XCTAssertNil(config.getConfigurationById(invalidServiceName))
+    }
 }
