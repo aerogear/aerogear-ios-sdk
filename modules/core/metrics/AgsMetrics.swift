@@ -4,12 +4,12 @@ import Foundation
  AeroGear Services metrics
  */
 open class AgsMetrics {
-    
+
     // Default metrics type
     private static let InitMetricsType = "init"
     // Default timeout for starting metrics
     private static let DefaultMetricsTimeout = 5.0
-    
+
     private let appData: AgsMetaData
     private let config: MetricsConfig
     private var publisher: MetricsPublisher?
@@ -23,7 +23,7 @@ open class AgsMetrics {
         appData = AgsCore.getMetadata()
         defaultMetrics = [AppMetrics(appData), DeviceMetrics()]
         setDefaultPublisher()
-        self.sendAppAndDeviceMetrics();
+        self.sendAppAndDeviceMetrics()
     }
 
     /**
@@ -61,14 +61,14 @@ open class AgsMetrics {
     /**
      Internal method for publishing SDK defined metrics.
      Not to be called in end user application
-     
+
      - Parameter type: represents metrics type
      - Parameter metrics: instances that should be published
      - Parameter handler: handler for success/failire
      */
     public func publish(_ type: String, _ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void) {
         guard let activePublisher = publisher else {
-            return;
+            return
         }
         var data = MetricsData()
         appendMetrics(metrics, &data)

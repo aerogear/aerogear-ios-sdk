@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
-       
     }
 
     func applicationWillTerminate(_: UIApplication) {

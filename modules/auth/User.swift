@@ -199,7 +199,7 @@ public struct User {
         else {
             return nil
         }
-        
+
         guard let keycloakUserProfile = try? JSONDecoder().decode(KeycloakUserProfile.self, from: jwt.decodedDataForPart(JSONWebToken.Part.payload)) else {
             return nil
         }
