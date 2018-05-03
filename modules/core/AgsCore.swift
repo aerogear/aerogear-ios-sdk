@@ -20,13 +20,23 @@ public class AgsCore {
     }
 
     /**
-     Get configuration for specific service reference
+     Get single configuration for specific service type
 
      - returns: MobileService instance or nil if configuration is missing service of that type
-     - parameter serviceRef: unique service reference uset to fetch configuration
+     - parameter serviceType:  service type that will be used to fetch configuration
      */
-    public func getConfiguration(_ serviceRef: String) -> MobileService? {
-        return config[serviceRef]
+    public func getConfiguration(_ serviceType: String) -> MobileService? {
+        return config.getConfigurationByType(serviceType).first
+    }
+    
+    /**
+     Get configuration for specific service reference
+     
+     - returns: MobileService instance or nil if configuration is missing service of that type
+     - parameter serviceId: id that will be used to fetch configuration
+     */
+    public func getConfigurationById(_ serviceId: String) -> MobileService? {
+        return config.getConfigurationById(serviceId)
     }
 
     /**

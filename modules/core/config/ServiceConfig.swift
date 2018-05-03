@@ -23,30 +23,6 @@ public class ServiceConfig {
     }
 
     /**
-     Fetch single service configuration from configuration files.
-
-     - return: MobileService instance or nil if service cannot be found
-     */
-    public subscript(serviceRef: String) -> MobileService? {
-        let configuration = getConfigurationByType(serviceRef)
-        if configuration.count > 1 {
-            AgsCore.logger.warning("""
-             Mobile configuration \(configFileName) contains more than one service of the same type.
-             Using configuration from the first occurence of service with that type.
-             Any other duplicate will be ignored.
-             Please review your \(configFileName) for services with \(serviceRef) type.
-            """)
-        } else if configuration.count == 0 {
-            AgsCore.logger.error("""
-            Configuration  \(configFileName) is missing service \(serviceRef) configuration
-            Please review your \(configFileName) for services with \(serviceRef) type.
-            """)
-            return nil
-        }
-        return configuration.first
-    }
-
-    /**
      Fetch configuration for specific type
 
      - Parameter type: type of the service to fetch
