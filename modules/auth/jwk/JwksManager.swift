@@ -21,17 +21,17 @@ public struct JwkContent: Codable {
 
 /**
  Performs RSA Key lookup in JSON Web Key Set
- 
+
  - parameters:
     - jwks: JSON Web Key Set to do the lookup
     - kid: the key identifier in the header of the JSON Web Token
- 
+
  - returns: the RSA JSON Web Key or nil if not found.
  */
 public func rsaJwk(jwks: Jwks, kid: String) -> JwkContent? {
     var rsaJwk: JwkContent?
     for (_, jwk) in jwks.keys.enumerated() {
-        if (jwk.kid == kid) {
+        if jwk.kid == kid {
             rsaJwk = jwk
         }
     }

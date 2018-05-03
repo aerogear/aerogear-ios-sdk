@@ -55,23 +55,23 @@ class Jwt {
             throw Errors.invalidToken("Error decoding JWT")
         }
     }
-    
+
     /**
      Verifies a JSON Web Token.
-     
+
      - parameters:
         - jwks: the JSON Web Key Set to verify the JWT against
         - jwt: the JSON Web Token to be verified
-     
+
      - throws: an `invalidModulus` error if the decoded modulus is nil, an `invalidExponent` error if the decoded exponent is nil or a `generatingPublicKey` error if the RSA public key could not be generated
-     
+
      - returns: true if the JWT is valid, false otherwise
      */
     public static func verifyJwt(jwks: Jwks, jwt: String) throws -> Bool {
         let jwt = try Jwt.decode(jwt)
         let jwtHeaderData = jwt.decodedDataForPart(JSONWebToken.Part.header)
         let jwtHeader = try JSONDecoder().decode(JwtHeader.self, from: jwtHeaderData)
-        
+
         guard let jwk = rsaJwk(jwks: jwks, kid: jwtHeader.kid) else {
             throw Errors.noRSAKeyFound("Could not find RSA JSON Web Key from JSON Web Key Set provided")
         }
@@ -84,14 +84,14 @@ class Jwt {
 
         do {
             let publicKey: RSAKey = try RSAKey.registerOrUpdateKey(modulus: modulus, exponent: exponent, tag: "publicKey")
-            
+
             let validator = RegisteredClaimValidator.expiration &
                 RegisteredClaimValidator.notBefore.optional &
-            RSAPKCS1Verifier(key: publicKey, hashFunction: .sha256)
-            
+                RSAPKCS1Verifier(key: publicKey, hashFunction: .sha256)
+
             let validationResult = validator.validateToken(jwt)
-            
-            if (validationResult.isValid) {
+
+            if validationResult.isValid {
                 return true
             } else {
                 return false

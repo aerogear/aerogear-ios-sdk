@@ -71,7 +71,7 @@ open class AgsAuth {
      */
     public func configure(authConfig: AuthenticationConfig) throws {
         if let config = serviceConfig {
-            jwksManager = JwksManager.init(AgsCore.instance.getHttp(), authConfig)
+            jwksManager = JwksManager(AgsCore.instance.getHttp(), authConfig)
             guard configured else {
                 keycloakConfig = KeycloakConfig(config, authConfig)
                 authenticator = OIDCAuthenticator(http: AgsCore.instance.getHttp(), keycloakConfig: keycloakConfig!, authConfig: authConfig, credentialManager: credentialManager)
@@ -149,28 +149,28 @@ open class AgsAuth {
      */
     public func currentUser() throws -> User? {
         var user: User?
-        
+
         guard configured else {
             throw Errors.serviceNotConfigured
         }
-        
+
         guard let currentCredential = credentialManager.load() else {
             return nil
         }
-        
+
         guard let jwks = jwksManager?.load(keycloakConfig!) else {
             return nil
         }
-        
+
         guard let jwt = currentCredential.accessToken else {
             return nil
         }
-        
+
         let valid = try Jwt.verifyJwt(jwks: jwks, jwt: jwt)
-        
-        if (!currentCredential.isExpired && valid && currentCredential.isAuthorized) {
+
+        if !currentCredential.isExpired && valid && currentCredential.isAuthorized {
             user = User(credential: currentCredential, clientName: keycloakConfig!.clientID)
         }
-         return user
+        return user
     }
 }
