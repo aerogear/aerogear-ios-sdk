@@ -12,3 +12,8 @@ echo "Generating auth documentation"
 ## Remove core dependency
 sed -i.bck "s/s.dependency 'AGSCore'/ /g" modules/auth/AGSAuth.podspec
 (cd modules/auth && bundle exec jazzy --podspec ../../AGSAuth.podspec --output ../../docs/api/auth)
+
+echo "Generating push documentation"
+## Remove core dependency
+sed -i.bck "s/s.dependency 'AGSCore'/ /g" modules/push/AGSPush.podspec
+(cd modules/auth && bundle exec jazzy --podspec ../../AGSPush.podspec --output ../../docs/api/push)
