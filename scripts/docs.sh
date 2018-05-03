@@ -10,10 +10,10 @@ bundle exec jazzy --podspec ./AGSCore.podspec --output ./docs/api/core
 
 echo "Generating auth documentation"
 ## Remove core dependency
-sed -i.bck "s/s.dependency 'AGSCore'/ /g" ./AGSAuth.podspec
+sed -i.bck "s/s.dependency 'AGSCore', s.version.to_s/ /g" ./AGSAuth.podspec
 bundle exec jazzy --podspec ./AGSAuth.podspec --output ./docs/api/auth
 
 echo "Generating push documentation"
 ## Remove core dependency
-sed -i.bck "s/s.dependency 'AGSCore'/ /g" ./AGSPush.podspec
+sed -i.bck "s.dependency 'AGSCore', s.version.to_s/ /g" ./AGSPush.podspec
 bundle exec jazzy --podspec ./AGSPush.podspec --output ./docs/api/push
