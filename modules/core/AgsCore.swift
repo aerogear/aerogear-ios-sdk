@@ -26,12 +26,19 @@ public class AgsCore {
      - parameter serviceType:  service type that will be used to fetch configuration
      */
     public func getConfiguration(_ serviceType: String) -> MobileService? {
-        return config.getConfigurationByType(serviceType).first
+        let configuration = config.getConfigurationByType(serviceType)
+        if configuration.count > 1 {
+            AgsCore.logger.warning("""
+             Config contains more than one service of the same type.
+             Using configuration from the first occurence of service with that type.
+            """)
+        }
+        return configuration.first
     }
-    
+
     /**
      Get configuration for specific service reference
-     
+
      - returns: MobileService instance or nil if configuration is missing service of that type
      - parameter serviceId: id that will be used to fetch configuration
      */

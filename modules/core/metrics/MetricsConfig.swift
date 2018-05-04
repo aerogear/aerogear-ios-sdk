@@ -11,7 +11,8 @@ class MetricsConfig {
     public var config: MobileService?
 
     init(_ configService: ServiceConfig) {
-        if let serviceConfig = configService.getConfigurationByType(sdkId).first {
+        let serviceConfigs = configService.getConfigurationByType(sdkId)
+        if let serviceConfig = serviceConfigs.first {
             config = serviceConfig
         } else {
             AgsCore.logger.error("""
