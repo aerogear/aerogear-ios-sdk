@@ -2,17 +2,11 @@
 
 User Apps and other SDK Modules can send their own metrics at any time.
 
-== Sending app and device metrics
+== App and device metrics
 
-To send bundled application metrics add following code to main application delegate:
-[source,swift]
-----
-func applicationDidBecomeActive(_: UIApplication) {
-    AgsCore.instance.sendAppAndDeviceMetrics()
-}
-----
+App and device metrics are sent by default when metrics server is enabled in `mobile-config.json` configuration.
 
-== Adding new metrics 
+== Contributing to SDK by adding new metrics 
 
 Users can also create their own metrics by extending `Metrics` prototype. 
 
