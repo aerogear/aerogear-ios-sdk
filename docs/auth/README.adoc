@@ -136,10 +136,10 @@ After adding the attributes in Keycloak, you can then retrieve the custom attrib
 
 [source, swift]
 ----
-let booleanAttribute = currentUser.customBooleanAttribute("booleanAttribute")
-let stringAttribute = currentUser.customStringAttribute("stringAttribute");
-let longAttribute = currentUser.customLongAttribute("longAttribute");
-let intAttribute = currentUser.customIntegerAttribute("intAttribute");
+let booleanAttribute = currentUser.customAttribute("booleanAttribute") as Bool?
+let stringAttribute = currentUser.customAttribute("stringAttribute") as String?
+let longAttribute = currentUser.customAttribute("longAttribute") as Int64?
+let intAttribute = currentUser.customAttribute("intAttribute") as Int?
 ----
 
 === Retrieving a Users Roles

@@ -96,22 +96,22 @@ class UsersTests: XCTestCase {
     }
     
     func testCustomBooleanAttribute() {
-        XCTAssertEqual(userToTest?.customBooleanAttribute("boolean"), true)
-        XCTAssertEqual(userToTest?.customBooleanAttribute("nonExistentCustomAttribute"), nil)
+        XCTAssertEqual(userToTest?.customAttribute("boolean") as Bool?, true)
+        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as Bool?, nil)
     }
-    
+
     func testCustomStringAttribute() {
-        XCTAssertEqual(userToTest?.customStringAttribute("string"), "string")
-        XCTAssertEqual(userToTest?.customStringAttribute("nonExistentCustomAttribute"), nil)
+        XCTAssertEqual(userToTest?.customAttribute("string") as String?, "string")
+        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as String?, nil)
     }
-    
+
     func testCustomLongAttribute() {
-        XCTAssertEqual(userToTest?.customLongAttribute("long"), 1)
-        XCTAssertEqual(userToTest?.customLongAttribute("nonExistentCustomAttribute"), nil)
+        XCTAssertEqual(userToTest?.customAttribute("long") as Int64?, 1)
+        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as Int64?, nil)
     }
-    
+
     func testCustomIntAttribute() {
-        XCTAssertEqual(userToTest?.customIntegerAttribute("int"), 1)
-        XCTAssertEqual(userToTest?.customLongAttribute("nonExistentCustomAttribute"), nil)
+        XCTAssertEqual(userToTest?.customAttribute("int") as Int?, 1)
+        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as Int?, nil)
     }
 }

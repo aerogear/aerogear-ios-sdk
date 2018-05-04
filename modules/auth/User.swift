@@ -252,72 +252,18 @@ public struct User {
     }
     
     /**
-     Gets the custom user attribute of type boolean.
+     Gets the custom user attribute.
      
      - parameters:
         - attributeName: the user attribute to retrieve
      
-     - returns: the custom boolean attribute if it exists, otherwise nil
+     - returns: the custom attribute if it exists, otherwise nil
      */
-    public func customBooleanAttribute(_ attributeName: String) -> Bool? {
-        var attribute: Bool?
+    public func customAttribute<T>(_ attributeName: String) -> T? {
+        var attribute: T?
         if let payload = rawIdentityToken() {
-            if let booleanAttribute = payload[attributeName] as? Bool {
-                attribute = booleanAttribute
-            }
-        }
-        return attribute
-    }
-    
-    /**
-     Gets the custom user attribute of type string.
-     
-     - parameters:
-        - attributeName: the user attribute to retrieve
-     
-     - returns: the custom string attribute if it exists, otherwise nil
-     */
-    public func customStringAttribute(_ attributeName: String) -> String? {
-        var attribute: String?
-        if let payload = rawIdentityToken() {
-            if let stringAttribute = payload[attributeName] as? String {
-                attribute = stringAttribute
-            }
-        }
-        return attribute
-    }
-    
-    /**
-     Gets the custom user attribute of type long.
-     
-     - parameters:
-        - attributeName: the user attribute to retrieve
-     
-     - returns: the custom long attribute if it exists, otherwise nil
-     */
-    public func customLongAttribute(_ attributeName: String) -> Int64? {
-        var attribute: Int64?
-        if let payload = rawIdentityToken() {
-            if let stringAttribute = payload[attributeName] as? Int64 {
-                attribute = stringAttribute
-            }
-        }
-        return attribute
-    }
-    
-    /**
-     Gets the custom user attribute of type int.
-     
-     - parameters:
-        - attributeName: the user attribute to retrieve
-     
-     - returns: the custom int attribute if it exists, otherwise nil
-     */
-    public func customIntegerAttribute(_ attributeName: String) -> Int? {
-        var attribute: Int?
-        if let payload = rawIdentityToken() {
-            if let stringAttribute = payload[attributeName] as? Int {
-                attribute = stringAttribute
+            if let customAttribute = payload[attributeName] as? T {
+                attribute = customAttribute
             }
         }
         return attribute
