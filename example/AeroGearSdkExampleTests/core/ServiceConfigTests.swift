@@ -22,10 +22,19 @@ class ServiceConfigTests: XCTestCase {
     }
 
     func testConfigReading() {
-        XCTAssertNotNil(config[validServiceName])
+        XCTAssertNotNil(config.getConfigurationByType(validServiceName))
     }
 
     func testConfigParsingInValidService() {
-        XCTAssertNil(config[invalidServiceName])
+        XCTAssertTrue(config.getConfigurationByType(invalidServiceName).count == 0)
+    }
+    
+    
+    func testConfigParsingGetById() {
+        XCTAssertNotNil(config.getConfigurationById(validServiceName))
+    }
+    
+    func testConfigParsingGetByIdInvalid() {
+        XCTAssertNil(config.getConfigurationById(invalidServiceName))
     }
 }

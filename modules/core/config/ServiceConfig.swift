@@ -23,40 +23,31 @@ public class ServiceConfig {
     }
 
     /**
-     Fetch single service configuration from configuration files.
-
-     - return: MobileService instance or nil if service cannot be found
-     */
-    public subscript(serviceRef: String) -> MobileService? {
-        let configuration = getConfiguration(serviceRef)
-        if configuration.count > 1 {
-            AgsCore.logger.warning("""
-             Mobile configuration \(configFileName) contains more than one service of the same type.
-             Using configuration from the first occurence of service with that type.
-             Any other duplicate will be ignored.
-             Please review your \(configFileName) for services with \(serviceRef) type.
-            """)
-        } else if configuration.count == 0 {
-            AgsCore.logger.error("""
-            Configuration  \(configFileName) is missing service \(serviceRef) configuration
-            Please review your \(configFileName) for services with \(serviceRef) type.
-            """)
-            return nil
-        }
-        return configuration.first
-    }
-
-    /**
      Fetch configuration for specific type
 
+     - Parameter type: type of the service to fetch
      - return: MobileService array
      */
-    public func getConfiguration(_ serviceRef: String) -> [MobileService] {
+    public func getConfigurationByType(_ type: String) -> [MobileService] {
         if let config = config {
-            return config.services.filter { $0.id == serviceRef }
+            return config.services.filter { $0.type == type }
         } else {
             return []
         }
+    }
+
+    /**
+     Fetch configuration for specific id
+     Should be used for elements that can appear multiple times in the config
+
+     - Parameter id: unique id of the service
+     - return: MobileService
+     */
+    public func getConfigurationById(_ id: String) -> MobileService? {
+        if let config = config {
+            return config.services.first { $0.id == id }
+        }
+        return nil
     }
 
     private func readConfiguration() {

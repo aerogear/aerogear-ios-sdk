@@ -36,4 +36,3 @@ MyPublisher publisher: MetricsPublisher = MyPublisher()
 AgsCore.instance.getMetrics().setMetricsPublisher(publisher) 
 ----
 
-
