@@ -129,6 +129,19 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 }
 ----
 
+=== Retrieving Custom User Attributes
+A walkthrough has been provided in the link:./user-attributes.adoc[Keycloak Custom User Attributes] document to show how you can allow custom user attributes in Keycloak to be available in the Identity token.
+
+After adding the attributes in Keycloak, you can then retrieve the custom attributes from the current user.
+
+[source, swift]
+----
+let booleanAttribute: Bool? = currentUser.customAttribute("booleanAttribute")
+let stringAttribute: String? = currentUser.customAttribute("stringAttribute")
+let longAttribute: Int64? = currentUser.customAttribute("longAttribute")
+let intAttribute: Int? = currentUser.customAttribute("intAttribute")
+----
+
 === Retrieving a Users Roles
 Once a User has been retrieved, the roles of the user can be listed and checked. This can be used to perform client side access control.
 

@@ -238,4 +238,34 @@ public struct User {
         let roleToFind = UserRole(nameSpace: nil, roleName: roleName)
         return roles.contains(roleToFind)
     }
+    
+    /**
+     Gets the identity JWT payload.
+     
+     - returns: identity JWT payload
+     */
+    private func rawIdentityToken() -> JSONWebToken.Payload? {
+        if let jwt = try? Jwt.decode(identityToken!) {
+            return jwt.payload
+        }
+        return nil
+    }
+    
+    /**
+     Gets the custom user attribute.
+     
+     - parameters:
+        - attributeName: the user attribute to retrieve
+     
+     - returns: the custom attribute if it exists, otherwise nil
+     */
+    public func customAttribute<T>(_ attributeName: String) -> T? {
+        var attribute: T?
+        if let payload = rawIdentityToken() {
+            if let customAttribute = payload[attributeName] as? T {
+                attribute = customAttribute
+            }
+        }
+        return attribute
+    }
 }
