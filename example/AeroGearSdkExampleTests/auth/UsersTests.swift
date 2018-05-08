@@ -96,22 +96,30 @@ class UsersTests: XCTestCase {
     }
     
     func testCustomBooleanAttribute() {
-        XCTAssertEqual(userToTest?.customAttribute("boolean") as Bool?, true)
-        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as Bool?, nil)
+        let booleanAttribute: Bool? = (userToTest?.customAttribute("boolean"))
+        let nonExistentCustomAttribute: Bool? = (userToTest?.customAttribute("nonExistentCustomAttribute"))
+        XCTAssertEqual(booleanAttribute, true)
+        XCTAssertEqual(nonExistentCustomAttribute, nil)
     }
 
     func testCustomStringAttribute() {
-        XCTAssertEqual(userToTest?.customAttribute("string") as String?, "string")
-        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as String?, nil)
+        let stringAttribute: String? = (userToTest?.customAttribute("string"))
+        let nonExistentCustomAttribute: String? = (userToTest?.customAttribute("nonExistentCustomAttribute"))
+        XCTAssertEqual(stringAttribute, "string")
+        XCTAssertEqual(nonExistentCustomAttribute, nil)
     }
 
     func testCustomLongAttribute() {
-        XCTAssertEqual(userToTest?.customAttribute("long") as Int64?, 1)
-        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as Int64?, nil)
+        let longAttribute: Int64? = (userToTest?.customAttribute("long"))
+        let nonExistentCustomAttribute: Int64? = (userToTest?.customAttribute("nonExistentCustomAttribute"))
+        XCTAssertEqual(longAttribute, 1)
+        XCTAssertEqual(nonExistentCustomAttribute, nil)
     }
 
     func testCustomIntAttribute() {
-        XCTAssertEqual(userToTest?.customAttribute("int") as Int?, 1)
-        XCTAssertEqual(userToTest?.customAttribute("nonExistentCustomAttribute") as Int?, nil)
+        let intAttribute: Int? = (userToTest?.customAttribute("int"))
+        let nonExistentCustomAttribute: Int? = (userToTest?.customAttribute("nonExistentCustomAttribute"))
+        XCTAssertEqual(intAttribute, 1)
+        XCTAssertEqual(nonExistentCustomAttribute, nil)
     }
 }
