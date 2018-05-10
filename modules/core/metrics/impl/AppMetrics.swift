@@ -20,6 +20,7 @@ public class AppMetrics: Metrics {
         return [
             "appId": self.appData.bundleId,
             "appVersion": self.appData.appVersion,
+            "framework": "native",
             "sdkVersion": self.appData.sdkVersion
         ]
     }
