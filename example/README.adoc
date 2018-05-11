@@ -1,7 +1,10 @@
-= Example project
+= IOS SDK testing project
 
 **This project is used only for internal testing purposes**
 See official documentation to see how to integrate SDK into your app.
+
+See official IOS showcase application that integrates with latest released version of SDK: 
+https://github.com/aerogear/ios-showcase-template
 
 == Prerequisites
 
