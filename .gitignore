@@ -6,6 +6,12 @@
 build/
 DerivedData/
 
+# antora
+
+/docs/build/
+/docs/node_modules/
+/docs/.cache/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser

@@ -1,0 +1,7 @@
+name: ios
+title: AeroGear iOS SDK
+version: 'latest'
+start_ROOT: ROOT:index.adoc
+nav:
+- modules/ROOT/nav.adoc
+
