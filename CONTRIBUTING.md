@@ -17,3 +17,12 @@ ticket, the Aerogear team is available for technical advice or feedback.
 You can reach us at [#aerogear](ircs://chat.freenode.net:6697/aerogear-dev) on [Freenode IRC](https://freenode.net/) or the 
 [aerogear-dev list](https://groups.google.com/forum/#!forum/aerogear)
 -- both are actively monitored.
+
+## Working with showcase application
+
+SDK can be tested together with showcase application.
+To clone showcase and link local SDK pods execute:
+
+```
+./scripts/cloneShowcase.sh
+```
