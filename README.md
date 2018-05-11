@@ -7,6 +7,10 @@ AeroGear Services iOS Swift SDK (AGS)
 1. [End User Getting Started Guide](./docs/getting-started.adoc)
 1. [Service Contributor Guide](./docs/service-guide.adoc)
 
+## Showcase application 
+
+To try out latest release of SDK go to [IOS showcase application](https://github.com/aerogear/ios-showcase-template)
+
 ### List of SDKs
 
 AeroGear Services consist of set of separate SDKs
