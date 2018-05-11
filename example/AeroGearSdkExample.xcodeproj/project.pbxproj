@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0156A54620584CEE0054F056 /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156A54520584CED0054F056 /* PushViewController.swift */; };
-		0156A54820584CF30054F056 /* push.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0156A54720584CF30054F056 /* push.storyboard */; };
 		01681E0F20973652004A0C8E /* SdkStartupPerfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01681E0C20973652004A0C8E /* SdkStartupPerfTest.swift */; };
 		01681E1320973770004A0C8E /* PushRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01681E1220973770004A0C8E /* PushRegistrationTests.swift */; };
-		016D7D81205BEB75001DE653 /* PushHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D7D80205BEB75001DE653 /* PushHelper.swift */; };
 		017F3708201F4014001A9009 /* ServiceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017F3707201F4014001A9009 /* ServiceConfigTests.swift */; };
 		018FBE5620123AEE00E763A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE5520123AEE00E763A5 /* AppDelegate.swift */; };
 		018FBE5820123AEE00E763A5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018FBE5720123AEE00E763A5 /* HomeViewController.swift */; };
@@ -38,10 +35,6 @@
 		B3526650204438A2004BACC7 /* menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B352664F204438A2004BACC7 /* menu.storyboard */; };
 		B352665220443D52004BACC7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352665120443D52004BACC7 /* RootViewController.swift */; };
 		B35266552044AD9C004BACC7 /* home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35266542044AD9C004BACC7 /* home.storyboard */; };
-		B35266582044AF17004BACC7 /* auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35266572044AF17004BACC7 /* auth.storyboard */; };
-		B352665A2044B1C1004BACC7 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35266592044B1C1004BACC7 /* AuthViewController.swift */; };
-		B352665C2044BBCD004BACC7 /* AuthDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352665B2044BBCD004BACC7 /* AuthDetailsViewController.swift */; };
-		B352665F20455FBC004BACC7 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352665E20455FBC004BACC7 /* ViewHelper.swift */; };
 		B3AC1A83204815E000BEB12B /* AuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A82204815E000BEB12B /* AuthTests.swift */; };
 		B3AC1A862048184600BEB12B /* OIDCAuthenticatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A852048184600BEB12B /* OIDCAuthenticatorTest.swift */; };
 		B3AC1A89204825EC00BEB12B /* MockHttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC1A88204825EC00BEB12B /* MockHttpRequest.swift */; };
@@ -71,12 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AeroGearSdkExample.entitlements; sourceTree = "<group>"; };
-		0156A54520584CED0054F056 /* PushViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
-		0156A54720584CF30054F056 /* push.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = push.storyboard; sourceTree = "<group>"; };
 		01681E0C20973652004A0C8E /* SdkStartupPerfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SdkStartupPerfTest.swift; sourceTree = "<group>"; };
 		01681E1220973770004A0C8E /* PushRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRegistrationTests.swift; sourceTree = "<group>"; };
-		016D7D80205BEB75001DE653 /* PushHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushHelper.swift; sourceTree = "<group>"; };
 		017F3707201F4014001A9009 /* ServiceConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceConfigTests.swift; sourceTree = "<group>"; };
 		018FBE5220123AEE00E763A5 /* AeroGearSdkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AeroGearSdkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018FBE5520123AEE00E763A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,10 +102,6 @@
 		B352664F204438A2004BACC7 /* menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = menu.storyboard; sourceTree = "<group>"; };
 		B352665120443D52004BACC7 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B35266542044AD9C004BACC7 /* home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = home.storyboard; sourceTree = "<group>"; };
-		B35266572044AF17004BACC7 /* auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = auth.storyboard; sourceTree = "<group>"; };
-		B35266592044B1C1004BACC7 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		B352665B2044BBCD004BACC7 /* AuthDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDetailsViewController.swift; sourceTree = "<group>"; };
-		B352665E20455FBC004BACC7 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 		B3AC1A82204815E000BEB12B /* AuthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTests.swift; sourceTree = "<group>"; };
 		B3AC1A852048184600BEB12B /* OIDCAuthenticatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCAuthenticatorTest.swift; sourceTree = "<group>"; };
 		B3AC1A88204825EC00BEB12B /* MockHttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHttpRequest.swift; sourceTree = "<group>"; };
@@ -157,16 +142,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0156A5442058301F0054F056 /* push */ = {
-			isa = PBXGroup;
-			children = (
-				0156A54720584CF30054F056 /* push.storyboard */,
-				0156A54520584CED0054F056 /* PushViewController.swift */,
-				016D7D80205BEB75001DE653 /* PushHelper.swift */,
-			);
-			path = push;
-			sourceTree = "<group>";
-		};
 		01681E0B20973652004A0C8E /* performance */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,12 +183,8 @@
 		018FBE5420123AEE00E763A5 /* AeroGearSdkExample */ = {
 			isa = PBXGroup;
 			children = (
-				0156A54320582FAD0054F056 /* AeroGearSdkExample.entitlements */,
-				0156A5442058301F0054F056 /* push */,
-				B35266562044AF07004BACC7 /* auth */,
 				B35266532044AD85004BACC7 /* home */,
 				B352664A204437DE004BACC7 /* menu */,
-				B352665D20455FAE004BACC7 /* helpers */,
 				018FBE75201257F300E763A5 /* mobile-services.json */,
 				B352665120443D52004BACC7 /* RootViewController.swift */,
 				018FBE5520123AEE00E763A5 /* AppDelegate.swift */,
@@ -324,24 +295,6 @@
 			path = home;
 			sourceTree = "<group>";
 		};
-		B35266562044AF07004BACC7 /* auth */ = {
-			isa = PBXGroup;
-			children = (
-				B35266572044AF17004BACC7 /* auth.storyboard */,
-				B35266592044B1C1004BACC7 /* AuthViewController.swift */,
-				B352665B2044BBCD004BACC7 /* AuthDetailsViewController.swift */,
-			);
-			path = auth;
-			sourceTree = "<group>";
-		};
-		B352665D20455FAE004BACC7 /* helpers */ = {
-			isa = PBXGroup;
-			children = (
-				B352665E20455FBC004BACC7 /* ViewHelper.swift */,
-			);
-			path = helpers;
-			sourceTree = "<group>";
-		};
 		B3AC1A81204815E000BEB12B /* auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,7 +359,6 @@
 				018FBE4F20123AEE00E763A5 /* Frameworks */,
 				018FBE5020123AEE00E763A5 /* Resources */,
 				1B2E2D2A6248F032BF93FB57 /* [CP] Embed Pods Frameworks */,
-				6EBB24470BF20D52834CD33E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -425,8 +377,6 @@
 				018FBE6220123AEE00E763A5 /* Sources */,
 				018FBE6320123AEE00E763A5 /* Frameworks */,
 				018FBE6420123AEE00E763A5 /* Resources */,
-				D68D1CF4667414290F575E12 /* [CP] Embed Pods Frameworks */,
-				CEF358D6F02FA5DD1CB50535 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -446,8 +396,6 @@
 				01AA3C99207CD5760096D2EE /* Sources */,
 				01AA3CAD207CD5760096D2EE /* Frameworks */,
 				01AA3CAF207CD5760096D2EE /* Resources */,
-				4B5AC0C2E02688DFCA86DD3B /* [CP] Embed Pods Frameworks */,
-				D02883BA8B2F1ECB128D412E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -474,13 +422,13 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -519,13 +467,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B35266582044AF17004BACC7 /* auth.storyboard in Resources */,
 				018FBE6020123AEE00E763A5 /* LaunchScreen.storyboard in Resources */,
 				B35266552044AD9C004BACC7 /* home.storyboard in Resources */,
 				018FBE76201257F300E763A5 /* mobile-services.json in Resources */,
 				018FBE5D20123AEE00E763A5 /* Assets.xcassets in Resources */,
 				B3526650204438A2004BACC7 /* menu.storyboard in Resources */,
-				0156A54820584CF30054F056 /* push.storyboard in Resources */,
 				018FBE5B20123AEE00E763A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,81 +583,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4B5AC0C2E02688DFCA86DD3B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6EBB24470BF20D52834CD33E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExample/Pods-AeroGearSdkExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CEF358D6F02FA5DD1CB50535 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D02883BA8B2F1ECB128D412E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleIntegrationTests/Pods-AeroGearSdkExampleIntegrationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D68D1CF4667414290F575E12 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearSdkExampleTests/Pods-AeroGearSdkExampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -723,12 +594,7 @@
 				018FBE5820123AEE00E763A5 /* HomeViewController.swift in Sources */,
 				018FBE5620123AEE00E763A5 /* AppDelegate.swift in Sources */,
 				B352664D204437DE004BACC7 /* BaseViewController.swift in Sources */,
-				B352665A2044B1C1004BACC7 /* AuthViewController.swift in Sources */,
-				0156A54620584CEE0054F056 /* PushViewController.swift in Sources */,
 				B352664E204437DE004BACC7 /* MenuViewController.swift in Sources */,
-				016D7D81205BEB75001DE653 /* PushHelper.swift in Sources */,
-				B352665F20455FBC004BACC7 /* ViewHelper.swift in Sources */,
-				B352665C2044BBCD004BACC7 /* AuthDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -915,7 +781,6 @@
 			baseConfigurationReference = 62B3CBB630EF770D9F5BB994 /* Pods-AeroGearSdkExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AeroGearSdkExample/AeroGearSdkExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHPBX39444;
 				INFOPLIST_FILE = AeroGearSdkExample/Info.plist;
@@ -933,7 +798,6 @@
 			baseConfigurationReference = 135360C38D2B44669D831A4A /* Pods-AeroGearSdkExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AeroGearSdkExample/AeroGearSdkExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GHPBX39444;
 				INFOPLIST_FILE = AeroGearSdkExample/Info.plist;
