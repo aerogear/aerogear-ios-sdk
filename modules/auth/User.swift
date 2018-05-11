@@ -238,7 +238,7 @@ public struct User {
         let roleToFind = UserRole(nameSpace: nil, roleName: roleName)
         return roles.contains(roleToFind)
     }
-    
+
     /**
      Gets the identity JWT payload.
      
@@ -250,7 +250,7 @@ public struct User {
         }
         return nil
     }
-    
+
     /**
      Gets the custom user attribute.
      
