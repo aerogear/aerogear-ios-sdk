@@ -108,7 +108,7 @@ Podfile.lock
 Debug
 Release
 
-
+showcase/
 AGExampleService
 
 docs/api
