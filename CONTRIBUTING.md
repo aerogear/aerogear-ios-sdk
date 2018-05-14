@@ -26,3 +26,7 @@ To clone showcase and link local SDK pods execute:
 ```
 ./scripts/cloneShowcase.sh
 ```
+
+## IOS SDK contributor documentation
+
+See [Contributor documentation](./docs/contrib)

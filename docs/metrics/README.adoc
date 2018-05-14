@@ -13,6 +13,7 @@ The Client ID will be generated and stored on the device when the App is started
 - *App ID*: The package name of your App
 - *App version*: The version of your App
 - *SDK version*: The version of the Aerogear SDK that is used
+- *Framework*: Framework used for development (native)
 
 === Device metrics
 
