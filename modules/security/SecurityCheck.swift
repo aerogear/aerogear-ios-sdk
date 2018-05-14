@@ -1,8 +1,8 @@
 import Foundation
 
-protocol SecurityCheck {
+public protocol SecurityCheck {
 
-    var name: String { get set }
+    var name: String { get }
 
     func check() -> SecurityCheckResult
 

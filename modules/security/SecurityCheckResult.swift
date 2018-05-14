@@ -2,8 +2,8 @@ import Foundation
 
 public struct SecurityCheckResult {
 
-    let name: String
-    let passed: Bool
+    public let name: String
+    public let passed: Bool
 
     init(_ name: String, _ passed: Bool) {
         self.name = name;
