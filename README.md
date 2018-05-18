@@ -28,7 +28,7 @@ Mobile application Unified Push SDK
 
 [General Contributing Guide](./CONTRIBUTING.md)
 
-[Example Application Guide](./example/README.adoc)
+[Dev tests Application Guide](./tests/README.adoc)
 
 ## License
 

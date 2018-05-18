@@ -3,7 +3,7 @@
 ## Requirement
 ## gem install cocoapods-deintegrate
 
-cd ./example
+cd ./tests
 pod deintegrate
 rm ./AeroGearSdkExample.xcworkspace
 

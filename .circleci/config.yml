@@ -21,7 +21,7 @@ jobs:
       # Install CocoaPods
       - run:
           name: Install CocoaPods
-          working_directory: ./example
+          working_directory: ./tests
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             pod install
@@ -29,7 +29,7 @@ jobs:
       # Build the app and run tests
       - run:
           name: Build and run tests
-          working_directory: ./example
+          working_directory: ./tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 7
@@ -39,7 +39,7 @@ jobs:
       # and save the same XML files under test-results folder
       # in the Artifacts tab
       - store_test_results:
-          path: ./example/test_output/report.xml
+          path: ./tests/test_output/report.xml
       - store_artifacts:
           path: /tmp/test-results
           destination: scan-test-results
@@ -61,7 +61,7 @@ jobs:
       # Install CocoaPods
       - run:
           name: Install CocoaPods
-          working_directory: ./example
+          working_directory: ./tests
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
 

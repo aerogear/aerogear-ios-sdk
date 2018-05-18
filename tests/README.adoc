@@ -8,7 +8,7 @@ https://github.com/aerogear/ios-showcase-template
 
 == Prerequisites
 
-An example project that makes use of the SDK has been provided in the `example` folder. This project is good for understanding how the SDK works.
+An tests project that makes use of the SDK has been provided in the `tests` folder. This project is good for understanding how the SDK works.
 
 You will need the following installed on your development machine:
 
@@ -27,16 +27,16 @@ gem install cocoapods
 pod setup
 ----
 
-2) In the `example` directory run the following command:
+2) In the `tests` directory run the following command:
 
 [source,bash]
 ----
 pod install
 ----
 
-=== Run the Example App
+=== Run the tests App
 
-3) Open the `AeroGearSdkExample.xcworkspace` file with Xcode and click the 'Build & Run' button in Xcode. This should start the example application in an emulator.
+3) Open the `AeroGearSdkExample.xcworkspace` file with Xcode and click the 'Build & Run' button in Xcode. This should start the tests application in an emulator.
 
 > Do not use `.xcodeproj`. If you open up a project file instead of a workspace, dependencies will not be correctly configured.
 
