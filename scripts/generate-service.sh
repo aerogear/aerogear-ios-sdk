@@ -35,7 +35,7 @@ echo "Create documentation folder and file"
 mkdir -p ./docs/$SDK_NAME 
 
 echo "Create test folder"
-mkdir -p ./example/AeroGearSdkExampleTests/$SDK_NAME
+mkdir -p ./tests/AeroGearSdkExampleTests/$SDK_NAME
 
 echo "Copy and process module templates"
 envsubst < ./template/service.podspec > ./modules/$SDK_NAME/${SDK_NAME}.podspec
@@ -44,6 +44,6 @@ envsubst < ./template/Service.swift_template > ./modules/$SDK_NAME/${SDK_CLASS}.
 echo "Copy and process docs and unit tests"
 envsubst < ./template/README.adoc > ./docs/$SDK_NAME/README.adoc
 envsubst < ./template/ServiceTests.swift_template > \
-./example/AeroGearSdkExampleTests/$SDK_NAME/${SDK_CLASS}Tests.swift
+./tests/AeroGearSdkExampleTests/$SDK_NAME/${SDK_CLASS}Tests.swift
  
 echo "SDK generated successfully"

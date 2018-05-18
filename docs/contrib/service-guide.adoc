@@ -8,7 +8,7 @@ image:./images/diagram.svg[diagram,450,450,role="right"]
 
 === SDK architecture
 
-SDK aggregates individual services SDK into one single managable namespace. SDK's like AeroGear Sync, Push are build as separate SDK's that can be included into any existing or new IOS applications. SDK using cocoapods for dependency resolution and distribution. Each SDK contains separate `podspec` file. Specifications are tested in `./example` application that is also used for building and demo purposes. 
+SDK aggregates individual services SDK into one single managable namespace. SDK's like AeroGear Sync, Push are build as separate SDK's that can be included into any existing or new IOS applications. SDK using cocoapods for dependency resolution and distribution. Each SDK contains separate `podspec` file. Specifications are tested in `./tests` application that is also used for testing. 
 
 Each SDK always include separate core module located in `./modules/core`.
 Core is responsible for parsing configuration, event logging and network communitcation. Both top level users and individual SDK components can interact with Core SDK api in order to avoid strict dependencies. 
@@ -20,8 +20,7 @@ Every SDK is fully independent from each other and interacts with Core interface
 `./modules` - folder containing AeroGear SDK's.  
 Each SDK (cocoapods module) is represented by podspec file
 
-`./example` - folder with example application used for testing etc.
-Example application also contain
+`./tests` - folder with tests application used for testing etc.
 
 `./scripts` - scripts for development, build, releases etc.
 See each script header for more information
@@ -83,7 +82,7 @@ Instruction bellow explains how to crete new IOS based SDK
 +
 [source,bash]
 ----
-    cd ./example
+    cd ./tests
     pod install
 ----
 +
@@ -91,7 +90,7 @@ Instruction bellow explains how to crete new IOS based SDK
 +
 [source,bash]
 ----
-open ./example/AeroGearSdkExampleTests/myservice/MyserviceTests.swift
+open ./tests/AeroGearSdkExampleTests/myservice/MyserviceTests.swift
 ----
 
 === XCode development
@@ -100,7 +99,7 @@ SDK and example applications can be developed in XCode.
 To open xcode project Execute
 
 ----
-cd ./example
+cd ./tests
 pod install
 open ./AeroGearSdkExample.xcworkspace
 ----

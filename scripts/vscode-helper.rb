@@ -26,12 +26,12 @@ def addfiles (direc, current_group, main_target)
     end
 end
 
-project_path = './example/AeroGearSdkExample.xcodeproj'
+project_path = './tests/AeroGearSdkExample.xcodeproj'
 project = Xcodeproj::Project.open(project_path)
 
 default_group = project.new_group('default')
 
-mainPath = './example'
+mainPath = './tests'
 main_target = project.targets.first
 
 addfiles("#{mainPath}/*", default_group, main_target)

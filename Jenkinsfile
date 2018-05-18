@@ -46,7 +46,7 @@ if ( prLabels.contains("test/integration") ) {
                     }
         
                     stage ('Prepare config file') {
-                        def servicesConfigJsonPath = "./example/AeroGearSdkExample/mobile-services.json"
+                        def servicesConfigJsonPath = "./tests/AeroGearSdkExample/mobile-services.json"
                         def servicesConfigJson = readJSON file: servicesConfigJsonPath
 
                         // Update URL for metrics in mobile-services.json file
@@ -60,7 +60,7 @@ if ( prLabels.contains("test/integration") ) {
 
                     stage ('Run integration test') {
                         sh "pod setup"
-                        dir('example') {
+                        dir('tests') {
                             sh """
                             pod install
                             xcodebuild \
