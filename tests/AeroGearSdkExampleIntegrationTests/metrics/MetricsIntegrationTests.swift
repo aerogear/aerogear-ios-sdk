@@ -4,7 +4,6 @@ import Foundation
 import XCTest
 
 class MetricsIntegrationTests: XCTestCase {
-
     let metrics = AgsCore.instance.getMetrics()
 
     func testPublishingDefaultMetricsShouldNotReturnError() {

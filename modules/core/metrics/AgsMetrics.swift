@@ -4,7 +4,6 @@ import Foundation
  AeroGear Services metrics
  */
 open class AgsMetrics {
-
     // Default metrics type
     private static let InitMetricsType = "init"
     // Default timeout for starting metrics

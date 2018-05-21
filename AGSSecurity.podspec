@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = 'AGSSec'
+  s.name         = 'AGSSecurity'
   s.version      = '0.2.2'
   s.summary      = 'OWASP Security Checks'
 
@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
                      :tag => s.version.to_s}
   s.source_files = 'modules/security/**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
+  s.dependency 'AGSCore'
   s.dependency 'DTTJailbreakDetection'
   s.requires_arc = true
 

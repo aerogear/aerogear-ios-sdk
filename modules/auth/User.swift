@@ -241,7 +241,7 @@ public struct User {
 
     /**
      Gets the identity JWT payload.
-     
+
      - returns: identity JWT payload
      */
     private func rawIdentityToken() -> JSONWebToken.Payload? {
@@ -253,10 +253,10 @@ public struct User {
 
     /**
      Gets the custom user attribute.
-     
+
      - parameters:
         - attributeName: the user attribute to retrieve
-     
+
      - returns: the custom attribute if it exists, otherwise nil
      */
     public func customAttribute<T>(_ attributeName: String) -> T? {

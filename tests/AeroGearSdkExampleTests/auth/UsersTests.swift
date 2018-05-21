@@ -67,7 +67,7 @@ class UsersTests: XCTestCase {
         + "xvbmciOjF9.OJ1K3h9kOccsLmAxNo_FOoy2L5BWTl2u9K3Y6HhteGKL8rd293sM856-Da8ZiuScSd6wGzk2lQjpCG"
         + "Cv_YUaduRGtN7RMtI61P4zYeYZj4z08A65ZhgXUDqIMkCvqgcSFkBdJvKeZBGeogWttqu6k_0oMHIywgWrxFm9uNw"
         + "66F8-3jwbOP-hdZDGFeCf9EhOcT9EzZ56nGRfWZI_FPjo0VRmRyixmLF3ulIZ_yrlcRAUNdW3g-GVTsUgO2DIXW45"
-        + "xt-_Kz1AQRhMRW50775_TZOlWt__wRrt9-Y4Qn_KHfiPaCqDAbzAdNpJJLo0S_yemEqV9pEWEQE4ZoVA9hwypQ";
+        + "xt-_Kz1AQRhMRW50775_TZOlWt__wRrt9-Y4Qn_KHfiPaCqDAbzAdNpJJLo0S_yemEqV9pEWEQE4ZoVA9hwypQ"
     let realmRole: UserRole = UserRole(nameSpace: nil, roleName: "realmRole")
     let clientRole: UserRole = UserRole(nameSpace: "client", roleName: "clientRole")
     var userToTest: User?
@@ -94,7 +94,7 @@ class UsersTests: XCTestCase {
         XCTAssertFalse(userToTest!.hasRealmRole("wrongRealmRole"))
         XCTAssertFalse(userToTest!.hasClientRole(client: "clientNotExist", role: "clientRole"))
     }
-    
+
     func testCustomBooleanAttribute() {
         let booleanAttribute: Bool? = (userToTest?.customAttribute("boolean"))
         let nonExistentCustomAttribute: Bool? = (userToTest?.customAttribute("nonExistentCustomAttribute"))
