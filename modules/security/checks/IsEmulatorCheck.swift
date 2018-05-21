@@ -14,8 +14,8 @@ public class IsEmulatorCheck: SecurityCheck {
      */
     public func check() -> SecurityCheckResult {
         #if (arch(i386) || arch(x86_64) && os(iOS))
-            return SecurityCheckResult(self.name, false, self.passing)
+            return SecurityCheckResult(self.name, false, self.failing)
         #endif
-        return SecurityCheckResult(self.name, true, self.failing)
+        return SecurityCheckResult(self.name, true, self.passing)
     }
 }
