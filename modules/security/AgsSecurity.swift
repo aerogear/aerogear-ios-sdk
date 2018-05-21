@@ -7,6 +7,10 @@ import Foundation
  checks on the device their code is running on
  */
 public class AgsSecurity {
+    
+    /**
+     The initialise method of AgsSecurity
+    */
     public init() {}
 
     /**

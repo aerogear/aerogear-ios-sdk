@@ -17,3 +17,8 @@ echo "Generating push documentation"
 ## Remove core dependency
 sed -i.bck "s.dependency 'AGSCore', s.version.to_s/ /g" ./AGSPush.podspec
 bundle exec jazzy --podspec ./AGSPush.podspec --output ./docs/api/push
+
+echo "Generating security documentation"
+## Remove core dependency
+sed -i.bck "s/s.dependency 'AGSCore', s.version.to_s/ /g" ./AGSSecurity.podspec
+bundle exec jazzy --podspec ./AGSSecurity.podspec --output ./docs/api/security

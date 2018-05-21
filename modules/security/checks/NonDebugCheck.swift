@@ -1,5 +1,10 @@
 import Foundation
 
+/**
+ IsDebuggerCheck implements the `SecurityCheck` protocol
+ 
+ It can check whether or not the device the check is running on is running with debug mode enabled
+ */
 public class NonDebugCheck: SecurityCheck {
     public var name = "Debugger"
     private let passing = "Debugger not detected"
