@@ -1,6 +1,6 @@
 = iOS Security - Self Defence Checks
 
-AeroGear iOS SDK offers a set of security features that will make sure that your application is meeting the modern OWASP recomendations. All security features are available as part of the separate `AGSSec` package. This package offers multiple security checks that can be used to analyse the security of the device. This can be useful for developers to detect vulnerablities and react accordingly. For example, if the app detects security issue *X* then do *Y*, where *X* could be no lock screen is set and *Y* is show a system prompt to setup the lock screen.
+AeroGear iOS SDK offers a set of security features that will make sure that your application is meeting the modern OWASP recomendations. All security features are available as part of the separate `AGSSecurity` package. This package offers multiple security checks that can be used to analyse the security of the device. This can be useful for developers to detect vulnerablities and react accordingly. For example, if the app detects security issue *X* then do *Y*, where *X* could be no lock screen is set and *Y* is show a system prompt to setup the lock screen.
 
 This package offers:
 
@@ -16,16 +16,16 @@ This package offers:
 Add dependency to your Podfile:
 
 ```
-pod 'AGSSec'
+pod 'AGSSecurity'
 ```
 
-To begin using the self defence checks in your app, you'll need to import and retrieve an instance of `AGSSec`:
+To begin using the self defence checks in your app, you'll need to import and retrieve an instance of `AGSSecurity`:
 
 [source,swift]
 ----
-import AGSSec
+import AGSSecurity
 
-let security = AGSSec()
+let security = AGSSecurity()
 ----
 
 == Provided Self Defence Checks
@@ -53,7 +53,7 @@ To detect if the app is runing in debug mode the `IsDebuggerCheck` function can 
 To detect if a device has a lock screen set the `IsDeviceLockCheck` function can be used. If the device *has* a screen lock enabled then this check will pass.
 
 === Defining a Custom Self Defence Check
-Custom self defence checks can be used with the `AGSSec SDK`. Custom self defence checks must implement the `SecurityCheck` interface.
+Custom self defence checks can be used with the `AGSSecurity SDK`. Custom self defence checks must implement the `SecurityCheck` interface.
 
 [source,swift]
 ----
@@ -69,7 +69,7 @@ public class CustomCheck: SecurityCheck {
 ----
 
 === Invoking a Single Self Defence Check
-The `AGSSec.check` function is used to invoke a security check which returns the result of type `SecurityCheckResult`. The check function takes a paramater of type `SecurityCheck` which will specify the type of check to be invoked:
+The `AGSSecurity.check` function is used to invoke a security check which returns the result of type `SecurityCheckResult`. The check function takes a paramater of type `SecurityCheck` which will specify the type of check to be invoked:
 
 [source,swift]
 ----
@@ -78,7 +78,7 @@ let result = security.check(IsDeviceLockCheck())
 ----
 
 === Invoking Multiple Self Defence Checks
-To invoke multiple checks the `AGSSec.checkMany` function is used. This returns an array of `SecurityCheckResult` objects in the order they`re provided in:
+To invoke multiple checks the `AGSSecurity.checkMany` function is used. This returns an array of `SecurityCheckResult` objects in the order they`re provided in:
 
 [source,swift]
 ----
