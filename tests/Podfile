@@ -9,7 +9,7 @@ target 'AeroGearSdkExample' do
   pod 'AGSCore', :path => '../'
   pod 'AGSAuth', :path => '../'
   pod 'AGSPush', :path => '../'
-  pod 'AGSSec', :path => '../'
+  pod 'AGSSecurity', :path => '../'
 
   target 'AeroGearSdkExampleTests' do
     inherit! :search_paths
