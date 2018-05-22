@@ -6,7 +6,8 @@ import Foundation
 
 /** All the configurations related to Keycloak */
 class KeycloakConfig {
-    private let serverUrlName = "auth-server-url"
+    private let authServerUrlName = "auth-server-url"
+    private let serverUrlName = "url"
     private let realmIdName = "realm"
     private let clientIdName = "resource"
 
@@ -19,6 +20,7 @@ class KeycloakConfig {
     private let authConfig: AuthenticationConfig
 
     private var serverUrl: String = ""
+    private var issuerHostname: String = ""
     private var realmId: String = ""
     private var clientId: String = ""
     private var baseUrl: String = ""
@@ -46,12 +48,15 @@ class KeycloakConfig {
             return
         }
 
-        if let url = config[serverUrlName] {
-            serverUrl = url.getString() ?? ""
-        }
+        // use the top level URL for authentication
+        serverUrl = mobileService.url
 
         if let realm = config[realmIdName] {
             realmId = realm.getString() ?? ""
+        }
+
+        if let issuerHostnameUrl = config[authServerUrlName] {
+            issuerHostname = issuerHostnameUrl.getString() ?? ""
         }
 
         if let clientIdValue = config[clientIdName] {
@@ -91,6 +96,11 @@ class KeycloakConfig {
         return serverUrl
     }
 
+    /** The Issuer Host URL string of the Keycloak service. This should only be used for token verification of the issuer field. */
+    var issuerHostnameUrl: String {
+        return issuerHostname
+    }
+
     /** The realm name of the Keycloak service */
     var realmName: String {
         return realmId
@@ -103,6 +113,6 @@ class KeycloakConfig {
 
     /** The JWK Issuer */
     var issuer: String {
-        return String(format: "%@/realms/%@", hostUrl, realmName)
+        return String(format: "%@/realms/%@", issuerHostnameUrl, realmName)
     }
 }
