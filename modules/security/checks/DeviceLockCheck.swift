@@ -1,7 +1,7 @@
 import Foundation
 import LocalAuthentication
 
-public class IsDeviceLockCheck: SecurityCheck {
+public class DeviceLockCheck: SecurityCheck {
     public let name = "Device Lock"
     private let passing = "Device lock detected"
     private let failing = "Device lock not detected"

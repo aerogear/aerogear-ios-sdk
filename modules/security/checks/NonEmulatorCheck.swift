@@ -1,6 +1,6 @@
 import Foundation
 
-public class IsEmulatorCheck: SecurityCheck {
+public class NonEmulatorCheck: SecurityCheck {
     public let name = "Emulator"
     private let passing = "Emulator not detected"
     private let failing = "Emulator detected"

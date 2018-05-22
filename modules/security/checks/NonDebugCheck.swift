@@ -1,23 +1,22 @@
-import DTTJailbreakDetection
 import Foundation
 
-public class IsJailbrokenCheck: SecurityCheck {
-    public let name = "Jailbreak"
-    private let passing = "Jailbreak not detected"
-    private let failing = "Jailbreak detected"
+public class NonDebugCheck: SecurityCheck {
+    public var name = "Debugger"
+    private let passing = "Debugger not detected"
+    private let failing = "Debugger detected"
 
     public init() {}
 
     /**
-     - Check if the device is Jailbroken.
+     - Check if the device is running in Debug mode.
 
      - Returns: A Security Check result with a true or false passing property
      */
     public func check() -> SecurityCheckResult {
-        if DTTJailbreakDetection.isJailbroken() {
+        #if DEBUG
             return SecurityCheckResult(self.name, false, self.failing)
-        } else {
+        #else
             return SecurityCheckResult(self.name, true, self.passing)
-        }
+        #endif
     }
 }
