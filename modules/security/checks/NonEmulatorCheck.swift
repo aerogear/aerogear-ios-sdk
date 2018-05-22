@@ -1,6 +1,11 @@
 import Foundation
 
-public class NonEmulatorCheck: SecurityCheck {
+/**
+ IsEmulatorCheck implements the `SecurityCheck` protocol
+ 
+ It can check whether or not the device the check is running on is running within an emulator or not.
+ */
+ public class NonEmulatorCheck: SecurityCheck {
     public let name = "Emulator"
     private let passing = "Emulator not detected"
     private let failing = "Emulator detected"
