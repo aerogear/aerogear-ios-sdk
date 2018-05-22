@@ -1,1 +1,6 @@
-* xref:index.adoc[Overview]
+* xref:index.adoc[Getting Started]
+** xref:core.adoc[Core]
+** xref:auth.adoc[Auth]
+** xref:security.adoc[Security]
+*** xref:sso.adoc[SSO]
+** xref:metrics.adoc[Metrics]

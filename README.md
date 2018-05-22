@@ -4,8 +4,8 @@ AeroGear Services iOS Swift SDK (AGS)
 
 ## Documentation
 
-1. [End User Getting Started Guide](./docs/getting-started.adoc)
-1. [Service Contributor Guide](./docs/service-guide.adoc)
+1. [End User Getting Started Guide](./docs/modules/ROOT/getting-started.adoc)
+1. [Service Contributor Guide](./docs/contrib/service-guide.adoc)
 
 ## Showcase application 
 
@@ -15,13 +15,13 @@ To try out latest release of SDK go to [IOS showcase application](https://github
 
 AeroGear Services consist of set of separate SDKs
 
-- [Core](./docs/core/README.adoc)
+- [Core](./docs/modules/ROOT/pages/core.adoc)
 Core library used as base for other SDKs
-- [Auth](./docs/auth/README.adoc)
+- [Auth](./docs/modules/ROOT/pages/auth.adoc)
 Mobile application Auth SDK (part of the core bundle)
-- [Metrics](./docs/metrics/README.adoc)
+- [Metrics](./docs/modules/ROOT/pages/metrics.adoc)
 Mobile application Metrics SDK (part of the core bundle)
-- [Push](./docs/push/README.adoc)
+- [Push](./docs/modules/ROOT/pages/push.adoc)
 Mobile application Unified Push SDK 
 
 ## Contributing

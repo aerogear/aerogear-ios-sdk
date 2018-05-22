@@ -36,19 +36,19 @@ The following are the self defence checks provided by the SDK.
 
 For example, the Jailbroken Detection check `IsJailbrokenCheck` should return `true` when it is *not* jailbroken, since this would be the more secure condition.
 
-==== Emulator Detection Check (IsEmulatorCheck)
+=== Emulator Detection Check (IsEmulatorCheck)
 
 To detect if the app is being run on an emulator the `IsEmulatorCheck` function can be used. If the device is *not* running in an emulator then the check will pass.
 
-==== Jailbroken Detection Check (IsJailbrokenCheck)
+=== Jailbroken Detection Check (IsJailbrokenCheck)
 
 To help prevent your app running in a device that has been jailbroken the `IsJailbrokenCheck` function can be used. If the device is *not* jailbroken then the check will pass.
 
-==== Debug Mode Check (IsDebuggerCheck)
+=== Debug Mode Check (IsDebuggerCheck)
 
 To detect if the app is runing in debug mode the `IsDebuggerCheck` function can be used. If the device is *not* running in debug mode then the check will pass.
 
-==== Device Lock Check (IsDeviceLockCheck)
+=== Device Lock Check (IsDeviceLockCheck)
 
 To detect if a device has a lock screen set the `IsDeviceLockCheck` function can be used. If the device *has* a screen lock enabled then this check will pass.
 
