@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'AGSAuth'
-  s.version      = '0.2.2'
+  s.version      = '0.3.0'
   s.summary      = 'AeroGear Auth Service'
 
   s.description  = 'AeroGear Auth SDK for iOS'

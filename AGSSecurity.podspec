@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'AGSSecurity'
-  s.version      = '0.2.2'
+  s.version      = '0.3.0'
   s.summary      = 'OWASP Security Checks'
 
   s.description  = 'AeroGear Services security'
