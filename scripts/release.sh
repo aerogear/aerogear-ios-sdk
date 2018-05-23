@@ -1,7 +1,7 @@
 #!/bin/bash
 # Push the AGSCore pod
 # Scripts validates pod specifications before release
-MODULES="AGSAuth AGSPush"
+MODULES="AGSAuth AGSPush AGSSecurity"
 set -eo pipefail
 
 SWIFT_VERSION=4.1
