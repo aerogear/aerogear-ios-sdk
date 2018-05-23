@@ -1,7 +1,6 @@
 #!/bin/bash
 # Prepare for release
 GIT_PUSH="${GIT_PUSH:-1}"
-MODULES="core auth push"
 SDK_VERSION=`cat VERSION|tr -d '[:space:]'`
 
 META_SDK_SEARCH='(sdkVersion[[:space:]]=[[:space:]])(\")([[:digit:]].[[:digit:]].[[:digit:]])(\")'

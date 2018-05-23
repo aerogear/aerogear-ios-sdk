@@ -1,7 +1,6 @@
 #!/bin/bash
-
 SDK_VERSION=`cat VERSION|tr -d '[:space:]'`
-declare -a modules=("AGSCore" "AGSAuth" "AGSPush")
+modules=($(ls | grep -E .podspec$ | awk -F '.' '{ print $1 }'))
 
 # explicit declaration that this script needs a $TAG variable passed in e.g TAG=1.2.3 ./script.sh
 TAG=$TAG
