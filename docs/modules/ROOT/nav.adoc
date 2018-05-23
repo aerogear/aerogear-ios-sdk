@@ -1,6 +1,7 @@
 * xref:index.adoc[Getting Started]
 ** xref:core.adoc[Core]
 ** xref:auth.adoc[Auth]
+*** xref:user-attributes.adoc[User Attributes]
 ** xref:security.adoc[Security]
 *** xref:sso.adoc[SSO]
 ** xref:metrics.adoc[Metrics]
