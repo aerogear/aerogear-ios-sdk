@@ -28,7 +28,7 @@ Add the Push SDK to your application module
 
 [source,swift]
 ----
-import AgsPush
+import AGSPush
 ----
 
 == Application setup
