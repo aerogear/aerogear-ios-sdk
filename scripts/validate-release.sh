@@ -4,11 +4,11 @@ modules=($(ls | grep -E .podspec$ | awk -F '.' '{ print $1 }'))
 
 # explicit declaration that this script needs a $TAG variable passed in e.g TAG=1.2.3 ./script.sh
 TAG=$TAG
-TAG_SYNTAX='[[:digit:]].[[:digit:]].[[:digit:]]'
+TAG_SYNTAX='[0-9]+\.[0-9]+\.[0-9]+(-.+)*$'
 
 # validate tag has format x.y.z
-if [[ ! $TAG =~ $TAG_SYNTAX ]]; then
-  echo "tag $TAG does not have correct syntax x.y.z. exiting..."
+if [[ "$(echo $TAG | grep -E $TAG_SYNTAX)" == "" ]]; then
+  echo "tag $TAG is invalid. Must be in the format x.y.z or x.y.z-SOME_TEXT"
   exit 1
 fi
 
