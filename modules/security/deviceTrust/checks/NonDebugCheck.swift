@@ -6,7 +6,7 @@ import Foundation
  It can check whether or not the device the check is running on is running with debug mode enabled
  */
 public class NonDebugCheck: SecurityCheck {
-    public var name = "Debugger"
+    public var name = "Debugger check"
     private let passing = "Debugger not detected"
     private let failing = "Debugger detected"
 

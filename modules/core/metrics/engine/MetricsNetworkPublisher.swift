@@ -13,7 +13,7 @@ public class MetricsNetworkPublisher: MetricsPublisher {
         self.url = url
     }
 
-    public func publish(_ payload: MetricsData, _ handler: @escaping (AgsHttpResponse?) -> Void) {
+    public func publish(_ payload: MetricsRoot, _ handler: @escaping (AgsHttpResponse?) -> Void) {
         AgsCore.logger.debug("Sending metrics \(payload)")
         http.post(url, body: payload, { (response: AgsHttpResponse) -> Void in
             handler(response)

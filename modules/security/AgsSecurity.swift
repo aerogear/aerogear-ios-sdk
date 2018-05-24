@@ -1,4 +1,5 @@
 import Foundation
+import AGSCore
 
 /**
  AeroGear Services Security SDK
@@ -7,6 +8,11 @@ import Foundation
  checks on the device their code is running on
  */
 public class AgsSecurity {
+    
+    private let serviceId = "security"
+    
+    /** instance of the Security SDK */
+    public let core = AgsCore.instance;
     
     /**
      The initialise method of AgsSecurity
@@ -22,7 +28,27 @@ public class AgsSecurity {
     public func check(_ check: SecurityCheck) -> SecurityCheckResult {
         return check.check()
     }
-
+    
+    /**
+     - Perform a security check on a device and also publish the result to the metrics service
+     
+     - Parameter check: The security check to be performed
+     - Returns: A SecurityCheckResult with a true or false property 'passed'
+    */
+    public func checkAndPublishMetric(_ check: SecurityCheck) -> SecurityCheckResult {
+        let result = check.check();
+        core.getMetrics().publish(serviceId, [SecurityCheckResultMetric([result])], { (response: AgsHttpResponse?) -> Void in
+            if let error = response?.error {
+                AgsCore.logger.error("An error has occurred when sending check metrics: \(error)")
+                return
+            }
+            if let response = response?.response as? [String: Any] {
+                AgsCore.logger.debug("Metrics response \(response)")
+            }
+        })
+        return result
+    }
+        
     /**
      - Perform multiple security checks on a device
 
@@ -35,5 +61,26 @@ public class AgsSecurity {
             completedChecks.append(check(value))
         }
         return completedChecks
+    }
+    
+    /**
+     - Perform multiple security checks on a device and also publish them to the metrics service
+     
+     - Parameter checks: The security checks to be performed
+     - Returns: An array of type SecurityCheckResult with a true or false property 'passed' for each result
+     */
+    public func checkManyAndPublishMetric(_ checks: [SecurityCheck]) -> [SecurityCheckResult] {
+        let results = checkMany(checks)
+        let securityResults = SecurityCheckResultMetric(results)
+        core.getMetrics().publish(serviceId, [securityResults], { (response: AgsHttpResponse?) -> Void in
+            if let error = response?.error {
+                AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")
+                return
+            }
+            if let response = response?.response as? [String: Any] {
+                AgsCore.logger.debug("Metrics response \(response)")
+            }
+        })
+        return results
     }
 }

@@ -69,7 +69,7 @@ open class AgsMetrics {
         guard let activePublisher = publisher else {
             return
         }
-        var data = MetricsData()
+        var data = MetricsRoot()
         appendMetrics(metrics, &data)
         appendMetrics(defaultMetrics, &data)
         let payload = appendToRootMetrics(type, data)
