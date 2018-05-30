@@ -11,9 +11,6 @@ public class AgsSecurity {
     
     private let serviceId = "security"
     
-    /** instance of the Security SDK */
-    public let core = AgsCore.instance;
-    
     /**
      The initialise method of AgsSecurity
     */
@@ -37,7 +34,7 @@ public class AgsSecurity {
     */
     public func checkAndPublishMetric(_ check: SecurityCheck) -> SecurityCheckResult {
         let result = check.check();
-        core.getMetrics().publish(serviceId, [SecurityCheckResultMetric([result])], { (response: AgsHttpResponse?) -> Void in
+        AgsCore.instance.getMetrics().publish(serviceId, [SecurityCheckResultMetric([result])], { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending check metrics: \(error)")
                 return
@@ -72,7 +69,7 @@ public class AgsSecurity {
     public func checkManyAndPublishMetric(_ checks: [SecurityCheck]) -> [SecurityCheckResult] {
         let results = checkMany(checks)
         let securityResults = SecurityCheckResultMetric(results)
-        core.getMetrics().publish(serviceId, [securityResults], { (response: AgsHttpResponse?) -> Void in
+        AgsCore.instance.getMetrics().publish(serviceId, [securityResults], { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")
                 return

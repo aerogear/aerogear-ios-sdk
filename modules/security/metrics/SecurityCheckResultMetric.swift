@@ -1,7 +1,7 @@
 import Foundation
 import AGSCore
 /**
- Protocol for the metric representation of a `SecurityCheckResult`.
+ Collecting metrics for security checks
  
  */
 public class SecurityCheckResultMetric : Metrics {
@@ -23,9 +23,9 @@ public class SecurityCheckResultMetric : Metrics {
             do {
                 let singleCheck = try result.adaptToDictionary()
                 let mappedObj = [
-                    "name": singleCheck["name"]!,
-                    "passed": singleCheck["passed"]!,
-                    "id": singleCheck["name"]!
+                    "name": singleCheck["name"] ?? "",
+                    "passed": singleCheck["passed"] ?? "",
+                    "id": singleCheck["name"] ?? ""
                 ]
                 collectArray.append(mappedObj)
             } catch {

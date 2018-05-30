@@ -7,7 +7,7 @@ import Foundation
 public typealias MetricsData =  Any
 
 /**
-   Root object that is being send to server to collect metrics
+   Root object that is being sent to server
  */
 public typealias MetricsRoot = [String: Any]
 
@@ -15,7 +15,7 @@ public typealias MetricsRoot = [String: Any]
    Protocol for classes that can publish or store metrics payload
  */
 public protocol MetricsPublisher {
-    /**ß
+    /**
        Allows to publish metrics to external source
        - parameter payload: metrics payload containing all data to be sent
        - parameter handler: closure called when publish operation finished
