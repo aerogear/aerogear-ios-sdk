@@ -1,7 +1,6 @@
 name: ios
 title: AeroGear iOS SDK
 version: 'latest'
-start_ROOT: ROOT:index.adoc
+start_ROOT: ROOT:getting-started.adoc
 nav:
 - modules/ROOT/nav.adoc
-

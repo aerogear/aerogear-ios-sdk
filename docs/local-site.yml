@@ -1,6 +1,6 @@
 site:
   title: AeroGear Docs Site
-  start_page: ios::index
+  start_page: ios::getting-started
 content:
   sources:
   - url: ../

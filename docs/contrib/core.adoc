@@ -6,7 +6,7 @@ See the link:../service-guide.adoc[Service Contributor Guide] for an explanation
 
 === Core Services Api
 
-The core SDK currently supports the following areas:
+The Core SDK currently supports the following areas:
 
 1. Configuration parser
 2. Network library 
@@ -15,7 +15,7 @@ The core SDK currently supports the following areas:
 
 === Logger
 
-The core SDK provides a logger. The logger is automatically initialized and available as a property of `AgsCore`.
+The Core SDK provides a logger. The logger is automatically initialized and available as a property of `AgsCore`.
 
 [source,swift]
 ----

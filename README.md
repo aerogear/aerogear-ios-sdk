@@ -1,28 +1,31 @@
 # AeroGear Services iOS Swift SDK
 
-AeroGear Services iOS Swift SDK (AGS)
+[![circle-ci](https://img.shields.io/circleci/project/github/aerogear/aerogear-ios-sdk/master.svg)](https://circleci.com/gh/aerogear/aerogear-ios-sdk)
+[![License](https://img.shields.io/badge/-Apache%202.0-blue.svg)](https://opensource.org/s/Apache-2.0)
 
-## Documentation
+|                 | Project Info                                                     |
+| --------------- | ---------------------------------------------------------------- |
+| License:        | Apache License, Version 2.0                                      |
+| Build:          | Gradle                                                           |
+| End User Documentation:  | https://docs.aerogear.org - Under construction - [Github Link](./docs/modules/ROOT/pages/)|
+| Community Documentation: | https://aerogear.org             |
+| Issue tracker:  | https://issues.jboss.org/browse/AEROGEAR                         |
+| Mailing lists:  | [aerogear-dev](https://groups.google.com/forum/#!forum/aerogear) |
 
-1. [End User Getting Started Guide](./docs/getting-started.adoc)
-1. [Service Contributor Guide](./docs/service-guide.adoc)
 
 ## Showcase application 
 
 To try out latest release of SDK go to [IOS showcase application](https://github.com/aerogear/ios-showcase-template)
 
-### List of SDKs
+### List of Modules
 
-AeroGear Services consist of set of separate SDKs
+The AeroGear SDK consists of set of Modules
 
-- [Core](./docs/core/README.adoc)
-Core library used as base for other SDKs
-- [Auth](./docs/auth/README.adoc)
-Mobile application Auth SDK (part of the core bundle)
-- [Metrics](./docs/metrics/README.adoc)
-Mobile application Metrics SDK (part of the core bundle)
-- [Push](./docs/push/README.adoc)
-Mobile application Unified Push SDK 
+- Core - Core Module used as base for other Modules
+- Auth - Mobile Application Auth Module
+- Security - Mobile Application Security Module
+- Metrics - Mobile Application Metrics Module
+- Push - Mobile Application Unified Push Module
 
 ## Contributing
 
@@ -33,3 +36,12 @@ Mobile application Unified Push SDK
 ## License
 
  See [LICENSE file](./LICENSE)
+
+ ## Questions?
+
+Join our [user mailing list](https://groups.google.com/forum/#!forum/aerogear) for any questions or help! We really hope you enjoy app development with AeroGear!
+
+## Found a bug?
+
+If you found a bug please create a ticket for us on [Jira](https://issues.jboss.org/browse/AEROGEAR) with some steps to reproduce it.
+
