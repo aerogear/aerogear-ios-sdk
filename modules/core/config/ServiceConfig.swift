@@ -30,7 +30,7 @@ public class ServiceConfig {
      */
     public func getConfigurationByType(_ type: String) -> [MobileService] {
         if let config = config {
-            return config.services.filter { $0.type == type }
+            return config.services.filter { $0.type.lowercased() == type.lowercased() }
         } else {
             return []
         }
