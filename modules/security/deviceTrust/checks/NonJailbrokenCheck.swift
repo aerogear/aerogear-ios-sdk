@@ -7,7 +7,7 @@ import Foundation
  It can check whether or not the device the check is running on is a Jailbroken device.
  */
  public class NonJailbrokenCheck: SecurityCheck {
-    public let name = "Jailbreak"
+    public let name = "Jailbreak check"
     private let passing = "Jailbreak not detected"
     private let failing = "Jailbreak detected"
 

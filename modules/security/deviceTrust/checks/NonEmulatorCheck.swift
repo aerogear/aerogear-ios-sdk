@@ -6,7 +6,7 @@ import Foundation
  It can check whether or not the device the check is running on is running within an emulator or not.
  */
  public class NonEmulatorCheck: SecurityCheck {
-    public let name = "Emulator"
+    public let name = "Emulator check"
     private let passing = "Emulator not detected"
     private let failing = "Emulator detected"
 

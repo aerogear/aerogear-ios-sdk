@@ -1,4 +1,4 @@
-@testable import AGSSec
+@testable import AGSSecurity
 import Foundation
 import XCTest
 

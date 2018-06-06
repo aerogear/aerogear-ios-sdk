@@ -67,9 +67,10 @@ open class AgsMetrics {
      */
     public func publish(_ type: String, _ metrics: [Metrics], _ handler: @escaping (AgsHttpResponse?) -> Void) {
         guard let activePublisher = publisher else {
+            handler(nil)
             return
         }
-        var data = MetricsData()
+        var data = MetricsRoot()
         appendMetrics(metrics, &data)
         appendMetrics(defaultMetrics, &data)
         let payload = appendToRootMetrics(type, data)
