@@ -26,8 +26,8 @@ public class AgsPush {
     }
 
     let requestApi: AgsHttpRequestProtocol
-    let serverURL: URL
-    let credentials: UnifiedPushCredentials
+    var serverURL: URL? = nil
+    var credentials: UnifiedPushCredentials? = nil
 
     /**
      Initialise the push module
@@ -38,13 +38,17 @@ public class AgsPush {
      */
     init(_ mobileConfig: MobileService?, _ requestApi: AgsHttpRequestProtocol) {
         self.requestApi = requestApi
-        self.serverURL = URL(string: (mobileConfig?.url)!)!
-
-        let pushSecurityConfig = mobileConfig?.config!["ios"]?.getObject()
+        guard let config = mobileConfig else{
+           AgsCore.logger.info("Missing configuration for UPS. Push registration will be disabled");
+           return;
+        }
+        self.serverURL = URL(string: (config.url))
+        let pushSecurityConfig = mobileConfig?.config?["ios"]?.getObject()
         let variant = pushSecurityConfig?["variantId"]?.getString()
         let secret = pushSecurityConfig?["variantSecret"]?.getString()
-
-        self.credentials = UnifiedPushCredentials(variant!, secret!)
+        if let variant = variant, let secret = secret {
+           self.credentials = UnifiedPushCredentials(variant, secret)
+        }
     }
 
     /**
@@ -63,9 +67,15 @@ public class AgsPush {
                          _ config: UnifiedPushConfig,
                          success: @escaping (() -> Void),
                          failure: @escaping ((Error) -> Void)) {
+        
+        guard let url = self.serverURL, let credentials = self.credentials else {
+            AgsCore.logger.info("Cannot register to UPS. Missing configuration");
+            return;
+        }
+        
         let currentDevice = UIDevice()
 
-        let headers = buildAuthHeaders(self.credentials)
+        let headers = buildAuthHeaders(credentials)
 
         let postData = [
             "deviceToken": convertToString(deviceToken) as Any,
@@ -76,10 +86,10 @@ public class AgsPush {
             "categories": config.categories ?? ""
         ] as [String: Any]
 
-        let registerUrl = self.serverURL.appendingPathComponent(AgsPush.apiPath).absoluteString
+        let registerUrl = url.appendingPathComponent(AgsPush.apiPath).absoluteString
         self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
             guard let requestError = response.error else {
-                self.saveClientDeviceInformation(deviceToken, self.serverURL)
+                self.saveClientDeviceInformation(deviceToken, url)
                 success()
                 return
             }
@@ -96,7 +106,7 @@ public class AgsPush {
     // Build headers used for Authentication
     fileprivate func buildAuthHeaders(_ credentials: UnifiedPushCredentials) -> [String: String] {
         // apply HTTP Basic Extract method
-        let basicAuthCredentials: Data! = "\(self.credentials.variantID):\(self.credentials.variantSecret)".data(using: String.Encoding.utf8)
+        let basicAuthCredentials: Data! = "\(credentials.variantID):\(credentials.variantSecret)".data(using: String.Encoding.utf8)
         let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         return ["Authorization": "Basic \(base64Encoded)"]
     }
