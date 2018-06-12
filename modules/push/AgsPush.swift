@@ -39,7 +39,7 @@ public class AgsPush {
     init(_ mobileConfig: MobileService?, _ requestApi: AgsHttpRequestProtocol) {
         self.requestApi = requestApi
         guard let config = mobileConfig else{
-           AgsCore.logger.info("Missing configuration for UPS. Push registration will be disabled");
+           AgsCore.logger.warning("Missing configuration for UPS. Push registration will be disabled");
            return;
         }
         self.serverURL = URL(string: (config.url))
@@ -69,7 +69,7 @@ public class AgsPush {
                          failure: @escaping ((Error) -> Void)) {
         
         guard let url = self.serverURL, let credentials = self.credentials else {
-            AgsCore.logger.info("Cannot register to UPS. Missing configuration");
+            AgsCore.logger.warning("Cannot register to UPS. Missing configuration");
             return;
         }
         
