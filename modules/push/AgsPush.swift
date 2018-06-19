@@ -19,6 +19,11 @@ public class AgsPush {
         return AgsPush(config, httpInterface)
     }()
 
+    public enum Errors : Error {
+        case serviceNotRegistered
+        case noServiceConfigurationFound
+    }
+    
     struct DeviceRegistrationError {
         static let PushErrorDomain = "PushErrorDomain"
         static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
@@ -26,6 +31,7 @@ public class AgsPush {
     }
 
     let requestApi: AgsHttpRequestProtocol
+    let serviceConfig: MobileService?
     var serverURL: URL? = nil
     var credentials: UnifiedPushCredentials? = nil
 
@@ -38,17 +44,7 @@ public class AgsPush {
      */
     init(_ mobileConfig: MobileService?, _ requestApi: AgsHttpRequestProtocol) {
         self.requestApi = requestApi
-        guard let config = mobileConfig else{
-           AgsCore.logger.warning("Missing configuration for UPS. Push registration will be disabled");
-           return;
-        }
-        self.serverURL = URL(string: (config.url))
-        let pushSecurityConfig = mobileConfig?.config?["ios"]?.getObject()
-        let variant = pushSecurityConfig?["variantId"]?.getString()
-        let secret = pushSecurityConfig?["variantSecret"]?.getString()
-        if let variant = variant, let secret = secret {
-           self.credentials = UnifiedPushCredentials(variant, secret)
-        }
+        self.serviceConfig = mobileConfig
     }
 
     /**
@@ -66,35 +62,45 @@ public class AgsPush {
     public func register(_ deviceToken: Data,
                          _ config: UnifiedPushConfig,
                          success: @escaping (() -> Void),
-                         failure: @escaping ((Error) -> Void)) {
+                         failure: @escaping ((Error) -> Void)) throws {
         
-        guard let url = self.serverURL, let credentials = self.credentials else {
-            AgsCore.logger.warning("Cannot register to UPS. Missing configuration");
-            return;
-        }
-        
-        let currentDevice = UIDevice()
-
-        let headers = buildAuthHeaders(credentials)
-
-        let postData = [
-            "deviceToken": convertToString(deviceToken) as Any,
-            "deviceType": currentDevice.model,
-            "operatingSystem": currentDevice.systemName,
-            "osVersion": currentDevice.systemVersion,
-            "alias": config.alias ?? "",
-            "categories": config.categories ?? ""
-        ] as [String: Any]
-
-        let registerUrl = url.appendingPathComponent(AgsPush.apiPath).absoluteString
-        self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
-            guard let requestError = response.error else {
-                self.saveClientDeviceInformation(deviceToken, url)
-                success()
-                return
+        if let serviceConfig = self.serviceConfig {
+            self.serverURL = URL(string: serviceConfig.url)
+            let pushSecurityConfig = serviceConfig.config?["ios"]?.getObject()
+            let variant = pushSecurityConfig?["variantId"]?.getString()
+            let secret = pushSecurityConfig?["variantSecret"]?.getString()
+            
+            if let variantId = variant, let variantSecret = secret, let url = self.serverURL {
+            
+                self.credentials = UnifiedPushCredentials(variantId, variantSecret)
+                
+                let currentDevice = UIDevice()
+                let headers = buildAuthHeaders(credentials!)
+                
+                let postData = [
+                    "deviceToken": convertToString(deviceToken) as Any,
+                    "deviceType": currentDevice.model,
+                    "operatingSystem": currentDevice.systemName,
+                    "osVersion": currentDevice.systemVersion,
+                    "alias": config.alias ?? "",
+                    "categories": config.categories ?? ""
+                    ] as [String: Any]
+                
+                let registerUrl = url.appendingPathComponent(AgsPush.apiPath).absoluteString
+                self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
+                    guard let requestError = response.error else {
+                        self.saveClientDeviceInformation(deviceToken, url)
+                        success()
+                        return
+                    }
+                    failure(requestError)
+                })
+            } else {
+                throw Errors.noServiceConfigurationFound
             }
-            failure(requestError)
-        })
+        } else {
+            throw Errors.noServiceConfigurationFound
+        }
     }
 
     // Storing data in UserDefaults
