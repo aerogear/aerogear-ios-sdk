@@ -29,9 +29,16 @@ public class AgsPush {
         static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
         static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
+    
+    struct PushConfig {
+        var variantId: String
+        var variantSecret: String
+        var url: URL
+    }
 
     let requestApi: AgsHttpRequestProtocol
     let serviceConfig: MobileService?
+    var pushConfig: PushConfig? = nil
     var serverURL: URL? = nil
     var credentials: UnifiedPushCredentials? = nil
 
@@ -45,8 +52,9 @@ public class AgsPush {
     init(_ mobileConfig: MobileService?, _ requestApi: AgsHttpRequestProtocol) {
         self.requestApi = requestApi
         self.serviceConfig = mobileConfig
+        self.pushConfig = parsePushConfig(mobileConfig)
     }
-
+    
     /**
     Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
     Registration information can be provided within clientInfo block
@@ -64,43 +72,32 @@ public class AgsPush {
                          success: @escaping (() -> Void),
                          failure: @escaping ((Error) -> Void)) throws {
         
-        if let serviceConfig = self.serviceConfig {
-            self.serverURL = URL(string: serviceConfig.url)
-            let pushSecurityConfig = serviceConfig.config?["ios"]?.getObject()
-            let variant = pushSecurityConfig?["variantId"]?.getString()
-            let secret = pushSecurityConfig?["variantSecret"]?.getString()
-            
-            if let variantId = variant, let variantSecret = secret, let url = self.serverURL {
-            
-                self.credentials = UnifiedPushCredentials(variantId, variantSecret)
-                
-                let currentDevice = UIDevice()
-                let headers = buildAuthHeaders(credentials!)
-                
-                let postData = [
-                    "deviceToken": convertToString(deviceToken) as Any,
-                    "deviceType": currentDevice.model,
-                    "operatingSystem": currentDevice.systemName,
-                    "osVersion": currentDevice.systemVersion,
-                    "alias": config.alias ?? "",
-                    "categories": config.categories ?? ""
-                    ] as [String: Any]
-                
-                let registerUrl = url.appendingPathComponent(AgsPush.apiPath).absoluteString
-                self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
-                    guard let requestError = response.error else {
-                        self.saveClientDeviceInformation(deviceToken, url)
-                        success()
-                        return
-                    }
-                    failure(requestError)
-                })
-            } else {
-                throw Errors.noServiceConfigurationFound
-            }
-        } else {
+        guard let pushConfig = self.pushConfig else {
             throw Errors.noServiceConfigurationFound
         }
+        self.credentials = UnifiedPushCredentials(pushConfig.variantId, pushConfig.variantSecret)
+        
+        let currentDevice = UIDevice()
+        let headers = buildAuthHeaders(credentials!)
+        
+        let postData = [
+            "deviceToken": convertToString(deviceToken) as Any,
+            "deviceType": currentDevice.model,
+            "operatingSystem": currentDevice.systemName,
+            "osVersion": currentDevice.systemVersion,
+            "alias": config.alias ?? "",
+            "categories": config.categories ?? ""
+            ] as [String: Any]
+        
+        let registerUrl = pushConfig.url.appendingPathComponent(AgsPush.apiPath).absoluteString
+        self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
+            guard let requestError = response.error else {
+                self.saveClientDeviceInformation(deviceToken, pushConfig.url)
+                success()
+                return
+            }
+            failure(requestError)
+        })
     }
 
     // Storing data in UserDefaults
@@ -123,6 +120,14 @@ public class AgsPush {
             return token.replacingOccurrences(of: "<", with: "")
                 .replacingOccurrences(of: ">", with: "")
                 .replacingOccurrences(of: " ", with: "")
+        }
+        return nil
+    }
+    
+    // Ensure that all elements in the push configuration exist and return a struct representation. If not return nil.
+    fileprivate func parsePushConfig(_ mobileService: MobileService?) -> PushConfig? {
+        if let service = mobileService, let iosConfig = service.config?["ios"]?.getObject(), let variantId = iosConfig["variantId"]?.getString(), let variantSecret = iosConfig["variantSecret"]?.getString(), let url = URL(string: service.url) {
+            return PushConfig(variantId: variantId, variantSecret: variantSecret, url: url)
         }
         return nil
     }
