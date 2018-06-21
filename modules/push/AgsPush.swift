@@ -19,13 +19,26 @@ public class AgsPush {
         return AgsPush(config, httpInterface)
     }()
 
+    public enum Errors : Error {
+        case serviceNotRegistered
+        case noServiceConfigurationFound
+    }
+    
     struct DeviceRegistrationError {
         static let PushErrorDomain = "PushErrorDomain"
         static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
         static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
+    
+    struct PushConfig {
+        var variantId: String
+        var variantSecret: String
+        var url: URL
+    }
 
     let requestApi: AgsHttpRequestProtocol
+    let serviceConfig: MobileService?
+    var pushConfig: PushConfig? = nil
     var serverURL: URL? = nil
     var credentials: UnifiedPushCredentials? = nil
 
@@ -38,19 +51,10 @@ public class AgsPush {
      */
     init(_ mobileConfig: MobileService?, _ requestApi: AgsHttpRequestProtocol) {
         self.requestApi = requestApi
-        guard let config = mobileConfig else{
-           AgsCore.logger.warning("Missing configuration for UPS. Push registration will be disabled");
-           return;
-        }
-        self.serverURL = URL(string: (config.url))
-        let pushSecurityConfig = mobileConfig?.config?["ios"]?.getObject()
-        let variant = pushSecurityConfig?["variantId"]?.getString()
-        let secret = pushSecurityConfig?["variantSecret"]?.getString()
-        if let variant = variant, let secret = secret {
-           self.credentials = UnifiedPushCredentials(variant, secret)
-        }
+        self.serviceConfig = mobileConfig
+        self.pushConfig = parsePushConfig(mobileConfig)
     }
-
+    
     /**
     Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
     Registration information can be provided within clientInfo block
@@ -66,17 +70,16 @@ public class AgsPush {
     public func register(_ deviceToken: Data,
                          _ config: UnifiedPushConfig,
                          success: @escaping (() -> Void),
-                         failure: @escaping ((Error) -> Void)) {
+                         failure: @escaping ((Error) -> Void)) throws {
         
-        guard let url = self.serverURL, let credentials = self.credentials else {
-            AgsCore.logger.warning("Cannot register to UPS. Missing configuration");
-            return;
+        guard let pushConfig = self.pushConfig else {
+            throw Errors.noServiceConfigurationFound
         }
+        self.credentials = UnifiedPushCredentials(pushConfig.variantId, pushConfig.variantSecret)
         
         let currentDevice = UIDevice()
-
-        let headers = buildAuthHeaders(credentials)
-
+        let headers = buildAuthHeaders(credentials!)
+        
         let postData = [
             "deviceToken": convertToString(deviceToken) as Any,
             "deviceType": currentDevice.model,
@@ -84,12 +87,12 @@ public class AgsPush {
             "osVersion": currentDevice.systemVersion,
             "alias": config.alias ?? "",
             "categories": config.categories ?? ""
-        ] as [String: Any]
-
-        let registerUrl = url.appendingPathComponent(AgsPush.apiPath).absoluteString
+            ] as [String: Any]
+        
+        let registerUrl = pushConfig.url.appendingPathComponent(AgsPush.apiPath).absoluteString
         self.requestApi.post(registerUrl, body: postData, headers: headers, { response in
             guard let requestError = response.error else {
-                self.saveClientDeviceInformation(deviceToken, url)
+                self.saveClientDeviceInformation(deviceToken, pushConfig.url)
                 success()
                 return
             }
@@ -117,6 +120,14 @@ public class AgsPush {
             return token.replacingOccurrences(of: "<", with: "")
                 .replacingOccurrences(of: ">", with: "")
                 .replacingOccurrences(of: " ", with: "")
+        }
+        return nil
+    }
+    
+    // Ensure that all elements in the push configuration exist and return a struct representation. If not return nil.
+    fileprivate func parsePushConfig(_ mobileService: MobileService?) -> PushConfig? {
+        if let service = mobileService, let iosConfig = service.config?["ios"]?.getObject(), let variantId = iosConfig["variantId"]?.getString(), let variantSecret = iosConfig["variantSecret"]?.getString(), let url = URL(string: service.url) {
+            return PushConfig(variantId: variantId, variantSecret: variantSecret, url: url)
         }
         return nil
     }
