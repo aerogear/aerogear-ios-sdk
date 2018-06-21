@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'AGSCore'
-  s.version      = '1.0.0-alpha'
+  s.version      = '1.0.0-alpha.2'
   s.summary      = 'AeroGear Services Core SDK for iOS.'
 
   s.description  = 'The AeroGear Core SDK for iOS provides a library to interact OpenShift based mobile services.'
