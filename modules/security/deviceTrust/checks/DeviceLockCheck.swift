@@ -8,8 +8,6 @@ import LocalAuthentication
  */
  public class DeviceLockCheck: SecurityCheck {
     public let name = "Device Lock check"
-    private let passing = "Device lock detected"
-    private let failing = "Device lock not detected"
 
     public init() {}
 
@@ -21,9 +19,9 @@ import LocalAuthentication
     public func check() -> SecurityCheckResult {
         let deviceLockSet = LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
         if deviceLockSet == false {
-            return SecurityCheckResult(self.name, false, self.failing)
+            return SecurityCheckResult(self.name, false)
         } else {
-            return SecurityCheckResult(self.name, true, self.passing)
+            return SecurityCheckResult(self.name, true)
         }
     }
 }

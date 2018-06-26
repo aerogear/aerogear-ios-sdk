@@ -8,8 +8,6 @@ import Foundation
  */
  public class NonJailbrokenCheck: SecurityCheck {
     public let name = "Jailbreak check"
-    private let passing = "Jailbreak not detected"
-    private let failing = "Jailbreak detected"
 
     public init() {}
 
@@ -20,9 +18,9 @@ import Foundation
      */
     public func check() -> SecurityCheckResult {
         if DTTJailbreakDetection.isJailbroken() {
-            return SecurityCheckResult(self.name, false, self.failing)
+            return SecurityCheckResult(self.name, false)
         } else {
-            return SecurityCheckResult(self.name, true, self.passing)
+            return SecurityCheckResult(self.name, true)
         }
     }
 }

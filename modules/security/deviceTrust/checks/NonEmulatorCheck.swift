@@ -7,8 +7,6 @@ import Foundation
  */
  public class NonEmulatorCheck: SecurityCheck {
     public let name = "Emulator check"
-    private let passing = "Emulator not detected"
-    private let failing = "Emulator detected"
 
     public init() {}
 
@@ -19,8 +17,8 @@ import Foundation
      */
     public func check() -> SecurityCheckResult {
         #if (arch(i386) || arch(x86_64) && os(iOS))
-            return SecurityCheckResult(self.name, false, self.failing)
+            return SecurityCheckResult(self.name, false)
         #endif
-        return SecurityCheckResult(self.name, true, self.passing)
+        return SecurityCheckResult(self.name, true)
     }
 }
