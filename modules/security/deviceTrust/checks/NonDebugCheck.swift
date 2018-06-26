@@ -16,10 +16,10 @@ public class NonDebugCheck: SecurityCheck {
      - Returns: A Security Check result with a true or false passing property
      */
     public func check() -> SecurityCheckResult {
+        var passed = true
         #if DEBUG
-            return SecurityCheckResult(self.name, false)
-        #else
-            return SecurityCheckResult(self.name, true)
+            passed = false
         #endif
+        return SecurityCheckResult(self.name, passed)
     }
 }

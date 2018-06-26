@@ -18,10 +18,6 @@ import LocalAuthentication
      */
     public func check() -> SecurityCheckResult {
         let deviceLockSet = LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
-        if deviceLockSet == false {
-            return SecurityCheckResult(self.name, false)
-        } else {
-            return SecurityCheckResult(self.name, true)
-        }
+        return SecurityCheckResult(self.name, deviceLockSet)
     }
 }

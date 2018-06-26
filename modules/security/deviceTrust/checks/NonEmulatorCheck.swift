@@ -16,9 +16,10 @@ import Foundation
      - Returns: A Security Check result with a true or false passing property
      */
     public func check() -> SecurityCheckResult {
+        var passed = true
         #if (arch(i386) || arch(x86_64) && os(iOS))
-            return SecurityCheckResult(self.name, false)
+            passed = false
         #endif
-        return SecurityCheckResult(self.name, true)
+        return SecurityCheckResult(self.name, passed)
     }
 }
