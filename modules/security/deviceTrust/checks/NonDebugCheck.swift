@@ -7,8 +7,6 @@ import Foundation
  */
 public class NonDebugCheck: SecurityCheck {
     public var name = "Debugger check"
-    private let passing = "Debugger not detected"
-    private let failing = "Debugger detected"
 
     public init() {}
 
@@ -18,10 +16,10 @@ public class NonDebugCheck: SecurityCheck {
      - Returns: A Security Check result with a true or false passing property
      */
     public func check() -> SecurityCheckResult {
+        var passed = true
         #if DEBUG
-            return SecurityCheckResult(self.name, false, self.failing)
-        #else
-            return SecurityCheckResult(self.name, true, self.passing)
+            passed = false
         #endif
+        return SecurityCheckResult(self.name, passed)
     }
 }

@@ -9,18 +9,15 @@ public struct SecurityCheckResult : Encodable{
     
     public let name: String
     public let passed: Bool
-    public var result: String
 
     /**
      - Initialise a SecurityCheckResult
      
      - Parameter name: the name of the check result
      - Parameter passed: whether or not the security check passed or failed
-     - Parameter result: a description of the result
      */
-    public init(_ name: String, _ passed: Bool, _ result: String) {
+    public init(_ name: String, _ passed: Bool) {
         self.name = name
         self.passed = passed
-        self.result = result
     }
 }
