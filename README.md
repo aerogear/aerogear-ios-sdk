@@ -6,9 +6,9 @@
 |                 | Project Info                                                     |
 | --------------- | ---------------------------------------------------------------- |
 | License:        | Apache License, Version 2.0                                      |
-| Build:          | Gradle                                                           |
-| End User Documentation:  | https://docs.aerogear.org - Under construction - [Github Link](./docs/modules/ROOT/pages/)|
-| Community Documentation: | https://aerogear.org             |
+| Build:          | Xcode                                                           |
+| End User Documentation:  | https://docs.aerogear.org|
+| Community Documentation: | https://www.aerogear.org             |
 | Issue tracker:  | https://issues.jboss.org/browse/AEROGEAR                         |
 | Mailing lists:  | [aerogear-dev](https://groups.google.com/forum/#!forum/aerogear) |
 
@@ -29,13 +29,13 @@ The AeroGear SDK consists of set of Modules
 
 ## Contributing
 
-[General Contributing Guide](./CONTRIBUTING.md)
+[General Contributing Guide](https://github.com/aerogear/aerogear-ios-sdk/blob/master/CONTRIBUTING.md)
 
-[Dev tests Application Guide](./tests/README.adoc)
+[Dev tests Application Guide](https://github.com/aerogear/aerogear-ios-sdk/blob/master/tests/README.adoc)
 
 ## License
 
- See [LICENSE file](./LICENSE)
+ See [LICENSE file](https://github.com/aerogear/aerogear-ios-sdk/blob/master/LICENSE)
 
  ## Questions?
 

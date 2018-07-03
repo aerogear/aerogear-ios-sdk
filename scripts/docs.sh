@@ -4,6 +4,8 @@
 
 rm -rf docs/api/core
 rm -rf docs/api/auth
+rm -rf docs/api/push
+rm -rf docs/api/security
 
 echo "Generating core documentation"
 bundle exec jazzy --podspec ./AGSCore.podspec --output ./docs/api/core
