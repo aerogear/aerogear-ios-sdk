@@ -1,0 +1,2 @@
+// The docs section in this repo is only meant for technical / non-user facing documentation
+// All other docs can be found at https://docs.aerogear.org/
