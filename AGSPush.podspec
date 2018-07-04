@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'AGSPush'
-  s.version      = '1.0.0-alpha.2'
+  s.version      = '1.0.0'
   s.summary      = 'AeroGear Services AgsPush'
 
   s.description  = 'AeroGear Push SDK for iOS'
