@@ -94,10 +94,10 @@ open class AgsAuth {
      - throws: a `serviceNotConfigured` error if the Auth SDK has not been configured
      */
     public func login(presentingViewController: UIViewController, onCompleted: @escaping (_ user: User?, _ error: Error?) -> Void) throws {
-        guard configured else {
+        guard configured, let authenticator = authenticator else {
             throw Errors.serviceNotConfigured
         }
-        authenticator!.authenticate(presentingViewController: presentingViewController, onCompleted: onCompleted)
+        authenticator.authenticate(presentingViewController: presentingViewController, onCompleted: onCompleted)
     }
 
     /**
@@ -113,10 +113,10 @@ open class AgsAuth {
      - returns: true if the login process can be resumed, false otherwise
      */
     public func resumeAuth(url: URL) throws -> Bool {
-        guard configured else {
+        guard configured, let authenticator = authenticator else {
             throw Errors.serviceNotConfigured
         }
-        return authenticator!.resumeAuth(url: url)
+        return authenticator.resumeAuth(url: url)
     }
 
     /**
@@ -130,14 +130,16 @@ open class AgsAuth {
         a `noLoggedInUserError` if no user is logged in
      */
     public func logout(onCompleted: @escaping (_ error: Error?) -> Void) throws {
-        guard configured else {
+        guard configured, let authenticator = authenticator else {
             throw Errors.serviceNotConfigured
         }
-        if let currentUser = try? currentUser() {
-            authenticator!.logout(currentUser: currentUser!, onCompleted: onCompleted)
-        } else {
-            onCompleted(Errors.noLoggedInUserError)
+        do {
+            if let currentUser = try currentUser() {
+                authenticator.logout(currentUser: currentUser, onCompleted: onCompleted)
+                return
+            }
         }
+        onCompleted(Errors.noLoggedInUserError);
     }
 
     /**
