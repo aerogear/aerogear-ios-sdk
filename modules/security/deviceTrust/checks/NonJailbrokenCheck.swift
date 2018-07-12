@@ -3,10 +3,10 @@ import Foundation
 
 /**
  IsJailbrokenCheck implements the `SecurityCheck` protocol
- 
+
  It can check whether or not the device the check is running on is a Jailbroken device.
  */
- public class NonJailbrokenCheck: SecurityCheck {
+public class NonJailbrokenCheck: SecurityCheck {
     public let name = "Jailbreak check"
 
     public init() {}

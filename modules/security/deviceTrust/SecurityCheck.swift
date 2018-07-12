@@ -5,12 +5,12 @@ import Foundation
 
  */
 public protocol SecurityCheck {
-    
+
     /**
      The name of the Security Check
     */
     var name: String { get }
-    
+
     /**
      Performs a security check and returns a security check result
     */
