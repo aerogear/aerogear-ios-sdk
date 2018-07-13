@@ -19,10 +19,10 @@ public class AgsSync {
  
     public let client: ApolloClient
 
-    init(_ mobileConfig: MobileService?) {
-        self.serviceConfig = mobileConfig
+    init(_ syncConfig: MobileService?) {
+        self.serviceConfig = syncConfig
         
-        guard let url = mobileConfig.url else {
+        guard let url = syncConfig.url else {
             return AgsCore.logger.error("Sync service is not configured");
         }
   

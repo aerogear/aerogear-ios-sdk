@@ -11,7 +11,6 @@ public class AgsSecurity {
 
     private let serviceId = "security"
     
-    public static let instance: AgsSecurity = AgsSecurity()
 
     /**
      The initialise method of AgsSecurity
