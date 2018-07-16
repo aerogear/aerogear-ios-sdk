@@ -26,6 +26,7 @@ The AeroGear SDK consists of set of Modules
 - Security - Mobile Application Security Module
 - Metrics - Mobile Application Metrics Module
 - Push - Mobile Application Unified Push Module
+- Sync - GraphQL based Data Sync SDK
 
 ## Contributing
 
