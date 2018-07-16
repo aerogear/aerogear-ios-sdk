@@ -23,6 +23,6 @@ public struct AuthenticationConfig {
     public init(redirectURL: String, useExternalUserAgent: Bool = false, minTimeBetweenJwksRequests: UInt = 24 * 60) {
         self.redirectURL = URL(string: redirectURL)!
         self.minTimeBetweenJwksRequests = minTimeBetweenJwksRequests
-        self.useExternalUserAgent = useExternalUserAgent;
+        self.useExternalUserAgent = useExternalUserAgent
     }
 }
