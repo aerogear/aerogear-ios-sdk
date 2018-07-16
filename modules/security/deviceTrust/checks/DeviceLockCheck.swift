@@ -3,10 +3,10 @@ import LocalAuthentication
 
 /**
  IsDeviceLockCheck implements the `SecurityCheck` protocol
- 
+
  It can check whether or not the device the check is running on has a device lock enabled
  */
- public class DeviceLockCheck: SecurityCheck {
+public class DeviceLockCheck: SecurityCheck {
     public let name = "Device Lock check"
 
     public init() {}

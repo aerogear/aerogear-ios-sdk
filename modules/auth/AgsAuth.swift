@@ -139,7 +139,7 @@ open class AgsAuth {
                 return
             }
         }
-        onCompleted(Errors.noLoggedInUserError);
+        onCompleted(Errors.noLoggedInUserError)
     }
 
     /**

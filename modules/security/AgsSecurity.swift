@@ -1,5 +1,5 @@
-import Foundation
 import AGSCore
+import Foundation
 
 /**
  AeroGear Services Security SDK
@@ -8,9 +8,10 @@ import AGSCore
  checks on the device their code is running on
  */
 public class AgsSecurity {
-    
+
     private let serviceId = "security"
     
+
     /**
      The initialise method of AgsSecurity
     */
@@ -25,15 +26,15 @@ public class AgsSecurity {
     public func check(_ check: SecurityCheck) -> SecurityCheckResult {
         return check.check()
     }
-    
+
     /**
      - Perform a security check on a device and also publish the result to the metrics service
-     
+
      - Parameter check: The security check to be performed
      - Returns: A SecurityCheckResult with a true or false property 'passed'
     */
     public func checkAndPublishMetric(_ check: SecurityCheck) -> SecurityCheckResult {
-        let result = check.check();
+        let result = check.check()
         AgsCore.instance.getMetrics().publish(serviceId, [SecurityCheckResultMetric([result])], { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending check metrics: \(error)")
@@ -45,7 +46,7 @@ public class AgsSecurity {
         })
         return result
     }
-        
+
     /**
      - Perform multiple security checks on a device
 
@@ -59,10 +60,10 @@ public class AgsSecurity {
         }
         return completedChecks
     }
-    
+
     /**
      - Perform multiple security checks on a device and also publish them to the metrics service
-     
+
      - Parameter checks: The security checks to be performed
      - Returns: An array of type SecurityCheckResult with a true or false property 'passed' for each result
      */
