@@ -82,7 +82,8 @@ public class OIDCAuthenticator: Authenticator {
         - error: the error returned in the `callback` function.  Will be nil if the token exchange was successful
      */
     func startAuthorizationFlow(byPresenting: OIDAuthorizationRequest, presenting: UIViewController, callback: @escaping (_ credentials: OIDCCredentials?, _ error: Error?) -> Void) -> OIDAuthorizationFlowSession {
-        return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: { authState, error in
+
+        let flowCallback: OIDAuthStateAuthorizationCallback = { authState, error in
             if let state = authState {
                 if let err = state.authorizationError {
                     callback(nil, err)
@@ -92,7 +93,14 @@ public class OIDCAuthenticator: Authenticator {
             } else {
                 callback(nil, error)
             }
-        })
+        }
+
+        if authConfig.useExternalUserAgent {
+            let externalUserAgent = OIDExternalUserAgentIOSCustomBrowser.customBrowserSafari()
+            return OIDAuthState.authState(byPresenting: byPresenting, externalUserAgent: externalUserAgent, callback: flowCallback)
+        } else {
+            return OIDAuthState.authState(byPresenting: byPresenting, presenting: presenting, callback: flowCallback)
+        }
     }
 
     /**

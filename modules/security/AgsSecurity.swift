@@ -10,7 +10,6 @@ import Foundation
 public class AgsSecurity {
 
     private let serviceId = "security"
-    
 
     /**
      The initialise method of AgsSecurity
