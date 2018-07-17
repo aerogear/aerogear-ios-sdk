@@ -7,7 +7,7 @@ import Foundation
  */
 public class AgsSync {
 
-    private let serviceName = "sync"
+    private static let serviceName = "sync"
 
     public static let instance: AgsSync = {
         let config = AgsCore.instance.getConfiguration(serviceName)
@@ -15,20 +15,21 @@ public class AgsSync {
         return AgsSync(config)
     }()
 
-    public static let instance = SyncService()
-
-    public let client: ApolloClient
+    public var client: ApolloClient?;
 
     init(_ syncConfig: MobileService?) {
-        self.serviceConfig = syncConfig
-
-        guard let url = syncConfig.url else {
-            return AgsCore.logger.error("Sync service is not configured")
+        guard let url = syncConfig?.url else {
+            AgsCore.logger.error("Sync service is not configured")
+            return;
+        }
+        
+        guard let parsedUrl = URL(string: url) else {
+            AgsCore.logger.error("Invalid service url provided")
+            return;
         }
 
         let configuration = URLSessionConfiguration.default
-        let url = URL(string: url)!
-        client = ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
-        client.cacheKeyForObject = { $0["id"] }
+        client = ApolloClient(networkTransport: HTTPNetworkTransport(url: parsedUrl, configuration: configuration))
+
     }
 }
