@@ -22,7 +22,7 @@ public class AgsSecurity {
      - Parameter check: The security check to be performed
      - Returns: A SecurityCheckResult with a true or false property 'passed'
      */
-    public func check(_ check: SecurityCheck) -> SecurityCheckResult {
+    public func check(_ check: DeviceCheck) -> DeviceCheckResult {
         return check.check()
     }
 
@@ -32,9 +32,9 @@ public class AgsSecurity {
      - Parameter check: The security check to be performed
      - Returns: A SecurityCheckResult with a true or false property 'passed'
     */
-    public func checkAndPublishMetric(_ check: SecurityCheck) -> SecurityCheckResult {
+    public func checkAndPublishMetric(_ check: DeviceCheck) -> DeviceCheckResult {
         let result = check.check()
-        AgsCore.instance.getMetrics().publish(serviceId, [SecurityCheckResultMetric([result])], { (response: AgsHttpResponse?) -> Void in
+        AgsCore.instance.getMetrics().publish(serviceId, [DeviceCheckResultMetric([result])], { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending check metrics: \(error)")
                 return
@@ -52,8 +52,8 @@ public class AgsSecurity {
      - Parameter checks: The security checks to be performed
      - Returns: An array of type SecurityCheckResult with a true or false property 'passed' for each result
      */
-    public func checkMany(_ checks: [SecurityCheck]) -> [SecurityCheckResult] {
-        var completedChecks: [SecurityCheckResult] = []
+    public func checkMany(_ checks: [DeviceCheck]) -> [DeviceCheckResult] {
+        var completedChecks: [DeviceCheckResult] = []
         for value in checks {
             completedChecks.append(check(value))
         }
@@ -66,9 +66,9 @@ public class AgsSecurity {
      - Parameter checks: The security checks to be performed
      - Returns: An array of type SecurityCheckResult with a true or false property 'passed' for each result
      */
-    public func checkManyAndPublishMetric(_ checks: [SecurityCheck]) -> [SecurityCheckResult] {
+    public func checkManyAndPublishMetric(_ checks: [DeviceCheck]) -> [DeviceCheckResult] {
         let results = checkMany(checks)
-        let securityResults = SecurityCheckResultMetric(results)
+        let securityResults = DeviceCheckResultMetric(results)
         AgsCore.instance.getMetrics().publish(serviceId, [securityResults], { (response: AgsHttpResponse?) -> Void in
             if let error = response?.error {
                 AgsCore.logger.error("An error has occurred when sending app metrics: \(error)")

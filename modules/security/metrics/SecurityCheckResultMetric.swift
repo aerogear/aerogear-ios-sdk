@@ -4,16 +4,16 @@ import Foundation
  Collecting metrics for security checks
 
  */
-public class SecurityCheckResultMetric: Metrics {
+public class DeviceCheckResultMetric: Metrics {
 
     /**
      An identifier that is used to namespace the metrics data
      */
     public let identifier = "security"
 
-    private var results: [SecurityCheckResult]
+    private var results: [DeviceCheckResult]
 
-    init(_ results: [SecurityCheckResult]) {
+    init(_ results: [DeviceCheckResult]) {
         self.results = results
     }
 
@@ -29,7 +29,7 @@ public class SecurityCheckResultMetric: Metrics {
                 ]
                 collectArray.append(mappedObj)
             } catch {
-                AgsCore.logger.error("An error has occurred when collecting security check metrics: \(error)")
+                AgsCore.logger.error("An error has occurred when collecting device check metrics: \(error)")
             }
         }
 

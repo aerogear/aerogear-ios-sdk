@@ -5,7 +5,7 @@ import Foundation
 
  A successful check means that the environment the application is running in is more secure and no action is required, as opposed to signalling if a certain feature is enabled.
  */
-public struct SecurityCheckResult: Encodable {
+public struct DeviceCheckResult: Encodable {
 
     public let name: String
     public let passed: Bool
