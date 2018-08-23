@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'AGSSync'
-  s.version      = '1.0.0'
+  s.version      = '2.0.0'
   s.summary      = 'AeroGear Services Sync'
 
   s.description  = 'AeroGear Services Data Sync SDK'
