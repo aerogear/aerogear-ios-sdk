@@ -20,6 +20,6 @@ public class AgsHttp {
 /**
  * Header provided class used in various SDK
  */
-public protocol HeaderProvider : class {
+public protocol HeaderProvider: class {
     func getHeaders() -> [String: String]
 }

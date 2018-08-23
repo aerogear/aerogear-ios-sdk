@@ -175,11 +175,11 @@ open class AgsAuth {
         }
         return user
     }
-    
+
     /**
       Get provider that can be used to supply auth headers
      */
     public func getAuthHeaderProvider() -> AuthHeaderProvider {
-        return AuthHeaderProvider(self);
+        return AuthHeaderProvider(self)
     }
 }
