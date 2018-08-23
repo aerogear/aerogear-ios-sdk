@@ -12,7 +12,7 @@ import KTVJSONWebToken
 
  A user role is a realm role if the nameSpace is not set. Otherwise it is a client role.
  */
-struct UserRole: Hashable {
+public struct UserRole: Hashable {
     /** Supported role types for UserRole. */
     enum Types {
         case REALM, CLIENT
@@ -35,7 +35,7 @@ struct UserRole: Hashable {
         }
     }
 
-    var hashValue: Int {
+    public var hashValue: Int {
         if let nspace = nameSpace {
             return nspace.hashValue ^ roleName.hashValue
         } else {
@@ -43,13 +43,13 @@ struct UserRole: Hashable {
         }
     }
 
-    static func == (lhs: UserRole, rhs: UserRole) -> Bool {
+    public static func == (lhs: UserRole, rhs: UserRole) -> Bool {
         return lhs.nameSpace == rhs.nameSpace && lhs.roleName == rhs.roleName
     }
 }
 
 /** Describes the structure of user profile returned by Keycloak */
-struct KeycloakUserProfile: Codable {
+public struct KeycloakUserProfile: Codable {
     /** Internal structure for AccessRoles. The JSON object contains other fields but we are only interested in "roles" */
     struct AccessRoles: Codable {
         let roles: [String]?
