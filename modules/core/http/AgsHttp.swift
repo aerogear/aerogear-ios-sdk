@@ -16,3 +16,10 @@ public class AgsHttp {
         return defaultHttp
     }
 }
+
+/**
+ * Header provided class used in various SDK
+ */
+public protocol HeaderProvider : class {
+    func getHeaders() -> [String: String]
+}

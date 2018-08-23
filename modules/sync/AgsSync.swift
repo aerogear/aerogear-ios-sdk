@@ -11,11 +11,11 @@ public class AgsSync {
 
     public static let instance: AgsSync = {
         let config = AgsCore.instance.getConfiguration(serviceName)
-        let httpInterface = AgsCore.instance.getHttp()
         return AgsSync(config)
     }()
 
     public var client: ApolloClient?;
+    public var transport: SyncNetworkTransport?;
 
     init(_ syncConfig: MobileService?) {
         guard let url = syncConfig?.url else {
@@ -29,7 +29,8 @@ public class AgsSync {
         }
 
         let configuration = URLSessionConfiguration.default
-        client = ApolloClient(networkTransport: HTTPNetworkTransport(url: parsedUrl, configuration: configuration))
-
+        
+        self.transport = SyncNetworkTransport(url: parsedUrl, configuration: configuration)
+        self.client = ApolloClient(networkTransport: transport!)
     }
 }
