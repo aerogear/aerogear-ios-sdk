@@ -28,9 +28,7 @@ public class AgsSync {
             return
         }
 
-        let configuration = URLSessionConfiguration.default
-
-        self.transport = SyncNetworkTransport(url: parsedUrl, configuration: configuration)
+        self.transport = MixedNetworkTransport(targetUrl: parsedUrl)
         self.client = ApolloClient(networkTransport: transport!)
     }
 }
