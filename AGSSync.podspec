@@ -15,7 +15,8 @@ Pod::Spec.new do |s|
   s.source_files = 'modules/sync/**/*.swift'
   s.frameworks   = 'UIKit', 'Foundation', 'SystemConfiguration'
   ## Default core dependency
-  s.dependency 'AGSCore'
-  s.dependency 'Apollo'
+  s.dependency 'AGSCore' , s.version.to_s
+  s.dependency 'Apollo/Core' , '~> 0.9.0'
+  s.dependency 'Apollo/WebSocket' , '~> 0.9.0'
   s.requires_arc = true
 end
