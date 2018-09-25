@@ -57,4 +57,20 @@ public class OIDCCredentials: NSObject, NSCoding {
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(authState, forKey: OIDCCredentials.authStateEncodingKey)
     }
+    
+    public func refresh(completionHandler: ((Error?) -> Void)!) {
+        if refreshToken == nil {
+            completionHandler?(OIDErrorUtilities.error(with: OIDErrorCode.tokenRefreshError, underlyingError: nil, description: "CurrentCredentials does not have a refresh token"))
+            return
+        }
+        
+        TokenLifecycleManager.refreshAsync(tokenRequest: authState.tokenRefreshRequest()!) { (response: OIDTokenResponse?, error: Error?) in
+            if (error != nil) {
+                completionHandler(error)
+                return
+            }
+            self.authState.update(with: response, error: nil)
+            completionHandler(nil)
+        }
+    }
 }

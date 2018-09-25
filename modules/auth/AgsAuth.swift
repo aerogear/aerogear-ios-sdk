@@ -150,6 +150,11 @@ open class AgsAuth {
      - returns: the user that is currently logged in
      */
     public func currentUser() throws -> User? {
+        return try currentUser(true);
+    }
+    
+    
+    public func currentUser(_ autoRefresh: Bool) throws -> User? {
         var user: User?
 
         guard configured else {
@@ -170,6 +175,10 @@ open class AgsAuth {
 
         let valid = try Jwt.verifyJwt(jwks: jwks, jwt: jwt)
 
+        if autoRefresh && currentCredential.isExpired {
+            
+        }
+        
         if !currentCredential.isExpired && valid && currentCredential.isAuthorized {
             user = User(credential: currentCredential, clientName: keycloakConfig!.clientID)
         }
