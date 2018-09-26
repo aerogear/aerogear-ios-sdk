@@ -176,6 +176,55 @@ open class AgsAuth {
         return user
     }
 
+    public func currentUser(autoRefresh: Bool, completionHandler: @escaping (User?, Error?) -> Void) throws {
+        //var user: User?
+        guard configured else {
+            throw Errors.serviceNotConfigured
+        }
+        
+        guard let currentCredential = credentialManager.load() else {
+            completionHandler(nil, nil)
+            return
+        }
+        
+        guard let jwks = jwksManager?.load(keycloakConfig!) else {
+            completionHandler(nil, nil)
+            return
+        }
+        
+        guard let jwt = currentCredential.accessToken else {
+            completionHandler(nil, nil)
+            return
+        }
+        
+        let valid = try Jwt.verifyJwt(jwks: jwks, jwt: jwt)
+        
+        if autoRefresh {
+            let oldAccessToken = currentCredential.authState.lastTokenResponse?.accessToken;
+            
+            currentCredential.authState.performAction { (accessToken, idToken, error) in
+                
+                if (accessToken != oldAccessToken) {
+                    // credentials has been refreshed
+                    self.credentialManager.save(credentials: currentCredential)
+                }
+                
+                if (error != nil) {
+                    completionHandler(nil, error)
+                    
+                } else {
+                    completionHandler(User(credential: currentCredential, clientName: self.keycloakConfig!.clientID), nil)
+                }
+            }
+        } else {
+            if !currentCredential.isExpired && valid && currentCredential.isAuthorized {
+                completionHandler(User(credential: currentCredential, clientName: keycloakConfig!.clientID), nil)
+            } else {
+                completionHandler(nil, nil);
+            }
+        }
+    }
+    
     /**
       Get provider that can be used to supply auth headers
      */
