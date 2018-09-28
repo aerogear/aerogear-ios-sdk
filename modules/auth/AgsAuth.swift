@@ -202,20 +202,21 @@ open class AgsAuth {
         if autoRefresh {
             let oldAccessToken = currentCredential.authState.lastTokenResponse?.accessToken;
             
-            currentCredential.authState.performAction { (accessToken, idToken, error) in
-                
-                if (accessToken != oldAccessToken) {
-                    // credentials has been refreshed
-                    self.credentialManager.save(credentials: currentCredential)
-                }
-                
-                if (error != nil) {
-                    completionHandler(nil, error)
+                currentCredential.authState.performAction { (accessToken, idToken, error) in
                     
-                } else {
-                    completionHandler(User(credential: currentCredential, clientName: self.keycloakConfig!.clientID), nil)
+                    if (accessToken != oldAccessToken) {
+                        // credentials has been refreshed
+                        self.credentialManager.save(credentials: currentCredential)
+                    }
+                    
+                    if (error != nil) {
+                        completionHandler(nil, error)
+                        
+                    } else {
+                        completionHandler(User(credential: currentCredential, clientName: self.keycloakConfig!.clientID), nil)
+                    }
                 }
-            }
+            
         } else {
             if !currentCredential.isExpired && valid && currentCredential.isAuthorized {
                 completionHandler(User(credential: currentCredential, clientName: keycloakConfig!.clientID), nil)

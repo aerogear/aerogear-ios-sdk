@@ -22,4 +22,5 @@ public class AgsHttp {
  */
 public protocol HeaderProvider: class {
     func getHeaders() -> [String: String]
+    func getHeaders(completionHandler: @escaping ([String: String]) -> Void ) -> Void
 }

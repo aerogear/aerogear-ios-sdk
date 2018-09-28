@@ -43,11 +43,15 @@ public class AuthHeaderProvider: HeaderProvider {
             try self.auth.currentUser(autoRefresh: true) { (currentUser, error) in
                 if let token = currentUser?.accessToken {
                     completionHandler([AuthHeaderProvider.headerKey: AuthHeaderProvider.headerType + token])
+                    return
+                } else {
+                    completionHandler([:])
                 }
             }
         } catch {
             // Intentionally empty when user is not logged in
             completionHandler([:])
+
         }
     }
 }

@@ -79,6 +79,17 @@ public class SyncNetworkTransport: NetworkTransport {
         self.sendOperationIdentifiers = sendOperationIdentifiers
     }
 
+    private func getHeaders() -> Promise<[String:String]> {
+        
+        let promise = Promise<[String:String]> { (fullfill, error) in
+            headerProvider?.getHeaders(completionHandler: { headers in
+                fullfill(headers)
+            })
+        }
+        
+        return promise;
+    }
+
     /// Send a GraphQL operation to a server and return a response.
     ///
     /// - Parameters:
@@ -92,12 +103,24 @@ public class SyncNetworkTransport: NetworkTransport {
         request.httpMethod = "POST"
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let headers = headerProvider?.getHeaders() {
-            for headerKey in headers.keys {
-                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
-            }
-        }
+//        let headers = try! getHeaders().await()
+//            for headerKey in headers.keys {
+//                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
+//            }
 
+        
+//        headerProvider?.getHeaders(completionHandler: { (headers) in
+//            for headerKey in headers.keys {
+//                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
+//            }
+//        })
+        
+        var headers = try! getHeaders().await();
+        
+        for headerKey in headers.keys {
+            request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
+        }
+    
         let body = requestBody(for: operation)
         request.httpBody = try! serializationFormat.serialize(value: body)
         let task = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
