@@ -79,6 +79,17 @@ public class SyncNetworkTransport: NetworkTransport {
         self.sendOperationIdentifiers = sendOperationIdentifiers
     }
 
+    private func getHeaders() -> Promise<[String:String]> {
+        
+        let promise = Promise<[String:String]> { (fullfill, error) in
+            headerProvider?.getHeaders(completionHandler: { headers in
+                fullfill(headers)
+            })
+        }
+        
+        return promise;
+    }
+
     /// Send a GraphQL operation to a server and return a response.
     ///
     /// - Parameters:
@@ -92,48 +103,67 @@ public class SyncNetworkTransport: NetworkTransport {
         request.httpMethod = "POST"
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let headers = headerProvider?.getHeaders() {
+//        let headers = try! getHeaders().await()
+//            for headerKey in headers.keys {
+//                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
+//            }
+
+        
+//        headerProvider?.getHeaders(completionHandler: { (headers) in
+//            for headerKey in headers.keys {
+//                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
+//            }
+//        })
+        
+        //var headers = try! getHeaders().await();
+        
+        let cancellable = CancellableFuture()
+        
+        getHeaders().andThen { (headers) in
             for headerKey in headers.keys {
                 request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
             }
-        }
-
-        let body = requestBody(for: operation)
-        request.httpBody = try! serializationFormat.serialize(value: body)
-        let task = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-            if let error = error {
-                completionHandler(nil, error)
-                return
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse else {
-                fatalError("Response should be an HTTPURLResponse")
-            }
-
-            if !httpResponse.isSuccessful {
-                completionHandler(nil, SyncHTTPResponseError(body: data, response: httpResponse, kind: .errorResponse))
-                return
-            }
-
-            guard let data = data else {
-                completionHandler(nil, SyncHTTPResponseError(body: nil, response: httpResponse, kind: .invalidResponse))
-                return
-            }
-
-            do {
-                guard let body = try self.serializationFormat.deserialize(data: data) as? JSONObject else {
-                    throw SyncHTTPResponseError(body: data, response: httpResponse, kind: .invalidResponse)
+            
+            let body = self.requestBody(for: operation)
+            request.httpBody = try! self.serializationFormat.serialize(value: body)
+            let task = self.session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+                if let error = error {
+                    completionHandler(nil, error)
+                    return
                 }
-                let response = GraphQLResponse(operation: operation, body: body)
-                completionHandler(response, nil)
-            } catch {
-                completionHandler(nil, error)
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    fatalError("Response should be an HTTPURLResponse")
+                }
+                
+                if !httpResponse.isSuccessful {
+                    completionHandler(nil, SyncHTTPResponseError(body: data, response: httpResponse, kind: .errorResponse))
+                    return
+                }
+                
+                guard let data = data else {
+                    completionHandler(nil, SyncHTTPResponseError(body: nil, response: httpResponse, kind: .invalidResponse))
+                    return
+                }
+                
+                do {
+                    guard let body = try self.serializationFormat.deserialize(data: data) as? JSONObject else {
+                        throw SyncHTTPResponseError(body: data, response: httpResponse, kind: .invalidResponse)
+                    }
+                    let response = GraphQLResponse(operation: operation, body: body)
+                    completionHandler(response, nil)
+                } catch {
+                    completionHandler(nil, error)
+                }
             }
+            cancellable.setTask(task)
         }
 
-        task.resume()
-
-        return task
+        cancellable.getTask().andThen { (task) in
+            task.resume()
+        }
+        
+        return cancellable
     }
 
     private let sendOperationIdentifiers: Bool
@@ -146,5 +176,33 @@ public class SyncNetworkTransport: NetworkTransport {
             return ["id": operationIdentifier, "variables": operation.variables]
         }
         return ["query": operation.queryDocument, "variables": operation.variables]
+    }
+}
+
+private class CancellableFuture : Cancellable {
+    
+    private var task: URLSessionTask?
+    private var fullfill:((URLSessionTask) -> Void)?
+    
+    //(_ fulfill: @escaping (Value) -> Void, _ reject: @escaping (Error) -> Void)
+    func getTask() -> Promise<URLSessionTask> {
+        if (task != nil) {
+            return Promise<URLSessionTask>(fulfilled: task!)
+        }
+        
+        return Promise<URLSessionTask> { (fullfill, reject) in
+            self.fullfill = fullfill
+        }
+    }
+    
+    func setTask(_ task: URLSessionTask) {
+        self.task = task
+        fullfill?(task)
+    }
+    
+    func cancel() {
+        getTask().andThen { (task) in
+            task.cancel()
+        }
     }
 }
