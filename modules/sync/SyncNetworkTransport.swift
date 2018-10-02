@@ -103,20 +103,10 @@ public class SyncNetworkTransport: NetworkTransport {
         request.httpMethod = "POST"
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        let headers = try! getHeaders().await()
-//            for headerKey in headers.keys {
-//                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
-//            }
-
         
-//        headerProvider?.getHeaders(completionHandler: { (headers) in
-//            for headerKey in headers.keys {
-//                request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
-//            }
-//        })
-        
-        //var headers = try! getHeaders().await();
-        
+        // The send method returns a `Cancellable`, but since we need to get the headers asynchronously (the access token must be refreshed to always be actual),
+        // we won't have a task to return until the token is successfully or unsuccessfully refreshed.
+        // We use this `CancellableFuture` to be able to return a `Cancellable` object that is eventually populated with the correct, cancellable task.
         let cancellable = CancellableFuture()
         
         getHeaders().andThen { (headers) in
@@ -179,12 +169,12 @@ public class SyncNetworkTransport: NetworkTransport {
     }
 }
 
+/// An object that implement `Cancellable` but is populated with the real `Cancellable` object in a future time.
 private class CancellableFuture : Cancellable {
     
     private var task: URLSessionTask?
     private var fullfill:((URLSessionTask) -> Void)?
     
-    //(_ fulfill: @escaping (Value) -> Void, _ reject: @escaping (Error) -> Void)
     func getTask() -> Promise<URLSessionTask> {
         if (task != nil) {
             return Promise<URLSessionTask>(fulfilled: task!)
