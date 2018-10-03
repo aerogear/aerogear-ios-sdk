@@ -15,15 +15,24 @@ public class AuthHeaderProvider: HeaderProvider {
         self.auth = auth
     }
 
-    public func getHeaders() -> [String: String] {
+    /**
+     Gets the header to be used to perform HTTP requests.
+     If needed, the `accessToken` will be automatically refreshed and the callback will be always called with a fresh token
+     */
+    public func getHeaders(completionHandler: @escaping ([String: String]) -> Void ) -> Void {
         do {
-            let currentUser = try self.auth.currentUser()
-            if let token = currentUser?.accessToken {
-                return [AuthHeaderProvider.headerKey: AuthHeaderProvider.headerType + token]
+            try self.auth.currentUser(autoRefresh: true) { (currentUser, error) in
+                if let token = currentUser?.accessToken {
+                    completionHandler([AuthHeaderProvider.headerKey: AuthHeaderProvider.headerType + token])
+                    return
+                } else {
+                    completionHandler([:])
+                }
             }
         } catch {
             // Intentionally empty when user is not logged in
+            completionHandler([:])
+
         }
-        return [:]
     }
 }
