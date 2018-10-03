@@ -79,17 +79,6 @@ public class SyncNetworkTransport: NetworkTransport {
         self.sendOperationIdentifiers = sendOperationIdentifiers
     }
 
-    private func getHeaders() -> Promise<[String:String]> {
-        
-        let promise = Promise<[String:String]> { (fullfill, error) in
-            headerProvider?.getHeaders(completionHandler: { headers in
-                fullfill(headers)
-            })
-        }
-        
-        return promise;
-    }
-
     /// Send a GraphQL operation to a server and return a response.
     ///
     /// - Parameters:
@@ -109,7 +98,7 @@ public class SyncNetworkTransport: NetworkTransport {
         // We use this `CancellableFuture` to be able to return a `Cancellable` object that is eventually populated with the correct, cancellable task.
         let cancellable = CancellableFuture()
         
-        getHeaders().andThen { (headers) in
+        self.headerProvider?.getHeaders() { (headers) in
             for headerKey in headers.keys {
                 request.setValue(headers[headerKey], forHTTPHeaderField: headerKey)
             }
