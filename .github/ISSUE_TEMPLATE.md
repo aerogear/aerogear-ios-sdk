@@ -1,12 +1,17 @@
 ## Description
+Add a brief and meaningful description.
+
+## Expected Behavior
+Describe the expected behaviour. 
+
+## Actual Behavior
+Describe the current/actual behaviour.
 
 ## Environment
 
-*IOS version*:
-*SDK version*: 
+* Operating system:
+* OpenShift versions:
+* Project Versions: 
 
 ## Steps to reproduce
-
-
-> NOTE: SDK issues are tracked in jboss jira. 
-https://issues.jboss.org/projects/AGIOS/issues
+Describe all steps and pre-requirements which are required to be performed in order to reproduce this scenario. ( E.g 1. Action, 2. Action ... )
